@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="git,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="LEARN GIT  through  blog install the git bashlinux: pacman -S git">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git配置">
+<meta property="og:url" content="http://yoursite.com/2019/03/07/LEARN-GIT/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="LEARN GIT  through  blog install the git bashlinux: pacman -S git">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-21T14:58:03.137Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git配置">
+<meta name="twitter:description" content="LEARN GIT  through  blog install the git bashlinux: pacman -S git">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/07/LEARN-GIT/">
+
+
+
+
+
+  <title>git配置 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/LEARN-GIT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">git配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-07T12:03:24+08:00">
+                2019-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="LEARN-GIT-through-blog"><a href="#LEARN-GIT-through-blog" class="headerlink" title="LEARN GIT  through  blog"></a>LEARN GIT  <em>through  <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000" target="_blank" rel="noopener">blog</a></em></h2><hr>
+<h3 id="install-the-git-bash"><a href="#install-the-git-bash" class="headerlink" title="install the git bash"></a>install the git bash</h3><p>linux: pacman -S git</p>
+<hr>
+<a id="more"></a>
+<h3 id="basic-operation"><a href="#basic-operation" class="headerlink" title="basic operation"></a>basic operation</h3><ol>
+<li><h4 id="single-simple-file-git"><a href="#single-simple-file-git" class="headerlink" title="single simple file git"></a>single simple file git</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li><p>mkdir learn</p>
+</li>
+<li><p>cd learn</p>
+</li>
+<li>git init ,git config –global user.name=””,….user.email=”” ;  <strong>init repo and set name,pwd:</strong> </li>
+<li>vim learn : <strong>create a file and use git to commit</strong> </li>
+<li>git commit -m “writed some thing” : <strong>commit information</strong></li>
+</ol>
+</blockquote>
+<ol start="2">
+<li><h4 id="multiple-file"><a href="#multiple-file" class="headerlink" title="multiple file"></a>multiple file</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li>git add file1</li>
+<li>git add file2</li>
+<li>git commit -m “multiply files”</li>
+</ol>
+</blockquote>
+<ol start="3">
+<li><h4 id="changed-file"><a href="#changed-file" class="headerlink" title="changed file"></a>changed file</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li>git status :   <strong>if the file is changed,use this command to see status</strong></li>
+<li>git diff readme.txt  : <strong>see the details of the chang</strong></li>
+<li>git add readme.txt : <strong>upload</strong></li>
+<li>git commit -m “changed”</li>
+</ol>
+</blockquote>
+<ol start="4">
+<li><h4 id="check-repo-history"><a href="#check-repo-history" class="headerlink" title="check repo history"></a>check repo history</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li>git log</li>
+</ol>
+</blockquote>
+<ol start="5">
+<li><h4 id="roll-back"><a href="#roll-back" class="headerlink" title="roll back"></a>roll back</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li>git reset –hard HEAD^         <strong>^:means your previous version==&gt;  ^^two previous version ==&gt; HEAD^^^ == HEAD~3</strong></li>
+</ol>
+</blockquote>
+<ol start="6">
+<li><h4 id="roll-to-future-version"><a href="#roll-to-future-version" class="headerlink" title="roll to future version"></a>roll to future version</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li><p>git reset –hard 1094a  (if you remember the id of the target version)</p>
+<p>regret and don’t know the version id: <strong>git reflog</strong>  </p>
+<ol start="2">
+<li>git reflog : command history</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<ol start="7">
+<li><h4 id="redo-after-commiting-or-adding-amp-amp-not-pushing-to-the-remote-repository"><a href="#redo-after-commiting-or-adding-amp-amp-not-pushing-to-the-remote-repository" class="headerlink" title="redo after commiting or adding &amp;&amp; not pushing to the remote repository"></a>redo after commiting or adding &amp;&amp; not pushing to the remote repository</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li>git checkout – readme.txt  <strong>(!!!not –readme.txt  It means switching to another branch)</strong></li>
+<li>or use: git reset HEAD readme.txt</li>
+</ol>
+</blockquote>
+<ol start="8">
+<li><h4 id="delete-file"><a href="#delete-file" class="headerlink" title="delete file"></a>delete file</h4></li>
+</ol>
+<blockquote>
+<ol>
+<li>rm test.txt</li>
+<li>git rm test.txt</li>
+<li>git commit -m “”</li>
+</ol>
+</blockquote>
+<hr>
+<h3 id="remote-repository"><a href="#remote-repository" class="headerlink" title="remote repository"></a>remote repository</h3><ol>
+<li><h4 id="how-to-connect-to-a-remote-reposity"><a href="#how-to-connect-to-a-remote-reposity" class="headerlink" title="how to connect to a remote reposity"></a>how to connect to a remote reposity</h4><ol>
+<li>ssh-keygen -t ras -C “<a href="mailto:tassassin@sina.com" target="_blank" rel="noopener">tassassin@sina.com</a>“ :  <strong>default directory is /user/home/.ssh</strong></li>
+</ol>
+<p><strong>​    then copy the id_ras.pub to you github !</strong></p>
+<ol start="2">
+<li>git remote add origin <a href="https://github.com/MOIPA/tmp.git" target="_blank" rel="noopener">https://github.com/MOIPA/tmp.git</a></li>
+<li><strong>git push -u origin master</strong>     //push content to remote server do it when every local changed </li>
+</ol>
+</li>
+<li><h4 id="how-to-git-clone"><a href="#how-to-git-clone" class="headerlink" title="how to git clone"></a>how to git clone</h4><ol>
+<li>git clone <a href="http://github.com/MPOIA/javaEE" target="_blank" rel="noopener">http://github.com/MPOIA/javaEE</a></li>
+</ol>
+</li>
+</ol>
+<h3 id="branches"><a href="#branches" class="headerlink" title="branches"></a>branches</h3><ol>
+<li>git checkout -b branchName(-b : create a branch and switch to it)<br>​    -b :equals two command:<br>​            a: git branch bname<br>​            b: git checkout bname</li>
+<li>git branch (see branches)</li>
+<li>connflicts: solve it in person<br>​    a:git status : show conflicted files<br>b:vim conflicted files: show details<br>c: git log –graph –pretty=oneline –abbrev-commit  :show branches merge status</li>
+<li>git merge –no-ff : use this argument can show merge history in git graph command</li>
+<li>force delete unmerged branches : git branch -D bName</li>
+</ol>
+<h3 id="git-stash-used-to-store-the-context"><a href="#git-stash-used-to-store-the-context" class="headerlink" title="git stash (used to store the context)"></a>git stash (used to store the context)</h3><ol>
+<li>when developing in dev branch, a bug in master branch need to be solved.<ol start="2">
+<li>git stash in dev branch</li>
+<li>git checkout -b issue-101 to create a bugfix branch</li>
+<li>after fixed, git checkout master then: git merge -m “bug fix issue 101” issue-101</li>
+<li>git checkout dev , git stash pop to continue<br><strong>conclusion: it is used for clean git , because you can’t push when have some unfinished work </strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="git-push-amp-git-pull"><a href="#git-push-amp-git-pull" class="headerlink" title="git push &amp; git pull"></a>git push &amp; git pull</h3><ol>
+<li><p>git push origin(default name of remote repository) &lt;branch&gt;(can be master or other banch name)</p>
+<ol start="2">
+<li>if push failed,use <strong>git pull</strong> to get the newest update and solve the conflict</li>
+<li>git pull  : if failed and shows no tracking information use **git branch –set-upstream-to=origin/&lt;branch&gt; localBranchName<pre><code>​            it failed because u don&apos;t connect ur local dev to remote dev
+</code></pre>team work:</li>
+</ol>
+<p>when work with a team, members only can get master branch and it’s default name is origin<br>now if we want to get a remote branch like dev: <strong>git checkout -b &lt;lbname&gt; origin/&lt;bname&gt;</strong></p>
+<h3 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h3></li>
+<li>make the git history become a straight line</li>
+</ol>
+<hr>
+<h3 id="TAG-convient-for-managing-one-tag-means-one-release"><a href="#TAG-convient-for-managing-one-tag-means-one-release" class="headerlink" title="TAG  convient for managing (one tag means one release)"></a>TAG  convient for managing (one tag means one release)</h3><ol>
+<li><h4 id="create-tag"><a href="#create-tag" class="headerlink" title="create tag"></a>create tag</h4><ol>
+<li>git tag v1.0</li>
+<li>git tag : show tags</li>
+</ol>
+</li>
+<li><h4 id="create-tag-for-old-version"><a href="#create-tag-for-old-version" class="headerlink" title="create tag for old version"></a>create tag for old version</h4><ol>
+<li>git tag v0.1 <71180d></71180d></li>
+</ol>
+</li>
+<li><h4 id="show-tag-details"><a href="#show-tag-details" class="headerlink" title="show tag details"></a>show tag details</h4><ol>
+<li>git show &lt;v0.1&gt;</li>
+</ol>
+</li>
+<li><h4 id="create-a-tag-with-a-readme"><a href="#create-a-tag-with-a-readme" class="headerlink" title="create a tag with a readme"></a>create a tag with a readme</h4><ol>
+<li>git tag -a v0.8 -m “merged something” <0123d></0123d></li>
+</ol>
+</li>
+<li><h4 id="delete-a-tag"><a href="#delete-a-tag" class="headerlink" title="delete a tag"></a>delete a tag</h4><ol>
+<li>git tag -d v0.1</li>
+</ol>
+</li>
+<li><h4 id="push-tag-to-remote"><a href="#push-tag-to-remote" class="headerlink" title="push tag to remote"></a>push tag to remote</h4><ol>
+<li>git push origin v1.0  :push one tag</li>
+<li>git push origin –tags :push all tags</li>
+</ol>
+</li>
+<li><h4 id="delete-tag-of-remote"><a href="#delete-tag-of-remote" class="headerlink" title="delete tag of remote"></a>delete tag of remote</h4><ol>
+<li>git tag -d v1.0  (delete on local first)</li>
+<li>git push origin :refs/tags/v0.9   (inform remote)</li>
+</ol>
+</li>
+</ol>
+<h3 id="if-want-to-synchronize-my-respository-to-github-and-gitee"><a href="#if-want-to-synchronize-my-respository-to-github-and-gitee" class="headerlink" title="if want to synchronize my respository to github and gitee"></a>if want to synchronize my respository to github and gitee</h3><ol>
+<li>git remote -v </li>
+<li>git remote rm origin</li>
+<li>git remote add github <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:MOIPA/REpo.git</li>
+<li>git remote add gitee <a href="mailto:git@gitee.com" target="_blank" rel="noopener">git@gitee.com</a>:MOIPA/REpo.git </li>
+</ol>
+<p><strong> if want to push to these two server </strong></p>
+<ol>
+<li>git push github master</li>
+<li>git push gitee master</li>
+</ol>
+<hr>
+<h3 id="configure"><a href="#configure" class="headerlink" title="configure"></a>configure</h3><ol>
+<li>git config –global color.ui true (high light color)</li>
+</ol>
+<ol start="2">
+<li><p>config some files won’t commited to git<br>   a: create a file .gitignore (store somefile names which will not be committed)<br>   b: the file module can be download at <em><a href="https://github.com/github/gitignore" target="_blank" rel="noopener">officialSite</a></em></p>
+</li>
+<li><p>configure alias:<br>  ​    git config –global alias.&lt;st&gt; status</p>
+</li>
+<li><p><strong>one good example:</strong><br>   git config –global alias.lg “log –color –graph –pretty=format:’%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset’ –abbrev-commit”</p>
+</li>
+<li><p><strong>notice</strong><br> all the configure are stored in .git/config</p>
+</li>
+</ol>
+<hr>
+<h3 id="Problems"><a href="#Problems" class="headerlink" title="Problems"></a>Problems</h3><ol>
+<li><h4 id="switch-to-ssh-instead-of-https"><a href="#switch-to-ssh-instead-of-https" class="headerlink" title="switch to ssh instead of https"></a>switch to ssh instead of https</h4><ol>
+<li>git remote -v : see connection </li>
+<li>git remote rm oringin :clear connection</li>
+<li>git remote add oringin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:MOIPA/REpo.git</li>
+</ol>
+</li>
+<li><h4 id="error-when-test-SSH-connection"><a href="#error-when-test-SSH-connection" class="headerlink" title="error when test SSH connection"></a>error when test SSH connection</h4><ol>
+<li>ssh -t github.com  : denied</li>
+<li>solution : ssh-keyscan -t rsa github.com &gt;&gt; ~/.ssh/known_hosts</li>
+<li>then git push -u origin master</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/Hibernate配置/" rel="next" title="Hibernate配置">
+                <i class="fa fa-chevron-left"></i> Hibernate配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/07/aria2-配置/" rel="prev" title="aria2 配置">
+                aria2 配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LEARN-GIT-through-blog"><span class="nav-number">1.</span> <span class="nav-text">LEARN GIT  through  blog</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#install-the-git-bash"><span class="nav-number">1.1.</span> <span class="nav-text">install the git bash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#basic-operation"><span class="nav-number">1.2.</span> <span class="nav-text">basic operation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#single-simple-file-git"><span class="nav-number">1.2.1.</span> <span class="nav-text">single simple file git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#multiple-file"><span class="nav-number">1.2.2.</span> <span class="nav-text">multiple file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#changed-file"><span class="nav-number">1.2.3.</span> <span class="nav-text">changed file</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#check-repo-history"><span class="nav-number">1.2.4.</span> <span class="nav-text">check repo history</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#roll-back"><span class="nav-number">1.2.5.</span> <span class="nav-text">roll back</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#roll-to-future-version"><span class="nav-number">1.2.6.</span> <span class="nav-text">roll to future version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redo-after-commiting-or-adding-amp-amp-not-pushing-to-the-remote-repository"><span class="nav-number">1.2.7.</span> <span class="nav-text">redo after commiting or adding &amp;&amp; not pushing to the remote repository</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delete-file"><span class="nav-number">1.2.8.</span> <span class="nav-text">delete file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#remote-repository"><span class="nav-number">1.3.</span> <span class="nav-text">remote repository</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#how-to-connect-to-a-remote-reposity"><span class="nav-number">1.3.1.</span> <span class="nav-text">how to connect to a remote reposity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#how-to-git-clone"><span class="nav-number">1.3.2.</span> <span class="nav-text">how to git clone</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#branches"><span class="nav-number">1.4.</span> <span class="nav-text">branches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-stash-used-to-store-the-context"><span class="nav-number">1.5.</span> <span class="nav-text">git stash (used to store the context)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-push-amp-git-pull"><span class="nav-number">1.6.</span> <span class="nav-text">git push &amp; git pull</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-rebase"><span class="nav-number">1.7.</span> <span class="nav-text">git rebase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TAG-convient-for-managing-one-tag-means-one-release"><span class="nav-number">1.8.</span> <span class="nav-text">TAG  convient for managing (one tag means one release)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#create-tag"><span class="nav-number">1.8.1.</span> <span class="nav-text">create tag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#create-tag-for-old-version"><span class="nav-number">1.8.2.</span> <span class="nav-text">create tag for old version</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#show-tag-details"><span class="nav-number">1.8.3.</span> <span class="nav-text">show tag details</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#create-a-tag-with-a-readme"><span class="nav-number">1.8.4.</span> <span class="nav-text">create a tag with a readme</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delete-a-tag"><span class="nav-number">1.8.5.</span> <span class="nav-text">delete a tag</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#push-tag-to-remote"><span class="nav-number">1.8.6.</span> <span class="nav-text">push tag to remote</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delete-tag-of-remote"><span class="nav-number">1.8.7.</span> <span class="nav-text">delete tag of remote</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if-want-to-synchronize-my-respository-to-github-and-gitee"><span class="nav-number">1.9.</span> <span class="nav-text">if want to synchronize my respository to github and gitee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#configure"><span class="nav-number">1.10.</span> <span class="nav-text">configure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problems"><span class="nav-number">1.11.</span> <span class="nav-text">Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#switch-to-ssh-instead-of-https"><span class="nav-number">1.11.1.</span> <span class="nav-text">switch to ssh instead of https</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#error-when-test-SSH-connection"><span class="nav-number">1.11.2.</span> <span class="nav-text">error when test SSH connection</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
