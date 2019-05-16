@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="hi, world">
+  <meta name="keywords" content="Python,">
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="description" content="python解析图片选用工具：python-docx 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。 第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo配置">
-<meta property="og:url" content="http://yoursite.com/2019/04/21/hello-world/index.html">
+<meta property="og:title" content="Python通过rel关系解析word图片">
+<meta property="og:url" content="http://yoursite.com/2019/05/16/Python通过rel关系解析word图片/index.html">
 <meta property="og:site_name" content="TrBlog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="python解析图片选用工具：python-docx 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。 第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-21T14:58:03.137Z">
+<meta property="og:updated_time" content="2019-05-16T07:42:47.871Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo配置">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="Python通过rel关系解析word图片">
+<meta name="twitter:description" content="python解析图片选用工具：python-docx 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。 第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/21/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/16/Python通过rel关系解析word图片/">
 
 
 
 
 
-  <title>hexo配置 | TrBlog</title>
+  <title>Python通过rel关系解析word图片 | TrBlog</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/Python通过rel关系解析word图片/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hexo配置</h1>
+          <h1 class="post-title" itemprop="name headline">Python通过rel关系解析word图片</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-21T22:58:03+08:00">
-                2019-04-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-16T15:29:00+08:00">
+                2019-05-16
               </time>
             
 
@@ -324,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -361,16 +362,16 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        <h3 id="python解析图片"><a href="#python解析图片" class="headerlink" title="python解析图片"></a>python解析图片</h3><p>选用工具：python-docx</p>
+<h6 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h6><p>首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。</p>
+<p>第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是word中每行中出现的矢量图，比如n不是n，而是wmf图片n。</p>
 <a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>第二种思路：将每段的word解析为xml文档，使用docx，其实这个底层原理也是通过映射每段与document.xml实现的。</p>
+<p>解压缩word为zip时，可以看到document.xml文件，这才是word真正的样子，docx可以把每段的xml展示出来，再通过elementtree解析xml树，把每段变为：文本+图片文件名字</p>
+<p>解析xml树代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> docx</span><br><span class="line"><span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line">fs = docx.Document(<span class="string">'computer_science.docx'</span>)</span><br><span class="line"></span><br><span class="line">lineCounts = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> fs.paragraphs:</span><br><span class="line">   <span class="keyword">if</span> lineCounts &lt;= <span class="number">0</span>:</span><br><span class="line">      exit()</span><br><span class="line">   root = ET.fromstring(line.paragraph_format.element.xml)</span><br><span class="line">   outStr = <span class="string">''</span></span><br><span class="line">   <span class="keyword">for</span> ele <span class="keyword">in</span> root.iter():</span><br><span class="line">      <span class="comment"># print(ele.tag)</span></span><br><span class="line">      <span class="comment"># continue</span></span><br><span class="line">      <span class="keyword">if</span>(ele.tag==<span class="string">"&#123;http://schemas.openxmlformats.org/wordprocessingml/2006/main&#125;t"</span>):</span><br><span class="line">         outStr += ele.text</span><br><span class="line">      <span class="keyword">if</span>(ele.tag == <span class="string">"&#123;urn:schemas-microsoft-com:vml&#125;shape"</span>):</span><br><span class="line">         outStr += <span class="string">"&lt;word-pic&gt;"</span>+ele.get(<span class="string">'id'</span>)+<span class="string">"&lt;/word-pic&gt;"</span></span><br><span class="line">   print(outStr)</span><br><span class="line">   outStr = <span class="string">''</span></span><br><span class="line"></span><br><span class="line">   print(<span class="string">"*****"</span>)</span><br><span class="line">   lineCounts -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>解析的xml文档里放的是shapeid，就是直接对应media文件夹的图片，但是！！，shapeid有的时候不是“图片 2” 而是”_x0000…“，这就可能导致错误。</p>
+<p>所以新的思路：在xml树里，每个图片都有一个r:id属性，值like：rid39。这个rid是word的映射对象，在解压缩后的document.xml.rel中可以找到对应的映射图片，比如rid39对应的target是图片12。</p>
 
       
     </div>
@@ -386,6 +387,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
 
       
       
@@ -395,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/15/python解析word文档/" rel="next" title="python解析word文档">
-                <i class="fa fa-chevron-left"></i> python解析word文档
+              <a href="/2019/05/12/log1/" rel="next" title="Python+oss+json+request">
+                <i class="fa fa-chevron-left"></i> Python+oss+json+request
               </a>
             
           </div>
@@ -404,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/21/serverConfigure/" rel="prev" title="serverConfigure">
-                serverConfigure <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python解析图片"><span class="nav-number">1.</span> <span class="nav-text">python解析图片</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#思路："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">思路：</span></a></li></ol></li></ol></div>
             
 
           </div>
