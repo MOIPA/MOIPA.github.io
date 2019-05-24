@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="el,">
+  <meta name="keywords" content="Test,">
 
 
 
@@ -94,18 +94,23 @@
 
 
 
-<meta name="description" content="原因：maven生成的web.xml版本太低解决方案： 在jsp前+&amp;lt;%@ page isELIgnored=&amp;quot;false&amp;quot; %&amp;gt;">
-<meta name="keywords" content="el">
+<meta name="description" content="Jmeter压力测试这几天有压力测试任务交给我，终于从scriptBoy转职成了testBoy。花了一天时间看了下，选用了JMeter测试工具用作压力测试">
+<meta name="keywords" content="Test">
 <meta property="og:type" content="article">
-<meta property="og:title" content="maven 中 el不被解释">
-<meta property="og:url" content="http://yoursite.com/2019/03/08/maven-中-el不被解释/index.html">
+<meta property="og:title" content="测试日志--压力测试">
+<meta property="og:url" content="http://yoursite.com/2019/05/24/测试日志-压力测试/index.html">
 <meta property="og:site_name" content="TrBlog">
-<meta property="og:description" content="原因：maven生成的web.xml版本太低解决方案： 在jsp前+&amp;lt;%@ page isELIgnored=&amp;quot;false&amp;quot; %&amp;gt;">
+<meta property="og:description" content="Jmeter压力测试这几天有压力测试任务交给我，终于从scriptBoy转职成了testBoy。花了一天时间看了下，选用了JMeter测试工具用作压力测试">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-21T14:58:03.137Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-4.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-5.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-6.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-7.png">
+<meta property="og:updated_time" content="2019-05-24T06:45:05.387Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maven 中 el不被解释">
-<meta name="twitter:description" content="原因：maven生成的web.xml版本太低解决方案： 在jsp前+&amp;lt;%@ page isELIgnored=&amp;quot;false&amp;quot; %&amp;gt;">
+<meta name="twitter:title" content="测试日志--压力测试">
+<meta name="twitter:description" content="Jmeter压力测试这几天有压力测试任务交给我，终于从scriptBoy转职成了testBoy。花了一天时间看了下，选用了JMeter测试工具用作压力测试">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-4.png">
 
 
 
@@ -134,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/08/maven-中-el不被解释/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/24/测试日志-压力测试/">
 
 
 
 
 
-  <title>maven 中 el不被解释 | TrBlog</title>
+  <title>测试日志--压力测试 | TrBlog</title>
   
 
 
@@ -273,7 +278,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/maven-中-el不被解释/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/24/测试日志-压力测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -290,7 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">maven 中 el不被解释</h1>
+          <h1 class="post-title" itemprop="name headline">测试日志--压力测试</h1>
         
 
         <div class="post-meta">
@@ -302,8 +307,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T16:32:22+08:00">
-                2019-03-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T14:26:00+08:00">
+                2019-05-24
               </time>
             
 
@@ -325,8 +330,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/maven/" itemprop="url" rel="index">
-                    <span itemprop="name">maven</span>
+                  <a href="/categories/Test/" itemprop="url" rel="index">
+                    <span itemprop="name">Test</span>
                   </a>
                 </span>
 
@@ -362,12 +367,40 @@
       
 
       
-        <h5 id="原因：maven生成的web-xml版本太低"><a href="#原因：maven生成的web-xml版本太低" class="headerlink" title="原因：maven生成的web.xml版本太低"></a>原因：maven生成的web.xml版本太低</h5><h5 id="解决方案：-在jsp前-lt-page-isELIgnored-quot-false-quot-gt"><a href="#解决方案：-在jsp前-lt-page-isELIgnored-quot-false-quot-gt" class="headerlink" title="解决方案： 在jsp前+&lt;%@ page isELIgnored=&quot;false&quot; %&gt;"></a>解决方案： 在jsp前+<code>&lt;%@ page isELIgnored=&quot;false&quot; %&gt;</code></h5><a id="more"></a>
-<p>更好的解决方案：将这部分2.3版本的换为2.4版本的即可</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE web-app PUBLIC</span></span><br><span class="line"><span class="meta"> "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"</span></span><br><span class="line"><span class="meta"> "http://java.sun.com/dtd/web-app_2_3.dtd" &gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>正常的格式：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">version</span>=<span class="string">"2.4"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="如果还不解释"><a href="#如果还不解释" class="headerlink" title="如果还不解释"></a>如果还不解释</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1: maven pom配置</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>taglibs<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>standard<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/javax.servlet/jstl --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.servlet<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jstl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">2：web.xml 必须这样</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee</span></span></span><br><span class="line"><span class="tag"><span class="string">                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">version</span>=<span class="string">"3.0"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h4 id="Jmeter压力测试"><a href="#Jmeter压力测试" class="headerlink" title="Jmeter压力测试"></a>Jmeter压力测试</h4><p>这几天有压力测试任务交给我，终于从scriptBoy转职成了testBoy。<br>花了一天时间看了下，选用了JMeter测试工具用作压力测试</p>
+<a id="more"></a>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><ol>
+<li><p>可以从各个地方下载到，开源免费的，由于使用java所以得把java下载配置好先。</p>
+</li>
+<li><p>配置JMETER_HOME环境，就是主目录</p>
+</li>
+<li><p>Path里添加下bin的目录，之后从cmd启动</p>
+</li>
+<li><p>打开cmd输入jmeter或者找到bin下的jmeter.bat打开</p>
+</li>
+<li><p>class path添加</p>
+<pre><code>%JMETER_HOME%/lib/ext/ApacheJMeter_core.jar;%JMETER_HOME%/lib/jorphan.jar;%JMETER_HOME%/lib/logkit-2.0.jar
+</code></pre></li>
+</ol>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><ol>
+<li><p>先下载个plugin manager:下载jar包到/lib/ext下重启即可</p>
+</li>
+<li><p>插件里面搜索下载jpgc<br><img src="/images/pasted-4.png" alt="upload successful"></p>
+</li>
+<li><p>下载后即可创建Stepping Thread测试组，这个是用于控制模拟用户进入行为的。</p>
+</li>
+</ol>
+<p><img src="/images/pasted-5.png" alt="upload successful"></p>
+<ol start="4">
+<li><p>录制脚本，选择使用chrome脚本录制，安装blazemeter插件，此插件专门记录所有的用户操作转为jml。<br><img src="/images/pasted-6.png" alt="upload successful"></p>
+</li>
+<li><p>录制脚本结束后下载下来，使用jmeter打开，做进一步的调试，比如添加listener（结果报告）等</p>
+</li>
+<li><p>最后开始压力测试，注意的是不要使用GUI测试，使用命令行：打开cmd-》输入：<br><img src="/images/pasted-7.png" alt="upload successful"></p>
+</li>
+<li><p>生成测试报告</p>
+</li>
+</ol>
 
       
     </div>
@@ -385,7 +418,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/el/" rel="tag"># el</a>
+            <a href="/tags/Test/" rel="tag"># Test</a>
           
         </div>
       
@@ -398,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/08/hibernate-Java详解/" rel="next" title="hibernate Java详解">
-                <i class="fa fa-chevron-left"></i> hibernate Java详解
+              <a href="/2019/05/16/Python通过rel关系解析word图片/" rel="next" title="Python通过rel关系解析word图片">
+                <i class="fa fa-chevron-left"></i> Python通过rel关系解析word图片
               </a>
             
           </div>
@@ -407,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/08/常用包的maven依赖/" rel="prev" title="常用包的maven依赖">
-                常用包的maven依赖 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -555,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#原因：maven生成的web-xml版本太低"><span class="nav-number">1.</span> <span class="nav-text">原因：maven生成的web.xml版本太低</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决方案：-在jsp前-lt-page-isELIgnored-quot-false-quot-gt"><span class="nav-number">2.</span> <span class="nav-text">解决方案： 在jsp前+&lt;%@ page isELIgnored=&quot;false&quot; %&gt;</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#如果还不解释"><span class="nav-number"></span> <span class="nav-text">如果还不解释</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jmeter压力测试"><span class="nav-number">1.</span> <span class="nav-text">Jmeter压力测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用"><span class="nav-number">1.2.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
             
 
           </div>
