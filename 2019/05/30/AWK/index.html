@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="hi, world">
+  <meta name="keywords" content="AWK,">
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="talk is cheap , show me the code.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TrBlog">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+<meta name="description" content="AWK非常好用的命令行工具，可以替代grep，支持正则 常用通过 pattern+action方式运行 输出第一个和第二个域，只存在action。每个域默认是通过空格分离的。 ll |awk &amp;apos;{print $3}&amp;apos; 添加了pattern -F ‘:’ 表示使用冒号分割，输出第一个和第二个域。 cat /etc/passwd|awk -F &amp;apos;:&amp;apos;  &amp;apo">
+<meta name="keywords" content="AWK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AWK">
+<meta property="og:url" content="http://yoursite.com/2019/05/30/AWK/index.html">
 <meta property="og:site_name" content="TrBlog">
-<meta property="og:description" content="talk is cheap , show me the code.">
+<meta property="og:description" content="AWK非常好用的命令行工具，可以替代grep，支持正则 常用通过 pattern+action方式运行 输出第一个和第二个域，只存在action。每个域默认是通过空格分离的。 ll |awk &amp;apos;{print $3}&amp;apos; 添加了pattern -F ‘:’ 表示使用冒号分割，输出第一个和第二个域。 cat /etc/passwd|awk -F &amp;apos;:&amp;apos;  &amp;apo">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-30T03:17:35.377Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TrBlog">
-<meta name="twitter:description" content="talk is cheap , show me the code.">
+<meta name="twitter:title" content="AWK">
+<meta name="twitter:description" content="AWK非常好用的命令行工具，可以替代grep，支持正则 常用通过 pattern+action方式运行 输出第一个和第二个域，只存在action。每个域默认是通过空格分离的。 ll |awk &amp;apos;{print $3}&amp;apos; 添加了pattern -F ‘:’ 表示使用冒号分割，输出第一个和第二个域。 cat /etc/passwd|awk -F &amp;apos;:&amp;apos;  &amp;apo">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/2/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/30/AWK/">
 
 
 
 
 
-  <title>Archive | TrBlog</title>
+  <title>AWK | TrBlog</title>
   
 
 
@@ -163,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,390 +259,184 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/30/AWK/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
-         
+          <h1 class="post-title" itemprop="name headline">AWK</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-30T10:57:00+08:00">
+                2019-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        Nice! 57 posts in total. Keep on posting.
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/24/Python转换Json格式插入数据库/" itemprop="url">
-              
-                <span itemprop="name">Python转换Json格式插入数据库</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-24T17:26:00+08:00" content="2019-04-24">
-          04-24
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/23/Python解析Json/" itemprop="url">
-              
-                <span itemprop="name">Python解析Json</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-23T10:41:00+08:00" content="2019-04-23">
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/23/PythonUrl请求GET-POST/" itemprop="url">
-              
-                <span itemprop="name">PythonUrl请求GET+POST</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-23T10:18:00+08:00" content="2019-04-23">
-          04-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h3 id="AWK"><a href="#AWK" class="headerlink" title="AWK"></a>AWK</h3><p>非常好用的命令行工具，可以替代grep，支持正则</p>
+<h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><p>通过 pattern+action方式运行</p>
+<p>输出第一个和第二个域，只存在action。每个域默认是通过空格分离的。</p>
+<pre><code>ll |awk &apos;{print $3}&apos;
+</code></pre><p>添加了pattern -F ‘:’ 表示使用冒号分割，输出第一个和第二个域。</p>
+<pre><code>cat /etc/passwd|awk -F &apos;:&apos;  &apos;{print $1 &quot;\t&quot; $2}&apos;
+</code></pre><p>直接查文件：</p>
+<pre><code>awk -F &apos;:&apos;  &apos;{print $1 &quot; &quot; $2}&apos; /etc/passwd
+</code></pre><p>所以可以直接作为搜索使用 -F: ‘’表示搜索pattern,注意格式:’\内容\’</p>
+<pre><code>awk -F: ’/root/&apos;
+</code></pre><p>支持正则</p>
+<pre><code>awk -F: ’/^root/&apos;
+</code></pre><p> 支持变量：</p>
+<pre><code> 统计某个文件夹下的文件占用的字节数
+ls -l |awk &apos;BEGIN {size=0;} {size=size+$5;} END{print &quot;[end]size is &quot;, size}&apos;
+</code></pre><p>高级用法以后用到再说…………</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/jenkins启动失败log/" itemprop="url">
-              
-                <span itemprop="name">jenkins启动失败log</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T10:55:00+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/Jenkins执行SSH的自动部署Docker的脚本/" itemprop="url">
-              
-                <span itemprop="name">Jenkins执行SSH的自动部署Docker的脚本</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T10:34:00+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/22/SonarQube配置集成到Jenkins/" itemprop="url">
-              
-                <span itemprop="name">SonarQube配置集成到Jenkins</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T09:45:00+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/21/serverConfigure/" itemprop="url">
-              
-                <span itemprop="name">serverConfigure</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-21T23:23:57+08:00" content="2019-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/21/hello-world/" itemprop="url">
-              
-                <span itemprop="name">hexo配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-21T22:58:03+08:00" content="2019-04-21">
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/15/python解析word文档/" itemprop="url">
-              
-                <span itemprop="name">python解析word文档</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-15T17:19:00+08:00" content="2019-04-15">
-          04-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/11/python解析习题集/" itemprop="url">
-              
-                <span itemprop="name">python解析习题集</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-11T09:52:00+08:00" content="2019-04-11">
-          04-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AWK/" rel="tag"># AWK</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/24/测试日志-压力测试/" rel="next" title="测试日志--压力测试">
+                <i class="fa fa-chevron-left"></i> 测试日志--压力测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -648,6 +444,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -668,8 +468,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
           <p class="site-author-name" itemprop="name">tr</p>
@@ -742,6 +551,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AWK"><span class="nav-number">1.</span> <span class="nav-text">AWK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用"><span class="nav-number">1.1.</span> <span class="nav-text">常用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -851,11 +676,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
