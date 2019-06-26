@@ -360,15 +360,28 @@
 <p> 在下载后需要执行git submodule update –init –recursive </p>
 </li>
 <li><p>安装YCM：（下载C语言家族支持的情况下）</p>
-<p> 下载好cmake和python head文件类似：python-dev,python3-dev,但是archlinux好像也么得</p>
-<p> 然后为了支持c语言，我们需要编译ycm_core，首先执行以下命令</p>
+<ol>
+<li><p>载好cmake和python head文件类似：python-dev,python3-dev,但是archlinux好像也么得</p>
+<p>然后为了支持c语言，我们需要编译ycm_core，首先执行以下命令</p>
 <pre><code>cd ~
 mkdir ycm_build
 cd ycm_build
 </code></pre></li>
+<li><p>然后下载最新的libclang或者clangd（编译的支持文件），由于archlinux下好像么得libclang，我从llvm.org <a href="http://http://releases.llvm.org/download.html" target="_blank" rel="noopener">llvm.org</a>.下载了clangd的编译版本，<a href="http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-aarch64-linux-gnu.tar.xz" target="_blank" rel="noopener">archlinux编译过版本</a><br>下载后将文件放入~/ycm_temp/llvm_root_dir（不存在请创建）</p>
+</li>
+<li><p>执行编译配置：（系统是linux，Generator选UnixMakefiles，需要cmake和make提前装好）</p>
+<pre><code>cmake -G &quot;Unix Makefiles&quot; -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+</code></pre><p>编译结束，当前目录生成配置文件</p>
+</li>
+<li><p>执行编译本体</p>
+<pre><code>cmake --build . --target ycm_core --config Release
+</code></pre><p>官方文档中说–config Release是为了windows特有的，可以不加</p>
+<p>注意：在cmake编译好配置文件后不能更改当前文件所在的目录，否则编译本体会找不到目录</p>
+</li>
+<li></li>
 </ol>
-<p>然后下载最新的libclang或者clangd（编译的支持文件），由于archlinux下好像么得libclang，我从llvm.org <a href="http://http://releases.llvm.org/download.html&quot;" target="_blank" rel="noopener">llvm.org</a>.下载了clangd的编译版本，<a href="http://releases.llvm.org/8.0.0/clang+llvm-8.0.0-aarch64-linux-gnu.tar.xz" target="_blank" rel="noopener">archlinux编译过版本</a></p>
-<p>下载后将文件放入~/ycm_temp/llvm_root_dir（不存在请创建）</p>
+</li>
+</ol>
 
           
         
