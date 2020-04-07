@@ -273,6 +273,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/InstantClient-PLSQL安装配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/07/InstantClient-PLSQL安装配置/" itemprop="url">InstantClient+PLSQL安装配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T16:15:00+08:00">
+                2020-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">Oracle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="oracle的连接客户端安装配置"><a href="#oracle的连接客户端安装配置" class="headerlink" title="oracle的连接客户端安装配置"></a>oracle的连接客户端安装配置</h3>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/07/InstantClient-PLSQL安装配置/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/windows-linux-subsystem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -781,36 +927,21 @@
 
       
         
-          
-            <h3 id="java-复习（heard-first-java）"><a href="#java-复习（heard-first-java）" class="headerlink" title="java 复习（heard first java）"></a>java 复习（heard first java）</h3><p>最近复习java基础知识，学校教的太差了，也没有推荐书籍，这两天把高分书看一遍，对自己的java基础做个查漏补缺</p>
-<h4 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h4><ol>
-<li><p>实例变量与局部变量：实例变量未被初始化可以通过编译，存在默认值，false，0，null。局部变量不初始化无法通过编译。</p>
-</li>
-<li><p>进制转换：Integer.parseInt(“1000”,2) :1000转为二进制：8</p>
-</li>
-<li><p>位异或运算（^）运算规则是：两个数转为二进制，然后从高位开始比较，如果相同则为0，不相同则为1。</p>
-<p> 比如：8^11.8转为二进制是1000，11转为二进制是1011.从高位开始比较得到的是：0011.然后二进制转为十进制，就是Integer.parseInt(“0011”,2)=3;</p>
-</li>
-<li><p>位与运算符（&amp;）运算规则：两个数都转为二进制，然后从高位开始比较，如果两个数都为1则为1，否则为0。</p>
-<p> 比如：129&amp;128.<br> 129转换成二进制就是10000001，128转换成二进制就是10000000。从高位开始比较得到，得到10000000，即128.、</p>
-<p> <code>注意：&amp;是位运算符，不是逻辑运算符，&amp;&amp;具有短路功能，在第一个条件不符合的情况下之后不会执行。
- 但是&amp;比较特殊，计算机中true是用二进制标识，所以可以进行与运算，使用&amp;作为逻辑运算本质还是位运算，等所有条件运行后将结果与。（1&gt;2 &amp; 2&gt;3) ==&gt; (true &amp; true)</code></p>
-</li>
-<li><p>位或运算符（|）运算规则：两个数都转为二进制，然后从高位开始比较，两个数只要有一个为1则为1，否则就为0。</p>
-<p> 比如：129|128.</p>
-<p> 129转换成二进制就是10000001，128转换成二进制就是10000000。从高位开始比较得到，得到10000001，即129.</p>
-<p> <code>注意：可作非短路，原因同上</code></p>
-</li>
-<li><p>位非运算符（~）运算规则：如果位为0，结果是1，如果位为1，结果是0.</p>
-<p> 比如：~37</p>
-<p> 在Java中，所有数据的表示方法都是以补码的形式表示，如果没有特殊说明，Java中的数据类型默认是int,int数据类型的长度是8位，一位是四个字节，就是32字节，32bit</p>
-</li>
-</ol>
-
-          
+          <h3 id="java-复习（heard-first-java）"><a href="#java-复习（heard-first-java）" class="headerlink" title="java 复习（heard first java）"></a>java 复习（heard first java）</h3><p>最近复习java基础知识:</p>
+<ul>
+<li>位运算和基础盲点</li>
+<li>Lambda</li>
+<li>stream
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/07/25/java-基础知识点（查漏补缺）/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </li></ul></div>
     
     
     
@@ -1638,150 +1769,6 @@ cd ycm_build
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/25/git-clone-need-sudo-sock4错误/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/25/git-clone-need-sudo-sock4错误/" itemprop="url">git clone need sudo: socks4错误</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-25T11:04:00+08:00">
-                2019-06-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="git-clone在开了代理的情况下无法使用"><a href="#git-clone在开了代理的情况下无法使用" class="headerlink" title="git clone在开了代理的情况下无法使用"></a>git clone在开了代理的情况下无法使用</h3><p>原因：git 默认https使用socks4作为代理协议，shadowsock使用的是socks5协议</p>
-<p>方法：                                             </p>
-<pre><code>git config --global http.proxy &apos;socks5://127.0.0.1:1080&apos; 
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1830,7 +1817,7 @@ cd ycm_build
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">71</span>
+                <span class="site-state-item-count">72</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1841,7 +1828,7 @@ cd ycm_build
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1852,7 +1839,7 @@ cd ycm_build
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
