@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="TrBlog">
 <meta property="og:description" content="python语法 1、python对大小写敏感  定义变量始终使用小写，true或false这种特殊关键字开头大写  2、引号使用  ①三引号可定义分开的字符串  course = &amp;apos;&amp;apos;&amp;apos; hi john here is your first email  thank you &amp;apos;&amp;apos;&amp;apos;  print(course)  ②单引号套双引号  c">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-05-12T01:34:50.184Z">
+<meta property="og:updated_time" content="2020-05-25T10:54:36.920Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python">
 <meta name="twitter:description" content="python语法 1、python对大小写敏感  定义变量始终使用小写，true或false这种特殊关键字开头大写  2、引号使用  ①三引号可定义分开的字符串  course = &amp;apos;&amp;apos;&amp;apos; hi john here is your first email  thank you &amp;apos;&amp;apos;&amp;apos;  print(course)  ②单引号套双引号  c">
@@ -456,6 +456,7 @@ print(round(x))
 <pre><code>import math
 print(math.ceil(2.9))
 </code></pre><p>输出3（ceil向上取整，floor向下取整）</p>
+<hr>
 <p>11、if语句</p>
 <pre><code>is_hot=False
 is_cold=False
@@ -470,12 +471,89 @@ else:
 print(&quot;enjoy your day&quot;)   //按shift加tab缩进
 </code></pre><p>输出it’s a lovely day</p>
 <p>enjoy your day</p>
+<hr>
 <p>12、逻辑运算符：and、or、not</p>
 <pre><code>has_high_income=True
 has_criminal_record=False
 
 if has_high_income and not has_criminal_record:
     print(&quot;eligible for loan&quot;)
+</code></pre><hr>
+<p> 13、列表</p>
+<p>① 添加</p>
+<pre><code>matrix.append([10,11,12])
+</code></pre><p>② 插入</p>
+<pre><code>number.insert(0,6)  //0是插入位置，6是插入数字
+</code></pre><p>③ 移除</p>
+<pre><code> number=[5,3,7,2,9]
+number.remove(5)
+</code></pre><p>④清除所有</p>
+<pre><code>number.clear()
+</code></pre><p>⑤删除列表最后一项</p>
+<pre><code>number.pop()
+</code></pre><p>⑥ 索引位置</p>
+<pre><code> number=[5,3,7,2,9]
+print(number.index(7))
+</code></pre><p> ⑦检查字符串中是否存在该字符</p>
+<pre><code> number=[5,3,7,2,9]
+print(50 in number)
+</code></pre><p> 输出False</p>
+<p> ⑧列表排序</p>
+<pre><code> number=[5,3,7,2,9]
+number.sort()   //reverse逆序
+print(number)
+</code></pre><p> ⑨复制</p>
+<pre><code> number=[5,3,7,2,9]
+number2=number.copy()
+number.append(10)
+print(number2)
+</code></pre><p> 输出[5, 3, 7, 2, 9]</p>
+<p> ⑩删除列表中重复数字</p>
+<pre><code> numbers=[2,9,2,4,6,5,8,7,9]
+uniques=[]
+for number in numbers:
+    if number not in uniques:
+        uniques.append(number)
+print(uniques)
+</code></pre><hr>
+<p> 14、元组  不可改变</p>
+<pre><code> numbers=(2,5,8)
+print(numbers[0])
+</code></pre><hr>
+<p>  15、解压缩（可适用于元组和列表）</p>
+<pre><code>x,y,z=coordinate 可以代替x=coordinate[0]
+                          y=coordinate[1]
+                          z=coordinate[2]
+</code></pre><hr>
+<p>16、字典</p>
+<p>①</p>
+<pre><code>customer={
+&quot;name&quot;:&quot;tzq&quot;,
+&quot;age&quot;:23,
+&quot;is_verified&quot;:True
+}
+print(customer[&quot;name&quot;])
+</code></pre><p>   如果用get方法print(customer.get(“birthdate”))</p>
+<p>  输出none</p>
+<p>  print(customer.get(“birthdate”,”Jan 1 1980”))设置默认值</p>
+<p>②将输入数字转变成英文输出</p>
+<pre><code> phone=input(&quot;phone:&quot;)
+digital_mapping={
+&quot;1&quot;:&quot;One&quot;,
+&quot;2&quot;:&quot;Two&quot;,
+&quot;3&quot;:&quot;Three&quot;,
+&quot;4&quot;:&quot;Four&quot;,
+&quot;5&quot;:&quot;Five&quot;,
+&quot;6&quot;:&quot;Six&quot;,
+&quot;7&quot;:&quot;Seven&quot;,
+&quot;8&quot;:&quot;Eight&quot;,
+&quot;9&quot;:&quot;Nine&quot;,
+&quot;0&quot;:&quot;Zero&quot;
+}
+output=&quot;&quot;
+for ch in phone:
+    output+=digital_mapping.get(ch)+&quot; &quot;
+print(output)
 </code></pre>
       
     </div>
@@ -593,7 +671,7 @@ if has_high_income and not has_criminal_record:
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -604,7 +682,7 @@ if has_high_income and not has_criminal_record:
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -615,7 +693,7 @@ if has_high_income and not has_criminal_record:
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
