@@ -273,6 +273,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/Archlinux-On-SurfaceBook2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/29/Archlinux-On-SurfaceBook2/" itemprop="url">Archlinux On SurfaceBook2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-29T17:23:00+08:00">
+                2020-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Archlinux-On-SurfaceBook2"><a href="#Archlinux-On-SurfaceBook2" class="headerlink" title="Archlinux On SurfaceBook2"></a>Archlinux On SurfaceBook2</h3><p>win10的内置linux还是效率低，和真正的linux环境还是不一样，但是原来使用子系统就是linux对surfacebook2的适配太差了</p>
+<p>但是最近找到了github上的一个surfacebook2的内核包，可以完美适配，因此换了个win/arch双系统，在此记录配置经历。</p>
+<p>备注：我的方式是先win10后linux，如果反过来请参考<a href="dual boot with windows">https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#Important_information</a></p>
+<h4 id="烧录u盘启动盘"><a href="#烧录u盘启动盘" class="headerlink" title="烧录u盘启动盘"></a>烧录u盘启动盘</h4><p>没必要用烧录软件，下载archlinux最新镜像，我的版本是<code>archlinux-2020.05.01-x86_64</code>,解压缩iso镜像到u盘，进入<code>loader\entries</code>目录，编辑<code>archiso-x86_64.conf</code>，看到类似<code>archisolabel=ARCH_202005</code>的信息，将<code>ARCH_202005</code>作为自己的设备名。</p>
+<p>禁用secureboot，重启按住<code>音量+</code>，禁用secureboot</p>
+<p>设置u盘优先启动</p>
+<h4 id="安装引导"><a href="#安装引导" class="headerlink" title="安装引导"></a>安装引导</h4><p>参考arch wiki<a href="Installation guide">https://wiki.archlinux.org/index.php/Installation_guide</a></p>
+<p>进入u盘的linux安装环境。</p>
+<h5 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h5><ol>
+<li><p><code>fdisk -l</code> 查看区块状态，fdisk内<code>w</code>写入修改，<code>fdisk -h</code> 帮助</p>
+</li>
+<li><p>分区自己的磁盘，我的磁盘是nvme协议的磁盘且预留了50G，<code>fdisk /dev/nvme0n1</code></p>
+</li>
+<li><p>创建EFI逻辑分区，512MB就够了。</p>
+<p> 创建efi目录（efi启动目录，所有boot loader相关） <code>mkdir -p /boot/efi</code></p>
+<p>创建efi分区，<code>n</code> 创建新分区，回车确定分区起始地址，<code>+512M</code> 给出分区大小，这个逻辑分区名是:<code>nvme0n1p7</code> 修改分区类型，<code>t</code>命令指定类型，输入<code>1</code>，确定自己换的就是EFI SYSTEM。</p>
+<p>创建swap分区，这个看个人，随意大小，格式化swap分区<code>mkswap /dev/nvme0n1p8</code>，挂载交换区<code>swapon /dev/nvme0n1p8</code></p>
+<p>创建mnt主分区，要有其他文件夹想自设分区可以随意 <code>n</code>-&gt;<code>回车确定开始地址</code>-&gt;<code>回车确定结束地址</code>，自动获得了剩余所有空间的逻辑分区<code>nvme0n1p9</code>，格式化分区<code>mkfs.ext4 /dev/nvme0n1p9</code></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/OracleSql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1778,152 +1939,6 @@ print(output)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/07/InstantClient-PLSQL安装配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/07/InstantClient-PLSQL安装配置/" itemprop="url">InstantClient+PLSQL安装配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-07T16:15:00+08:00">
-                2020-04-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="oracle的连接客户端安装配置"><a href="#oracle的连接客户端安装配置" class="headerlink" title="oracle的连接客户端安装配置"></a>oracle的连接客户端安装配置</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/07/InstantClient-PLSQL安装配置/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1972,7 +1987,7 @@ print(output)
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">82</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
