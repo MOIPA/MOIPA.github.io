@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="TrBlog">
 <meta property="og:description" content="Archlinux On SurfaceBook2win10的内置linux还是效率低，和真正的linux环境还是不一样，但是原来使用子系统就是linux对surfacebook2的适配太差了 但是最近找到了github上的一个surfacebook2的内核包，可以完美适配，因此换了个win/arch双系统，在此记录配置经历。 最终结果是获得win+arch 支持secureboot和适配surf">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-06-05T07:32:10.708Z">
+<meta property="og:updated_time" content="2020-06-05T07:37:43.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Archlinux On SurfaceBook2">
 <meta name="twitter:description" content="Archlinux On SurfaceBook2win10的内置linux还是效率低，和真正的linux环境还是不一样，但是原来使用子系统就是linux对surfacebook2的适配太差了 但是最近找到了github上的一个surfacebook2的内核包，可以完美适配，因此换了个win/arch双系统，在此记录配置经历。 最终结果是获得win+arch 支持secureboot和适配surf">
@@ -367,6 +367,7 @@
 <p>最终结果是获得win+arch 支持secureboot和适配surface硬件的自定义内核的双系统。</p>
 <p>备注：我的方式是先win10后linux，如果反过来请参考</p>
 <p><a href="dual boot with windows">https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#Important_information</a></p>
+<a id="more"></a>
 <h4 id="烧录u盘启动盘"><a href="#烧录u盘启动盘" class="headerlink" title="烧录u盘启动盘"></a>烧录u盘启动盘</h4><p>没必要用烧录软件，下载archlinux最新镜像，我的版本是<code>archlinux-2020.05.01-x86_64</code>,解压缩iso镜像到u盘，进入<code>loader\entries</code>目录，编辑<code>archiso-x86_64.conf</code>，看到类似<code>archisolabel=ARCH_202005</code>的信息，将<code>ARCH_202005</code>作为自己的设备名。</p>
 <p>禁用secureboot，重启按住<code>音量+</code>，禁用secureboot</p>
 <p>设置u盘优先启动</p>
@@ -580,6 +581,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/06/09/Layui时间判断和前端转义/" rel="prev" title="Layui时间判断和前端转义">
+                Layui时间判断和前端转义 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -653,7 +658,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -664,7 +669,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -675,7 +680,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
