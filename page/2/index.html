@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/Linux编辑桌面图标/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/09/LeetCode-每日三道题-03-动规-指针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -292,7 +292,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/04/Linux编辑桌面图标/" itemprop="url">Linux编辑桌面图标</a></h1>
+                <a class="post-title-link" href="/2021/04/09/LeetCode-每日三道题-03-动规-指针/" itemprop="url">LeetCode 每日三道题 03 动规 指针</a></h1>
         
 
         <div class="post-meta">
@@ -304,8 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-04T09:48:00+08:00">
-                2020-09-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-09T09:23:00+08:00">
+                2021-04-09
               </time>
             
 
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -366,10 +366,13 @@
       
         
           
-            <h4 id="linux-编辑桌面图标"><a href="#linux-编辑桌面图标" class="headerlink" title="linux 编辑桌面图标"></a>linux 编辑桌面图标</h4><p>我使用的是gnome3，此配置对dash-to-dock生效</p>
-<p><code>vim .local/share/applications/wine-extension-chm.desktop</code> 可编辑启动命令，图标等等</p>
-<p><code>ls .local/share/icons/</code> 图标库</p>
-<p>如需使用独显开启 命令加上前缀 optirun</p>
+            <h1 id="Trapping-rain-water-hard"><a href="#Trapping-rain-water-hard" class="headerlink" title="Trapping rain water   -hard"></a>Trapping rain water   -hard</h1><p>三种解题方法和思路，最好的80%</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.leetcode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrappingRainWater42</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Solution3().trap(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">9</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">4</span>&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 涉及数组 动规 双指针</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 思路：首先找到最高点，分别向左右两边找第二高的点，找到第二高的点，将第二高的值减去包裹的所有高度，</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * Runtime: 2 ms, faster than 21.28% of Java online submissions for Trapping Rain Water.</span></span><br><span class="line"><span class="comment">     * Memory Usage: 38.3 MB, less than 86.97% of Java online submissions for Trapping Rain Water.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> doTrap(height, <span class="number">0</span>, height.length - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">doTrap</span><span class="params">(<span class="keyword">int</span>[] height, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (start &gt;= end - <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> heighestIndex = findMaxIndex(height, start, end, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">int</span> totalWater = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> leftSecondHeightIndex = findMaxIndex(height, start, heighestIndex - <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">int</span> rightSecondHeightIndex = findMaxIndex(height, heighestIndex + <span class="number">1</span>, end, <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 找到左边包含水源</span></span><br><span class="line">            <span class="keyword">if</span> (leftSecondHeightIndex != -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = leftSecondHeightIndex + <span class="number">1</span>; i &lt;= heighestIndex - <span class="number">1</span>; i++) &#123;</span><br><span class="line">                    totalWater += height[leftSecondHeightIndex] - height[i];</span><br><span class="line">                &#125;</span><br><span class="line">                totalWater += doTrap(height, start, leftSecondHeightIndex);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 找到右边包含水源</span></span><br><span class="line">            <span class="keyword">if</span> (rightSecondHeightIndex != -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = heighestIndex + <span class="number">1</span>; i &lt;= rightSecondHeightIndex - <span class="number">1</span>; i++) &#123;</span><br><span class="line">                    totalWater += height[rightSecondHeightIndex] - height[i];</span><br><span class="line">                &#125;</span><br><span class="line">                totalWater += doTrap(height, rightSecondHeightIndex, end);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> totalWater;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 找到最高点的下标</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * <span class="doctag">@param</span> direction 靠近哪边的最高点，因为可能有高度相同， 1：表示靠近右边的最大值，0表示靠近左边的最大值</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findMaxIndex</span><span class="params">(<span class="keyword">int</span>[] height, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> direction)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 相邻的两个墙壁找最高无意义</span></span><br><span class="line">            <span class="keyword">if</span> (start &gt;= end) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> tmp;</span><br><span class="line">            <span class="keyword">if</span> (direction == <span class="number">0</span>) &#123;</span><br><span class="line">                tmp = start;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (height[tmp] &lt; height[i]) tmp = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                tmp = end;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = end; i &gt;= start; i--) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (height[tmp] &lt; height[i]) tmp = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 上一种太慢，换种，两个指针，一个头，一个尾 都不为0，左指针又走到比自身大的，右指针左走到比自己大的，分别计算两个指针刚刚和现在的位置包含的水量。</span></span><br><span class="line"><span class="comment">     * 直到左右指针相遇结束</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * Runtime: 2 ms, faster than 21.28% of Java online submissions for Trapping Rain Water.</span></span><br><span class="line"><span class="comment">     * Memory Usage: 38.3 MB, less than 86.97% of Java online submissions for Trapping Rain Water.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution2</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> totalWater = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> startPoint = <span class="number">0</span>, endPoint = height.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> recordStart, recordEnd;</span><br><span class="line">            <span class="keyword">while</span> (startPoint &lt; endPoint) &#123;</span><br><span class="line">                <span class="comment">// 直到比自己大</span></span><br><span class="line">                recordStart = startPoint;</span><br><span class="line">                recordEnd = endPoint;</span><br><span class="line">                <span class="comment">// 指针走的时候会有递减的情况 如果指针一次走到底了 那么需要重置指针 让另一个指针走</span></span><br><span class="line">                <span class="keyword">while</span> (startPoint &lt; endPoint - <span class="number">1</span> &amp;&amp; height[recordStart] &gt;= height[startPoint + <span class="number">1</span>]) startPoint++;</span><br><span class="line">                startPoint++;</span><br><span class="line">                <span class="comment">// reset</span></span><br><span class="line">                <span class="keyword">if</span> (startPoint &gt;= endPoint &amp;&amp; height[recordStart] &gt; height[startPoint]) startPoint = recordStart;</span><br><span class="line">                <span class="keyword">while</span> (startPoint &lt; endPoint - <span class="number">1</span> &amp;&amp; height[recordEnd] &gt;= height[endPoint - <span class="number">1</span>]) endPoint--;</span><br><span class="line">                endPoint--;</span><br><span class="line">                <span class="keyword">if</span> (startPoint &gt;= endPoint &amp;&amp; height[endPoint] &lt; height[recordEnd]) endPoint = recordEnd;</span><br><span class="line">                <span class="comment">// 分别计算水量</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = recordStart + <span class="number">1</span>; i &lt; startPoint; i++) &#123;</span><br><span class="line">                    totalWater += height[recordStart] - height[i];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = endPoint + <span class="number">1</span>; i &lt; recordEnd; i++) &#123;</span><br><span class="line">                    totalWater += height[recordEnd] - height[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> totalWater;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 上面那个思路稍微修改下即可 80%  不重置指针，而是先找到最大值，左指针和右指针最高只能找到最大值</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Runtime: 1 ms, faster than 81.80% of Java online submissions for Trapping Rain Water.</span></span><br><span class="line"><span class="comment">     * Memory Usage: 38 MB, less than 99.27% of Java online submissions for Trapping Rain Water.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution3</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> totalWater = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> startPoint = <span class="number">0</span>, endPoint = height.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> recordStart, recordEnd;</span><br><span class="line">            <span class="comment">// 找到最大值 左右指针只能走到最大值</span></span><br><span class="line">            <span class="keyword">int</span> maxIndex = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; height.length; i++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (height[maxIndex] &lt; height[i]) maxIndex = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (startPoint &lt; endPoint) &#123;</span><br><span class="line">                <span class="comment">// 直到比自己大</span></span><br><span class="line">                recordStart = startPoint;</span><br><span class="line">                recordEnd = endPoint;</span><br><span class="line">                <span class="comment">// 指针走的时候会有递减的情况 如果指针一次走到底了 那么需要重置指针 让另一个指针走</span></span><br><span class="line">                <span class="keyword">while</span> (startPoint &lt; maxIndex &amp;&amp; height[recordStart] &gt;= height[startPoint + <span class="number">1</span>]) startPoint++;</span><br><span class="line">                <span class="keyword">if</span> (startPoint &lt; maxIndex) startPoint++;</span><br><span class="line">                <span class="keyword">while</span> (endPoint &gt; maxIndex &amp;&amp; height[recordEnd] &gt;= height[endPoint - <span class="number">1</span>]) endPoint--;</span><br><span class="line">                <span class="keyword">if</span> (endPoint &gt; maxIndex) endPoint--;</span><br><span class="line">                <span class="comment">// 分别计算水量</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = recordStart + <span class="number">1</span>; i &lt; startPoint; i++) &#123;</span><br><span class="line">                    totalWater += height[recordStart] - height[i];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = endPoint + <span class="number">1</span>; i &lt; recordEnd; i++) &#123;</span><br><span class="line">                    totalWater += height[recordEnd] - height[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> totalWater;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="JumpGame-II-45-medium"><a href="#JumpGame-II-45-medium" class="headerlink" title="JumpGame II 45 medium"></a>JumpGame II 45 medium</h1><p>动规和贪心的解决方案</p>
+<p>贪心算法：</p>
+<p><img src="/images/pasted-48.png" alt="upload successful"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.leetcode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JumpGameII45</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Solution2().jump(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>&#125;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 问题：</span></span><br><span class="line"><span class="comment">     * Given an array of non-negative integers nums, you are initially positioned at the first index of the array.</span></span><br><span class="line"><span class="comment">     * Each element in the array represents your maximum jump length at that position.</span></span><br><span class="line"><span class="comment">     * Your goal is to reach the last index in the minimum number of jumps.</span></span><br><span class="line"><span class="comment">     * You can assume that you can always reach the last index.</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 当前位置值为最大跳跃步数，如何移动最小次数跳到最后</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 思路：先用动态规划的思想，从低到高，从最后开始算最优跳跃次数 -1表示无法到达终点</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * Runtime: 0 ms, faster than 100.00% of Java online submissions for Jump Game II.</span></span><br><span class="line"><span class="comment">     * Memory Usage: 36.3 MB, less than 85.37% of Java online submissions for Jump Game II.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">jump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span>[] jumpTimes = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">            Arrays.fill(jumpTimes, -<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i == nums.length - <span class="number">1</span>) &#123;</span><br><span class="line">                    jumpTimes[i] = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 每位再遍历后面的次数 选最小的</span></span><br><span class="line">                <span class="keyword">int</span> min = jumpTimes[i + <span class="number">1</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= nums[i]; j++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (i + j &lt; nums.length &amp;&amp; min &gt; jumpTimes[i + j] &amp;&amp; jumpTimes[i + j] != -<span class="number">1</span>) min = jumpTimes[i + j];</span><br><span class="line">                &#125;</span><br><span class="line">                jumpTimes[i] = min + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> jumpTimes[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 改造成贪心算法</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;</span></span><br><span class="line"><span class="comment">     * 思路：选择能跳到的范围内的，最远下一次跳跃距离</span></span><br><span class="line"><span class="comment">     * 当前的currentJumpEnd记录能跳到的最远位置，在当前位置和最远位置里面挑出跳的最远的方案：max，i==currentPosi表明已经找到最大跳远距离了</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution2</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">jump</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> jumpTimes = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> currentJumpEnd = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">// 记录能跳的最远位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length - <span class="number">1</span>; i++) &#123;</span><br><span class="line">                max = Math.max(max, i + nums[i]);</span><br><span class="line">                <span class="keyword">if</span> (i == currentJumpEnd) &#123;</span><br><span class="line">                    jumpTimes++;</span><br><span class="line">                    currentJumpEnd = max;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> jumpTimes;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Rotate-image"><a href="#Rotate-image" class="headerlink" title="Rotate image"></a>Rotate image</h1><p>medium<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.leetcode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Array;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RotateImage48</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> Solution().rotater2(<span class="keyword">new</span> <span class="keyword">int</span>[][]&#123;</span><br><span class="line">                &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;, &#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;, &#123;<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Runtime: 3 ms, faster than 100.00% of Java online submissions for Rotate Image.</span></span><br><span class="line"><span class="comment">     * Memory Usage: 39 MB, less than 48.87% of Java online submissions for Rotate Image.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 从第一列开始</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.length; i++) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; matrix.length; j++) &#123;</span><br><span class="line">                    swap(matrix, i, j, j, i);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix.length / <span class="number">2</span>; j++) &#123;</span><br><span class="line">                    swap(matrix, i, j, i, matrix.length - <span class="number">1</span> - j);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            Arrays.stream(matrix).forEach(x -&gt; System.out.println(Arrays.toString(x)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> newI, <span class="keyword">int</span> newJ)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = matrix[newI][newJ];</span><br><span class="line">            matrix[newI][newJ] = matrix[i][j];</span><br><span class="line">            matrix[i][j] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rotater2</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// 从第一列开始</span></span><br><span class="line">            StringBuffer out = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">            out.append(<span class="string">"["</span>);</span><br><span class="line">            <span class="comment">// 列</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.length; i++) &#123;</span><br><span class="line">                out.append(<span class="string">"["</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = matrix.length - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">                    out.append(matrix[j][i]);</span><br><span class="line">                    <span class="keyword">if</span> (j!=<span class="number">0</span>) out.append(<span class="string">","</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                out.append(<span class="string">"]"</span>);</span><br><span class="line">                <span class="keyword">if</span> (i != matrix.length-<span class="number">1</span>) out.append(<span class="string">","</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            out.append(<span class="string">"]"</span>);</span><br><span class="line">            System.out.println(out.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -418,7 +421,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/VSC代替intellij/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/08/LeetCode-每日三道题-02-array-回溯/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -437,7 +440,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/09/02/VSC代替intellij/" itemprop="url">VSC代替intellij</a></h1>
+                <a class="post-title-link" href="/2021/04/08/LeetCode-每日三道题-02-array-回溯/" itemprop="url">LeetCode 每日三道题 02 array + 回溯</a></h1>
         
 
         <div class="post-meta">
@@ -449,8 +452,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-02T16:43:00+08:00">
-                2020-09-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-08T15:44:00+08:00">
+                2021-04-08
               </time>
             
 
@@ -472,8 +475,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/VSC/" itemprop="url" rel="index">
-                    <span itemprop="name">VSC</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -510,10 +513,10 @@
 
       
         
-          <h4 id="VSC代替Intellij"><a href="#VSC代替Intellij" class="headerlink" title="VSC代替Intellij"></a>VSC代替Intellij</h4><p>Intellij idea 到期了，换vsc</p>
+          <h1 id="Combination-Sum-39"><a href="#Combination-Sum-39" class="headerlink" title="Combination Sum 39"></a>Combination Sum 39</h1>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/09/02/VSC代替intellij/#more" rel="contents">
+            <a class="btn" href="/2021/04/08/LeetCode-每日三道题-02-array-回溯/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -564,7 +567,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/Emacs配置/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/26/LeetCode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -583,7 +586,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/08/19/Emacs配置/" itemprop="url">Emacs配置</a></h1>
+                <a class="post-title-link" href="/2021/03/26/LeetCode/" itemprop="url">leet code 每日三道题 01 array+binary search</a></h1>
         
 
         <div class="post-meta">
@@ -595,132 +598,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-19T09:46:42+08:00">
-                2020-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="emacs-for-windows配置"><a href="#emacs-for-windows配置" class="headerlink" title="emacs for windows配置"></a>emacs for windows配置</h3><p>下载的emacs版本在24以上，内置了插件管理软件</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/08/19/Emacs配置/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/20/Layui字符数组超出表格问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/20/Layui字符数组超出表格问题/" itemprop="url">Layui字符数组超出表格问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-20T10:24:00+08:00">
-                2020-06-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-26T15:43:00+08:00">
+                2021-03-26
               </time>
             
 
@@ -742,8 +621,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LayUi/" itemprop="url" rel="index">
-                    <span itemprop="name">LayUi</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -780,10 +659,10 @@
 
       
         
-          <h3 id="内容溢出问题"><a href="#内容溢出问题" class="headerlink" title="内容溢出问题"></a>内容溢出问题</h3>
+          <h1 id="leet-code-每日三道题-01-array-binary-search"><a href="#leet-code-每日三道题-01-array-binary-search" class="headerlink" title="leet code 每日三道题 01 array+binary search"></a>leet code 每日三道题 01 array+binary search</h1>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/06/20/Layui字符数组超出表格问题/#more" rel="contents">
+            <a class="btn" href="/2021/03/26/LeetCode/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -834,7 +713,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/13/Layui事件监听/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/24/Java-工程师之路-五/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -853,7 +732,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/13/Layui事件监听/" itemprop="url">Layui事件监听</a></h1>
+                <a class="post-title-link" href="/2021/03/24/Java-工程师之路-五/" itemprop="url">Java 工程师之路 五</a></h1>
         
 
         <div class="post-meta">
@@ -865,132 +744,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-13T15:57:00+08:00">
-                2020-06-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Layui事件监听"><a href="#Layui事件监听" class="headerlink" title="Layui事件监听"></a>Layui事件监听</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/06/13/Layui事件监听/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/Java工程师之路-大部分知识点/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/09/Java工程师之路-大部分知识点/" itemprop="url">Java工程师之路 一</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-09T13:09:00+08:00">
-                2020-06-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-24T16:34:00+08:00">
+                2021-03-24
               </time>
             
 
@@ -1050,19 +805,730 @@
 
       
         
-          <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="面向对象三大基本特征"><a href="#面向对象三大基本特征" class="headerlink" title="面向对象三大基本特征"></a>面向对象三大基本特征</h3><ol>
-<li>封装 这个不用多说</li>
-<li>继承 子类可以继承父类，对父类进行拓展，有两种继承：实现继承（直接使用父类方法），接口继承（重写父类属性和方法），实际代码编写中应该慎用继承，除非真是<code>is-a</code>关系 否则别用，用组合。</li>
-<li>多态 一个类的实例在不同情况下有不同表现，最常见就是子类传入父类参数中，运行调用父类时，实际的操作是其子类完成</li>
+          <h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/24/Java-工程师之路-五/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/23/日语/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/23/日语/" itemprop="url">日语</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-23T09:10:00+08:00">
+                2021-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/日语/" itemprop="url" rel="index">
+                    <span itemprop="name">日语</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="第二课"><a href="#第二课" class="headerlink" title="第二课"></a>第二课</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/23/日语/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/17/socketio实时推送/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/17/socketio实时推送/" itemprop="url">socketio实时推送</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-17T10:55:58+08:00">
+                2021-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="socketio-实时推送"><a href="#socketio-实时推送" class="headerlink" title="socketio 实时推送"></a>socketio 实时推送</h1><p>不仅是简单的建立连接响应，还要每隔一段时间推送数据到客户端<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/17/socketio实时推送/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/10/Java-工程师之路-四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/10/Java-工程师之路-四/" itemprop="url">Java 工程师之路 四</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-10T14:27:00+08:00">
+                2021-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="Java序列化"><a href="#Java序列化" class="headerlink" title="Java序列化"></a>Java序列化</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/10/Java-工程师之路-四/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/02/Java-工程师之路-三/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/02/Java-工程师之路-三/" itemprop="url">Java 工程师之路 三</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-02T16:31:00+08:00">
+                2021-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="基础篇"><a href="#基础篇" class="headerlink" title="基础篇"></a>基础篇</h1><h2 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2021/03/02/Java-工程师之路-三/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/Scala-Spark踩坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/17/Scala-Spark踩坑/" itemprop="url">Scala-Spark踩坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-17T10:28:00+08:00">
+                2020-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Scala-Spark-在idea下的错误记录"><a href="#Scala-Spark-在idea下的错误记录" class="headerlink" title="Scala Spark 在idea下的错误记录"></a>Scala Spark 在idea下的错误记录</h3><p>百度真坑爹，一群人互相抄作业，浪费时间</p>
+<h4 id="Object-apache-is-not-a-member-of-package-org…"><a href="#Object-apache-is-not-a-member-of-package-org…" class="headerlink" title="Object apache is not a member of package org…"></a>Object apache is not a member of package org…</h4><p>idea下，使用默认的scala插件开发</p>
+<p>错误描述：这个错误是缺少jar配置文件导致的，但是奇怪的是在linux系统下会出现这个问题，但是windows下使用msi安装sbt不会出现这个问题，idea真神奇</p>
+<p>错误解决：</p>
+<ol>
+<li>导入spark下的jars（2.0版本后）</li>
+<li><p>下载 <a href="https://talend-update.talend.com/nexus/content/repositories/libraries/org/talend/libraries/spark-assembly-1.6.0-hadoop2.6.0/6.0.0/" target="_blank" rel="noopener">spark-assembly-1.6.0-hadoop2.6.0-6.0.0.jar</a> 然后导入即可，这个包包含了全部的集成环境</p>
+</li>
+<li><p>不要使用maven了，利用sbt构建环境，新建scala项目，右边选择sbt，在打开的build.sbt中写入以下依赖,版本自行决定</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">name := <span class="string">"LearningSparkWithSBT"</span></span><br><span class="line"></span><br><span class="line">version := <span class="string">"0.1"</span></span><br><span class="line"></span><br><span class="line">scalaVersion := <span class="string">"2.11.8"</span></span><br><span class="line">libraryDependencies ++= <span class="type">Seq</span>(</span><br><span class="line">  <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-core"</span> % <span class="string">"2.2.0"</span>,</span><br><span class="line">  <span class="string">"org.apache.spark"</span> %% <span class="string">"spark-sql"</span> % <span class="string">"2.2.0"</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<h3 id="面向对象5大基本原则-SOLID"><a href="#面向对象5大基本原则-SOLID" class="headerlink" title="面向对象5大基本原则 SOLID"></a>面向对象5大基本原则 SOLID</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/06/09/Java工程师之路-大部分知识点/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p>NOTE: 版本一定要保持一直，spark和对于的scala版本</p>
+
+          
         
       
     </div>
@@ -1109,7 +1575,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/Layui时间判断和前端转义/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/Spark-学习-03-原理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tr">
@@ -1128,7 +1594,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/09/Layui时间判断和前端转义/" itemprop="url">Layui时间判断和前端转义</a></h1>
+                <a class="post-title-link" href="/2020/11/17/Spark-学习-03-原理/" itemprop="url">Spark 学习 03 原理</a></h1>
         
 
         <div class="post-meta">
@@ -1140,8 +1606,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-09T11:23:00+08:00">
-                2020-06-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-17T10:25:00+08:00">
+                2020-11-17
               </time>
             
 
@@ -1163,8 +1629,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ayUi/" itemprop="url" rel="index">
-                    <span itemprop="name">>ayUi</span>
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
                   </a>
                 </span>
 
@@ -1201,469 +1667,91 @@
 
       
         
-          <h4 id="Layui-前端防止sql注入"><a href="#Layui-前端防止sql注入" class="headerlink" title="Layui 前端防止sql注入"></a>Layui 前端防止sql注入</h4>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/06/09/Layui时间判断和前端转义/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/Archlinux-On-SurfaceBook2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/29/Archlinux-On-SurfaceBook2/" itemprop="url">Archlinux On SurfaceBook2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-29T17:23:00+08:00">
-                2020-05-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <h3 id="Spark-学习-03-spark原理"><a href="#Spark-学习-03-spark原理" class="headerlink" title="Spark 学习 03 spark原理"></a>Spark 学习 03 spark原理</h3><h4 id="1-0-总体介绍"><a href="#1-0-总体介绍" class="headerlink" title="1.0 总体介绍"></a>1.0 总体介绍</h4><ol>
+<li><p>为什么说一组电脑是spark集群？ 因为这一组电脑都运行了Spark，node01 运行了masterdaemon 所以node01是master，其他电脑运行了workderDaemon，所以其他是worker，workDaemon去master上认领任务，取得任务后还要创建和关闭executor</p>
+</li>
+<li><p>executor 怎么运行？ 首先运行一个executor Backend来管理executor，一对一关系</p>
+</li>
+<li><p>driver干嘛的？  整个spark application的驱动节点，action操作实质是将结果发给driver</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> textRdd: <span class="type">RDD</span>[<span class="type">String</span>] = sc.textFile(<span class="string">"data/wordcount.txt"</span>)</span><br><span class="line">   <span class="keyword">val</span> splitRdd = textRdd.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">   <span class="keyword">val</span> tupleRdd = splitRdd.map((_, <span class="number">1</span>))</span><br><span class="line">   <span class="keyword">val</span> reduceRdd = tupleRdd.reduceByKey(_ + _)</span><br><span class="line">   <span class="keyword">val</span> strRdd = reduceRdd.map(item =&gt; <span class="string">s"<span class="subst">$&#123;item._1&#125;</span>,<span class="subst">$&#123;item._2&#125;</span>"</span>)</span><br><span class="line">   strRdd.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+<h4 id="2-0-逻辑执行图"><a href="#2-0-逻辑执行图" class="headerlink" title="2.0 逻辑执行图"></a>2.0 逻辑执行图</h4><ol>
+<li><p>代表了数据如何计算和流转，以wordCount为例，在结果调用print(strRdd.toCollectString()),可以看到依赖关系</p>
+</li>
+<li><p>并非执行单位，最后还是要划分到实际执行单位(机器怎么执行)</p>
+</li>
+</ol>
+<h5 id="2-1-边界"><a href="#2-1-边界" class="headerlink" title="2.1 边界"></a>2.1 边界</h5><ol>
+<li><p>rdd从第一个rdd的创建开始，到逻辑图action执行之前结束.就是一组rdd和其依赖关系</p>
+</li>
+<li><p>RDD 5大属性：分区，依赖，计算函数，最佳位置，分区函数</p>
+</li>
+</ol>
+<h5 id="2-2-rdd如何生成"><a href="#2-2-rdd如何生成" class="headerlink" title="2.2 rdd如何生成"></a>2.2 rdd如何生成</h5><ol>
+<li><p>sc.textFile在源码中回去生成一个对象：HadoopRdd，这个HadoopRdd继承了父类RDD并且重写了compute方法，这个compute方法实际调用了inputFormat方法，实际就是去读取hdfs文件块，HadoopRdd的一个分区实际就对应了hadoop的一个文件块。</p>
+</li>
+<li><p>map算子: 在源码中就是new了一个MapPartitionsRdd，且传递了一个scala的map方法给他的构造函数，并且由iter调用。spark map算子中接受的函数，实际交给了里面的scala的map。 这个iter实际是一个分区的迭代器。</p>
+</li>
+<li><p>flatMap算子：和map差不多</p>
+</li>
+</ol>
+<h5 id="2-3-rdd之间有哪些依赖"><a href="#2-3-rdd之间有哪些依赖" class="headerlink" title="2.3 rdd之间有哪些依赖"></a>2.3 rdd之间有哪些依赖</h5><ol>
+<li><p>rdd分区之间的关系，flatMap这些算子的分区关系是一一对应的</p>
+</li>
+<li><p>多对一的关系：reduceByKey</p>
+</li>
+</ol>
+<p>为什么要对rdd划分依赖关系：想确定rdd是否能在同一流水线上执行(取决于两个是否是shuffle关系)</p>
+<ol>
+<li><p>窄依赖：没有shuffle，shuffle是必须要对被分发区的每条数据进行切分的</p>
+</li>
+<li><p>宽依赖：有shuffle，reduceByKey:假设rddA有三个区块的数据，第一个区块的数据为：（hadoop，1），（spark，1）,假设生成到rddB，通过分区函数将每个分区的数据发送到rddB的每个分区。然后开始塞数据，假设 key为hadoop的数据给到rddB的0分区，key为spark的hadoop的数据给rddB的1分区。那么rddA的第一个区块的数据会被拆分，所以这是一个宽依赖（shuffle）</p>
+</li>
+</ol>
+<p>如果两个分区一对一关系，必定是窄依赖<br>如果多对一要看是否有数据分发，有就是宽依赖</p>
+<p>窄依赖的类别：</p>
+<ol>
+<li>依赖类的关系</li>
+</ol>
+<p>RDD之间的关系是由 dependency对象决定的，这个对象可以获得另一端信息</p>
+<p>第一级别继承类：NarrowDependency,ShuffleDependency</p>
+<p>第二级别：OneToOneDependency，RangeDependency，继承自NarrowDependency  </p>
+<ul>
+<li>一对一窄依赖：map算子</li>
+<li>range窄依赖：只在union中使用，两个集合合起来。</li>
+<li>多对一窄依赖：和shuffle相似但是不是，coalesce求笛卡尔积为例，被发的rdd是不会对数据再切分</li>
+</ul>
+<p>宽依赖只能等待前一个rdd的所有数据算好后切割分发，但是窄依赖的不同分区可以和生成的rdd的分区对应放在一个task计算。</p>
+<h4 id="3-0-物理执行图"><a href="#3-0-物理执行图" class="headerlink" title="3.0 物理执行图"></a>3.0 物理执行图</h4><ol>
+<li>数据如何在集群中计算</li>
+</ol>
+<p>如代码所示，flatMap和map会被合并为一个计算任务在一个executor中执行完毕后，再执行，一个task表示一个flatMap和map计算，多个task组合成一个stage。<br>执行shuffle（reduceByKey）操作后就是另一个stage，最后将结果发给Driver。</p>
+<ol start="2">
+<li>RDD是被谁执行计算的？</li>
+</ol>
+<p>每台电脑的executor是一个进程，使用多线程计算，和driver认领任务，运行任务线程：task。</p>
+<p>task如何设计，如果有rddA—map—&gt;rddB—map—rddC每个rdd都是3个分区。</p>
+<p>如果设计每个分区和map就是一个task，那么map的结果得生成文件，给下一个分区的map这就和hadoop的mapreduce一样了</p>
+<p>如果将rddA的分区和rddB的分区的两个map生成一个task，一共三个task，共享内存，效率高多了，但是遇到shuffle操作就有问题了。</p>
+<p>spark采用数据流动模型设计，划分阶段：因为在遇到shuffle会出问题,所以在有shuffle的地方分段，shuffle左边的某分区的所有操作成为一个task，右边分为一个task，这样就有了两个stage。</p>
+<p>划分stage规则：从后往前划分，知道遇到shuffle（宽依赖）断开stage，创建新的stage，继续往前走。</p>
+<ol start="3">
+<li>数据流向</li>
+</ol>
+<p>数据的计算发生在调用Action的RDD上，RDD一直往上请求数据，类似递归，然后不停返回数据。第一个获取数据的rdd是最左边的rdd。</p>
+<h4 id="4-0-如何运行"><a href="#4-0-如何运行" class="headerlink" title="4.0 如何运行"></a>4.0 如何运行</h4><ol>
+<li><p>Collect方法会去调用DAGScheduler方法==》taskScheduler方法 运行到集群中。DAGScheduler给每个job生成有向无环图，确定最佳task位置</p>
+</li>
+<li><p>一次action生成一个job，数据从读取到生成结果就是一个job，job会被分发到集群是spark调度的颗粒，一个job有多个stage，一个stage有多个task，stage之间串行执行。</p>
+</li>
+<li><p>TaskSet：一个stage对应了一个TaskSet（多个task，数量由分区决定）</p>
+</li>
+</ol>
+<h4 id="5-0-spark-高级特性"><a href="#5-0-spark-高级特性" class="headerlink" title="5.0 spark 高级特性"></a>5.0 spark 高级特性</h4><h5 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">closeure</span></span>():<span class="type">Unit</span>  = &#123;</span><br><span class="line">    <span class="keyword">val</span> factor = <span class="number">3.14</span></span><br><span class="line">    (r:<span class="type">Int</span>) = </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-0-spark-shuffle原理"><a href="#6-0-spark-shuffle原理" class="headerlink" title="6.0 spark shuffle原理"></a>6.0 spark shuffle原理</h4>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Archlinux-On-SurfaceBook2"><a href="#Archlinux-On-SurfaceBook2" class="headerlink" title="Archlinux On SurfaceBook2"></a>Archlinux On SurfaceBook2</h3><p>win10的内置linux还是效率低，和真正的linux环境还是不一样，但是原来使用子系统就是linux对surfacebook2的适配太差了</p>
-<p>但是最近找到了github上的一个surfacebook2的内核包，可以完美适配，因此换了个win/arch双系统，在此记录配置经历。</p>
-<p>最终结果是获得win+arch 支持secureboot和适配surface硬件的自定义内核的双系统。</p>
-<p>备注：我的方式是先win10后linux，如果反过来请参考</p>
-<p><a href="dual boot with windows">https://wiki.archlinux.org/index.php/Dual_boot_with_Windows#Important_information</a></p>
-<p>截图：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/29/Archlinux-On-SurfaceBook2/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/26/OracleSql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/26/OracleSql/" itemprop="url">OracleSql+mybatis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-26T16:43:00+08:00">
-                2020-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Sql/" itemprop="url" rel="index">
-                    <span itemprop="name">Sql</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Sql/Oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="OracleSql-mybatis"><a href="#OracleSql-mybatis" class="headerlink" title="OracleSql+mybatis"></a>OracleSql+mybatis</h3><p>oracle sql与mysql sql 区别还是有的，复习sql</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/26/OracleSql/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/文件上传/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/tr.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/16/文件上传/" itemprop="url">文件上传</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T16:28:00+08:00">
-                2020-05-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LayUi/" itemprop="url" rel="index">
-                    <span itemprop="name">LayUi</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>多文件批量上传问题，layui下的实现。</p>
-<p>layui底层只支持单个文件上传，实现多文件统一上传并在全部上传后生成事件</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/16/文件上传/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1701,7 +1789,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1745,7 +1833,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">115</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1756,7 +1844,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1767,7 +1855,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -425,7 +425,7 @@
 <ol start="4">
 <li><code>vim /opt/hadoop/etc/hadoop/mapred-env.sh</code></li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_JOB_HISTORYSERVER_HEAPSIZE=1000</span><br><span class="line"></span><br><span class="line">export HADOOP_MAPRED_ROOT_LOGGER=INFO,RFA</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>export HADOOP_JOB_HISTORYSERVER_OPTS=</span><br><span class="line"><span class="meta">#</span>export HADOOP_MAPRED_LOG_DIR="" # Where log files are stored.  $HADOOP_MAPRED_HOME/logs by default.</span><br><span class="line"><span class="meta">#</span>export HADOOP_JHS_LOGGER=INFO,RFA # Hadoop JobSummary logger.</span><br><span class="line"><span class="meta">#</span>export HADOOP_MAPRED_PID_DIR= # The pid files are stored. /tmp by default.</span><br><span class="line"><span class="meta">#</span>export HADOOP_MAPRED_IDENT_STRING= #A string representing this instance of hadoop. $USER by default</span><br><span class="line"><span class="meta">#</span>export HADOOP_MAPRED_NICENESS= #The scheduling priority for daemons. Defaults to 0.</span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_JOB_HISTORYSERVER_HEAPSIZE=1000</span><br><span class="line"></span><br><span class="line">export HADOOP_MAPRED_ROOT_LOGGER=INFO,RFA</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_JOB_HISTORYSERVER_OPTS=</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_LOG_DIR=<span class="string">""</span> <span class="comment"># Where log files are stored.  $HADOOP_MAPRED_HOME/logs by default.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_JHS_LOGGER=INFO,RFA <span class="comment"># Hadoop JobSummary logger.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_PID_DIR= <span class="comment"># The pid files are stored. /tmp by default.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_IDENT_STRING= <span class="comment">#A string representing this instance of hadoop. $USER by default</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_NICENESS= <span class="comment">#The scheduling priority for daemons. Defaults to 0.</span></span></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br></pre></td></tr></table></figure>
 <ol start="5">
 <li><p><code>vim /opt/hadoop/etc/hadoop/slaves</code>: <code>node01</code></p>
 </li>
@@ -458,7 +458,7 @@
 <li><p>配置conf/spark-env.sh</p>
 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 指定java</span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 指定spark master 地址</span><br><span class="line">export SPARK_MASTER_HOST=node01</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 指定查找history server日志目录和web端口</span><br><span class="line">export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=4001 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://node01:8020/spark_log"</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME=/opt/hadoop</span><br><span class="line">export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 指定java</span></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定spark master 地址</span></span><br><span class="line">export SPARK_MASTER_HOST=node01</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定查找<span class="built_in">history</span> server日志目录和web端口</span></span><br><span class="line">export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=4001 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://node01:8020/spark_log"</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME=/opt/hadoop</span><br><span class="line">export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li><p>配置conf/slaves，master启动时可以启动所有从节点，告诉master worker在哪</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node01</span><br><span class="line">192.168.....</span><br></pre></td></tr></table></figure>
@@ -483,7 +483,7 @@
 <p>配置高可用</p>
 <ol>
 <li><p>进入spark-env.sh</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>注释原来的Spark Master地址</span><br><span class="line"><span class="meta">#</span> export SPARK_MASTER_HOST=node01</span><br><span class="line"><span class="meta">#</span> 指定spark运行时参数</span><br><span class="line">export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=node01:2181,node02:2181,node03:2181(#这里填写的是zookeeper的三台主机) -Dspark.deploy.zookeeper.dir=/spark"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">注释原来的Spark Master地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">export</span> SPARK_MASTER_HOST=node01</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定spark运行时参数</span></span><br><span class="line">export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=node01:2181,node02:2181,node03:2181(#这里填写的是zookeeper的三台主机) -Dspark.deploy.zookeeper.dir=/spark"</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>分发配置 <code>scp -r spark root@node02:$PWD</code></p>
 </li>
@@ -665,7 +665,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">99</span>
+                <span class="site-state-item-count">115</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -676,7 +676,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -687,7 +687,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
