@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Algorithm,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="FLOYD 最短路径算法思路佛洛依德最短路径实际上是使用了两个邻接矩阵遍历完成的 O(n^3)，一个邻接矩阵A用来保存点到点的路径权重，另一个B用来保存路径。 A的初始已经写好了点到点的直接距离，对于没有直连的点，内容都算作无穷。然后依次取中间点后再依次遍历通过这个中间点的距离，如果小于原来的A矩阵的内的距离，那么就覆写且将路径写入B矩阵。 图解例子 根据这个图做两个矩阵A（存储点到点的距离），B">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Floyd最短路径算法">
+<meta property="og:url" content="http://yoursite.com/2021/10/29/Floyd最短路径算法/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="FLOYD 最短路径算法思路佛洛依德最短路径实际上是使用了两个邻接矩阵遍历完成的 O(n^3)，一个邻接矩阵A用来保存点到点的路径权重，另一个B用来保存路径。 A的初始已经写好了点到点的直接距离，对于没有直连的点，内容都算作无穷。然后依次取中间点后再依次遍历通过这个中间点的距离，如果小于原来的A矩阵的内的距离，那么就覆写且将路径写入B矩阵。 图解例子 根据这个图做两个矩阵A（存储点到点的距离），B">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-86.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-87.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-88.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-89.png">
+<meta property="og:updated_time" content="2021-10-29T06:39:22.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Floyd最短路径算法">
+<meta name="twitter:description" content="FLOYD 最短路径算法思路佛洛依德最短路径实际上是使用了两个邻接矩阵遍历完成的 O(n^3)，一个邻接矩阵A用来保存点到点的路径权重，另一个B用来保存路径。 A的初始已经写好了点到点的直接距离，对于没有直连的点，内容都算作无穷。然后依次取中间点后再依次遍历通过这个中间点的距离，如果小于原来的A矩阵的内的距离，那么就覆写且将路径写入B矩阵。 图解例子 根据这个图做两个矩阵A（存储点到点的距离），B">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-86.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/10/29/Floyd最短路径算法/">
+
+
+
+
+
+  <title>Floyd最短路径算法 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/10/29/Floyd最短路径算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Floyd最短路径算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-10-29T11:35:00+08:00">
+                2021-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="FLOYD-最短路径算法"><a href="#FLOYD-最短路径算法" class="headerlink" title="FLOYD 最短路径算法"></a>FLOYD 最短路径算法</h1><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>佛洛依德最短路径实际上是使用了两个邻接矩阵遍历完成的 O(n^3)，一个邻接矩阵A用来保存点到点的路径权重，另一个B用来保存路径。</p>
+<p>A的初始已经写好了点到点的直接距离，对于没有直连的点，内容都算作无穷。然后依次取中间点后再依次遍历通过这个中间点的距离，如果小于原来的A矩阵的内的距离，那么就覆写且将路径写入B矩阵。</p>
+<h2 id="图解例子"><a href="#图解例子" class="headerlink" title="图解例子"></a>图解例子</h2><p><img src="/images/pasted-86.png" alt="upload successful"></p>
+<p>根据这个图做两个矩阵A（存储点到点的距离），B（存储经过点）</p>
+<p><img src="/images/pasted-87.png" alt="upload successful"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">以上图为例，录入后的矩阵A，A[0][1]表示0节点到1节点的距离为5，A[1][0]就表示节点1到节点0的距离，无穷表示无法连接。</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/pasted-88.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">路径Path，对于B[0][1]表示 0节点到1节点需要经过什么节点</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">现在开始从头遍历，先找出节点对（就是图中什么节点可以到什么节点）有：</span><br><span class="line"></span><br><span class="line">&lt;0,1&gt; &lt;0,2&gt; &lt;0,3&gt;</span><br><span class="line">&lt;1,0&gt; &lt;1,2&gt; &lt;1,3&gt;</span><br><span class="line">&lt;2,0&gt; &lt;2,1&gt; &lt;2,3&gt;</span><br><span class="line">&lt;3,0&gt; &lt;3,1&gt; &lt;3,2&gt;</span><br><span class="line"></span><br><span class="line">现在取中间节点0（挨个取0，1，2，3）:对于0节点来说0节点到某节点距离，使用0作为中间节点是无意义的，所以包含0节点的节点对都不看，从&lt;1,2&gt;开始，即1使用0节点作为中间节点到2 = 1到0的节点距离+ 0到2的节点距离，也就是 A[1,2] = A[1,0] + A[0,2]。如果这个距离是小于原来距离的那么就更新，这里4&gt;无穷所以不更新。</span><br><span class="line"></span><br><span class="line">每次算可能有点绕，这里有个技巧：假设还是算 A[1,2]以 X 作为中间节点，可以先找到 A[1,2]在图中的点，分别朝着两个 X 方向走（X 行和 X 列），看他们的和是否小于自己，小于就更新自己，且在B矩阵内更新B[1,2] = X。这里X可以是0，1，2，3节点。</span><br></pre></td></tr></table></figure>
+<p>如此遍历更新两个矩阵得到最后结果：</p>
+<p><img src="/images/pasted-89.png" alt="upload successful"></p>
+<h2 id="查找代码实现"><a href="#查找代码实现" class="headerlink" title="查找代码实现"></a>查找代码实现</h2><p>现在我们得到了最后的更新结果，使用的话以<code>A[1][0]</code>为例，即1节点到0节点从A矩阵可以看到1节点到0节点距离6，根据Path矩阵，看到<code>Path[1][0] = 3</code>表示 1到0节点要经过3，再看1到3和3到0，<code>Path[1][3] = -1</code>表示1到3直连，查<code>Path[3][0] = 2</code> 表示3到0经过节点2，查看3-2和2-0结果是-1，所以最后路径是<code>1-3-2-0</code>，不难发现这个过程是递归的，代码实现较为简单如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 打印节点x到节点y 经过的节点</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> x</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> y</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> matrixPath 邻接矩阵的路径矩阵</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printPath</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> matrixPath[][])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (matrixPath[x][y] == -<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// -1表示直连 输出</span></span><br><span class="line">        System.out.println(<span class="string">"直连"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 要经过一个节点</span></span><br><span class="line">        System.out.println(<span class="string">"经过节点:"</span> + matrixPath[x][y]);</span><br><span class="line">        <span class="comment">// 递归查找x与y到中间节点的中间节点</span></span><br><span class="line">        printPath(x, matrixPath[x][y], matrixPath);</span><br><span class="line">        printPath(matrixPath[x][y], y, matrixPath);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="最短路径实现"><a href="#最短路径实现" class="headerlink" title="最短路径实现"></a>最短路径实现</h2><p>再看一下最短路径的过程会发现本质就是遍历更新两个表，从选取中间节点开始遍历，找到中间节点后遍历所有节点，对比节点的值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 生成最短路径矩阵</span></span><br><span class="line"><span class="comment"> * 传入的矩阵都是方阵 即长宽一样的多维数组</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> matrix     图的邻接矩阵表示，传入时已经写好了点到点的直接距离</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> matrixPath 图的路径矩阵</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floydGenerate</span><span class="params">(<span class="keyword">int</span> matrix[][], <span class="keyword">int</span> matrixPath[][])</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化路径矩阵 -1表示直连 一开始所有点都算做直连，matrix保存了直连的距离，如果两个节点不能直连，那么算作距离无限大</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrixPath.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrixPath.length; j++) &#123;</span><br><span class="line">            matrixPath[i][j] = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 选取中间经过节点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> passingByNode = <span class="number">0</span>; passingByNode &lt; matrix.length; passingByNode++)</span><br><span class="line">        <span class="comment">// 选取节点对(开始节点和结束节点) 0-1 0-2 0-3 ...这样的</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> startNode = <span class="number">0</span>; startNode &lt; matrix.length; startNode++)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> endNode = <span class="number">0</span>; endNode &lt; matrix.length; endNode++)</span><br><span class="line">                <span class="comment">// 计算开始节点到经过节点的值和经过节点到结束节点的值</span></span><br><span class="line">                <span class="keyword">if</span> (matrix[startNode][passingByNode] + matrix[passingByNode][endNode] &lt; matrix[startNode][endNode]) &#123;</span><br><span class="line">                    matrix[startNode][endNode] = matrix[startNode][passingByNode] + matrix[passingByNode][endNode];</span><br><span class="line">                    matrixPath[startNode][endNode] = passingByNode;</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/09/11/ArchLinux滚挂的一次修复/" rel="next" title="ArchLinux滚挂的一次修复">
+                <i class="fa fa-chevron-left"></i> ArchLinux滚挂的一次修复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/29/Dijkstra迪杰斯特拉算法/" rel="prev" title="Dijkstra迪杰斯特拉算法">
+                Dijkstra迪杰斯特拉算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FLOYD-最短路径算法"><span class="nav-number">1.</span> <span class="nav-text">FLOYD 最短路径算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图解例子"><span class="nav-number">1.2.</span> <span class="nav-text">图解例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找代码实现"><span class="nav-number">1.3.</span> <span class="nav-text">查找代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路径实现"><span class="nav-number">1.4.</span> <span class="nav-text">最短路径实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

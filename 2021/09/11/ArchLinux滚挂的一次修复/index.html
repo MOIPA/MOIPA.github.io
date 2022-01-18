@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="我的Arch一年没更新 滚挂了事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google登陆却被疯狂登出，整了一个小时发现是是chrome的问题。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。 但是我一开始不知道这个政">
+<meta name="description" content="我的Arch一年没更新 滚挂了事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google账号被疯狂登出，整了一个小时才发现是chrome的问题（我是弱智）。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。 一开始不知道这">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ArchLinux滚挂的一次修复">
 <meta property="og:url" content="http://yoursite.com/2021/09/11/ArchLinux滚挂的一次修复/index.html">
 <meta property="og:site_name" content="TrBlog">
-<meta property="og:description" content="我的Arch一年没更新 滚挂了事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google登陆却被疯狂登出，整了一个小时发现是是chrome的问题。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。 但是我一开始不知道这个政">
+<meta property="og:description" content="我的Arch一年没更新 滚挂了事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google账号被疯狂登出，整了一个小时才发现是chrome的问题（我是弱智）。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。 一开始不知道这">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2021-09-11T10:37:28.998Z">
+<meta property="og:updated_time" content="2021-09-11T10:46:53.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ArchLinux滚挂的一次修复">
-<meta name="twitter:description" content="我的Arch一年没更新 滚挂了事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google登陆却被疯狂登出，整了一个小时发现是是chrome的问题。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。 但是我一开始不知道这个政">
+<meta name="twitter:description" content="我的Arch一年没更新 滚挂了事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google账号被疯狂登出，整了一个小时才发现是chrome的问题（我是弱智）。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。 一开始不知道这">
 
 
 
@@ -362,11 +362,11 @@
       
 
       
-        <h1 id="我的Arch一年没更新-滚挂了"><a href="#我的Arch一年没更新-滚挂了" class="headerlink" title="我的Arch一年没更新 滚挂了"></a>我的Arch一年没更新 滚挂了</h1><p>事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google登陆却被疯狂登出，整了一个小时发现是是chrome的问题。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。</p>
-<p>但是我一开始不知道这个政策，以为是chromiu的版本问题，事发的版本是83，我用pacman upgrade了下到了93的版本，启动chromium的时候提示动态链接库缺失。</p>
-<p>这个问题其实我是知道的，因为arch的版本更新政策比较激进，可能半个月就更新了一次，然后大部分上游的软件都依赖这些最新的库，所以如果是老系统更新新软件很容易出现动态链接库的问题，我本来也没在意，pacman -F 查了下软件包的依赖库，打算更新下以来。</p>
-<p>但是！ 问题就出在了更新依赖库，我更新了一个底层依赖库 <code>icu</code>，导致我reboot的时候gnome-shell都无法启用了，因为这些依赖了老版本的icu库。</p>
-<p>无奈，只能全盘更新了，但是全盘更新估计也是出问题的。一个是我的系统太久没更新了一年了，版本跨域太大还不知道有啥bug。其次我的是自定义的内核，且我的bootloader用的签名机制，如果内核更新了，原来的内核哈希码肯定对应不上新的内核，必定失败的。没办法，怀着忐忑的心情 <code>sudo pacman -Syu</code>了</p>
+        <h1 id="我的Arch一年没更新-滚挂了"><a href="#我的Arch一年没更新-滚挂了" class="headerlink" title="我的Arch一年没更新 滚挂了"></a>我的Arch一年没更新 滚挂了</h1><p>事情是这样的：好久没用另一台电脑，登入系统的时候打开chrome想更新下插件，好死不死的退了google账号，想重新登入的，发现google账号被疯狂登出，整了一个小时才发现是chrome的问题（我是弱智）。我用的是chrome的开源版：chromium，自从21年2月份开始google的登陆api收紧了政策，只有chrome可以登陆google账号。</p>
+<p>一开始不知道这个政策，以为是chromiu的版本问题，事发的版本是83，我用pacman upgrade了下到了93的版本，启动chromium的时候提示动态链接库缺失。</p>
+<p>这个问题其实我是知道的，因为arch的版本更新政策比较激进，可能半个月就更新了一次，且大部分上游的软件都依赖这些最新的库，所以如果是老系统更新新软件很容易出现动态链接库的问题，我本来也没在意，pacman -F 查了下软件包的依赖库，打算更新下以来。</p>
+<p>但是！ 问题就出在了更新依赖库，我更新了一个底层依赖库 <code>icu</code>，导致我reboot的时候gnome-shell这些依赖老版本库的应用都无法启动了，只能进tty看了<code>alt + ctrl +3</code></p>
+<p>回退也很麻烦我都忘了刚刚的icu是啥版本了，还更新几个其他的库，这样看来，只能全盘更新了，但是全盘更新估计也是出问题的。原因一个是我的系统太久没更新了一年了，版本跨太大还不知道有啥bug。其次我的内核是自定义的用了签名机制，如果内核更新了，原来的内核哈希码肯定对应不上新的内核，必定失败的。没办法，怀着忐忑的心情 <code>sudo pacman -Syu</code>了</p>
 <p>嗯   果然挂了</p>
 <h2 id="shim-签名问题"><a href="#shim-签名问题" class="headerlink" title="shim 签名问题"></a>shim 签名问题</h2><p>因为的内核是自定义编译的内核，比较适配我的surface硬件，为了美观开了secureboot，不然每次开机上面红色的锁的刺眼ui真的难受。secureboot是微软的一个机制，微软信任windows系统和几个第三放的bootloader（内核加载器）。这几个内核加载器呢需要我来指定内核，怎么指定呢，用shim签名（哈希）来做这件事。</p>
 <p>举例：我的编译好的新内核，我用shim签名生成了哈希结果，我需要再下一次开机启动是enroll，引入这个签名，这样secureboot启动bootloader，bootlaoder查看自己的信任列表，有这个内核，可以启动。</p>
@@ -411,6 +411,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/10/29/Floyd最短路径算法/" rel="prev" title="Floyd最短路径算法">
+                Floyd最短路径算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -485,7 +489,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -496,7 +500,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -507,7 +511,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -592,7 +596,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

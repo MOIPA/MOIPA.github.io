@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Docker,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Docker 深入3">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 深入3">
+<meta property="og:url" content="http://yoursite.com/2020/01/24/Docker-深入3/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="Docker 深入3">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-114.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-115.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-118.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-119.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-120.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-121.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-127.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-128.png">
+<meta property="og:updated_time" content="2022-01-18T02:53:45.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 深入3">
+<meta name="twitter:description" content="Docker 深入3">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-114.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/24/Docker-深入3/">
+
+
+
+
+
+  <title>Docker 深入3 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/24/Docker-深入3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker 深入3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-24T09:42:00+08:00">
+                2020-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Docker-深入3"><a href="#Docker-深入3" class="headerlink" title="Docker 深入3"></a>Docker 深入3</h1><a id="more"></a>
+<h2 id="Docker-网络"><a href="#Docker-网络" class="headerlink" title="Docker 网络"></a>Docker 网络</h2><p>首先启动一个带net-tool的镜像（可以自己写个dockerfile构建下镜像或者进入容器安装<code>apt update &amp;&amp; apt install -y iproute2</code>），查看容器的网卡信息</p>
+<p><img src="/images/pasted-114.png" alt="upload successful"></p>
+<p>对于windows下，默认并没有docker的网卡，所以启动的容器可能ping不通，如果存在网卡，会发现网卡地址和容器内网卡地址处于一个网段下。</p>
+<p>实验发现每启动一个容器，宿主机内会多一个虚拟网卡，正好和容器匹配，这个技术称为<code>veth-pair</code></p>
+<p><img src="/images/pasted-115.png" alt="upload successful"></p>
+<p>工作原理，就是个交换机（多网桥）</p>
+<h2 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h2><h3 id="–link"><a href="#–link" class="headerlink" title="–link"></a>–link</h3><p>类似dns，通过容器名访问</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name tomcat03 --link tomcat02 tomcat</span><br></pre></td></tr></table></figure>
+<p>这样03即可ping通02，其实–link只是在启动的容器内添加了host配置，不过我感觉这种方式不好用，直接把host文件共享更方便配集群的话。</p>
+<p>查看网络配置:<code>docker network ls</code> <code>docker network inspect</code></p>
+<h3 id="自定义网络"><a href="#自定义网络" class="headerlink" title="自定义网络"></a>自定义网络</h3><p>直接启动的容器，默认会添加<code>--net bridge</code>参数</p>
+<p>在默认的桥接模式下，宿主机会存在一个虚拟网卡用作所有容器的网关，容器之间通信都走这个网关。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建网络:docker network create </span></span><br><span class="line">docker network create --driver bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 mynet</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用自己创建的网络</span></span><br><span class="line">docker run -d -P --name trtomcat01 --net mynet tr/tomcat:1.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 自定义网络本质是划分网段，将容器放入网段下 查看网络</span></span><br><span class="line">docker network inspect mynet</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">![upload successful](/images/pasted-116.png)</span><br><span class="line"></span><br><span class="line">这样的最大好处是可以通过容器名访问了，且保证了只有子网内的容器是可以互相访问的</span><br><span class="line">![upload successful](/images/pasted-117.png)</span><br><span class="line"></span><br><span class="line">通过docker创建的网络，不同的网段是无法通信的，通过`docker network connect 网络 目标容器`联通</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># REDIS集群</span></span></span><br><span class="line"></span><br><span class="line">做这样一个模型，两个redis组合一个哨兵模式，共有三组</span><br><span class="line"></span><br><span class="line">1. 组网，把redis集群放在一个局域网网段`docker network create --driver bridge --subnet 172.38.0.0/16 redisnet`</span><br><span class="line"></span><br><span class="line">2. 启动容器</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line"><span class="meta">#</span><span class="bash"> 批量创建配置文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for port in $(seq 1 6);</span><br><span class="line">do</span><br><span class="line">mkdir -p ~/dockerPractice/redis/node-$&#123;port&#125;/conf</span><br><span class="line">touch  ~/dockerPractice/redis/node-$&#123;port&#125;/conf/redis.conf</span><br><span class="line">cat &lt;&lt; EOF &gt; ~/dockerPractice/redis/node-$&#123;port&#125;/conf/redis.conf</span><br><span class="line">port 6379</span><br><span class="line">bind 0.0.0.0</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file nodes.conf</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line">cluster-announce-ip 172.38.0.1$&#123;port&#125;</span><br><span class="line">cluster-announce-port 6379</span><br><span class="line">cluster-announce-bus-port 16379</span><br><span class="line">appendonly yes</span><br><span class="line">EOF</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 批量启动redis容器</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for port in $(seq 1 6);</span><br><span class="line">do</span><br><span class="line">docker run -p 637$&#123;port&#125;:6379 \</span><br><span class="line">-p 1637$&#123;port&#125;:16379 \</span><br><span class="line">--name redis-$&#123;port&#125; \</span><br><span class="line">-v ~/dockerPractice/redis/node-$&#123;port&#125;/data:/data \</span><br><span class="line">-v ~/dockerPractice/redis/node-$&#123;port&#125;/conf/redis.conf:/etc/redis/redis.conf -d \</span><br><span class="line">--net redisnet \</span><br><span class="line">--ip 172.38.0.1$&#123;port&#125; \</span><br><span class="line">redis \</span><br><span class="line">redis-server /etc/redis/redis.conf</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>容器启动了，现在需要将这六个容器集群，这里可以随便进入一个redis容器，默认目录是/data,里面有节点配置文件，可以通过命令配置三个主机和从机:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-cli --cluster create 172.38.0.11:6379 172.38.0.12:6379 172.38.0.13:6379 172.38.0.14:6379</span><br><span class="line">172.38.0.15:6379 172.38.0.16:6379 --cluster-replicas 1</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><img src="/images/pasted-118.png" alt="upload successful"></p>
+<blockquote>
+<p>使用集群测试，可以在集群内登陆：<code>redis-cli -c</code>,查看集群主从信息<code>cluster nodes</code>，键入一个值保存<code>set name tr</code>，这时候docker停止保存的主机，在重新进入redis-cli，获取<code>get name</code>发现可以在从机获取</p>
+</blockquote>
+<h2 id="SpringBoot打包微服务"><a href="#SpringBoot打包微服务" class="headerlink" title="SpringBoot打包微服务"></a>SpringBoot打包微服务</h2><blockquote>
+<p>通过idea环境工具打包</p>
+</blockquote>
+<p><img src="/images/pasted-119.png" alt="upload successful"></p>
+<blockquote>
+<p>可以配置idea的docker仓库</p>
+</blockquote>
+<p><img src="/images/pasted-120.png" alt="upload successful"></p>
+<blockquote>
+<p>编写Dockerfile（和pom同一层级）</p>
+</blockquote>
+<p><img src="/images/pasted-121.png" alt="upload successful"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8</span><br><span class="line">COPY *.jar /app.jar</span><br><span class="line">CMD ["--server.port=9080"]</span><br><span class="line">EXPOSE 9080</span><br><span class="line">ENTRYPOINT ["java","-jar","/app.jar"]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>打包就行了 docker build</p>
+</blockquote>
+<p><img src="/images/pasted-127.png" alt="upload successful"></p>
+<blockquote>
+<p>启动测试镜像</p>
+</blockquote>
+<p><img src="/images/pasted-128.png" alt="upload successful"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/23/Docker深入2/" rel="next" title="Docker深入2">
+                <i class="fa fa-chevron-left"></i> Docker深入2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/31/Git-ssh/" rel="prev" title="Git ssh">
+                Git ssh <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-深入3"><span class="nav-number">1.</span> <span class="nav-text">Docker 深入3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-网络"><span class="nav-number">1.1.</span> <span class="nav-text">Docker 网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器互联"><span class="nav-number">1.2.</span> <span class="nav-text">容器互联</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#–link"><span class="nav-number">1.2.1.</span> <span class="nav-text">–link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义网络"><span class="nav-number">1.2.2.</span> <span class="nav-text">自定义网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpringBoot打包微服务"><span class="nav-number">1.3.</span> <span class="nav-text">SpringBoot打包微服务</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

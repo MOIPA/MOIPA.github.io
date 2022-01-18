@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Docker,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Docker深入2">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker深入2">
+<meta property="og:url" content="http://yoursite.com/2020/01/23/Docker深入2/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="Docker深入2">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-96.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-97.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-98.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-99.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-100.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-102.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-103.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-104.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-105.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-106.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-107.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-109.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-110.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-111.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-112.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-113.png">
+<meta property="og:updated_time" content="2022-01-17T01:41:53.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker深入2">
+<meta name="twitter:description" content="Docker深入2">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-96.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/23/Docker深入2/">
+
+
+
+
+
+  <title>Docker深入2 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/23/Docker深入2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker深入2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-23T10:52:00+08:00">
+                2020-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Docker深入2"><a href="#Docker深入2" class="headerlink" title="Docker深入2"></a>Docker深入2</h1><a id="more"></a>
+<h2 id="portainer可视化界面安装"><a href="#portainer可视化界面安装" class="headerlink" title="portainer可视化界面安装"></a>portainer可视化界面安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d 8088:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --privileged=true portainer/portainer</span><br></pre></td></tr></table></figure>
+<p>访问测试</p>
+<p><img src="/images/pasted-96.png" alt="upload successful"></p>
+<p>如果是在windos中 挂载数据卷需要换</p>
+<p><img src="/images/pasted-97.png" alt="upload successful"></p>
+<h2 id="Docker镜像探究"><a href="#Docker镜像探究" class="headerlink" title="Docker镜像探究"></a>Docker镜像探究</h2><p>镜像类似一个独立软件包，但这个软件包包含了代码，运行时的库，环境变量和配置文件。</p>
+<p>得到镜像：从远程仓库，或者别人复制，或者自己做（DockerFile）</p>
+<h3 id="Docker镜像加载原理"><a href="#Docker镜像加载原理" class="headerlink" title="Docker镜像加载原理"></a>Docker镜像加载原理</h3><p>下载镜像的时候可以看到分了很多层，其实就是<code>UnionFs文件系统</code>，它可以对文件系统的修改作为一次次的提交，类似于<code>git</code>（比如安装一个jenkins，先安装centos内核，安装库，安装jdk，最后安装jenkins本身，多个应用可能共有安装内核和库的行为），下载时候看到的一层一层的就是这个提交记录。假设两个镜像都用到了同样的几个记录，这几个记录就不用下载了。</p>
+<p>Docker镜像需要bootfs:最底层的启动器包含bootloader和kernel（精简版内核），前者用于引导加载bootfs文件系统，加载内核。当boot完成后内核就存在在内存中了，此时内存使用权转移给内核，系统卸载bootfs</p>
+<p>还有rootfs：rootfs就是在bootfs之上的各个系统的发行版（ubuntu，centos等）</p>
+<h3 id="Docker镜像分层原理"><a href="#Docker镜像分层原理" class="headerlink" title="Docker镜像分层原理"></a>Docker镜像分层原理</h3><p>docker下载镜像的时候回下载多次记录，下载过的记录不再下载，可以通过<code>docker inspect</code>查看每层的记录</p>
+<p>具体原理：和git一样，每层（ly:layer)认为一个文件记录，下一层可能新增，或者修改，或者删除了某些文件，这一层的操作为一个记录。</p>
+<h3 id="commit镜像"><a href="#commit镜像" class="headerlink" title="commit镜像"></a>commit镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker commit 提交容器成为新副本</span><br><span class="line"></span><br><span class="line">docker commit -m "" -a "作者" &lt;镜像名&gt;:[Tag]</span><br></pre></td></tr></table></figure>
+<p>tomcat为例，官方的镜像内webapps是没有东西的，可以手动将webapps.list内容拷贝过去，重新打包成一个镜像</p>
+<p><img src="/images/pasted-98.png" alt="upload successful"></p>
+<p>这个镜像现在可以发布给任何人了</p>
+<h2 id="Docker的容器数据卷"><a href="#Docker的容器数据卷" class="headerlink" title="Docker的容器数据卷"></a>Docker的容器数据卷</h2><p>一个闭合的容器没有太大意义，比如配置多的nginx，每次修改配置需要取容器内部vim修改，可以通过容器内和容器外共享文件吗。答案是肯定的，将内部容器的一个目录挂载到主机上的一个目录，实现自动同步目录内容虽然本质是硬链接。</p>
+<p>使用挂载卷，每次创建容器时输入<code>参数：-v</code>即可。</p>
+<p>以centos为例，从镜像启动一个容器时：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /d/DockerV:/home/ centos /bin/bash #启动时挂载卷</span><br><span class="line"></span><br><span class="line">docker inspect #可以查看挂载的卷</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/pasted-99.png" alt="upload successful"></p>
+<p>查看挂载好的卷</p>
+<p><img src="/images/pasted-100.png" alt="upload successful"></p>
+<h3 id="具名挂载和匿名挂载（不指定主机目录的情况）"><a href="#具名挂载和匿名挂载（不指定主机目录的情况）" class="headerlink" title="具名挂载和匿名挂载（不指定主机目录的情况）"></a>具名挂载和匿名挂载（不指定主机目录的情况）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-v 容器内路径 </span><br><span class="line"><span class="meta">#</span><span class="bash">匿名挂载</span></span><br><span class="line"><span class="meta">#</span><span class="bash">例子 docker run -d -P --name nginx01 -v /etc/nginx nginx  <span class="comment"># -P 随机选择主机 端口</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看所有数据卷</span></span><br><span class="line">docker volume ls #会看到大部分卷是哈希数，因为当时挂载的时候没有起名</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">具名挂载</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-102.png" alt="upload successful"></p>
+<p>如果是具名挂载那么数据卷默认挂载到仓库</p>
+<p><img src="/images/pasted-103.png" alt="upload successful"></p>
+<h3 id="挂载数据卷的读写权限配置"><a href="#挂载数据卷的读写权限配置" class="headerlink" title="挂载数据卷的读写权限配置"></a>挂载数据卷的读写权限配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">加上参数 :rw 即可</span></span><br><span class="line">docker run -d -v myvolume:/etc/nginx:ro nginx</span><br><span class="line"><span class="meta">#</span><span class="bash"> rw:可读可写</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ro:只可读</span></span><br></pre></td></tr></table></figure>
+<h3 id="Dockfile-挂载数据卷"><a href="#Dockfile-挂载数据卷" class="headerlink" title="Dockfile 挂载数据卷"></a>Dockfile 挂载数据卷</h3><p>DockerFile只是用来构建docker镜像的脚本，每个命令都是一层修改(commit)<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> dockerfile里面的内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> dockerfile里面的内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash">以什么系统作为基础</span></span><br><span class="line">FROM centos</span><br><span class="line"><span class="meta">#</span><span class="bash">匿名挂载数据卷 这里的配置在运行这个镜像的时候会自动将两个卷挂载到宿主机</span></span><br><span class="line">VOLUME ["volume01","volume02"] </span><br><span class="line"></span><br><span class="line">CMD echo "---build finished---"</span><br></pre></td></tr></table></figure></p>
+<p>将这个文件用作为我们的构建脚本<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f .\dockerfile -t tr/centos ./</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/pasted-104.png" alt="upload successful"></p>
+<h3 id="数据卷容器"><a href="#数据卷容器" class="headerlink" title="数据卷容器"></a>数据卷容器</h3><p>就是创建一个卷，这个数据卷也运行在一个容器里。</p>
+<p>假设有一个需求，需要几个容器之间做数据的同步，需要参数<code>--volumes-from #同步挂载点操作</code> 子容器挂载父容器（数据卷容器）</p>
+<p>例子：启动三个容器（最好是自己构建的镜像）</p>
+<p><img src="/images/pasted-105.png" alt="upload successful"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PS D:\DockerV\docker-volume1&gt; docker run -itd --name trcentos01 tr/centos /bin/bash</span><br><span class="line">e14d5b0f7558eff1028427bd47ded7d85dd1087010a6dab8ed777bca41e59b2b</span><br><span class="line">PS D:\DockerV\docker-volume1&gt; docker run -itd --name trcentos02 --volumes-from trcentos01 tr/centos /bin/bash</span><br><span class="line">9d89c8cffb07f14b51853a7d79f9b125ab339e00ed97638ce35a77fe42f516b8</span><br><span class="line">PS D:\DockerV\docker-volume1&gt;</span><br><span class="line"></span><br><span class="line">--itd ：后台运行centos但是不进入命令行</span><br></pre></td></tr></table></figure>
+<p>这样两个容器内的两个卷数据完全同步了。且删除随便一个容器，卷内的数据也不会丢失。</p>
+<h2 id="Dockfile"><a href="#Dockfile" class="headerlink" title="Dockfile"></a>Dockfile</h2><p>DockeFile是用来构建docker镜像的文件，一般开发完就得写，简单的很。</p>
+<p>需要注意的是，dockerfile编写的时候不能在命令后面写注释。</p>
+<p><img src="/images/pasted-106.png" alt="upload successful"></p>
+<p>要注意的指令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">onbuild: 这是一个特殊指令，它后面跟的是其他指令如run，copy等，而这些指令当前构建不会执行，只有以当前镜像为基础镜像来构建下一级镜像的时候才会执行</span><br><span class="line">cmd: 容器启动执行的一些命令,如果run的时候指定了参数，会覆盖原来的参数，和run不同，run是构建镜像过程中执行的命令，通常用来安装一些软件</span><br><span class="line">entrypoint: 容器启动执行的一些命令,如果run的时候指定了参数，会追加原来的参数</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">例子：构建自己的centos</span><br><span class="line">```shell</span><br><span class="line">FROM centos</span><br><span class="line">MAINTAINER tangrui&lt;1540525748@qq.com&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash">配置环境变量</span></span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line">RUN yum -y install net-tools</span><br><span class="line">RUN yum -y install cowsay</span><br><span class="line"></span><br><span class="line">EXPOSE 80</span><br><span class="line"></span><br><span class="line">CMD echo $MYPATH</span><br><span class="line">CMD echo "--build finished--"</span><br><span class="line">CMD /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>构建镜像：<code>docker build -f dockerfile -t tr/centos:2.0 .</code></p>
+<p>查看构建历史：<code>docker history</code></p>
+<h3 id="cmd和entrypoint用法"><a href="#cmd和entrypoint用法" class="headerlink" title="cmd和entrypoint用法"></a>cmd和entrypoint用法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">在dockerfile中cmd和entrypoin使用方式有三种：</span><br><span class="line">CMD ["executable","param1","param2"] (exec form, this is the preferred form)</span><br><span class="line">CMD ["param1","param2"] (as default parameters to ENTRYPOINT)</span><br><span class="line">CMD command param1 param2 (shell form)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">举例</span></span><br><span class="line">CMD ls -a</span><br><span class="line">CMD echo "hello"</span><br><span class="line"></span><br><span class="line">CMD ["ls","-a"]</span><br><span class="line">CMD ["echo","hello"]</span><br><span class="line"></span><br><span class="line">ENTRYPOINT ["ls","-a"]</span><br></pre></td></tr></table></figure>
+<p>使用的区别：在如果dockerfile内使用了cmd，那么<code>docker run ... ls -a</code>最后一个命令会覆盖之前dockerfile内的命令</p>
+<p>如果使用了entrypoint，<code>docker run ... -al</code>那么会在里面的参数追加<code>al</code>参数</p>
+<h3 id="Tomcat镜像"><a href="#Tomcat镜像" class="headerlink" title="Tomcat镜像"></a>Tomcat镜像</h3><ol>
+<li>tomcat需要jdk和tomcat的压缩包</li>
+<li>编写dockerfile文件(如果dockerfile名字就是<code>Dockerfile</code>则不需要指定文件了</li>
+</ol>
+<p>下载好文件后执行build即可</p>
+<p><img src="/images/pasted-107.png" alt="upload successful"><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">FROM centos</span><br><span class="line">MAINTAINER tangrui&lt;1540525748@qq.com&gt;</span><br><span class="line"></span><br><span class="line">COPY readme.txt /usr/local/readme.txt</span><br><span class="line"></span><br><span class="line">ADD jdk-8u311-linux-x64.tar.gz /usr/local/</span><br><span class="line">ADD apache-tomcat-9.0.56.tar.gz /usr/local/</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local/</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置javahome</span></span><br><span class="line">ENV JAVA_HOME /usr/local/jdk1.8.0_311</span><br><span class="line">ENV CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置tomcat</span></span><br><span class="line">ENV CATALINA_HOME /usr/local/apache-tomcat-9.0.56</span><br><span class="line">ENV CATALINA_BASE /usr/local/apache-tomcat-9.0.56</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 写入系统环境变量PATH</span></span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 暴露端口</span></span><br><span class="line">EXPOSE 8080</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动tomcat</span></span><br><span class="line"></span><br><span class="line">CMD /usr/local/apache-tomcat-9.0.56/bin/startup.sh &amp;&amp; tail -F /usr/local/apache-tomcat-9.0.56/logs/catalina.out</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">构建：docker build -t tr/tomcat .</span><br><span class="line">启动：docker run -itd -P -v /d/DockerV/myTomcat/TomcatHome/webapps:/usr/local/apache-tomcat-9.0.56/webapps -v /d/DockerV/myTomcat/TomcatHome/logs:/usr/local/apache-tomcat-9.0.56/logs --name trtomcat tr/tomcat</span><br></pre></td></tr></table></figure>
+<p>至此tomcat已经完毕，可以放入一个项目到webapps内测试如图：</p>
+<p><img src="/images/pasted-109.png" alt="upload successful"></p>
+<p>访问测试：</p>
+<p><img src="/images/pasted-110.png" alt="upload successful"></p>
+<h2 id="Docker发布镜像"><a href="#Docker发布镜像" class="headerlink" title="Docker发布镜像"></a>Docker发布镜像</h2><p>命令行里使用 <code>docker push</code></p>
+<p>建议先去官网点击用户下的安全设置，生成一个安全口令作为密码。</p>
+<p><img src="/images/pasted-111.png" alt="upload successful"><br>拒绝是因为发送的docker镜像必须符合<code>用户名/...</code>的格式，可以通过<code>docker  tag</code>重命名镜像</p>
+<p><img src="/images/pasted-112.png" alt="upload successful"></p>
+<p>也推荐使用docker desktop</p>
+<p><img src="/images/pasted-113.png" alt="upload successful"></p>
+<h2 id="本地保存镜像"><a href="#本地保存镜像" class="headerlink" title="本地保存镜像"></a>本地保存镜像</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker save spring-boot-docker  -o  /home/tr/docker/spring-boot-docker.tar</span><br><span class="line"></span><br><span class="line">docker load -i spring-boot-docker.tar</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/22/Docker-Complete/" rel="next" title="Docker 深入1">
+                <i class="fa fa-chevron-left"></i> Docker 深入1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/24/Docker-深入3/" rel="prev" title="Docker 深入3">
+                Docker 深入3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker深入2"><span class="nav-number">1.</span> <span class="nav-text">Docker深入2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#portainer可视化界面安装"><span class="nav-number">1.1.</span> <span class="nav-text">portainer可视化界面安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker镜像探究"><span class="nav-number">1.2.</span> <span class="nav-text">Docker镜像探究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker镜像加载原理"><span class="nav-number">1.2.1.</span> <span class="nav-text">Docker镜像加载原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker镜像分层原理"><span class="nav-number">1.2.2.</span> <span class="nav-text">Docker镜像分层原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#commit镜像"><span class="nav-number">1.2.3.</span> <span class="nav-text">commit镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker的容器数据卷"><span class="nav-number">1.3.</span> <span class="nav-text">Docker的容器数据卷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具名挂载和匿名挂载（不指定主机目录的情况）"><span class="nav-number">1.3.1.</span> <span class="nav-text">具名挂载和匿名挂载（不指定主机目录的情况）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载数据卷的读写权限配置"><span class="nav-number">1.3.2.</span> <span class="nav-text">挂载数据卷的读写权限配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockfile-挂载数据卷"><span class="nav-number">1.3.3.</span> <span class="nav-text">Dockfile 挂载数据卷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据卷容器"><span class="nav-number">1.3.4.</span> <span class="nav-text">数据卷容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockfile"><span class="nav-number">1.4.</span> <span class="nav-text">Dockfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd和entrypoint用法"><span class="nav-number">1.4.1.</span> <span class="nav-text">cmd和entrypoint用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tomcat镜像"><span class="nav-number">1.4.2.</span> <span class="nav-text">Tomcat镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker发布镜像"><span class="nav-number">1.5.</span> <span class="nav-text">Docker发布镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地保存镜像"><span class="nav-number">1.6.</span> <span class="nav-text">本地保存镜像</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

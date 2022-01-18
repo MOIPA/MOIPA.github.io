@@ -103,7 +103,7 @@
 <meta property="og:description" content="Archlinux On SurfaceBook2win10的内置linux还是效率低，和真正的linux环境还是不一样，但是原来使用子系统就是linux对surfacebook2的适配太差了 但是最近找到了github上的一个surfacebook2的内核包，可以完美适配，因此换了个win/arch双系统，在此记录配置经历。 最终结果是获得win+arch 支持secureboot和适配surf">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/pasted-34.png">
-<meta property="og:updated_time" content="2020-12-17T02:58:34.829Z">
+<meta property="og:updated_time" content="2021-09-14T02:13:47.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Archlinux On SurfaceBook2">
 <meta name="twitter:description" content="Archlinux On SurfaceBook2win10的内置linux还是效率低，和真正的linux环境还是不一样，但是原来使用子系统就是linux对surfacebook2的适配太差了 但是最近找到了github上的一个surfacebook2的内核包，可以完美适配，因此换了个win/arch双系统，在此记录配置经历。 最终结果是获得win+arch 支持secureboot和适配surf">
@@ -540,10 +540,12 @@
 </li>
 <li><p><code>refind-install --shim /usr/share/shim-signed/shimx64.efi --localkeys</code>：配置refind的shim keys目录，可以在/boot/efi/EFI/refind/keys存放内核的签名了。</p>
 </li>
-<li><p><code>sbsign --key /etc/refind.d/keys/refind_local.key --cert /etc/refind.d/keys/refind_local.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux</code>：可以在/boot/efi/EFI/refind/keys内看到签名，这里可以再执行几次签名其他自定义内核。</p>
+<li><p><code>sbsign --key /etc/refind.d/keys/refind_local.key --cert /etc/refind.d/keys/refind_local.crt --output /boot/vmlinuz-linux /boot/vmlinuz-linux</code>：可以在/boot/efi/EFI/refind/keys内看到签名，这里可以再执行几次签名其他自定义内核，本质上是将启动的内核引导文件添加签名信息。</p>
 </li>
-<li><p><code>reboot</code>：打开secureboot支持第三方（third party），重启。进入shim控制界面，选择<code>Enroll KEY</code>，点击文件系统，找到<code>/boot/efi/EFI/refind/keys/.....key</code> 确定添加，然后重启即可。</p>
-</li>
+</ol>
+<p>NOTE: 实际可以不用添加key，直接refind启动界面，使用enroll hash，将/boot/vmlinuz-linux（或者其他内核文件）引入即可，系统启动bootloader，bootloader启动内核文件查看签名或者hash</p>
+<ol start="8">
+<li><code>reboot</code>：打开secureboot支持第三方（third party），重启。进入shim控制界面，选择<code>Enroll KEY</code>，点击文件系统，找到<code>/boot/efi/EFI/refind/keys/.....key</code> 确定添加，然后重启即可。</li>
 </ol>
 <h4 id="独显和集显交火"><a href="#独显和集显交火" class="headerlink" title="独显和集显交火"></a>独显和集显交火</h4><ol>
 <li>参考 <a href="https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Bumblebee_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</a></li>
@@ -671,7 +673,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">115</span>
+                <span class="site-state-item-count">120</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -682,7 +684,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">42</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -693,7 +695,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-count">62</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -778,7 +780,7 @@
         <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

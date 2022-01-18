@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Docker,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Docker 学习">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 深入1">
+<meta property="og:url" content="http://yoursite.com/2020/01/22/Docker-Complete/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="Docker 学习">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-92.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-93.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-94.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-95.png">
+<meta property="og:updated_time" content="2022-01-06T09:31:09.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 深入1">
+<meta name="twitter:description" content="Docker 学习">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-92.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/01/22/Docker-Complete/">
+
+
+
+
+
+  <title>Docker 深入1 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/22/Docker-Complete/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker 深入1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-22T11:06:00+08:00">
+                2020-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Docker-学习"><a href="#Docker-学习" class="headerlink" title="Docker 学习"></a>Docker 学习</h1><a id="more"></a>
+<h2 id="Docker出现的历史和原因"><a href="#Docker出现的历史和原因" class="headerlink" title="Docker出现的历史和原因"></a>Docker出现的历史和原因</h2><p>开发环境，测试环境，生产环境，要配置很多东西，nginx端口，web端口，后端，注册中心配置等等。版本问题也会导致服务不可用，运维成本比较大。</p>
+<p>主要还是环境配置很麻烦，特别是集群的话，每个机器安装一遍，费时费力</p>
+<p>发布项目时可能发个jar或者war包，但是需要环境才能运行这个包，最好能把环境一起打包发过去。</p>
+<p>Docker就是服务于开发解决上述问题的解决方案。</p>
+<p>从而达成了：java – jar包 – 打包项目带上环境（镜像） — 放入docker仓库 — 下载镜像–运行镜像</p>
+<p>10年发布，后来docker开源才火了起来，因为大家发现docker比起vm这些软件是真的轻量。</p>
+<p>Docker和虚拟机本质都是虚拟化技术，虚拟机需要虚拟化所有硬件，容器只关注软件本身，只安装最核心的东西（linux核心也就一些指令大概4m）</p>
+<h2 id="docker本身"><a href="#docker本身" class="headerlink" title="docker本身"></a>docker本身</h2><p>Docker基于Golang开发，是个开源项目</p>
+<p>Docker推荐阅读官方文档，文档非常详细，可以看看dockerHub类似github</p>
+<p>Docker容器是没有自己的内核的（虚拟机有完整的内核），但有自己独特的环境，容器之间是共享内核的。</p>
+<p>image：docker镜像类似与java中的类概念<br>container：容器，类似与java中的对象的概念，容器是从镜像过来的，容器之间是隔离的<br>repository：仓库，存放image的地方</p>
+<h2 id="docker初步安装和运行"><a href="#docker初步安装和运行" class="headerlink" title="docker初步安装和运行"></a>docker初步安装和运行</h2><p>根据docker官方安装文档装下来就行了，可能要改下源，安装好后<code>docker version</code>查看docker版本</p>
+<p>执行<code>docker run hello-world</code>测试hello world</p>
+<p>执行<code>docker images</code>查看镜像</p>
+<p>如果是linux系统，资源一般放在/var/lib/docker内</p>
+<p>执行<code>docker run ...</code>发生的事：docker会先去本地仓库寻找镜像，如果找不到回去docker hub找对应镜像并且下载，如果用的阿里云服务器，可以配置镜像加速地址，就不去docker hub下载了直接从阿里云下载更快点。</p>
+<p>docker是cs架构的系统，Docker的守护进程运行在主机，客户端命令是通过socket发送通信的，DockerServer接收后执行指令</p>
+<h2 id="docker常用指令"><a href="#docker常用指令" class="headerlink" title="docker常用指令"></a>docker常用指令</h2><p>所有指令可以在官网看到</p>
+<p>帮助命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker info  显示当前运行状态</span><br><span class="line">docker &lt;Command&gt; --help</span><br></pre></td></tr></table></figure></p>
+<p>镜像命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker images 查看镜像 -a显示全部 -q只显示id</span><br><span class="line"></span><br><span class="line">docker search 查询镜像 --filte=stars=100 搜索stars大于100的镜像 </span><br><span class="line"></span><br><span class="line">docker pull 下载镜像 例：docker pull mysql:5.7(带版本) docker下载采用了分层的方式</span><br><span class="line"></span><br><span class="line">docker rmi -f &lt;id&gt; 通过镜像id删除，或者 docker image rm &lt;id&gt;</span><br><span class="line"></span><br><span class="line">批量删除：docker rmi -f $(docker images -aq)</span><br></pre></td></tr></table></figure></p>
+<p>容器命令：<br>运行创建容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">docker run [参数] &lt;镜像&gt; </span><br><span class="line"><span class="meta">#</span> 参数说明</span><br><span class="line">--name=""    #给容器起名</span><br><span class="line">-d      	#类似nohup，静默运行</span><br><span class="line">-it			 #进入容器查看内容</span><br><span class="line">-p			#指定容器端口 -p 9999:8080</span><br><span class="line">	主机端口：容器端口</span><br><span class="line">    容器端口</span><br><span class="line">-P 			#随机端口</span><br><span class="line">-c			#写入命令</span><br><span class="line">--rm		#容器启动后删除</span><br><span class="line">--net		#网络配置</span><br><span class="line"><span class="meta">#</span>例子 启动centos 并且写入命令（一段shell脚本）</span><br><span class="line">docker run -it --name="mycentos" centos #直接进入执行</span><br><span class="line"> docker run -d --name="mycentos" centos /bin/bash -c "while true;do echo hello world;sleep 1;done"</span><br></pre></td></tr></table></figure></p>
+<p>查看容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br><span class="line">		-a #查看所有的容器</span><br><span class="line">        -n=? #显示最近创建的容器</span><br><span class="line">        -q #只显示id</span><br></pre></td></tr></table></figure></p>
+<p>退出容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exit #容器停止并且推出</span><br><span class="line">ctrl + P + Q #容器不停止退出</span><br></pre></td></tr></table></figure></p>
+<p>删除容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker rm &lt;容器id&gt; #不能删除正在运行的容器除非加上 -f</span><br><span class="line">docker rm $(docker ps -aq) #删除全部容器</span><br></pre></td></tr></table></figure></p>
+<p>启动停止容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker start &lt;id&gt;</span><br><span class="line">docker stop &lt;id&gt;</span><br><span class="line">docker restart &lt;id&gt;</span><br><span class="line">docker kill &lt;id&gt; #暴力停止</span><br></pre></td></tr></table></figure></p>
+<p>进入当前运行的容器<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. docker exec -it &lt;容器id&gt; /bin/bash</span><br><span class="line">2. docker attach &lt;容器id&gt; </span><br><span class="line"><span class="meta">#</span> 区别： </span><br><span class="line">方式1 docker exec</span><br><span class="line">进入容器后开启新的终端</span><br><span class="line">方式2 docker attach</span><br><span class="line">进入容器正在执行的终端</span><br></pre></td></tr></table></figure></p>
+<p>容器和主机文件传递<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker cp &lt;容器id:路径&gt; 目的主机路径 #容器到主机，反过来就是主机到容器</span><br><span class="line"></span><br><span class="line">docker </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>例子 docker cp mycentos:/home/mycentosConfig ./</span><br></pre></td></tr></table></figure></p>
+<p>查看镜像源数据<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker inspect --help</span><br><span class="line"><span class="meta">#</span>里面包含了容器id，挂载信息，网络信息等等等等</span><br></pre></td></tr></table></figure></p>
+<p>其他命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>后台启动</span><br><span class="line">docker run -d &lt;镜像id&gt;</span><br><span class="line"></span><br><span class="line">例子：docker run -d centos </span><br><span class="line"><span class="meta">#</span> 会发现centos停止了，因为容器后台运行必须要有前台进程，如果没有自动停止</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>查看日志</span><br><span class="line">docker logs [参数] &lt;id&gt;</span><br><span class="line">	-f 实时显示</span><br><span class="line">    --tail 11 显示最后11条</span><br><span class="line">    -t 显示时间</span><br><span class="line">    </span><br><span class="line"><span class="meta">#</span> 查看进程信息 类似top命令</span><br><span class="line">docker top &lt;容器id&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>查看cpu使用状态</span><br><span class="line">docker stats &lt;容器Id&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="docker-常用示例"><a href="#docker-常用示例" class="headerlink" title="docker 常用示例"></a>docker 常用示例</h2><h3 id="安装配置nginx"><a href="#安装配置nginx" class="headerlink" title="安装配置nginx"></a>安装配置nginx</h3><p>可以去官网搜索nginx，看看有哪些版本和使用日志</p>
+<p><img src="/images/pasted-92.png" alt="upload successful"></p>
+<p>启动nginx并且映射一个端口到主机，nginx默认80端口，这里映射到本地9999<br><code>docker run -d --name mynginx -p 9999:80 nginx</code></p>
+<p>启动后可以通过浏览器或者命令访问nginx服务：<code>curl http://localhost:9999</code></p>
+<p>也可以再次进入容器，找到nginx的配置文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mynginx /bin/bash</span><br><span class="line">whereis nginx</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/pasted-93.png" alt="upload successful"></p>
+<p>因为要经常修改nginx配置文件，所以最好挂载数据卷。</p>
+<h3 id="安装配置tomcat"><a href="#安装配置tomcat" class="headerlink" title="安装配置tomcat"></a>安装配置tomcat</h3><p>可以直接用官方的命令，里面的rm参数是用完即删除容器的，最好不要加上</p>
+<p><img src="/images/pasted-94.png" alt="upload successful"></p>
+<p>装好的可以exec进入，但是缺很多命令，因为docker安装的是最小可运行环境</p>
+<h3 id="安装部署ES-kibana"><a href="#安装部署ES-kibana" class="headerlink" title="安装部署ES+kibana"></a>安装部署ES+kibana</h3><ol>
+<li><p>es端口多还很耗内存，数据得放到安全目录</p>
+</li>
+<li><p>还是推荐使用官方的命令</p>
+</li>
+</ol>
+<p><img src="/images/pasted-95.png" alt="upload successful"></p>
+<p>先不用network<br><code>$ docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; elasticsearch:tag</code><br>太耗费内存和cpu，需要增加限制<br><code>$ docker run -d --name elasticsearch -p 9200:9200 -p 9300:9300 -e &quot;discovery.type=single-node&quot; elasticsearch:8.0 -e ES_JAVA_OPTS=&quot;-Xms64m -Xmx512m&quot;</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/01/springBoot-mybatis-多数据源动态配置/" rel="next" title="springBoot+mybatis+多数据源动态配置">
+                <i class="fa fa-chevron-left"></i> springBoot+mybatis+多数据源动态配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/23/Docker深入2/" rel="prev" title="Docker深入2">
+                Docker深入2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-学习"><span class="nav-number">1.</span> <span class="nav-text">Docker 学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker出现的历史和原因"><span class="nav-number">1.1.</span> <span class="nav-text">Docker出现的历史和原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker本身"><span class="nav-number">1.2.</span> <span class="nav-text">docker本身</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker初步安装和运行"><span class="nav-number">1.3.</span> <span class="nav-text">docker初步安装和运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker常用指令"><span class="nav-number">1.4.</span> <span class="nav-text">docker常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-常用示例"><span class="nav-number">1.5.</span> <span class="nav-text">docker 常用示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装配置nginx"><span class="nav-number">1.5.1.</span> <span class="nav-text">安装配置nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装配置tomcat"><span class="nav-number">1.5.2.</span> <span class="nav-text">安装配置tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装部署ES-kibana"><span class="nav-number">1.5.3.</span> <span class="nav-text">安装部署ES+kibana</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
