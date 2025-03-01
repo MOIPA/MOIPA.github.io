@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="GO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go Lang Basic">
+<meta property="og:url" content="http://example.com/2022/04/12/Go-Lang/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="GO">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/images/pasted-174.png">
+<meta property="og:image" content="http://example.com/images/pasted-175.png">
+<meta property="og:image" content="http://example.com/images/pasted-176.png">
+<meta property="og:image" content="http://example.com/images/pasted-177.png">
+<meta property="og:image" content="http://example.com/images/pasted-178.png">
+<meta property="og:image" content="http://example.com/images/pasted-179.png">
+<meta property="og:image" content="http://example.com/images/pasted-180.png">
+<meta property="og:image" content="http://example.com/images/pasted-181.png">
+<meta property="og:image" content="http://example.com/images/pasted-182.png">
+<meta property="article:published_time" content="2022-04-12T09:26:00.000Z">
+<meta property="article:modified_time" content="2025-03-01T12:26:37.328Z">
+<meta property="article:author" content="tr">
+<meta property="article:tag" content="Go">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pasted-174.png">
+
+<link rel="canonical" href="http://example.com/2022/04/12/Go-Lang/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Go Lang Basic | TrBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="TrBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TrBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/MOIPA" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/12/Go-Lang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Go Lang Basic
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-04-12 09:26:00" itemprop="dateCreated datePublished" datetime="2022-04-12T09:26:00+00:00">2022-04-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-03-01 12:26:37" itemprop="dateModified" datetime="2025-03-01T12:26:37+00:00">2025-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="GO"><a href="#GO" class="headerlink" title="GO"></a>GO</h2><span id="more"></span>
+
+<blockquote>
+<p>go语言学习，记录《Head First Go》的学习内容</p>
+<p>前面几十页都在讲怎么更好的学习……</p>
+<p>编译最快，运行效率最高，便捷分发任务，多线程效率高</p>
+<p>07年google开始立项GO语言，因为每次测试新功能就要编译老版本，编译至少要一小时,所以开发全新的语言，快，不冗余，gc回收，好写多线程，支持多核cpu的语言。</p>
+</blockquote>
+<h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><blockquote>
+<p>package: go使用package来管理同一项目的所有文件，使用 package main作为主程序的入口，且方法名得是main作为入口代码</p>
+<p>import: go文件里想要使用其他文件内定义的方法需要使用import,import 包名，这样比起引用整个依赖库更灵活轻量，如果import的包没有被使用过，编译不通过</p>
+<p>标准的go文件布局：</p>
+<ul>
+<li><p>package <code>&lt;name&gt;</code></p>
+</li>
+<li><p>import <code>&quot;&lt;name&gt;&quot;</code></p>
+</li>
+<li><p>actual code : 一般都是由各个方法组成的</p>
+</li>
+</ul>
+<p>可以用 <code>;</code>结尾 随意，以下代码可以 <code>go fmt</code>格式化，<code>go run hello.go</code>执行</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;hello go from tr&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>import 的另一种形式</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">//import &quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;math&quot;</span></span><br><span class="line"> <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">//fmt.Println(&quot;hello go from tr&quot;,&quot;!&quot;)</span></span><br><span class="line"> math.Floor(<span class="number">2.75</span>)</span><br><span class="line"> strings.Title(<span class="string">&quot;head first go&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>import 导入的实际是包的路径，包名不一定需要等于路径名，例如这里，rand包路径在<code>math/rand</code>下，且包名是rand,所以调用方法是<code>rand.Intn(100)</code>生成随机数，通常情况下包路径的最后一段就和包名同名</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//import &quot;fmt&quot;</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;math/rand&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>转义符 这个不多说，有意思的是fmt.Print方法里面传入转义符或者其他字符<code>&#39;</code>单引号为单字符，会输出这些字符的原始unicode编码</p>
+<p>true &amp; false</p>
+<p><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>==</code> <code>&gt;=</code> <code>&lt;=</code> <code>!=</code> 都和其他语言一样来，返回<code>true/flase</code></p>
+<p>go提供了查看数据类型的工具如下：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;reflect&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> fmt.Println(reflect.TypeOf(<span class="number">42</span>)) <span class="comment">// int</span></span><br><span class="line"> fmt.Println(reflect.TypeOf(<span class="number">3.14</span>)) <span class="comment">//float64</span></span><br><span class="line"> fmt.Println(reflect.TypeOf(<span class="literal">true</span>)) <span class="comment">//bool</span></span><br><span class="line"> fmt.Println(reflect.TypeOf(<span class="string">&quot;hello,go&quot;</span>)) <span class="comment">//string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="go的变量定义和声明"><a href="#go的变量定义和声明" class="headerlink" title="go的变量定义和声明"></a>go的变量定义和声明</h3><blockquote>
+<p>go的变量有很多</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int8</span></span><br><span class="line"><span class="keyword">int16</span></span><br><span class="line"><span class="keyword">int32</span></span><br><span class="line"><span class="keyword">int64</span></span><br><span class="line"></span><br><span class="line">unit: 和<span class="keyword">int</span>一样 只不过只能存储正数，所以占用空间少一半</span><br><span class="line">unit8</span><br><span class="line">unit16</span><br><span class="line">unit32</span><br><span class="line">unit64</span><br><span class="line"></span><br><span class="line"><span class="keyword">float32</span> :除了<span class="keyword">float64</span>还有<span class="number">32</span>位的版本</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="keyword">var</span> quantity = <span class="number">4</span> <span class="comment">//可以忽略int</span></span><br><span class="line"> <span class="keyword">var</span> length,width <span class="keyword">float64</span> = <span class="number">1.2</span>，<span class="number">2.4</span></span><br><span class="line"> <span class="keyword">var</span> name <span class="keyword">string</span></span><br><span class="line"> fmt.Println(quantity) <span class="comment">// 初始化都是0</span></span><br><span class="line"> fmt.Println(length)</span><br><span class="line"> fmt.Println(width)</span><br><span class="line"> fmt.Println(name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>定义可以简写 <code>:=</code></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">//var quantity int = 12</span></span><br><span class="line"> <span class="comment">//var length,width float64 = 1.1,1.2</span></span><br><span class="line"> <span class="comment">//var name string = &quot;test&quot;</span></span><br><span class="line"> <span class="comment">// 简写形式</span></span><br><span class="line"> quantity := <span class="number">12</span></span><br><span class="line"> length, width := <span class="number">1.1</span>, <span class="number">1.2</span></span><br><span class="line"> name := <span class="string">&quot;tr&quot;</span></span><br><span class="line"> fmt.Println(quantity)</span><br><span class="line"> fmt.Println(length)</span><br><span class="line"> fmt.Println(width)</span><br><span class="line"> fmt.Println(name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>go的命名规则</p>
+<ul>
+<li>变量/方法若以大写字母开头，则被认为是暴露出去的，其他包文件可以访问，反之是私有的只有包内的文件可以访问</li>
+<li>不能以数字开头</li>
+<li>遵循驼峰法</li>
+</ul>
+<p>注意：数学操作或者比较都需要输入的类型为同一类型，举例int和float64的不能做乘除，需要做转换<code>float64(变量)</code>，如果是float64转int，小数会被截掉</p>
+<p>go的if判断也和其他语言一样</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="literal">true</span> &amp;&amp; <span class="literal">true</span> &#123;</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span> !<span class="literal">true</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="go-的cli工具"><a href="#go-的cli工具" class="headerlink" title="go 的cli工具"></a>go 的cli工具</h3><blockquote>
+<p>go是这么编译的 一个大概流程</p>
+</blockquote>
+<p><img src="/images/pasted-174.png" alt="upload successful"></p>
+<blockquote>
+<p>go build ： 编译，可以发给其他人执行<br>go run ： 编译执行，不输出编译结果文件<br>go fmt ：格式化<br>go version<br>go install <code>&lt;文件夹的名字&gt;</code>：需要文件夹内有go代码和src目录，且go代码处于main包下，才能在bin文件夹下生成可执行文件<br>go get ：想要导入其他人的包就需要用这个，在后面会学到导入其他人的包的组织方式，社区的代码托管在github上，可以通过go get获取，将自动下载到工作区的src下 例子：<code>go get github.com/headfirstgo/greeting</code><br>go doc ：导入了他人的包后想要使用，go doc可以查看说明,比如，<code>go doc strconv</code>查看包，<code>go doc strconv ParseFloat</code>查看包内方法</p>
+</blockquote>
+<h3 id="方法调用-时间-字符"><a href="#方法调用-时间-字符" class="headerlink" title="方法调用 时间 字符"></a>方法调用 时间 字符</h3><blockquote>
+<p>有意思的是 go可以返回多个值，go规定定义的变量必须要被用到，所以如果返回的多个值有不需要的，可以用下划线<code>_</code>代表废弃<code>name,_ := reader.ReadString()</code></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;time&quot;</span></span><br><span class="line"> <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 时间调用</span></span><br><span class="line"> <span class="keyword">var</span> now time.Time = time.Now()</span><br><span class="line"> fmt.Println(now.Year())</span><br><span class="line"> <span class="comment">// 字符调用</span></span><br><span class="line"></span><br><span class="line"> broken := <span class="string">&quot;G# r#cks&quot;</span></span><br><span class="line"> replacer := strings.NewReplacer(<span class="string">&quot;#&quot;</span>,<span class="string">&quot;o&quot;</span>)</span><br><span class="line"> fixed := replacer.Replace(broken)</span><br><span class="line"> fmt.Println(fixed)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="GO-在if中初始化"><a href="#GO-在if中初始化" class="headerlink" title="GO 在if中初始化"></a>GO 在if中初始化</h3><blockquote>
+<p><code>err := myFunc()</code> 错误时常会有，有的时候我们会忘记<code>err</code>的定义是否要加上<code>:</code>，但是实际上<code>err</code>很快只用来if判断是否出错，随后就不在使用，这时我们可以在if中直接初始化<code>err</code></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err:=myFunc(); err!=<span class="literal">nil</span>&#123;</span><br><span class="line">	log.Fatal(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GO-的switch"><a href="#GO-的switch" class="headerlink" title="GO 的switch"></a>GO 的switch</h3><blockquote>
+<p>switch 自动加上break，如果要继续往下，加上<code>fallthrough</code></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">val := <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> val &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">	fmt.Println(<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">	fmt.Println(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">	<span class="keyword">fallthrough</span></span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">	fmt.Println(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="GO-字符"><a href="#GO-字符" class="headerlink" title="GO 字符"></a>GO 字符</h3><blockquote>
+<p>GO 使用<code>utf8</code>编码，当我们使用<code>len(myStr)</code>的时候，返回的是字符串的字节数，而不是字符个数，需要反映字符个数用：<code>utf8.RuneCountInString(myStr)</code></p>
+<p>如果想要处理字符串，处理里面的单个字符，GO提供了字符串到字符slice的转换</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strRunes := []<span class="keyword">rune</span>(myStr) <span class="comment">// 字符串转slice</span></span><br><span class="line">str := <span class="keyword">string</span>(strRunes) <span class="comment">// slice 转字符串</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>用for遍历字符串</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> position,c := <span class="keyword">range</span> myStr&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误处理-用户输入"><a href="#错误处理-用户输入" class="headerlink" title="错误处理 用户输入"></a>错误处理 用户输入</h3><blockquote>
+<p>go的方法都会返回一个error，如果有错，这个值不为<code>Nil</code>，且提供了日志<code>log</code>让我们用来输出</p>
+<p>注意的是这里的err不能定义为error，因为有系统类型error，如果手动定义了error会遮盖系统的</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;os&quot;</span></span><br><span class="line"> <span class="string">&quot;bufio&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用户输入和判断</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> fmt.Print(<span class="string">&quot;Enter a grade: &quot;</span>)</span><br><span class="line"> reader := bufio.NewReader(os.Stdin)</span><br><span class="line"> <span class="comment">// input,_ := reader.ReadString(&#x27;\n&#x27;) 使用blank identifier忽视错误</span></span><br><span class="line"> input,err := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)  <span class="comment">// 接收错误</span></span><br><span class="line"> <span class="keyword">if</span> err!=<span class="literal">nil</span>&#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(input)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;bufio&quot;</span></span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line"> <span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> file,err := os.Open(<span class="string">&quot;./data&quot;</span>)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"> scanner := bufio.NewScanner(file)</span><br><span class="line"> <span class="keyword">for</span> scanner.Scan()&#123;</span><br><span class="line">  fmt.Println(scanner.Text())</span><br><span class="line"> &#125;</span><br><span class="line">    err = file.Close()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line">    <span class="keyword">if</span> scanner.Err() != <span class="literal">nil</span>&#123;</span><br><span class="line">  log.Fatal(scanner.Err())</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回异常"><a href="#返回异常" class="headerlink" title="返回异常"></a>返回异常</h3><blockquote>
+<p>go的存在返回多个值的特性，所以一个方法如果执行参数有问题，可以返回error类型的参数，通过调用error包的New方法</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;errors&quot;</span></span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> sayHi()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sayHi</span><span class="params">()</span></span> &#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;hi&quot;</span>)</span><br><span class="line"> fmt.Printf(<span class="string">&quot;%d\n&quot;</span>, calc(<span class="number">-3</span>, <span class="number">5</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">calc</span><span class="params">(height <span class="keyword">int</span>, width <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line"> <span class="keyword">if</span> height &lt; <span class="number">0</span> || width &lt; <span class="number">0</span> &#123;</span><br><span class="line">  errA := errors.New(<span class="string">&quot;can not be negative&quot;</span>) <span class="comment">// 原始用法，如果需要格式化参数用下面这种</span></span><br><span class="line">  errB := fmt.Errorf(<span class="string">&quot;can not be negative,value is %d&quot;</span>, (height * width))</span><br><span class="line">  <span class="comment">// 可以直接打印效果等同于：err.Error()</span></span><br><span class="line">  log.Fatal(errA)</span><br><span class="line">  msg := errB.Error()</span><br><span class="line">  fmt.Println(msg)</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> height * width</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符转数字"><a href="#字符转数字" class="headerlink" title="字符转数字"></a>字符转数字</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> fmt.Print(<span class="string">&quot;Enter a grade: &quot;</span>)</span><br><span class="line"> reader := bufio.NewReader(os.Stdin)</span><br><span class="line"> <span class="comment">// input,_ := reader.ReadString(&#x27;\n&#x27;) 使用blank identifier忽视错误</span></span><br><span class="line"> input, err := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>) <span class="comment">// 接收错误</span></span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(input)</span><br><span class="line"> input = strings.TrimSpace(input)</span><br><span class="line"> grade, err := strconv.ParseFloat(input, <span class="number">64</span>)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> grade &gt; <span class="number">60</span> &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;qualified&quot;</span>)</span><br><span class="line"> &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;failed&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里我们看到err似乎被定义了两次，在go中，同一个变量名被定义两次是不可以的，但是如果简写形式<code>:=</code>下，定义多个变量，有至少一个变量是未曾出现过的，那么是合法的</p>
+</blockquote>
+<h3 id="scope-域"><a href="#scope-域" class="headerlink" title="scope 域"></a>scope 域</h3><blockquote>
+<p>需要注意的是go的域是通过{}来划分的，{}内部定义的变量无法被外部读取</p>
+</blockquote>
+<p><img src="/images/pasted-175.png" alt="upload successful"></p>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><p>基本和其他语言一致</p>
+<blockquote>
+<p>continue 和 break 还是一样的用法</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> x:=<span class="number">0</span>;x&lt;<span class="number">10</span>;x++ &#123;</span><br><span class="line"> fmt.Pintln(x)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以这样</span></span><br><span class="line">x:=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> x&lt;<span class="number">10</span> &#123;</span><br><span class="line"> fmt.Pintln(x)</span><br><span class="line">    x++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>猜数游戏</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;bufio&quot;</span></span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line"> <span class="string">&quot;math/rand&quot;</span></span><br><span class="line"> <span class="string">&quot;os&quot;</span></span><br><span class="line"> <span class="string">&quot;strconv&quot;</span></span><br><span class="line"> <span class="string">&quot;strings&quot;</span></span><br><span class="line"> <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> seconds := time.Now().Unix()</span><br><span class="line"> rand.Seed(seconds) <span class="comment">// 如果不给时间种子，每次随机结果一样</span></span><br><span class="line"> target := rand.Intn(<span class="number">100</span>) + <span class="number">1</span></span><br><span class="line"> fmt.Println(<span class="string">&quot;start gussing&quot;</span>)</span><br><span class="line"> fmt.Println(target)</span><br><span class="line"> <span class="comment">// 循环10次</span></span><br><span class="line"> <span class="keyword">for</span> x := <span class="number">0</span>; x &lt; <span class="number">10</span>; x++ &#123;</span><br><span class="line">  fmt.Println(<span class="string">&quot;u have&quot;</span>, <span class="number">10</span>-x, <span class="string">&quot;times to guss&quot;</span>)</span><br><span class="line">  <span class="comment">// 下一步 用户输入</span></span><br><span class="line">  reader := bufio.NewReader(os.Stdin)</span><br><span class="line">  input, err := reader.ReadString(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">   log.Fatal(err)</span><br><span class="line">  &#125;</span><br><span class="line">  input = strings.TrimSpace(input)</span><br><span class="line">  guss, err := strconv.Atoi(input)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">   log.Fatal(err)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> guss == target &#123;</span><br><span class="line">   fmt.Println(<span class="string">&quot;right&quot;</span>)</span><br><span class="line">   <span class="keyword">return</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> guss &lt; target &#123;</span><br><span class="line">   fmt.Println(<span class="string">&quot;lower&quot;</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   fmt.Println(<span class="string">&quot;higher&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(<span class="string">&quot;u failed&quot;</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Printf-Sprintf以及占位符"><a href="#Printf-Sprintf以及占位符" class="headerlink" title="Printf,Sprintf以及占位符"></a>Printf,Sprintf以及占位符</h3><p>和c的用法一样：<code>Printf(&quot;number: %0.2f\n,1.0、3.0)</code></p>
+<p>Sprintf 和 Printf一样，不同的是Sprintf打印，而是返回格式化的字符串</p>
+<p><img src="/images/pasted-176.png" alt="upload successful"></p>
+<blockquote>
+<p>%v 和 %#v 很有意思，后者不转义，代码里啥样，显示就是啥样</p>
+</blockquote>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><blockquote>
+<p>和其他语言差不多，没啥好说，命名不能数字开头，大写字母开头表示暴露</p>
+<p>方法内 类型和变量名是倒着的，方法返回值类型也在最后和scala一样</p>
+<p>func calc(width int) 这里是值拷贝</p>
+<p>如果方法有返回类型，最后一行不是reture编译不通过</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> sayHi()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sayHi</span><span class="params">()</span></span> &#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;hi&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="返回多个值"><a href="#返回多个值" class="headerlink" title="返回多个值"></a>返回多个值</h4><blockquote>
+<p>返回多个值需要在方法定义内加上<code>()</code></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getParam</span><span class="params">(number <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>,<span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">1</span>,<span class="string">&quot;test&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>甚至可以给每个返回值取名</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getParam</span><span class="params">(number <span class="keyword">int</span>)</span> <span class="params">(vale <span class="keyword">int</span>,name <span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">1</span>,<span class="string">&quot;test&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一般这个特性用来返回方法是否出错</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">calc</span><span class="params">(height <span class="keyword">int</span>, width <span class="keyword">int</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span> &#123;</span><br><span class="line"> <span class="keyword">if</span> height &lt; <span class="number">0</span> || width &lt; <span class="number">0</span> &#123;</span><br><span class="line">  errA := errors.New(<span class="string">&quot;can not be negative&quot;</span>) <span class="comment">// 原始用法，如果需要格式化参数用下面这种</span></span><br><span class="line">  errB := fmt.Errorf(<span class="string">&quot;can not be negative,value is %d&quot;</span>, (height * width))</span><br><span class="line">  <span class="comment">// 可以直接打印效果等同于：err.Error()</span></span><br><span class="line">  <span class="comment">//log.Fatal(errA)</span></span><br><span class="line">  msg := errB.Error()</span><br><span class="line">  fmt.Println(msg)</span><br><span class="line">  <span class="comment">// 也可以抛出</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>, errA</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> height * width, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="可变函数"><a href="#可变函数" class="headerlink" title="可变函数"></a>可变函数</h4><blockquote>
+<p><code>fmt.Println(1,2)</code>如同这个函数，有些函数可以接收若干个参数</p>
+<p>想要函数可变接收参数如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">get</span><span class="params">(number <span class="keyword">int</span> , numbers ...<span class="keyword">int</span>)</span></span>&#123;</span><br><span class="line"> <span class="comment">//numbers是个slice</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// slice 无法直接传递进去，需要转换</span></span><br><span class="line">mysli :=[]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;</span><br><span class="line">get(<span class="number">1</span>,mysli...)</span><br></pre></td></tr></table></figure>
+
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><blockquote>
+<p>学过了scala后还是觉得指针不好，虽然很灵活单也很容易出问题，且go支持了多值返回，更不推荐指针了</p>
+<p>go 是值传递语言，所有传入的值都只拷贝，可以通过指针将变量的地址传入，这里还是值传递，只不过拷贝的是地址。</p>
+<p>书里的解释很有趣，指针类型用<code>*</code>表示，go的定义和其他语言是反的，所以指针类型其他语言是<code>int *</code> ，go是<code>*int</code>表示<code>pointer to int</code>：指向int类型的指针</p>
+<p>通过<code>fmt.Pintln(reflect.TypeOf(&amp;num))</code>查看类型</p>
+<p>特别注意的是：其他语言的指针，只能在自己的访问域内使用，举例，假如方法内生成了局部变量且将局部变量的指针返回，其他语言在方法执行结束后，指针指向的地址空间会被释放，但是go不会，只要有人用就不会释放</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;reflect&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> <span class="comment">// 查看地址</span></span><br><span class="line"> <span class="keyword">var</span> amount <span class="keyword">int</span> = <span class="number">19</span></span><br><span class="line"> fmt.Println(&amp;amount)</span><br><span class="line"> <span class="comment">// 查看类型</span></span><br><span class="line"> fmt.Println(reflect.TypeOf(&amp;amount))</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 定义指针和使用</span></span><br><span class="line"> <span class="keyword">var</span> intPointer *<span class="keyword">int</span> = &amp;amount</span><br><span class="line"> fmt.Println(intPointer, *intPointer)</span><br><span class="line"> <span class="comment">// 另一种形式</span></span><br><span class="line"> floatVal := <span class="number">1.1</span></span><br><span class="line"> floatPointer := &amp;floatVal</span><br><span class="line"> fmt.Println(floatPointer)</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 修改指针指向的值</span></span><br><span class="line"> strVal := <span class="string">&quot;hello&quot;</span></span><br><span class="line"> strPointer := &amp;strVal</span><br><span class="line"> *strPointer = <span class="string">&quot;hello from tr&quot;</span></span><br><span class="line"> fmt.Println(strVal, strPointer)</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 获取方法内的指针</span></span><br><span class="line"> <span class="keyword">var</span> receivePointer *<span class="keyword">float64</span> = genPointer()</span><br><span class="line"> fmt.Println(receivePointer, *receivePointer)</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 解决值传递的问题，传递的数据可被修改</span></span><br><span class="line"> h := <span class="number">10</span></span><br><span class="line"> changeVal(&amp;h)</span><br><span class="line"> fmt.Println(h)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法内的指针在方法结束后如果被引用，空间不会被释放</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">genPointer</span><span class="params">()</span> *<span class="title">float64</span></span> &#123;</span><br><span class="line"> val := <span class="number">1.4</span></span><br><span class="line"> <span class="keyword">return</span> &amp;val</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改传递的数据</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">changeVal</span><span class="params">(val *<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line"> *val *= <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="包管理-package"><a href="#包管理-package" class="headerlink" title="包管理 package"></a>包管理 package</h3><blockquote>
+<p>go定义了工作区，文件夹名字就叫<code>go</code>,安装了go后默认在home目录下会有go这个文件夹，这就是默认的工作区，包含<code>bin</code>,<code>pkg</code>,<code>src</code></p>
+<p>一般包名和包的文件夹名是一致的,但是<code>main</code>package是例外，main文件的package 必须是main，但是所在文件夹的名字随意，所有的文件引用都是去工作区引用的</p>
+<p>如果运行失败无法找到自己写的模块，可能需要改下环境变量</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">go env -w GO111MODULE=&quot;off&quot;</span><br><span class="line">go env -w GOPATH=/home/tr/go</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将main文件所在目录改为main</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-177.png" alt="upload successful"></p>
+<h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><ol>
+<li><p>小写</p>
+</li>
+<li><p>简写：fmt ==&gt; format</p>
+</li>
+<li><p>最好一个单词表达，如果超过一个单词用 <code>_</code></p>
+</li>
+<li><p>最好不常用，不然容易和本地变量命名冲突</p>
+</li>
+</ol>
+<h3 id="常量-constants"><a href="#常量-constants" class="headerlink" title="常量 constants"></a>常量 constants</h3><ol>
+<li><p>const 定义符</p>
+</li>
+<li><p>定义的时候必须赋值</p>
+</li>
+<li><p>常量不可用 <code>:=</code> 简写 但是还是可以省略类型</p>
+</li>
+<li><p>推荐程序内的所有“魔数”都用常量替换</p>
+</li>
+<li><p>最好定义在包层，而不是方法内部</p>
+</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> quantity = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="cmd传递参数"><a href="#cmd传递参数" class="headerlink" title="cmd传递参数"></a>cmd传递参数</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> fmt.Println(os.Args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改go的配置"><a href="#修改go的配置" class="headerlink" title="修改go的配置"></a>修改go的配置</h3><h4 id="修改GOPATH"><a href="#修改GOPATH" class="headerlink" title="修改GOPATH"></a>修改GOPATH</h4><blockquote>
+<p>go的工作目录永远在默认的home目录下，如果想要把工作区修改到其他目录，需要修改环境变量</p>
+<p>go tool永远会去GOPATH下寻找我们引用的模块，假如我们自己写的模块放入了<code>/code/src</code>目录下，如果想要go编译的时候去寻找，需要<code>export GOPATH=&quot;/code&quot;</code></p>
+<p><code>go env -w GO111MODULE=&quot;off&quot;</code> <code>go env -w GOPATH=&quot;/code&quot;</code>  如果<code>export</code>不起作用，可以试试这样</p>
+</blockquote>
+<h4 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h4><blockquote>
+<p>假如导入github上其他人的包，一般是将其他人的包以URI的形式，放入src下的目录，如下，导入的时候只需输入路径<code>&quot;github.com/headfirstgo/keyboard&quot;</code></p>
+</blockquote>
+<p><img src="/images/pasted-178.png" alt="upload successful"></p>
+<blockquote>
+<p>导入他人包就是cli里的，<code>go get &lt;URL&gt;</code>，查看文档：<code>go doc &lt;URL&gt;</code></p>
+</blockquote>
+<h4 id="添加包说明"><a href="#添加包说明" class="headerlink" title="添加包说明"></a>添加包说明</h4><blockquote>
+<p><code>go doc</code>可以查看包的信息，包给其他人用的时候需要添加一些说明</p>
+<p>所有<code>Package</code>和方法语句之前的注释文档都会被<code>go doc</code>输出</p>
+<p>go可以自动生成在线文档服务，<code>godoc -http=:6060</code></p>
+</blockquote>
+<h2 id="GO数据结构"><a href="#GO数据结构" class="headerlink" title="GO数据结构"></a>GO数据结构</h2><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><blockquote>
+<p>基本和其他语言一样</p>
+<p>不过初始化的时候，int型的默认0，string型的默认空</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础类型数组</span></span><br><span class="line"><span class="keyword">var</span> notes [<span class="number">7</span>]<span class="keyword">string</span></span><br><span class="line">notes[<span class="number">0</span>] = <span class="string">&quot;test&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象/结构体数组 默认值是utc 0的时间</span></span><br><span class="line"><span class="keyword">var</span> dates [<span class="number">3</span>]time.Time</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速初始化数值</span></span><br><span class="line"><span class="keyword">var</span> names [<span class="number">3</span>]<span class="keyword">string</span> = [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 简写快速初始化</span></span><br><span class="line">names := [<span class="number">2</span>]<span class="keyword">string</span> &#123;<span class="string">&quot;1&quot;</span>,<span class="string">&quot;2&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果要分多行，一定要用逗号作为格式化字符(最后一行也要逗号)</span></span><br><span class="line">names := [<span class="number">2</span>]<span class="keyword">string</span>&#123;</span><br><span class="line"> <span class="string">&quot;1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;2&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// fmt可以快速打印数据接口包括 array,map,slices等</span></span><br><span class="line">fmt.Println(names)</span><br><span class="line">fmt.Printf(<span class="string">&quot;%#v\n&quot;</span>,names)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>数组的循环</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// loop</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(names); i++ &#123;</span><br><span class="line">  fmt.Println(names[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>loop的另一种形式 和python的 <code>for key in</code>很像</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// loog another</span></span><br><span class="line"><span class="keyword">for</span> index, value := <span class="keyword">range</span> names &#123;</span><br><span class="line">  fmt.Println(index, value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上这种情况，index如果没被用到，是会报错的，可以使用空定义避免</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, value := <span class="keyword">range</span> names &#123;</span><br><span class="line">  fmt.Println(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="slices"><a href="#slices" class="headerlink" title="slices"></a>slices</h3><blockquote>
+<p>类似链表，用于解决数组长度固定问题<br>定义和数组一样，只不过不需要提供长度<br><b>本身是基于数组的，只是数组的一个限制镜像，若slice来自数组，修改数组就会导致slice变动</b></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明，因为slice基于数组，没有底层数组单声明slice无用，这时候的slice是个nil</span></span><br><span class="line"><span class="keyword">var</span> mycli []<span class="keyword">string</span></span><br><span class="line"><span class="comment">// 初始化一个数组给slice</span></span><br><span class="line">mycli = <span class="built_in">make</span>([]<span class="keyword">string</span>,<span class="number">7</span>)</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line">mycli[<span class="number">0</span>] = <span class="string">&quot;test&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以快速简写，且遍历和数组一样</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mycli := <span class="built_in">make</span>([]<span class="keyword">string</span>,<span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速定义赋值</span></span><br><span class="line">mycli := []<span class="keyword">string</span>&#123;</span><br><span class="line">  <span class="string">&quot;1&quot;</span>,</span><br><span class="line">        <span class="string">&quot;2&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>slice可以从现有数组中创建</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从数组的0到3截取创建slice，左闭右开</span></span><br><span class="line">myarr := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">mysli := myarr[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line"><span class="comment">// 且可以忽略开始或者结束</span></span><br><span class="line">myslic := myarr[<span class="number">0</span>:]</span><br><span class="line">myslid := myarr[:<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改数组会导致slice变化</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myarr := [<span class="number">5</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;</span><br><span class="line">mysli := myarr[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">myarr[<span class="number">0</span>] = <span class="number">10</span></span><br><span class="line">fmt.Println(mysli)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>所以使用slice的时候，还是推荐make单独给slice一个数组</p>
+<p>slice 有append方法可以在尾部添加数据，前面说过slice是基于数组的，如果底层的数组空间不足，append会生成新的数组，将原来值拷贝过去，这时append给一个新的slice无法确定这两个slice是否共享一个底层数组，所以建议append给原来的slice</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安全的调用slice</span></span><br><span class="line">mysli = <span class="built_in">append</span>(mysli,<span class="number">1</span>)</span><br><span class="line"><span class="comment">// 无法确定是否属于同一数组</span></span><br><span class="line">mycli2 := <span class="built_in">append</span>(mycli,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：虽然slice初始化的时候不确定数组是个nil，但是其他方法调用的时候不用判断是否为nil，默认为nill的slice是个空slice，比如以下就是合法的操作</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sc []<span class="keyword">string</span></span><br><span class="line">sc = <span class="built_in">append</span>(sc,<span class="string">&quot;test&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一个读取文件内的文本转为float型数组的例子：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;bufio&quot;</span></span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line"> <span class="string">&quot;os&quot;</span></span><br><span class="line"> <span class="string">&quot;strconv&quot;</span></span><br><span class="line"> <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"> arr, err := readFloatFromFile(<span class="string">&quot;./data&quot;</span>)</span><br><span class="line"> <span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">  fmt.Println(arr)</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">readFloatFromFile</span><span class="params">(filePath <span class="keyword">string</span>)</span> <span class="params">([]<span class="keyword">float64</span>, error)</span></span> &#123;</span><br><span class="line"> <span class="keyword">var</span> numbers []<span class="keyword">float64</span></span><br><span class="line"> file, err := os.Open(filePath)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"> scanner := bufio.NewScanner(file)</span><br><span class="line"> <span class="keyword">for</span> scanner.Scan() &#123;</span><br><span class="line">  txt := strings.TrimSpace(scanner.Text())</span><br><span class="line">  number, err := strconv.ParseFloat(txt, <span class="number">64</span>)</span><br><span class="line">  <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">   <span class="comment">// 出错返回数组和错误信息</span></span><br><span class="line">   <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">  &#125;</span><br><span class="line">  numbers = <span class="built_in">append</span>(numbers, number)</span><br><span class="line"> &#125;</span><br><span class="line"> err = file.Close()</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">if</span> scanner.Err() != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 无错 返回数组和空</span></span><br><span class="line"> <span class="keyword">return</span> numbers, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>slice 传入可变函数需要添加<code>...</code></p>
+<p>slice 排序</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort.Strings(mySli)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><blockquote>
+<p>Map几乎可以用任意类型作为key（但是必须是可以使用<code>==</code>来比较的类型）</p>
+<p>Map定义：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myMap <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">float64</span></span><br><span class="line">myMap = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">float64</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>快速定义：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myMap[<span class="string">&quot;first&quot;</span>] = <span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>map字面量（快速赋值）：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myMap := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;<span class="string">&quot;a&quot;</span>:<span class="number">1.2</span>,<span class="string">&quot;b&quot;</span>:<span class="number">1.3</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>map[something]</code> 如果从未定义过，也可以获取结果是0，想要区分一个key是否被赋值过如下：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// map访问可以多带一个返回参数，是否接收都可以用于判断是否赋值过</span></span><br><span class="line"><span class="comment">// myMap[&quot;tzq&quot;] # 这是直接访问</span></span><br><span class="line">value,ok := myMap[<span class="string">&quot;tzq&quot;</span>]</span><br><span class="line"><span class="comment">// ok 为true表示赋值过</span></span><br><span class="line"><span class="comment">// 若只想知道是否赋值过</span></span><br><span class="line">_,ok := myMap[<span class="string">&quot;tzq&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除key</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从myMap中删除key为name的值</span></span><br><span class="line"><span class="built_in">delete</span>(myMap,<span class="string">&quot;name&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>map打印的时候是乱序打印的，可以将key塞到一个slice，然后排序slice打印</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;sort&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> grades := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">float64</span>&#123;</span><br><span class="line">  <span class="string">&quot;tr&quot;</span>:<span class="number">100</span>,</span><br><span class="line">  <span class="string">&quot;tzq&quot;</span>:<span class="number">100</span>,</span><br><span class="line">  <span class="string">&quot;sxy&quot;</span>:<span class="number">90</span>,</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> mySlic []<span class="keyword">string</span></span><br><span class="line"> <span class="comment">// 可以不写_</span></span><br><span class="line"> <span class="keyword">for</span> k := <span class="keyword">range</span> grades&#123;</span><br><span class="line">  mySlic = <span class="built_in">append</span>(mySlic,k)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 不返回值</span></span><br><span class="line"> sort.Strings(mySlic)</span><br><span class="line"> <span class="keyword">for</span> _,name := <span class="keyword">range</span> mySlic&#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;%5s || %5.2f\n&quot;</span>,name,grades[name])</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一个使用map的例子，统计选票</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;bufio&quot;</span></span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line"> <span class="string">&quot;os&quot;</span></span><br><span class="line"> <span class="string">&quot;strings&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;reading&quot;</span>)</span><br><span class="line"> names,err := readStringFromFile(<span class="string">&quot;./names&quot;</span>)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 统计名字出现次数</span></span><br><span class="line"> res := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;&#125;</span><br><span class="line"> <span class="keyword">for</span> _,name := <span class="keyword">range</span> names&#123;</span><br><span class="line">  res[name]++</span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(res) </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">readStringFromFile</span><span class="params">(path <span class="keyword">string</span>)</span><span class="params">([]<span class="keyword">string</span>,error)</span></span>&#123;</span><br><span class="line"> res := []<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"> file,err := os.Open(path)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span>,err</span><br><span class="line"> &#125;</span><br><span class="line"> scanner := bufio.NewScanner(file)</span><br><span class="line"> <span class="keyword">for</span> scanner.Scan()&#123;</span><br><span class="line">  res = <span class="built_in">append</span>(res,strings.TrimSpace(scanner.Text())) </span><br><span class="line"> &#125;</span><br><span class="line"> err = file.Close()</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span>,err</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">if</span> scanner.Err()!=<span class="literal">nil</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span>,err</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> res,<span class="literal">nil</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="结构体-structs（和C很像）"><a href="#结构体-structs（和C很像）" class="headerlink" title="结构体 structs（和C很像）"></a>结构体 structs（和C很像）</h3><blockquote>
+<p>单独的结构体定义变量</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单独定义一个结构体（类似对象）</span></span><br><span class="line"><span class="keyword">var</span> person <span class="keyword">struct</span>&#123;</span><br><span class="line"> name <span class="keyword">string</span></span><br><span class="line">    age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line">person.name = <span class="string">&quot;tr&quot;</span></span><br><span class="line">fmt.Println(person.name)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>自定义数据类型 配合结构体(类似实现java的类)</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span>&#123;</span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  age <span class="keyword">int</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> tr Person</span><br><span class="line"> tr.name = <span class="string">&quot;te&quot;</span></span><br><span class="line"> tr.age = <span class="number">24</span></span><br><span class="line"> fmt.Println(tr)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结构体类型可以作为方法出入参，但是要记住go永远是值拷贝，传递的结构体，方法内修改不会影响方法外的结构体，所以建议所有对原始数据修改的方法，都用指针。且如果结构体很大，也用指针，不然拷贝很久消耗内存和更多cpu</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">type</span> Person <span class="keyword">struct</span>&#123;</span><br><span class="line">  name <span class="keyword">string</span></span><br><span class="line">  age <span class="keyword">int</span></span><br><span class="line"> &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="comment">//var person struct&#123;</span></span><br><span class="line"> <span class="comment">// name string</span></span><br><span class="line"> <span class="comment">// age int</span></span><br><span class="line"> <span class="comment">//&#125;</span></span><br><span class="line"> <span class="comment">//person.name = &quot;tr&quot;</span></span><br><span class="line"> <span class="comment">//person.age = 24</span></span><br><span class="line"> <span class="comment">//fmt.Println(person)</span></span><br><span class="line"> <span class="keyword">var</span> tr Person</span><br><span class="line"> tr.name = <span class="string">&quot;te&quot;</span></span><br><span class="line"> tr.age = <span class="number">24</span></span><br><span class="line"> tr = changeName(tr)</span><br><span class="line"> fmt.Println(tr)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">changeName</span><span class="params">(person Person)</span><span class="title">Person</span></span>&#123;</span><br><span class="line"> person.name = <span class="string">&quot;changed&quot;</span></span><br><span class="line"> <span class="keyword">return</span> person</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>指针访问结构体</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pointer *Person = &amp;tr</span><br><span class="line"><span class="comment">// 访问指针的内容</span></span><br><span class="line">fmt.Println((*pointer).name) <span class="comment">// (*pointer)这样的写法很冗杂</span></span><br><span class="line">fmt.Println(pointer.name) <span class="comment">// 简化形式</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>go里面，只有大写开头的结构体才可以被其他包使用！<b>并且，结构体内的字段也要大写开头，才能访问！</b></p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Package MyStru</span><br><span class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span>&#123;</span><br><span class="line">  Name <span class="keyword">string</span></span><br><span class="line">  Age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 其他包内容调用</span></span><br><span class="line"><span class="keyword">import</span> MyStru</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">var</span> p MyStru.Person </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这样通过<code>包名.类型</code>的方式有些啰嗦，go提供了结构体字面量可以同时创建和初始化字段</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不必所有的字段都要赋值</span></span><br><span class="line">p := MyStru.Person&#123;Name:<span class="string">&quot;tr&quot;</span>,Age:<span class="number">24</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>结构体的嵌套</p>
+</blockquote>
+<p><img src="/images/pasted-179.png" alt="upload successful"></p>
+<blockquote>
+<p>匿名变量（结构体链式调用简写），有时候如上图emp.Addr.City看起来很冗杂，go提供了匿名变量：只保留变量类型，去掉名字<br>访问的时候可以去掉名字作为内置变量访问，也可以通过类型名访问</p>
+</blockquote>
+<p><img src="/images/pasted-180.png" alt="upload successful"></p>
+<h2 id="Go的高级特性"><a href="#Go的高级特性" class="headerlink" title="Go的高级特性"></a>Go的高级特性</h2><h3 id="自定义类型"><a href="#自定义类型" class="headerlink" title="自定义类型"></a>自定义类型</h3><blockquote>
+<p>上一节讲了<code>type</code>，自定义类型基于结构体，现在可以试试基于任何其他类型并且定义方法</p>
+<p>为什么要用这个，这里提供书上的一个场景：<br>一加仑=3.78升，如果一个程序定义了油耗是10:<code>var fuel float64 = 10</code>，那么他是10升还是10加仑，所以这时候我们可以将<code>float64</code>转为自定义类型，用可阅读的英语代替</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Liter <span class="keyword">float64</span> <span class="comment">// 定义升</span></span><br><span class="line"><span class="keyword">type</span> Gallon <span class="keyword">float64</span> <span class="comment">// 定义加仑</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span></span>&#123;</span><br><span class="line"> <span class="keyword">var</span> carFuel Liter <span class="comment">// 这里明显可以得知是升</span></span><br><span class="line">    <span class="keyword">var</span> busFuel Gallon <span class="comment">// 同理</span></span><br><span class="line">    carFuel = Liter(<span class="number">10</span>) <span class="comment">// 10升油</span></span><br><span class="line">    </span><br><span class="line">    motorCycle := Gallon(<span class="number">10</span>)</span><br><span class="line">    </span><br><span class="line">    carFuel = Gallon(<span class="number">10</span>) <span class="comment">// 这里会编译错误，因为一开始声明的类型不一样，即使这些类型底层都是float64</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但有时我们会想要混用转换这两种类型，go提供了两种自定义类型（基于同一种类型）互相转化的解决方案</p>
+<p>定义自己的类型和对应操作符（+ - * / == &gt; &lt;），一般go是不允许不同类型加减乘除的，需要自定义操作符，这里我们希望<code>Liter</code>和<code>Gallon</code>单位混合运算<br>PS:这里定义每个类型的对应方法的时候，方法指的就是方法(Function),函数(Method)指的是不属于类型的那些方法，比起函数，方法要多加一个入参(写在方法名左边)，其他和函数没有区别</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyType <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 一旦MyType的方法定义了，任何MyType的value都可以调用</span></span><br><span class="line"><span class="comment">// 一般自定义的入参取名单个开头字母小写</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m MyType)</span> <span class="title">sayHi</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">value := MyType(<span class="string">&quot;some thing&quot;</span>)</span><br><span class="line">value.sayHi() <span class="comment">// 这里value就是第一个入参</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyType <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果不加sayHi左边的就是一个普通的方法而已</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t MyType)</span><span class="title">sayHi</span><span class="params">(name <span class="keyword">string</span>)</span><span class="title">string</span></span>&#123;</span><br><span class="line"> fmt.Println(name,t)</span><br><span class="line"> <span class="keyword">return</span> name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// a := &quot;test&quot;</span></span><br><span class="line"> <span class="comment">// 这里是无法调出 a.sayHi的</span></span><br><span class="line"> value := MyType(<span class="string">&quot;tr&quot;</span>)</span><br><span class="line"> value.sayHi(<span class="string">&quot;hello from &quot;</span>)</span><br><span class="line"> <span class="comment">// 结果是 hello from tr</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>哪些类型可以被自定义方法？ 在同一包下自定义的类型可以，int等系统类型不行</p>
+<p>方法的第一入参可以接收指针，场景：需要给自己的基于int的类型加个Double倍增的方法，但是不使用指针无法修改，不过不用担心，对于首要入参，go会自动的在需要的时候转为指针，如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Number <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// n如果不是指针类型 无法实现*2效果</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Number)</span> <span class="title">DoubleNumber</span><span class="params">()</span></span>&#123;</span><br><span class="line"> (*n) *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> val := Number(<span class="number">12</span>)</span><br><span class="line"> val.DoubleNumber() <span class="comment">// 调用的时候go自动传入了地址</span></span><br><span class="line"> fmt.Println(val)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这时候我们就可以解决第一个场景的问题了：给升和加仑转为对方的转换方法</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Liter <span class="keyword">float64</span> <span class="comment">// 定义升</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l liter)</span> <span class="title">toGallon</span><span class="params">()</span><span class="title">Gallon</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> Gallon(l* <span class="number">0.264</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="封装和嵌入"><a href="#封装和嵌入" class="headerlink" title="封装和嵌入"></a>封装和嵌入</h3><h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><blockquote>
+<p>其实go的封装很类似java的一个实体类，对于go来说，一个struct内部的方法，如果可以不经过校验随意输入参数，那么代码很容易出错，需要给一个setter方法，让输入的参数经过校验</p>
+<p>其实真的很像java的实体类，我们需要定义一个对象，对象再调用setter方法设置值，在go中我们得通过上节的自定义类型方法，例子如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义日期结构体</span></span><br><span class="line"><span class="keyword">type</span> Date <span class="keyword">struct</span>&#123;</span><br><span class="line"> Year <span class="keyword">int</span></span><br><span class="line"> Month <span class="keyword">int</span></span><br><span class="line"> Day <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义类型方法 如果不用指针 结果不会改变</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span><span class="title">SetYear</span><span class="params">(year <span class="keyword">int</span>)</span></span>&#123;</span><br><span class="line"> d.Year = year</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">var</span> d Date</span><br><span class="line"> <span class="comment">// 显然直接修改结构体内的值不安全，万一设置负的呢</span></span><br><span class="line"> <span class="comment">//d.Year = -1</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 我们想要调用d.setYear 但是让类型调用方法我们需要自定义类型方法</span></span><br><span class="line"> d.SetYear(<span class="number">1997</span>)</span><br><span class="line"> fmt.Println(d)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以上这个例子结构体内的域变量还是可以被访问到，其实这时候只要将结构体移到其他包内，且域内变量都小写不开放即可。这样我们就只能通过开放的<code>Setxxx</code>方法去修改不开放的<code>域内值</code></p>
+</blockquote>
+<h4 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h4><blockquote>
+<p>Get方法实际上和java的作用也一样，建议类型首参用指针且方法名不用<code>GetYear</code>而是<code>Year</code>，如下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span><span class="title">Year</span><span class="params">()</span><span class="title">int</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> d.year</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在其他语言中，封装是通过<code>class</code>实现的，而go是通过<code>package</code>实现的</p>
+</blockquote>
+<h4 id="完整的GetSet例子"><a href="#完整的GetSet例子" class="headerlink" title="完整的GetSet例子"></a>完整的GetSet例子</h4><blockquote>
+<p>date目录下</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> date</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;errors&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义日期结构体,全都是小写为了防止被其他包读取</span></span><br><span class="line"><span class="keyword">type</span> Date <span class="keyword">struct</span> &#123;</span><br><span class="line"> year  <span class="keyword">int</span></span><br><span class="line"> month <span class="keyword">int</span></span><br><span class="line"> day   <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义Set方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span> <span class="title">SetYear</span><span class="params">(year <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line"> <span class="keyword">if</span> year &lt; <span class="number">0</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> errors.New(<span class="string">&quot;Year can not be negative&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> d.year = year</span><br><span class="line"> <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span> <span class="title">SetMonth</span><span class="params">(month <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line"> <span class="keyword">if</span> month &lt; <span class="number">1</span> || month &gt; <span class="number">12</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> errors.New(<span class="string">&quot;Month must between 1-12&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> d.month = month</span><br><span class="line"> <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span> <span class="title">SetDay</span><span class="params">(day <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line"> <span class="keyword">if</span> day &gt; <span class="number">31</span> || day &lt; <span class="number">1</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> errors.New(<span class="string">&quot;Day must between 1-31&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> d.day = day</span><br><span class="line"> <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Get方法,最好还用指针不然拷贝数据浪费内存</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span> <span class="title">Year</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> d.year</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span> <span class="title">Month</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> d.month</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Date)</span> <span class="title">Day</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line"> <span class="keyword">return</span> d.day</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用日期包的主文件</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;date&quot;</span></span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">var</span> myDate date.Date</span><br><span class="line"> myDate.SetYear(<span class="number">1997</span>)</span><br><span class="line"> myDate.SetMonth(<span class="number">11</span>)</span><br><span class="line"> myDate.SetDay(<span class="number">21</span>)</span><br><span class="line"></span><br><span class="line"> fmt.Printf(<span class="string">&quot;%v || %v || %v&quot;</span>,myDate.Year(),myDate.Month(),myDate.Day())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="嵌入"><a href="#嵌入" class="headerlink" title="嵌入"></a>嵌入</h4><blockquote>
+<p>一个结构体可以嵌套另一个结构体，但是访问的时候可以将子结构体的内容当做自己的属性访问（这些内容包括方法和属性）</p>
+<p>不过需要外部结构体定义的子结构体是匿名的，即只有类型</p>
+<p>当然子结构体内部不暴露的（小写开头）的变量是不会嵌入/或者说弹出给外部结构体的</p>
+</blockquote>
+<h3 id="接口-Interface"><a href="#接口-Interface" class="headerlink" title="接口 Interface"></a>接口 Interface</h3><blockquote>
+<p>go的接口指的永远是变量的接口，因为go没有类的概念，一个自定义类型可以基于任何类型，可以实现方法。那么接口就是约定这个自定义类型需要包含的方法</p>
+</blockquote>
+<h4 id="接口实现和对应类型实现"><a href="#接口实现和对应类型实现" class="headerlink" title="接口实现和对应类型实现"></a>接口实现和对应类型实现</h4><blockquote>
+<p>和java的接口概念一样，约定我需要哪些方法，具体怎么来的不关心，不过go里面，接口必须和类型结合使用，类型可以有多个方法，但是必须有符合接口的方法才满足</p>
+<p><code>You don’t care whether you have a Pen or a Pencil, you just need something with a Draw method</code></p>
+<p>定义接口示例</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyInterface <span class="keyword">interface</span>&#123;</span><br><span class="line"> sayHi()</span><br><span class="line">    getSomething(<span class="keyword">float64</span>)</span><br><span class="line">    returnSomething()<span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>定义满足接口的类型</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyType <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//给这个类型定义方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *MyType)</span> <span class="title">sayHi</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *MyType)</span> <span class="title">getSomething</span><span class="params">(f <span class="keyword">float64</span>)</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *MyType)</span> <span class="title">returnSomething</span><span class="params">()</span><span class="title">string</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 可以有其他方法</span></span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里定义了接口和类型，需要注意的是不同于<code>Java</code>的<code>implement</code>go是自动的，不需要手动声明，如下使用</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="comment">// 定义变量类型为接口</span></span><br><span class="line">  <span class="keyword">var</span> value MyInterface</span><br><span class="line">  <span class="comment">// 因为MyType定义的方法是符合接口的，所以这么做合法</span></span><br><span class="line">  value = MyType(<span class="number">5</span>)</span><br><span class="line">  value.sayHi();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一个接口类型不确定内容到底是什么，可能是int，可能是其他，取决于自定义类型的基础</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Whistle <span class="keyword">string</span></span><br><span class="line"><span class="keyword">type</span> Horn <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(w Whistle)</span> <span class="title">MakeSound</span><span class="params">()</span></span>&#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;whistle&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h Horn)</span> <span class="title">MakeSound</span><span class="params">()</span></span>&#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;whistle&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NoiseMaker <span class="keyword">interface</span>&#123;</span><br><span class="line"> MakeSound()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">var</span> toy NoisMaker</span><br><span class="line">    toy = Whistle(<span class="string">&quot;toy&quot;</span>)</span><br><span class="line">    toy.MakeSound()</span><br><span class="line">    toy = Horn(<span class="string">&quot;toy&quot;</span>)</span><br><span class="line">    toy.MakeSound()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>接口变量也可以作为入参，总结一下，go的接口实现方式是基于自定义类型的，一个自定义类型，包含了数据，和类型可以调用的方法，这就相当于Java的类</p>
+<p>当生成了自定义类型的变量，就相当于java内的对象，可以作为参数传递，如果这个变量的方法满足接口，那么入参类型为接口变量即可</p>
+<p>需要注意的是：如果实现类型方法的时候，首参是指针，那么在给一个接口变量赋值的时候，只能赋值类型变量的指针，下面是错误的示例和修正代码</p>
+</blockquote>
+<p><img src="/images/pasted-181.png" alt="upload successful"></p>
+<p><img src="/images/pasted-182.png" alt="upload successful"></p>
+<h4 id="接口类型转为具体类型"><a href="#接口类型转为具体类型" class="headerlink" title="接口类型转为具体类型"></a>接口类型转为具体类型</h4><blockquote>
+<p>如同java的接口一样，当使用接口的时候，那么只能使用接口定义的方法，假如实现接口的具体类有更多方法，需要转为具体实现类</p>
+<p>go也是同理，假如一个接口变量定义了并且赋值了一个实现接口的接口自定义类型，如果需要将接口变量转为自定义类型变量，只需要<code>.(具体自定义类型)</code>即可</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> noiseMaker NoiseMaker = Robot(<span class="string">&quot;test&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> robot Robot = noiseMaker.(Robot)</span><br><span class="line"><span class="comment">// 更推荐用下面这种带判断是否转换成功的</span></span><br><span class="line">robot,ok := noiseMaker.(Robot)</span><br><span class="line"><span class="keyword">if</span> ok&#123;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Error接口"><a href="#Error接口" class="headerlink" title="Error接口"></a>Error接口</h4><blockquote>
+<p>我们之前常用error类型，但是实际上error只是个接口，只要我们实现了<code>Error()string</code>的自定义类型都可以视为error的实现</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义类型</span></span><br><span class="line"><span class="keyword">type</span> ComputerError <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义类型实现Error()string 方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c ComputerError)</span><span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">&quot;a computerError occured&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="comment">// 我们自定义的ComputerError符合接口</span></span><br><span class="line"> <span class="keyword">var</span> err error = ComputerError(<span class="string">&quot;test&quot;</span>)</span><br><span class="line"> err.Error()</span><br><span class="line"> fmt.Println(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>error接口是小写开头，那么我们为啥可以调用，毕竟小写开头都是私有不暴露的，这是因为error是作为<code>universe block</code>存在的，不论在哪个包都可以调用到。</p>
+<p>有些接口是定义在方法下的，有些是在包下的，所以他们有限制，必须大写才能暴露，且使用需要引入，但是<code>error</code>和一些其他预定于的是在”所有包下的”</p>
+</blockquote>
+<h4 id="String接口"><a href="#String接口" class="headerlink" title="String接口"></a>String接口</h4><blockquote>
+<p>对于<code>fmt.Println</code>或者其他方法来说，这些print方法会去寻找入参的变量是否有<code>String()string</code>方法，如果有，会去调用这个方法</p>
+<p>即，fmt存在<code>Stringer</code>接口，输入的任何变量其实是作为<code>Stringer</code>接口变量存在的:<code>fmt.Println(myVariable)</code>，<code>myVariable</code>会作为接口变量存在，当然如果不满足接口方法那就不是了</p>
+<p>可以<code>go doc fmt Println</code>查看具体接口定义</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义类型实现string方法满足Stringer接口</span></span><br><span class="line"><span class="keyword">type</span> CoffeePot <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c CoffeePot)</span><span class="title">String</span><span class="params">()</span> <span class="title">string</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">string</span>(c) + <span class="string">&quot;coffee&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> coffee := CoffeePot(<span class="string">&quot;100&quot;</span>)</span><br><span class="line"> fmt.Println(coffee)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="空接口"><a href="#空接口" class="headerlink" title="空接口"></a>空接口</h4><blockquote>
+<p>一个接口定义了以后，只要任何变量满足这个接口内的方法，那么变量就可以被传入或者赋值</p>
+<p>那么假如接口内无任何方法定义，则可以接收任何变量</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单独命名一个空接口</span></span><br><span class="line"><span class="keyword">type</span> emptInterface <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"><span class="comment">// 任何值都可以被传入 &#123;&#125;表示接收的接口变量无方法</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AcceptThing</span><span class="params">(thing <span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line">......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是问题是空接口那么也没有方法可被调用，所以这时候要转换空接口为具体变量<br>了解这个再看fmt包的Println就明白了<code>func Println(a ...any) (n int, err error)</code> 这么定义表明可以接收若干个空接口即任何参数<br>随后转换这些参数</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AcceptThing</span><span class="params">(thing <span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line">  whistle,ok :=thing.(Whistle)</span><br><span class="line">  <span class="keyword">if</span> ok&#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码例子"><a href="#代码例子" class="headerlink" title="代码例子"></a>代码例子</h3><blockquote>
+<p>利用接口，自定义类型，结构体，封装等概念完成一个自定义链表，以及基于链表的栈</p>
+<p>代码实现</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;list&quot;</span></span><br><span class="line"> <span class="string">&quot;log&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试main</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> fmt.Println(<span class="string">&quot;********&quot;</span>)</span><br><span class="line"> <span class="comment">// 测试节点 节点元素可以是任何类型</span></span><br><span class="line"> <span class="keyword">var</span> n list.Node</span><br><span class="line"> ele := list.StringEle(<span class="string">&quot;13.1&quot;</span>)</span><br><span class="line"> n.SetEle(ele) </span><br><span class="line"> n.SetEle(<span class="number">13</span>)</span><br><span class="line"> n.PrintList()</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 测试链表</span></span><br><span class="line"> fmt.Println(<span class="string">&quot;*************&quot;</span>)</span><br><span class="line"> <span class="comment">// 生成的新节点不能用指针 除非malloc手动分配内存</span></span><br><span class="line"> <span class="keyword">var</span> newStartNode list.Node</span><br><span class="line"> newStartNode.SetEle(<span class="number">11</span>)</span><br><span class="line"> <span class="keyword">var</span> myList list.List</span><br><span class="line"> myList = &amp;newStartNode</span><br><span class="line"> myList.AppendNode(<span class="number">22</span>)</span><br><span class="line"> myList.InsertNode(<span class="number">33</span>,<span class="number">1</span>)</span><br><span class="line"> myList,_ = myList.DeleteNodeByIndex(<span class="number">1</span>)</span><br><span class="line"> err := myList.UpdateNodeByIndex(<span class="number">100</span>,<span class="number">3</span>)</span><br><span class="line"> <span class="keyword">if</span> err!=<span class="literal">nil</span> &#123;</span><br><span class="line">  log.Fatal(err)</span><br><span class="line"> &#125;</span><br><span class="line"> myList.PrintList()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>链表实现</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> list</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author tr</span></span><br><span class="line"><span class="comment"> * @content 实现链式链表</span></span><br><span class="line"><span class="comment"> * @date 2022-4-19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//*************** 定义链式链表的基础节点***************</span></span><br><span class="line"><span class="comment">// 自定义错误类型(不能用指针！！！)</span></span><br><span class="line"><span class="keyword">type</span> nodeErr <span class="keyword">string</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n nodeErr)</span> <span class="title">Error</span><span class="params">()</span><span class="title">string</span></span>&#123;</span><br><span class="line"> <span class="comment">// 需要类型转换</span></span><br><span class="line"> <span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;node error %s:\n&quot;</span>,<span class="keyword">string</span>(n))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义节点元素的基础类型</span></span><br><span class="line"><span class="keyword">type</span> IntEle <span class="keyword">int</span></span><br><span class="line"><span class="keyword">type</span> StringEle <span class="keyword">string</span></span><br><span class="line"><span class="keyword">type</span> FloatEle <span class="keyword">float64</span></span><br><span class="line"><span class="keyword">type</span> Node <span class="keyword">struct</span>&#123;</span><br><span class="line"> <span class="comment">// 节点元素，可以是任何类型</span></span><br><span class="line"> ele <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"> <span class="comment">// 节点的下一个指针 初始化的时候默认为nil</span></span><br><span class="line"> next *Node</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 封闭私有元素，开放set,get</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">SetEle</span><span class="params">(ele <span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line"> n.ele = ele</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">SetNext</span><span class="params">(next *Node)</span></span>&#123;</span><br><span class="line"> n.next = next</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">Ele</span><span class="params">()</span><span class="title">interface</span></span>&#123;&#125;&#123;</span><br><span class="line"> <span class="keyword">return</span> n.ele</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">Next</span><span class="params">()</span>*<span class="title">Node</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> n.next</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//*****************************************************</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//************************* 定义链式链表***************</span></span><br><span class="line"><span class="comment">// 定义一个链表的接口</span></span><br><span class="line"><span class="keyword">type</span> List <span class="keyword">interface</span>&#123;</span><br><span class="line"> <span class="comment">// 清楚元素</span></span><br><span class="line"> Clear()</span><br><span class="line"> <span class="comment">// 链表长度</span></span><br><span class="line"> GetLength()<span class="keyword">int</span></span><br><span class="line"> <span class="comment">// 插入节点</span></span><br><span class="line"> InsertNode(<span class="keyword">interface</span>&#123;&#125;,<span class="keyword">int</span>)(*Node,error)</span><br><span class="line"> <span class="comment">// 尾部插入节点</span></span><br><span class="line"> AppendNode(<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line"> <span class="comment">// 删除节点-通过节点位置且返回头结点</span></span><br><span class="line"> DeleteNodeByIndex(<span class="keyword">int</span>)(*Node,error)</span><br><span class="line"> <span class="comment">// 删除节点-通过节点元素且返回被删除元素</span></span><br><span class="line"> <span class="comment">//DeleteNodeByEle(interface&#123;&#125;)(interface&#123;&#125;,error)</span></span><br><span class="line"> <span class="comment">// 更新节点-通过index</span></span><br><span class="line"> UpdateNodeByIndex(<span class="keyword">interface</span>&#123;&#125;,<span class="keyword">int</span>)error</span><br><span class="line"> <span class="comment">// 打印链表</span></span><br><span class="line"> PrintList()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现链表接口 如果实现的时候首参数用了 * 赋值要用 &amp; 注意区别</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">Clear</span><span class="params">()</span></span>&#123;</span><br><span class="line"> n.next = <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现打印，因为元素类型不同,可以转为自定义的元素类型或者原始元素类型，通过转换分辨节点类型</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doPrint</span><span class="params">(ele <span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line"> <span class="keyword">var</span> ok <span class="keyword">bool</span></span><br><span class="line"> _,ok = ele.(IntEle)</span><br><span class="line"> <span class="keyword">if</span> ok &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;int element %d\n&quot;</span>,ele)</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line"> &#125;</span><br><span class="line"> _,ok = ele.(StringEle)</span><br><span class="line"> <span class="keyword">if</span> ok &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;string element %s\n&quot;</span>,ele)</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line"> &#125;</span><br><span class="line"> _,ok = ele.(FloatEle)</span><br><span class="line"> <span class="keyword">if</span> ok &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;float element %f\n&quot;</span>,ele)</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line"> &#125;</span><br><span class="line"> _,ok = ele.(<span class="keyword">int</span>)</span><br><span class="line"> <span class="keyword">if</span> ok &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;original int element %d\n&quot;</span>,ele)</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(<span class="string">&quot;unknown type&quot;</span>,ele)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">PrintList</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">for</span> n!=<span class="literal">nil</span>&#123;</span><br><span class="line">  <span class="comment">// fmt.Println(n.ele) 这样打印显示不出类型转换</span></span><br><span class="line">  ele := n.Ele()</span><br><span class="line">  doPrint(ele)</span><br><span class="line">  n = n.Next()</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">GetLength</span><span class="params">()</span><span class="title">int</span></span>&#123;</span><br><span class="line"> <span class="comment">// 计数器</span></span><br><span class="line"> counter := <span class="number">0</span></span><br><span class="line"> <span class="keyword">for</span> n!=<span class="literal">nil</span>&#123;</span><br><span class="line">  counter++</span><br><span class="line">  n = n.Next()</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> counter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入节点 从0开始计数，0表示在第一个，1表示在第一个节点后...</span></span><br><span class="line"><span class="comment">// 且只有为0的时候需要返回新的头部节点</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">InsertNode</span><span class="params">(ele <span class="keyword">interface</span>&#123;&#125;,index <span class="keyword">int</span>)</span><span class="params">(*Node,error)</span></span>&#123;</span><br><span class="line"> <span class="comment">// 若大于链表长度 返回错误</span></span><br><span class="line"> <span class="keyword">if</span> index&gt;n.GetLength()&#123;</span><br><span class="line">  <span class="keyword">return</span> n,nodeErr(<span class="string">&quot;index out of bounds&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 若等于 调用append</span></span><br><span class="line"> <span class="keyword">if</span> index == n.GetLength()&#123;</span><br><span class="line">  n.AppendNode(ele)</span><br><span class="line">  <span class="keyword">return</span> n,<span class="literal">nil</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 若为0 成为头部</span></span><br><span class="line"> <span class="keyword">if</span> index == <span class="number">0</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> newHead Node</span><br><span class="line">  newHead.SetEle(ele)</span><br><span class="line">  newHead.SetNext(n)</span><br><span class="line">  <span class="keyword">return</span> &amp;newHead,<span class="literal">nil</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 其他情况下要做处理</span></span><br><span class="line"> <span class="keyword">for</span> ;index&gt;<span class="number">1</span>;index--&#123;</span><br><span class="line">  n = n.Next()</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">var</span> newN Node</span><br><span class="line"> newN.SetEle(ele)</span><br><span class="line"> newN.SetNext(n.Next())</span><br><span class="line"> n.SetNext(&amp;newN) </span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> n,<span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">AppendNode</span><span class="params">(ele <span class="keyword">interface</span>&#123;&#125; )</span></span>&#123;</span><br><span class="line"> <span class="keyword">var</span> newN Node</span><br><span class="line"> newN.SetEle(ele)</span><br><span class="line"> n.SetNext(&amp;newN)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除从1开始计数 如果删除第一个需要返回新的头结点</span></span><br><span class="line"><span class="function"><span class="keyword">func</span><span class="params">(n *Node)</span><span class="title">DeleteNodeByIndex</span><span class="params">(index <span class="keyword">int</span>)</span><span class="params">(*Node,error)</span></span>&#123;</span><br><span class="line"> <span class="keyword">if</span> index&gt;n.GetLength()||index&lt;<span class="number">1</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">nil</span>,nodeErr(<span class="string">&quot;index out of bounds in deleting&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">if</span> index == <span class="number">1</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n.Next(),<span class="literal">nil</span></span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> ;index&gt;<span class="number">2</span>;index--&#123;</span><br><span class="line">  n = n.Next()</span><br><span class="line"> &#125;</span><br><span class="line"> n.SetNext(n.Next().Next())</span><br><span class="line"> <span class="keyword">return</span> n,<span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//*****************************************************</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Node)</span><span class="title">UpdateNodeByIndex</span><span class="params">(ele <span class="keyword">interface</span>&#123;&#125;,index <span class="keyword">int</span>)</span><span class="title">error</span></span>&#123;</span><br><span class="line"> <span class="keyword">if</span> index&gt;n.GetLength()||index&lt;<span class="number">1</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> nodeErr(<span class="string">&quot;index out of bounds in updating&quot;</span>)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> ;index&gt;<span class="number">1</span>;index--&#123;</span><br><span class="line">  n = n.Next()</span><br><span class="line"> &#125;</span><br><span class="line"> n.SetEle(ele) </span><br><span class="line"> <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Go/" rel="tag"># Go</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/08/VSC-Remote-Container/" rel="prev" title="VSC Remote Container">
+      <i class="fa fa-chevron-left"></i> VSC Remote Container
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/19/Go-Lang-Pro/" rel="next" title="Go Lang Pro">
+      Go Lang Pro <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GO"><span class="nav-number">1.</span> <span class="nav-text">GO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go%E7%9A%84%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E5%92%8C%E5%A3%B0%E6%98%8E"><span class="nav-number">2.1.</span> <span class="nav-text">go的变量定义和声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-%E7%9A%84cli%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">go 的cli工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8-%E6%97%B6%E9%97%B4-%E5%AD%97%E7%AC%A6"><span class="nav-number">2.3.</span> <span class="nav-text">方法调用 时间 字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GO-%E5%9C%A8if%E4%B8%AD%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.4.</span> <span class="nav-text">GO 在if中初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GO-%E7%9A%84switch"><span class="nav-number">2.5.</span> <span class="nav-text">GO 的switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GO-%E5%AD%97%E7%AC%A6"><span class="nav-number">2.6.</span> <span class="nav-text">GO 字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86-%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5"><span class="nav-number">2.7.</span> <span class="nav-text">错误处理 用户输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="nav-number">2.8.</span> <span class="nav-text">文件读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%BC%82%E5%B8%B8"><span class="nav-number">2.9.</span> <span class="nav-text">返回异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E8%BD%AC%E6%95%B0%E5%AD%97"><span class="nav-number">2.10.</span> <span class="nav-text">字符转数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scope-%E5%9F%9F"><span class="nav-number">2.11.</span> <span class="nav-text">scope 域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.12.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Printf-Sprintf%E4%BB%A5%E5%8F%8A%E5%8D%A0%E4%BD%8D%E7%AC%A6"><span class="nav-number">2.13.</span> <span class="nav-text">Printf,Sprintf以及占位符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">2.14.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%A4%9A%E4%B8%AA%E5%80%BC"><span class="nav-number">2.14.1.</span> <span class="nav-text">返回多个值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E5%87%BD%E6%95%B0"><span class="nav-number">2.14.2.</span> <span class="nav-text">可变函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E9%92%88"><span class="nav-number">2.15.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86-package"><span class="nav-number">2.16.</span> <span class="nav-text">包管理 package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">2.17.</span> <span class="nav-text">命名规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F-constants"><span class="nav-number">2.18.</span> <span class="nav-text">常量 constants</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0"><span class="nav-number">2.19.</span> <span class="nav-text">cmd传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9go%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.20.</span> <span class="nav-text">修改go的配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9GOPATH"><span class="nav-number">2.20.1.</span> <span class="nav-text">修改GOPATH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%8C%85"><span class="nav-number">2.20.2.</span> <span class="nav-text">导入包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8C%85%E8%AF%B4%E6%98%8E"><span class="nav-number">2.20.3.</span> <span class="nav-text">添加包说明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GO%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">GO数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">3.1.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slices"><span class="nav-number">3.2.</span> <span class="nav-text">slices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-number">3.3.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93-structs%EF%BC%88%E5%92%8CC%E5%BE%88%E5%83%8F%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">结构体 structs（和C很像）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">Go的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">自定义类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%92%8C%E5%B5%8C%E5%85%A5"><span class="nav-number">4.2.</span> <span class="nav-text">封装和嵌入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Set"><span class="nav-number">4.2.1.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Get"><span class="nav-number">4.2.2.</span> <span class="nav-text">Get</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84GetSet%E4%BE%8B%E5%AD%90"><span class="nav-number">4.2.3.</span> <span class="nav-text">完整的GetSet例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B5%8C%E5%85%A5"><span class="nav-number">4.2.4.</span> <span class="nav-text">嵌入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3-Interface"><span class="nav-number">4.3.</span> <span class="nav-text">接口 Interface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%AF%B9%E5%BA%94%E7%B1%BB%E5%9E%8B%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.3.1.</span> <span class="nav-text">接口实现和对应类型实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E7%B1%BB%E5%9E%8B%E8%BD%AC%E4%B8%BA%E5%85%B7%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.3.2.</span> <span class="nav-text">接口类型转为具体类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Error%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.3.3.</span> <span class="nav-text">Error接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.3.4.</span> <span class="nav-text">String接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A9%BA%E6%8E%A5%E5%8F%A3"><span class="nav-number">4.3.5.</span> <span class="nav-text">空接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BE%8B%E5%AD%90"><span class="nav-number">4.4.</span> <span class="nav-text">代码例子</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tr"
+      src="/images/tr.jpg">
+  <p class="site-author-name" itemprop="name">tr</p>
+  <div class="site-description" itemprop="description">talk is cheap , show me the code.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MOIPA" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MOIPA" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tassassintr@gmail.com" title="E-Mail → mailto:tassassintr@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

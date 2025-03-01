@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Docker compose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DockerCompose">
+<meta property="og:url" content="http://example.com/2022/03/31/DockerCompost/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="Docker compose">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/images/pasted-158.png">
+<meta property="og:image" content="http://example.com/images/pasted-168.png">
+<meta property="og:image" content="http://example.com/images/pasted-169.png">
+<meta property="og:image" content="http://example.com/images/pasted-170.png">
+<meta property="og:image" content="http://example.com/images/pasted-171.png">
+<meta property="og:image" content="http://example.com/images/pasted-173.png">
+<meta property="article:published_time" content="2022-03-31T09:45:00.000Z">
+<meta property="article:modified_time" content="2025-03-01T12:26:37.327Z">
+<meta property="article:author" content="tr">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pasted-158.png">
+
+<link rel="canonical" href="http://example.com/2022/03/31/DockerCompost/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>DockerCompose | TrBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="TrBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TrBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/MOIPA" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/31/DockerCompost/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DockerCompose
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-31 09:45:00" itemprop="dateCreated datePublished" datetime="2022-03-31T09:45:00+00:00">2022-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-03-01 12:26:37" itemprop="dateModified" datetime="2025-03-01T12:26:37+00:00">2025-03-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Docker-compose"><a href="#Docker-compose" class="headerlink" title="Docker compose"></a>Docker compose</h1><span id="more"></span>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/compose/gettingstarted/">官方学习文档</a></p>
+<h2 id="出现的原因"><a href="#出现的原因" class="headerlink" title="出现的原因"></a>出现的原因</h2><p>DockerFile有了以后，build，run只针对一个容器，效率不高，如果多个服务之前存在依赖关系很麻烦</p>
+<p>Docker Compose 是用来定义和运行多个容器的应用，使用yaml配置文件</p>
+<p>正常使用有三个步骤：</p>
+<ol>
+<li>定义应用的环境（Dockefile）</li>
+<li>docker-compose.yml 用来定义服务</li>
+<li>运行 docker compose up 启动项目</li>
+</ol>
+<p>这个其实也就比自己手动写脚本好用，还是很局限，本质是脚本方式启动电脑上的一些服务</p>
+<blockquote>
+<p>对于docker compose的一些说明</p>
+</blockquote>
+<blockquote>
+<p>如果使用的是官方示例可以发现启动的容器名字是文件夹的名字+副本数量</p>
+</blockquote>
+<blockquote>
+<p>会默认创建对应的 文件夹_default的网络，yml配置文件内定义的若干个服务启动后，这些服务都在同一个网络下，之后互相访问可以直接通过容器名访问</p>
+</blockquote>
+<h2 id="yml-规则"><a href="#yml-规则" class="headerlink" title="yml 规则"></a>yml 规则</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 3层</span></span><br><span class="line"></span><br><span class="line">version : &#x27;&#x27; #版本</span><br><span class="line"></span><br><span class="line">service : #服务</span><br><span class="line">	service1:web</span><br><span class="line">    	images:</span><br><span class="line">        build:</span><br><span class="line">        volume:</span><br><span class="line">        ...</span><br><span class="line">    service2:redis</span><br><span class="line">    	depends_on:</span><br><span class="line">        - db</span><br><span class="line">        - redis</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 其他配置 网络 卷 全局规则</span></span><br><span class="line"></span><br><span class="line">volumes:</span><br><span class="line">network:</span><br><span class="line">configs:</span><br></pre></td></tr></table></figure>
+<p>一些重要的参数的详情</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动的时候是有一个启动顺序的，需要保证其他服务器启动</span></span><br><span class="line">depends_on:</span><br><span class="line">- db</span><br><span class="line"><span class="meta">#</span><span class="bash"> db 这里指的是自己定义的服务名</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> image: 这里指的是镜像import的基础镜像</span></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: postgres</span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">	web:</span><br><span class="line">      # 指令执行 镜像构建成功后执行的命令</span><br><span class="line">      command: python manage.py runserver 0.0.0.0:8000	</span><br><span class="line">      # 构建 根据当前目录的dockerfile文件构建这个镜像</span><br><span class="line">      build: .</span><br><span class="line">      # 暴露的端口 本地8000 容器5000</span><br><span class="line">      ports:</span><br><span class="line">        - &quot;8000:5000&quot;</span><br><span class="line">      # 挂载卷，启动docker的目录，映射到容器的code目录</span><br><span class="line">      volumes:</span><br><span class="line">        - .:/code</span><br><span class="line">      # 环境变量设置</span><br><span class="line">      environment:</span><br><span class="line">        FLASK_ENV: development</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> volume 还有其他挂载方式 具名挂载</span></span><br><span class="line">services:</span><br><span class="line">  db:</span><br><span class="line">    image: mysql:5.7</span><br><span class="line">    volumes: </span><br><span class="line">      - mysql_db_data:/var/lib/mysql</span><br><span class="line">      </span><br><span class="line"><span class="meta">#</span><span class="bash"> 需要单独声明具名挂载的卷 其实是为了多个容器公用数据</span>      </span><br><span class="line">volumes:</span><br><span class="line">  mysql_db_data: &#123;&#125;</span><br><span class="line">  wordpress_data: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="springboot实例"><a href="#springboot实例" class="headerlink" title="springboot实例"></a>springboot实例</h2><p>以公司的spring项目为例，首先确保<code>java -jar</code>没有问题，但是我maven打包后执行<code>java -jar</code>自动退出，打开日志详细发现没有指定yml配置文件的问题，通过<code>java -jar -Dspring.config.location=./application.yml,./application-local.yml phm-admin.jar</code> 且拷贝两个配置文件到本地才成功。</p>
+<p>编写这个springboot的镜像吧，基于java8</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM java:8</span><br><span class="line">COPY target/phm-admin.jar /app.jar</span><br><span class="line">COPY src/main/resources/*.yml ./</span><br><span class="line">CMD [&quot;--server.port=8080&quot;]</span><br><span class="line">EXPOSE 8080</span><br><span class="line">ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;-Dspring.config.location=./application.yml,./application-local.yml&quot;,&quot;app.jar&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>成功后编写对应的docker-compose文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.9&quot;</span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;8080:8080&quot;</span><br><span class="line">    depends_on:</span><br><span class="line">      - redis</span><br><span class="line"></span><br><span class="line">  redis:</span><br><span class="line">    image: &quot;redis:alpine&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意要修改配置文件，把依赖的redis的地址改为<code>redis</code>，这里用的是redis的主机名</p>
+</blockquote>
+<p><img src="/images/pasted-158.png" alt="upload successful"></p>
+<h2 id="DockerSwarm"><a href="#DockerSwarm" class="headerlink" title="DockerSwarm"></a>DockerSwarm</h2><blockquote>
+<p>Docker swarm控制服务器物理集群（加入离开锁定集群）</p>
+</blockquote>
+<blockquote>
+<p>Docker node控制集群节点（修改删除节点）</p>
+</blockquote>
+<blockquote>
+<p>Docker service控制集群的所有服务（启动删除更新扩容服务）</p>
+</blockquote>
+<blockquote>
+<p>Docker task(不是我们关心的，对于具体容器的创建，维护等)</p>
+</blockquote>
+<p><img src="/images/pasted-168.png" alt="upload successful"></p>
+<blockquote>
+<p>操作都在manager节点上，执行都在工作节点上，搭建集群的时候机器数量一定得是奇数，因为采用了投票机制，半数以上才可以</p>
+</blockquote>
+<blockquote>
+<p>swam的命令</p>
+</blockquote>
+<p><img src="/images/pasted-169.png" alt="upload successful"></p>
+<h3 id="1-初始化swarm："><a href="#1-初始化swarm：" class="headerlink" title="1. 初始化swarm："></a>1. 初始化swarm：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker swarm init --help #可以看到所有选项</span><br><span class="line">docker swarm init --advertis-addr #初始化一个广播地址</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这个地址是节点间互相链接的地址分为：公网，私网，基本用私网免费地址即本机的内网IP地址</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-170.png" alt="upload successful"></p>
+<h3 id="2-获取令牌"><a href="#2-获取令牌" class="headerlink" title="2. 获取令牌"></a>2. 获取令牌</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker swarm join-token manager # 管理令牌</span><br><span class="line">docker swarm join-token worker # 工作令牌</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-节点加入"><a href="#3-节点加入" class="headerlink" title="3. 节点加入"></a>3. 节点加入</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在第二台机器加入一个worker节点</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意 被加入的节点需要防火墙允许 2377 端口</span></span><br><span class="line">docker swarm join     --token SWMTKN-1-4vm7k4jkahd939fpsmd5spts5ejlkyke968i1il8yld3oyj77r-89wdwoemvmr1joyvnu8bo7wrj     192.168.56.101:2377</span><br></pre></td></tr></table></figure>
+
+<p>加入管理节点也是同理，管理者需要打开防火墙 2377端口。</p>
+<p><img src="/images/pasted-171.png" alt="upload successful"></p>
+<p><img src="/images/pasted-173.png" alt="upload successful"></p>
+<blockquote>
+<p>主节点管理工作节点：docker node –help</p>
+</blockquote>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><blockquote>
+<p>关于服务的命令：docker service –help</p>
+</blockquote>
+<blockquote>
+<p>灰度发布</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建服务的一些参数</span></span><br><span class="line">docker service create --help #查看所有参数</span><br><span class="line">					-e:# 配置环境变量</span><br><span class="line">                    -l:# 服务标签</span><br><span class="line">                    -p:# 暴露端口</span><br><span class="line">                    -w:# 工作目录</span><br><span class="line">docker service create -p 8888:80 --name mynginx nginx </span><br><span class="line"><span class="meta">#</span><span class="bash">会发现和docker run命令很相似，实际上docker run的命令不具有扩缩容，只是个单机架构，docker service会在集群中选择一台服务器启动服务</span></span><br><span class="line">docker service ls # 查看服务，这是集群的所有服务</span><br><span class="line">docker service ps &lt;具体服务&gt; #查看具体服务的信息</span><br><span class="line">docker service inspect &lt;具体服务&gt; #服务的配置信息，部署在哪台主机上都可以看到</span><br><span class="line">docker service update --help # 动态修改服务的信息，包括扩容缩容等</span><br><span class="line">					--replicas # 服务的副本数量</span><br><span class="line">docker service update --replicas 3 mynginx # 给这个服务扩展了两个</span><br><span class="line"></span><br><span class="line">docker service scale mynginx=4 # 同replicas的功能</span><br><span class="line"></span><br><span class="line">docker service rm &lt;具体服务名&gt; # 移除服务</span><br><span class="line"></span><br><span class="line">docker service rollback &lt;服务&gt; # 如果上一次扩容了，回滚到上次</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 全局模式</span></span><br><span class="line">docker service create --mode global ....# 启动全局服务，不加默认是replicated副本模式</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">全局服务不可拓展只有一个，一般可以用来作为中心日志收集服务</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-Stack"><a href="#Docker-Stack" class="headerlink" title="Docker Stack"></a>Docker Stack</h3><p>docker compose 是单机的，想要集群部署，需要docker stack</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d xxx.yml # 单机</span><br><span class="line"></span><br><span class="line">docker stack deploy xxx.yml # 部署一个可以扩容的服务</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-Secret"><a href="#Docker-Secret" class="headerlink" title="Docker Secret"></a>Docker Secret</h3><p>安全配置，配置证书密码等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker secret --help</span><br></pre></td></tr></table></figure>
+
+<h3 id="Docker-Config"><a href="#Docker-Config" class="headerlink" title="Docker Config"></a>Docker Config</h3><p>配置</p>
+<h3 id="做云的思想"><a href="#做云的思想" class="headerlink" title="做云的思想"></a>做云的思想</h3><p>有了docker swarm其实已经可以做云了，举例，用公司机房，加入机房平时不忙，服务器都闲置的时候其实可以搭建好docker swam的集群环境，做个卖vps的页面，用户每次买一个服务器，实际就在docker中新建一个linux虚拟机，副本新增一个，配置给路由器好网络出入站规则，就是一个简单的云了。</p>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>部署好后，服务器的任意一个地址都可以访问集群内的服务，这时候一台服务器可以开多个同端口的服务，因为服务之间访问是通过容器名而不是ip+端口,集群内部通过DNS访问service</p>
+<p>Docker Swarm 的负载均衡分为两种：</p>
+<p>Swarm集群内的service之间的相互访问需要做负载均衡，称为内部负载均衡（Internal LB）</p>
+<p>从Swarm集群外部访问服务的公开端口，也需要做负载均衡，称外部部负载均衡(Exteral LB or Ingress LB)</p>
+<h2 id="了解-集群节点奇数的原因"><a href="#了解-集群节点奇数的原因" class="headerlink" title="了解 集群节点奇数的原因"></a>了解 集群节点奇数的原因</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42393859/article/details/82792211">转载其他人blog</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">无论是公司的生产环境，还是自己搭建的测试环境，Zookeeper集群的节点个数都是奇数个。至于为什么要是奇数个，以前只是模糊的知道是为了满足选举需要，并不知道详细的原因。最近重点学习zookeeper，了解到其中的原理，现将其整理记录下来。</span><br><span class="line"></span><br><span class="line">首先需要明确zookeeper选举的规则：leader选举，要求 可用节点数量 &gt; 总节点数量/2  。注意 是 &gt; , 不是 ≥。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">注：为什么规则要求 可用节点数量 &gt; 集群总结点数量/2 ？  如果不这样限制，在集群出现脑裂的时候，可能会出现多个子集群同时服务的情况（即子集群各组选举出自己的leader）， 这样对整个zookeeper集群来说是紊乱的。</span><br><span class="line"></span><br><span class="line">换句话说，如果遵守上述规则进行选举，即使出现脑裂，集群最多也只能回出现一个子集群可以提供服务的情况（能满足节点数量&gt; 总结点数量/2 的子集群最多只会有一个）。所以要限制 可用节点数量 &gt; 集群总结点数量/2 。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">采用奇数个的节点主要是出于两方面的考虑：</span><br><span class="line"></span><br><span class="line">1、防止由脑裂造成的集群不可用。</span><br><span class="line"></span><br><span class="line">首先，什么是脑裂？集群的脑裂通常是发生在节点之间通信不可达的情况下，集群会分裂成不同的小集群，小集群各自选出自己的master节点，导致原有的集群出现多个master节点的情况，这就是脑裂。</span><br><span class="line"></span><br><span class="line">下面举例说一下为什么采用奇数台节点，就可以防止由于脑裂造成的服务不可用：</span><br><span class="line"></span><br><span class="line">(1) 假如zookeeper集群有 5 个节点，发生了脑裂，脑裂成了A、B两个小集群： </span><br><span class="line"></span><br><span class="line">     (a) A ： 1个节点 ，B ：4个节点 ， 或 A、B互换</span><br><span class="line"></span><br><span class="line">     (b) A ： 2个节点， B ：3个节点  ， 或 A、B互换</span><br><span class="line"></span><br><span class="line">    可以看出，上面这两种情况下，A、B中总会有一个小集群满足 可用节点数量 &gt; 总节点数量/2 。所以zookeeper集群仍然能够选举出leader ， 仍然能对外提供服务，只不过是有一部分节点失效了而已。</span><br><span class="line"></span><br><span class="line">(2) 假如zookeeper集群有4个节点，同样发生脑裂，脑裂成了A、B两个小集群：</span><br><span class="line"></span><br><span class="line">    (a) A：1个节点 ，  B：3个节点，   或 A、B互换 </span><br><span class="line"></span><br><span class="line">    (b) A：2个节点 ， B：2个节点</span><br><span class="line"></span><br><span class="line">    可以看出，情况(a) 是满足选举条件的，与（1）中的例子相同。 但是情况(b) 就不同了，因为A和B都是2个节点，都不满足 可用节点数量 &gt; 总节点数量/2 的选举条件， 所以此时zookeeper就彻底不能提供服务了。</span><br><span class="line"></span><br><span class="line">综合上面两个例子可以看出： 在节点数量是奇数个的情况下， zookeeper集群总能对外提供服务（即使损失了一部分节点）；如果节点数量是偶数个，会存在zookeeper集群不能用的可能性（脑裂成两个均等的子集群的时候）。</span><br><span class="line"></span><br><span class="line">在生产环境中，如果zookeeper集群不能提供服务，那将是致命的 ， 所以zookeeper集群的节点数一般采用奇数个。</span><br><span class="line"></span><br><span class="line">2、在容错能力相同的情况下，奇数台更节省资源。</span><br><span class="line"></span><br><span class="line">leader选举，要求 可用节点数量 &gt; 总节点数量/2  。注意 是 &gt; , 不是 ≥。</span><br><span class="line"></span><br><span class="line">举两个例子：</span><br><span class="line"></span><br><span class="line">(1) 假如zookeeper集群1 ，有3个节点，3/2=1.5 ,  即zookeeper想要正常对外提供服务（即leader选举成功），至少需要2个节点是正常的。换句话说，3个节点的zookeeper集群，允许有一个节点宕机。</span><br><span class="line"></span><br><span class="line">(2) 假如zookeeper集群2，有4个节点，4/2=2 , 即zookeeper想要正常对外提供服务（即leader选举成功），至少需要3个节点是正常的。换句话说，4个节点的zookeeper集群，也允许有一个节点宕机。</span><br><span class="line"></span><br><span class="line">那么问题就来了， 集群1与集群2都有 允许1个节点宕机 的容错能力，但是集群2比集群1多了1个节点。在相同容错能力的情况下，本着节约资源的原则，zookeeper集群的节点数维持奇数个更好一些。</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/28/ArchLinux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" rel="prev" title="ArchLinux 安装 + 大部分的软件配置">
+      <i class="fa fa-chevron-left"></i> ArchLinux 安装 + 大部分的软件配置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/08/VSC-Remote-Container/" rel="next" title="VSC Remote Container">
+      VSC Remote Container <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-compose"><span class="nav-number">1.</span> <span class="nav-text">Docker compose</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BA%E7%8E%B0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.1.</span> <span class="nav-text">出现的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yml-%E8%A7%84%E5%88%99"><span class="nav-number">1.2.</span> <span class="nav-text">yml 规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#springboot%E5%AE%9E%E4%BE%8B"><span class="nav-number">1.3.</span> <span class="nav-text">springboot实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DockerSwarm"><span class="nav-number">1.4.</span> <span class="nav-text">DockerSwarm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96swarm%EF%BC%9A"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 初始化swarm：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%8E%B7%E5%8F%96%E4%BB%A4%E7%89%8C"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 获取令牌</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 节点加入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.4.4.</span> <span class="nav-text">启动服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Stack"><span class="nav-number">1.4.5.</span> <span class="nav-text">Docker Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Secret"><span class="nav-number">1.4.6.</span> <span class="nav-text">Docker Secret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-Config"><span class="nav-number">1.4.7.</span> <span class="nav-text">Docker Config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9A%E4%BA%91%E7%9A%84%E6%80%9D%E6%83%B3"><span class="nav-number">1.4.8.</span> <span class="nav-text">做云的思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.4.9.</span> <span class="nav-text">负载均衡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3-%E9%9B%86%E7%BE%A4%E8%8A%82%E7%82%B9%E5%A5%87%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">1.5.</span> <span class="nav-text">了解 集群节点奇数的原因</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tr"
+      src="/images/tr.jpg">
+  <p class="site-author-name" itemprop="name">tr</p>
+  <div class="site-description" itemprop="description">talk is cheap , show me the code.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MOIPA" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MOIPA" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tassassintr@gmail.com" title="E-Mail → mailto:tassassintr@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

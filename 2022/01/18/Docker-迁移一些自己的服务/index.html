@@ -29,7 +29,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://example.com/images/pasted-129.png">
 <meta property="article:published_time" content="2022-01-18T11:07:00.000Z">
-<meta property="article:modified_time" content="2022-01-19T08:06:42.855Z">
+<meta property="article:modified_time" content="2025-03-01T12:26:37.327Z">
 <meta property="article:author" content="tr">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 08:06:42" itemprop="dateModified" datetime="2022-01-19T08:06:42+00:00">2022-01-19</time>
+                <time title="Modified: 2025-03-01 12:26:37" itemprop="dateModified" datetime="2025-03-01T12:26:37+00:00">2025-03-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +267,7 @@
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动博客容器</span></span><br><span class="line">docker run -d --name trhexo -p 5555:4000 moipa/hexo:1.4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 迁移所有博客</span></span><br><span class="line">docker exec -it trhexo /bin/bash</span><br><span class="line"></span><br><span class="line">hexo migrate rss http://39.108.159.175:4000/atom.xml</span><br></pre></td></tr></table></figure>
 
-<h1 id="配置个人的专属hexo镜像"><a href="#配置个人的专属hexo镜像" class="headerlink" title="配置个人的专属hexo镜像"></a>配置个人的专属hexo镜像</h1><ol>
+<h3 id="配置个人的专属hexo镜像"><a href="#配置个人的专属hexo镜像" class="headerlink" title="配置个人的专属hexo镜像"></a>配置个人的专属hexo镜像</h3><ol>
 <li><p>将linux的公钥私钥复制到镜像中</p>
 </li>
 <li><p>将source/_posts文件夹改为git目录，文档从github上同步，在deploy脚本内写好git push的命令</p>
@@ -277,6 +277,14 @@
 <li><p>生成了hexo admin的key，再次使用的时候可能需要注释掉，重新去admin界面生成</p>
 </li>
 <li><p>自动同步（图片和文档）git脚本写好了，可以在配置好admin界面后将这个脚本加上去，之后只需要点击deploy即可完成部署<br><img src="/images/pasted-129.png" alt="upload successful"></p>
+</li>
+</ol>
+<h3 id="镜像说明"><a href="#镜像说明" class="headerlink" title="镜像说明"></a>镜像说明</h3><ol>
+<li><p>镜像文件版本2.2，docker pull下载后即可使用</p>
+</li>
+<li><p>admin界面写日志，deploy按钮即可同步git</p>
+</li>
+<li><p>需要注意的是最好记住自己哪些日志可能冲突，需要提前同步一下，否则出现冲突要么自己merge conflict，要么重建容器</p>
 </li>
 </ol>
 
@@ -316,12 +324,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/10/29/Dijkstra%E8%BF%AA%E6%9D%B0%E6%96%AF%E7%89%B9%E6%8B%89%E7%AE%97%E6%B3%95/" rel="prev" title="Dijkstra迪杰斯特拉算法">
-      <i class="fa fa-chevron-left"></i> Dijkstra迪杰斯特拉算法
+    <a href="/2021/11/17/Arduino%E5%BC%80%E5%8F%91-%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE/" rel="prev" title="Arduino开发-入门配置">
+      <i class="fa fa-chevron-left"></i> Arduino开发-入门配置
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/01/19/hello-world/" rel="next" title="hexo配置">
-      hexo配置 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/01/27/%E5%86%8D%E7%9C%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F1/" rel="next" title="再看操作系统1">
+      再看操作系统1 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -381,7 +389,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">迁移自己的服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2-hexo"><span class="nav-number">1.1.</span> <span class="nav-text">博客 hexo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AA%E4%BA%BA%E7%9A%84%E4%B8%93%E5%B1%9Ehexo%E9%95%9C%E5%83%8F"><span class="nav-number">2.</span> <span class="nav-text">配置个人的专属hexo镜像</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E8%87%AA%E5%B7%B1%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.</span> <span class="nav-text">迁移自己的服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2-hexo"><span class="nav-number">1.1.</span> <span class="nav-text">博客 hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%AA%E4%BA%BA%E7%9A%84%E4%B8%93%E5%B1%9Ehexo%E9%95%9C%E5%83%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">配置个人的专属hexo镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E8%AF%B4%E6%98%8E"><span class="nav-number">1.1.2.</span> <span class="nav-text">镜像说明</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -397,20 +405,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -445,7 +453,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

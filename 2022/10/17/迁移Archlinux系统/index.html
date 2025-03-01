@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="迁移Archlinux系统到新电脑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迁移Archlinux系统">
+<meta property="og:url" content="http://example.com/2022/10/17/%E8%BF%81%E7%A7%BBArchlinux%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="迁移Archlinux系统到新电脑">
+<meta property="og:locale">
+<meta property="article:published_time" content="2022-10-17T07:54:00.000Z">
+<meta property="article:modified_time" content="2025-03-01T12:26:37.330Z">
+<meta property="article:author" content="tr">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/10/17/%E8%BF%81%E7%A7%BBArchlinux%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>迁移Archlinux系统 | TrBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="TrBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TrBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/MOIPA" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/17/%E8%BF%81%E7%A7%BBArchlinux%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          迁移Archlinux系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-10-17 07:54:00" itemprop="dateCreated datePublished" datetime="2022-10-17T07:54:00+00:00">2022-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2025-03-01 12:26:37" itemprop="dateModified" datetime="2025-03-01T12:26:37+00:00">2025-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="迁移Archlinux系统到新电脑"><a href="#迁移Archlinux系统到新电脑" class="headerlink" title="迁移Archlinux系统到新电脑"></a>迁移Archlinux系统到新电脑</h1><span id="more"></span>
+
+<h2 id="迁移前的准备"><a href="#迁移前的准备" class="headerlink" title="迁移前的准备"></a>迁移前的准备</h2><blockquote>
+<p>下载<code>usbWriter</code>和<code>Archlinux</code>的系统镜像</p>
+<p>烧录镜像到usb内</p>
+<p>准备容量足够的硬盘或者U盘存储系统所有文件</p>
+<p>在被备份的系统上安装多线程压缩工具<code>sudo pacman -S zstd</code></p>
+</blockquote>
+<h2 id="复制系统文件"><a href="#复制系统文件" class="headerlink" title="复制系统文件"></a>复制系统文件</h2><blockquote>
+<p>linux将所有东西都视为文件，设备也是文件，但是不同电脑设备不同，这个需要后期修改</p>
+<p>插上容量足够的U盘到现有的linux系统，将<code>/</code>下的所有文件压缩到一个压缩包到U盘下，执行<code>sudo tar --use-compress-program=zstd -cvpf /mnt/usb&lt;你的U盘挂载地址&gt;/arch-backup.tgz --exclude=/proc --exclude=/lost+found --exclude=/mnt --exclude=/sys --exclude=/run/media  --exclude=/media  /</code></p>
+<p>这一步比较耗费时间，我的100G空间执行了1个小时左右</p>
+</blockquote>
+<h2 id="在新电脑划分分区"><a href="#在新电脑划分分区" class="headerlink" title="在新电脑划分分区"></a>在新电脑划分分区</h2><blockquote>
+<p>注意：如果是双系统注意不要覆盖windows的分区</p>
+<p>关闭<code>secureboot</code>,插入<code>archlinux</code>的系统盘，进入<code>liveCD</code>系统</p>
+<p>这时候<code>lsblk</code>或者<code>fdisk -l</code>查看分区信息，对硬盘执行分区操作：<code>fdisk /dev/nvmen1</code>，具体如何分区可以参考安装篇</p>
+<p>划分好分区后，开启缓存，挂载主分区到<code>/mnt</code>下，执行<code>mkdir /mnt/boot</code>再把boot分区挂载到<code>/mnt/boot</code>下</p>
+</blockquote>
+<h2 id="解压系统文件到新电脑"><a href="#解压系统文件到新电脑" class="headerlink" title="解压系统文件到新电脑"></a>解压系统文件到新电脑</h2><blockquote>
+<p>这时电脑处在<code>liveCD</code>下，如果没有可用的U盘存储新系统，可以将两台电脑放在一个局域网下，通过<code>iwctl命令连接无线网络</code>，之后可以通过<code>sftp</code>命令，将旧电脑的<code>arch-backup.tgz</code>文件传输到新电脑</p>
+<p>若有U盘则直接将<code>arch-backup.tgz</code>文件复制到<code>/</code>目录下，然后执行解压缩命令解压缩到<code>/mnt/</code>目录下：<code>sudo tar -z -c -T0 -18 -v -p -f - arch-backup.zstd -C /mnt</code></p>
+<p>执行完毕后创建刚刚排除的文件夹：<code>sudo mkdir -pv /mnt/proc sudo mkdir -pv /mnt/sys sudo mkdir -pv /mnt/run sudo mkdir -pv /mnt/dev</code></p>
+</blockquote>
+<h2 id="配置新电脑的硬件信息"><a href="#配置新电脑的硬件信息" class="headerlink" title="配置新电脑的硬件信息"></a>配置新电脑的硬件信息</h2><blockquote>
+<p>至此新的系统已经复制到了新电脑，但是还没有配置新系统使用的硬件信息（缓存所在分区，系统主分区信息等），执行<code>sudo genfstab -U /mnt/ &gt; /mnt/etc/fstab</code> 可以看到交换区信息等都已写入</p>
+<p>配置系统新系统的引导程序使用的硬件地址，使用的引导软件现在还不知道启动的时候去哪个分区里面加载系统，所以要配置主分区的UUID到引导软件的配置里。</p>
+<p>配置前首先切换到新系统：<code>arch-chroot /mnt</code></p>
+<p>如果和我一样使用<code>reFind</code>，那么只需修改<code>/boot/EFI/refind/refind.conf</code>的配置文件的信息，使用<code>ls -l /dev/disk/by-uuid</code>查看所有分区的UUID信息。</p>
+<p>如果是<code>grub</code>引导，执行`grub-install –target=x86_64-efi –efi-directory=/boot/efi –bootloader=ArchLinux –recheck</p>
+</blockquote>
+<p>update-grub`</p>
+<blockquote>
+</blockquote>
+<h2 id="更新Initramfs配置双系统等"><a href="#更新Initramfs配置双系统等" class="headerlink" title="更新Initramfs配置双系统等"></a>更新Initramfs配置双系统等</h2><blockquote>
+<p>执行<code>mkinitcpio -P</code></p>
+<p>挂载windows的ESP分区（很小 只有100<br>，里面有个Microsoft目录），把目录的Microsoft目录拷贝到/boot/EFI/下，将<code>Microsoft</code>文件夹拷贝到<code>/boot/EFI</code>下</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/21/BOOKS/" rel="prev" title="BOOKS">
+      <i class="fa fa-chevron-left"></i> BOOKS
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/01/31/orika%E4%BD%BF%E7%94%A8/" rel="next" title="orika使用">
+      orika使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%81%E7%A7%BBArchlinux%E7%B3%BB%E7%BB%9F%E5%88%B0%E6%96%B0%E7%94%B5%E8%84%91"><span class="nav-number">1.</span> <span class="nav-text">迁移Archlinux系统到新电脑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">迁移前的准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">复制系统文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%96%B0%E7%94%B5%E8%84%91%E5%88%92%E5%88%86%E5%88%86%E5%8C%BA"><span class="nav-number">1.3.</span> <span class="nav-text">在新电脑划分分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E7%B3%BB%E7%BB%9F%E6%96%87%E4%BB%B6%E5%88%B0%E6%96%B0%E7%94%B5%E8%84%91"><span class="nav-number">1.4.</span> <span class="nav-text">解压系统文件到新电脑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%B0%E7%94%B5%E8%84%91%E7%9A%84%E7%A1%AC%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="nav-number">1.5.</span> <span class="nav-text">配置新电脑的硬件信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0Initramfs%E9%85%8D%E7%BD%AE%E5%8F%8C%E7%B3%BB%E7%BB%9F%E7%AD%89"><span class="nav-number">1.6.</span> <span class="nav-text">更新Initramfs配置双系统等</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tr"
+      src="/images/tr.jpg">
+  <p class="site-author-name" itemprop="name">tr</p>
+  <div class="site-description" itemprop="description">talk is cheap , show me the code.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MOIPA" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MOIPA" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tassassintr@gmail.com" title="E-Mail → mailto:tassassintr@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

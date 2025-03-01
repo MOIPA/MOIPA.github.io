@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/21/serverConfigure/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/30/AWK/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tr.jpg">
@@ -207,7 +207,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/21/serverConfigure/" class="post-title-link" itemprop="url">serverConfigure</a>
+            <a href="/2019/05/30/AWK/" class="post-title-link" itemprop="url">AWK</a>
         </h2>
 
         <div class="post-meta">
@@ -217,7 +217,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-21 23:23:57" itemprop="dateCreated datePublished" datetime="2019-04-21T23:23:57+00:00">2019-04-21</time>
+              <time title="Created: 2019-05-30 10:57:00" itemprop="dateCreated datePublished" datetime="2019-05-30T10:57:00+00:00">2019-05-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -226,6 +226,15 @@
                 <span class="post-meta-item-text">Edited on</span>
                 <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
 
           
 
@@ -238,10 +247,354 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="配置阿里云服务器作为后台管理端"><a href="#配置阿里云服务器作为后台管理端" class="headerlink" title="配置阿里云服务器作为后台管理端"></a>配置阿里云服务器作为后台管理端</h3><ol>
-<li>后端管理部署在阿里云</li>
-<li>后端管理部署脚本/deploy.sh</li>
-<li>后端同步只需登陆阿里云点击deploy</li>
+          <h3 id="AWK"><a href="#AWK" class="headerlink" title="AWK"></a>AWK</h3><p>非常好用的命令行工具，可以替代grep，支持正则</p>
+<h4 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h4><p>通过 pattern+action方式运行</p>
+<p>输出第一个和第二个域，只存在action。每个域默认是通过空格分离的。</p>
+<pre><code>ll |awk &#39;&#123;print $3&#125;&#39;
+</code></pre>
+<p>添加了pattern -F ‘:’ 表示使用冒号分割，输出第一个和第二个域。</p>
+<pre><code>cat /etc/passwd|awk -F &#39;:&#39;  &#39;&#123;print $1 &quot;\t&quot; $2&#125;&#39;
+</code></pre>
+<p>直接查文件：</p>
+<pre><code>awk -F &#39;:&#39;  &#39;&#123;print $1 &quot; &quot; $2&#125;&#39; /etc/passwd
+</code></pre>
+<p>所以可以直接作为搜索使用 -F: ‘’表示搜索pattern,注意格式:’\内容&#39;</p>
+<pre><code>awk -F: ’/root/&#39;
+</code></pre>
+<p>支持正则</p>
+<pre><code>awk -F: ’/^root/&#39;
+</code></pre>
+<p> 支持变量：</p>
+<pre><code> 统计某个文件夹下的文件占用的字节数
+ls -l |awk &#39;BEGIN &#123;size=0;&#125; &#123;size=size+$5;&#125; END&#123;print &quot;[end]size is &quot;, size&#125;&#39;
+</code></pre>
+<p>高级用法以后用到再说…………</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/24/%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97-%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/24/%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97-%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">测试日志--压力测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-24 14:26:00" itemprop="dateCreated datePublished" datetime="2019-05-24T14:26:00+00:00">2019-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index"><span itemprop="name">Test</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="Jmeter压力测试"><a href="#Jmeter压力测试" class="headerlink" title="Jmeter压力测试"></a>Jmeter压力测试</h4><p>这几天有压力测试任务交给我，终于从scriptBoy转职成了testBoy。<br>花了一天时间看了下，选用了JMeter测试工具用作压力测试</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/05/24/%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97-%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/16/Python%E9%80%9A%E8%BF%87rel%E5%85%B3%E7%B3%BB%E8%A7%A3%E6%9E%90word%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/16/Python%E9%80%9A%E8%BF%87rel%E5%85%B3%E7%B3%BB%E8%A7%A3%E6%9E%90word%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">Python通过rel关系解析word图片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-16 15:29:00" itemprop="dateCreated datePublished" datetime="2019-05-16T15:29:00+00:00">2019-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="python解析图片"><a href="#python解析图片" class="headerlink" title="python解析图片"></a>python解析图片</h3><p>选用工具：python-docx，elementtree</p>
+<p>最终目标：读取word文档，把文档里的图片和wmf转为<code>&lt;img src=&quot;&quot;/&gt;</code>或者<code>&lt;word-pic&gt;url&lt;/word-pic&gt;</code></p>
+<h6 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h6><p>首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。</p>
+<p>第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是word中每行中出现的矢量图，比如n不是n，而是wmf图片n。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/05/16/Python%E9%80%9A%E8%BF%87rel%E5%85%B3%E7%B3%BB%E8%A7%A3%E6%9E%90word%E5%9B%BE%E7%89%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/12/log1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/12/log1/" class="post-title-link" itemprop="url">Python+oss+json+request</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-12 22:29:00" itemprop="dateCreated datePublished" datetime="2019-05-12T22:29:00+00:00">2019-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="python-调用oss实例"><a href="#python-调用oss实例" class="headerlink" title="python 调用oss实例"></a>python 调用oss实例</h4><p>code:</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/05/12/log1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/02/U%E7%9B%98%E9%97%AE%E9%A2%98%EF%BC%9A%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E5%88%86%E5%8C%BA%EF%BC%8C%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E5%88%86%E5%8C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/02/U%E7%9B%98%E9%97%AE%E9%A2%98%EF%BC%9A%E6%97%A0%E6%B3%95%E6%98%BE%E7%A4%BA%E5%88%86%E5%8C%BA%EF%BC%8C%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E5%88%86%E5%8C%BA/" class="post-title-link" itemprop="url">U盘问题：无法显示分区，无法使用分区</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-02 11:37:00" itemprop="dateCreated datePublished" datetime="2019-05-02T11:37:00+00:00">2019-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Log/" itemprop="url" rel="index"><span itemprop="name">Log</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="U盘问题：清理分区"><a href="#U盘问题：清理分区" class="headerlink" title="U盘问题：清理分区"></a>U盘问题：清理分区</h3><h6 id="在公司使用U盘-USBWriter安装centOS后导致U盘分区无法使用，显示只有安装大小"><a href="#在公司使用U盘-USBWriter安装centOS后导致U盘分区无法使用，显示只有安装大小" class="headerlink" title="在公司使用U盘+USBWriter安装centOS后导致U盘分区无法使用，显示只有安装大小"></a>在公司使用U盘+USBWriter安装centOS后导致U盘分区无法使用，显示只有安装大小</h6><h4 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h4><ol>
+<li><p>清理分区：</p>
+<pre><code>.win+r，打开运行窗口，输入cmd，出现dos运行环境，输入diskpart，回车，弹出另一个命令窗口，然后将在上面（1）中的索引，输入select disk 1 进去，回车，输入clean，之后即可将空间内容清除（disk 编号可以再系统磁盘管理器中找到）
+</code></pre>
+</li>
+<li><p>创建分区：<br> 打开磁盘管理器，建立即可</p>
+</li>
 </ol>
 
       
@@ -262,7 +615,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/15/python%E8%A7%A3%E6%9E%90word%E6%96%87%E6%A1%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/02/ErrorLog-npm-err/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tr.jpg">
@@ -276,7 +629,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/15/python%E8%A7%A3%E6%9E%90word%E6%96%87%E6%A1%A3/" class="post-title-link" itemprop="url">python解析word文档</a>
+            <a href="/2019/05/02/ErrorLog-npm-err/" class="post-title-link" itemprop="url">ErrorLog npm err</a>
         </h2>
 
         <div class="post-meta">
@@ -286,7 +639,155 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-15 17:19:00" itemprop="dateCreated datePublished" datetime="2019-04-15T17:19:00+00:00">2019-04-15</time>
+              <time title="Created: 2019-05-02 11:31:00" itemprop="dateCreated datePublished" datetime="2019-05-02T11:31:00+00:00">2019-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Log/" itemprop="url" rel="index"><span itemprop="name">Log</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="errlog-npm-err"><a href="#errlog-npm-err" class="headerlink" title="errlog npm err"></a>errlog npm err</h3><h5 id="使用npm安装vue-cli时遇到的错误-在此记录"><a href="#使用npm安装vue-cli时遇到的错误-在此记录" class="headerlink" title="使用npm安装vue-cli时遇到的错误 在此记录"></a>使用npm安装vue-cli时遇到的错误 在此记录</h5><p>npm install -g npm@latest</p>
+<p>似乎时更新的问题， 下次遇到再看吧</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/28/education%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/28/education%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">education自动化测试环境部署</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-28 09:31:00" itemprop="dateCreated datePublished" datetime="2019-04-28T09:31:00+00:00">2019-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index"><span itemprop="name">Test</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="配置selenium和testng"><a href="#配置selenium和testng" class="headerlink" title="配置selenium和testng"></a>配置selenium和testng</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/25/Python%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%9A-ascii-codec-can-t-encode-character/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/25/Python%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%9A-ascii-codec-can-t-encode-character/" class="post-title-link" itemprop="url">Python报错问题解决：'ascii' codec can't encode character</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-25 10:48:00" itemprop="dateCreated datePublished" datetime="2019-04-25T10:48:00+00:00">2019-04-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -316,10 +817,84 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="今天公司新需求，解析word习题集"><a href="#今天公司新需求，解析word习题集" class="headerlink" title="今天公司新需求，解析word习题集"></a>今天公司新需求，解析word习题集</h3><p>使用python-docx这个库解析</p>
+          <h3 id="python报错问题解决：’ascii’-codec-can’t-encode-character"><a href="#python报错问题解决：’ascii’-codec-can’t-encode-character" class="headerlink" title="python报错问题解决：’ascii’ codec can’t encode character"></a>python报错问题解决：’ascii’ codec can’t encode character</h3><p>vim /usr/lib/python2.7/site-packages/sitecustomize.py </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加如下内容，设置编码为utf8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># encoding=utf8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/25/manjaro-%E6%89%A9%E5%B1%95%E5%88%86%E5%8C%BA-%E6%B7%BB%E5%8A%A0swap%E5%88%86%E5%8C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/25/manjaro-%E6%89%A9%E5%B1%95%E5%88%86%E5%8C%BA-%E6%B7%BB%E5%8A%A0swap%E5%88%86%E5%8C%BA/" class="post-title-link" itemprop="url">manjaro 扩展分区+添加swap分区</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-25 09:22:00" itemprop="dateCreated datePublished" datetime="2019-04-25T09:22:00+00:00">2019-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="archlinux–》manjaro-分区问题"><a href="#archlinux–》manjaro-分区问题" class="headerlink" title="archlinux–》manjaro 分区问题"></a>archlinux–》manjaro 分区问题</h3><p>由于linux系统的空间不足，去windows系统下面压缩了8个g，感觉windows下面的软件估计都不怎么用得到了，linux太方便了，如果用一个月，windows用不到就删了买个ipad写office</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/15/python%E8%A7%A3%E6%9E%90word%E6%96%87%E6%A1%A3/#more" rel="contents">
+              <a class="btn" href="/2019/04/25/manjaro-%E6%89%A9%E5%B1%95%E5%88%86%E5%8C%BA-%E6%B7%BB%E5%8A%A0swap%E5%88%86%E5%8C%BA/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -343,7 +918,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/11/python%E8%A7%A3%E6%9E%90%E4%B9%A0%E9%A2%98%E9%9B%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/24/Python%E6%8F%90%E5%8F%96word%E5%9B%BE%E7%89%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/tr.jpg">
@@ -357,7 +932,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/11/python%E8%A7%A3%E6%9E%90%E4%B9%A0%E9%A2%98%E9%9B%86/" class="post-title-link" itemprop="url">python解析习题集</a>
+            <a href="/2019/04/24/Python%E6%8F%90%E5%8F%96word%E5%9B%BE%E7%89%87/" class="post-title-link" itemprop="url">Python提取word图片</a>
         </h2>
 
         <div class="post-meta">
@@ -367,7 +942,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-11 09:52:00" itemprop="dateCreated datePublished" datetime="2019-04-11T09:52:00+00:00">2019-04-11</time>
+              <time title="Created: 2019-04-24 17:29:00" itemprop="dateCreated datePublished" datetime="2019-04-24T17:29:00+00:00">2019-04-24</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -397,577 +972,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="使用python解析txt题目文本"><a href="#使用python解析txt题目文本" class="headerlink" title="使用python解析txt题目文本"></a>使用python解析txt题目文本</h3><p> 公司需求，解析一本习题集，将所有的单选题和答案解析放在一个对象，转成json输出</p>
+          <h3 id="Python提取word图片"><a href="#Python提取word图片" class="headerlink" title="Python提取word图片"></a>Python提取word图片</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/04/11/python%E8%A7%A3%E6%9E%90%E4%B9%A0%E9%A2%98%E9%9B%86/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/09/%E7%86%94%E6%96%AD%E5%99%A8Hystrix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/09/%E7%86%94%E6%96%AD%E5%99%A8Hystrix/" class="post-title-link" itemprop="url">熔断器Hystrix</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-09 09:27:00" itemprop="dateCreated datePublished" datetime="2019-04-09T09:27:00+00:00">2019-04-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="熔断器"><a href="#熔断器" class="headerlink" title="熔断器"></a>熔断器</h3><p>在分布式系统中，服务与服务之间的依赖错综复杂， 一种不可避免的情况就是某些服务会 出现故障，导致依赖于它们的其他服务出现远程调度的线程阻塞。 Hystrix 是 Netflix 公司开 源的一个项目，它提供了熔断器功能，能够阻止分布式系统中出现联动故障。 Hystrix 是通过 隔离服务的访问点阻止联动故障的，并提供了故障的解决方案，从而提高了整个分布式系统 的弹性。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/09/%E7%86%94%E6%96%AD%E5%99%A8Hystrix/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/08/Feign/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/08/Feign/" class="post-title-link" itemprop="url">Feign</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-08 16:15:00" itemprop="dateCreated datePublished" datetime="2019-04-08T16:15:00+00:00">2019-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="声明式调用Feign"><a href="#声明式调用Feign" class="headerlink" title="声明式调用Feign"></a>声明式调用Feign</h3><p>使用feign远程调度其他服务</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/08/Feign/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/04/centOS%E9%98%B2%E7%81%AB%E5%A2%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/04/centOS%E9%98%B2%E7%81%AB%E5%A2%99/" class="post-title-link" itemprop="url">centOS防火墙</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-04 13:58:00" itemprop="dateCreated datePublished" datetime="2019-04-04T13:58:00+00:00">2019-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/centOS/" itemprop="url" rel="index"><span itemprop="name">centOS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="防火墙操作"><a href="#防火墙操作" class="headerlink" title="防火墙操作"></a>防火墙操作</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/04/centOS%E9%98%B2%E7%81%AB%E5%A2%99/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/04/centOS%E4%B8%8B%E5%AE%89%E8%A3%85jdk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/04/centOS%E4%B8%8B%E5%AE%89%E8%A3%85jdk/" class="post-title-link" itemprop="url">centOS下安装jdk</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-04 13:47:00" itemprop="dateCreated datePublished" datetime="2019-04-04T13:47:00+00:00">2019-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/centOS/" itemprop="url" rel="index"><span itemprop="name">centOS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="卸载系统自带的OpenJDK以及相关的java文件"><a href="#卸载系统自带的OpenJDK以及相关的java文件" class="headerlink" title="卸载系统自带的OpenJDK以及相关的java文件"></a>卸载系统自带的OpenJDK以及相关的java文件</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/04/centOS%E4%B8%8B%E5%AE%89%E8%A3%85jdk/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/04/rabbitmq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/04/rabbitmq/" class="post-title-link" itemprop="url">rabbitmq</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-04 10:46:00" itemprop="dateCreated datePublished" datetime="2019-04-04T10:46:00+00:00">2019-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/rabbitmq/" itemprop="url" rel="index"><span itemprop="name">rabbitmq</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="rabbitmq"><a href="#rabbitmq" class="headerlink" title="rabbitmq"></a>rabbitmq</h4><p>消息队列服务</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/04/rabbitmq/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/04/SSL%E7%94%9F%E6%88%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/04/SSL%E7%94%9F%E6%88%90/" class="post-title-link" itemprop="url">SSL生成</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-04 09:06:00" itemprop="dateCreated datePublished" datetime="2019-04-04T09:06:00+00:00">2019-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ssl/" itemprop="url" rel="index"><span itemprop="name">ssl</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ssl本地生成脚本"><a href="#ssl本地生成脚本" class="headerlink" title="ssl本地生成脚本"></a>ssl本地生成脚本</h3><p>在公司部署前端到nginx服务器，遇到了证书问题，gateway有一个证书，前端有一个证书。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/04/SSL%E7%94%9F%E6%88%90/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2019/04/01/Ribbon/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/tr.jpg">
-      <meta itemprop="name" content="tr">
-      <meta itemprop="description" content="talk is cheap , show me the code.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="TrBlog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/01/Ribbon/" class="post-title-link" itemprop="url">Ribbon</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-01 09:10:00" itemprop="dateCreated datePublished" datetime="2019-04-01T09:10:00+00:00">2019-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringCloud/" itemprop="url" rel="index"><span itemprop="name">SpringCloud</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Ribbon-均衡负载器"><a href="#Ribbon-均衡负载器" class="headerlink" title="Ribbon 均衡负载器"></a>Ribbon 均衡负载器</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>Ribbon 是 Netflix 公司开源的一个负载均衡的组件，它属于上述的第二种方式，是将负载 均衡逻辑封装在客户端中，并且运行在客户端的进程里。 Ribbon 是一个经过了云端测试的 IPC 库，司以很好地控制 HTTP 和 TCP 客户端的负载均衡行为。 在 Spring Cloud 构建的微服务系统中， Ribbon 作为服务消费者的负载均衡器，有两种使用<br>方式，一种是和 RestTemplate 相结合，另一种是和 Feign 相结合。Feign 已经默认集成了 Ribbon</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/01/Ribbon/#more" rel="contents">
+              <a class="btn" href="/2019/04/24/Python%E6%8F%90%E5%8F%96word%E5%9B%BE%E7%89%87/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -990,7 +998,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1058,20 +1066,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-count">137</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">44</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">66</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1106,7 +1114,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
