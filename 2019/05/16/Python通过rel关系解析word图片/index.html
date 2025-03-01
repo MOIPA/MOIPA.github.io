@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="python解析图片选用工具：python-docx，elementtree 最终目标：读取word文档，把文档里的图片和wmf转为&lt;img src&#x3D;&quot;&quot;&#x2F;&gt;或者&lt;word-pic&gt;url&lt;&#x2F;word-pic&gt; 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python通过rel关系解析word图片">
+<meta property="og:url" content="http://example.com/2019/05/16/Python%E9%80%9A%E8%BF%87rel%E5%85%B3%E7%B3%BB%E8%A7%A3%E6%9E%90word%E5%9B%BE%E7%89%87/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="python解析图片选用工具：python-docx，elementtree 最终目标：读取word文档，把文档里的图片和wmf转为&lt;img src&#x3D;&quot;&quot;&#x2F;&gt;或者&lt;word-pic&gt;url&lt;&#x2F;word-pic&gt; 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-05-16T15:29:00.000Z">
+<meta property="article:modified_time" content="2022-01-19T04:06:18.000Z">
+<meta property="article:author" content="tr">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2019/05/16/Python%E9%80%9A%E8%BF%87rel%E5%85%B3%E7%B3%BB%E8%A7%A3%E6%9E%90word%E5%9B%BE%E7%89%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Python通过rel关系解析word图片 | TrBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="TrBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TrBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/MOIPA" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/05/16/Python%E9%80%9A%E8%BF%87rel%E5%85%B3%E7%B3%BB%E8%A7%A3%E6%9E%90word%E5%9B%BE%E7%89%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python通过rel关系解析word图片
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-16 15:29:00" itemprop="dateCreated datePublished" datetime="2019-05-16T15:29:00+00:00">2019-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="python解析图片"><a href="#python解析图片" class="headerlink" title="python解析图片"></a>python解析图片</h3><p>选用工具：python-docx，elementtree</p>
+<p>最终目标：读取word文档，把文档里的图片和wmf转为<code>&lt;img src=&quot;&quot;/&gt;</code>或者<code>&lt;word-pic&gt;url&lt;/word-pic&gt;</code></p>
+<h6 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h6><p>首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。</p>
+<p>第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是word中每行中出现的矢量图，比如n不是n，而是wmf图片n。</p>
+<span id="more"></span>
+
+<p>第二种思路：将每段的word解析为xml文档，使用docx，其实这个底层原理也是通过映射每段与document.xml实现的。</p>
+<p>解压缩word为zip时，可以看到document.xml文件，这才是word真正的样子，docx可以把每段的xml展示出来，再通过elementtree解析xml树，把每段变为：文本+图片文件名字</p>
+<p>解析xml树代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> docx</span><br><span class="line"><span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs = docx.Document(<span class="string">&#x27;computer_science.docx&#x27;</span>)</span><br><span class="line"></span><br><span class="line">lineCounts = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> fs.paragraphs:</span><br><span class="line">   <span class="keyword">if</span> lineCounts &lt;= <span class="number">0</span>:</span><br><span class="line">      exit()</span><br><span class="line">   root = ET.fromstring(line.paragraph_format.element.xml)</span><br><span class="line">   outStr = <span class="string">&#x27;&#x27;</span></span><br><span class="line">   <span class="keyword">for</span> ele <span class="keyword">in</span> root.<span class="built_in">iter</span>():</span><br><span class="line">      <span class="comment"># print(ele.tag)</span></span><br><span class="line">      <span class="comment"># continue</span></span><br><span class="line">      <span class="keyword">if</span>(ele.tag==<span class="string">&quot;&#123;http://schemas.openxmlformats.org/wordprocessingml/2006/main&#125;t&quot;</span>):</span><br><span class="line">         outStr += ele.text</span><br><span class="line">      <span class="keyword">if</span>(ele.tag == <span class="string">&quot;&#123;urn:schemas-microsoft-com:vml&#125;shape&quot;</span>):</span><br><span class="line">         outStr += <span class="string">&quot;&lt;word-pic&gt;&quot;</span>+ele.get(<span class="string">&#x27;id&#x27;</span>)+<span class="string">&quot;&lt;/word-pic&gt;&quot;</span></span><br><span class="line">   <span class="built_in">print</span>(outStr)</span><br><span class="line">   outStr = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">   <span class="built_in">print</span>(<span class="string">&quot;*****&quot;</span>)</span><br><span class="line">   lineCounts -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>解析的xml文档里放的是shapeid，就是直接对应media文件夹的图片，但是！！，shapeid有的时候不是“图片 2” 而是”_x0000…“，这就可能导致错误。</p>
+<p>所以新的思路：在xml树里，每个图片都有一个r:id属性，值like：rid39。这个rid是word的映射对象，在解压缩后的document.xml.rel中可以找到对应的映射图片，比如rid39对应的target是图片12。</p>
+<p>所以先变为rid,然后通过document.xml.rel文件将rid变为图片地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> docx</span><br><span class="line"><span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs = docx.Document(<span class="string">&#x27;computer_science.docx&#x27;</span>)</span><br><span class="line"></span><br><span class="line">lineCounts = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseRidByRel</span>(<span class="params">rid</span>):</span></span><br><span class="line">   root = ET.ElementTree(file=<span class="string">&#x27;document.xml.rels&#x27;</span>)</span><br><span class="line">   <span class="keyword">for</span> ele <span class="keyword">in</span> root.<span class="built_in">iter</span>():</span><br><span class="line">      <span class="keyword">if</span> ele.tag == <span class="string">&quot;&#123;http://schemas.openxmlformats.org/package/2006/relationships&#125;Relationship&quot;</span>:</span><br><span class="line">         <span class="keyword">if</span> ele.get(<span class="string">&#x27;Id&#x27;</span>) == rid:</span><br><span class="line">            <span class="keyword">return</span> ele.get(<span class="string">&#x27;Target&#x27;</span>)</span><br><span class="line">   <span class="keyword">return</span> <span class="string">&quot;Null&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseLinePic</span>(<span class="params">line</span>):</span></span><br><span class="line">   root = ET.fromstring(line.paragraph_format.element.xml)</span><br><span class="line">   outStr = <span class="string">&#x27;&#x27;</span></span><br><span class="line">   <span class="keyword">for</span> ele <span class="keyword">in</span> root.<span class="built_in">iter</span>():</span><br><span class="line">      <span class="comment"># print(ele.tag)</span></span><br><span class="line">      <span class="comment"># continue</span></span><br><span class="line">      <span class="keyword">if</span>(ele.tag==<span class="string">&quot;&#123;http://schemas.openxmlformats.org/wordprocessingml/2006/main&#125;t&quot;</span>):</span><br><span class="line">         outStr += ele.text</span><br><span class="line">      <span class="keyword">if</span>(ele.tag == <span class="string">&quot;&#123;urn:schemas-microsoft-com:vml&#125;imagedata&quot;</span>):</span><br><span class="line">         rid = ele.get(<span class="string">&#x27;&#123;http://schemas.openxmlformats.org/officeDocument/2006/relationships&#125;id&#x27;</span>)</span><br><span class="line">         outStr += <span class="string">&quot;&lt;word-pic&gt;&quot;</span>+parseRidByRel(rid)+<span class="string">&quot;&lt;/word-pic&gt;&quot;</span></span><br><span class="line">   <span class="keyword">return</span> outStr</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> fs.paragraphs:</span><br><span class="line">   <span class="keyword">if</span> lineCounts &lt;= <span class="number">0</span>:</span><br><span class="line">      exit()</span><br><span class="line">   outStr = parseLinePic(line)</span><br><span class="line">   <span class="built_in">print</span>(outStr)</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">   lineCounts -= <span class="number">1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">输出</span><br><span class="line">[Running] python -u &quot;c:\Users\tassa\Downloads\test.py&quot;</span><br><span class="line">第一章 计算机网络体系结构</span><br><span class="line">知识导图</span><br><span class="line">&lt;word-pic&gt;media/image1.png&lt;/word-pic&gt;&lt;word-pic&gt;media/image2.png&lt;/word-pic&gt;</span><br><span class="line">历年真题</span><br><span class="line">单项选择题</span><br><span class="line">1.在OSI参考模型中，直接为会话层提供服务的是，插入测试图片如下图（   ）。             [全国联考2014年]</span><br><span class="line">&lt;word-pic&gt;media/image2.png&lt;/word-pic&gt;</span><br><span class="line">A.应用层                             B.表示层</span><br><span class="line">C.运输层                             D.网络层</span><br><span class="line">2.在OSI参考模型中，&lt;word-pic&gt;media/image3.wmf&lt;/word-pic&gt;下列功能需由应用层的相邻层实现的是（   ）。   [全国联考2013年]</span><br><span class="line">A.对话管理                           B.数据格式转换</span><br><span class="line">C.路由选择                           D.可靠数据传输</span><br><span class="line">3.TCP/IP参考模型的网络层提供的是（   ）。                        [全国联考2011年]</span><br><span class="line">A.无连接不可靠的数据报服务           B.无连接可靠的数据报服务</span><br><span class="line">C.有连接不可靠的虚电路服务           D.有连接可靠的虚电路服务</span><br><span class="line">4.下列选项中，不属于网络体系结构所描述的内容是（   ）。          [全国联考2010年]</span><br><span class="line">A.网络的层次                         B.每一层使用的协议</span><br><span class="line">C.协议的内部实现细节                 D.每一层必须完成的功能</span><br><span class="line">5.在OSI参考模型中，自下而上第一个提供端到端服务的层次是（   ）。 [全国联考2009年]</span><br><span class="line">A.数据链路层                         B.运输层</span><br><span class="line">C.会话层                             D.应用层</span><br><span class="line">6.有关交换技术的论述，以下哪个是正确的？（   ）          [杭州电子科技大学2017年]</span><br><span class="line">A.电路交换要求在通信的双方之间建立起一条实际的物理通路，但通信过程中，这条通路可以与别的通信方共享</span><br><span class="line">B.现有的公用数据网都采用报文交换技术</span><br><span class="line">C.报文交换可以满足实时或交互式的通信要求</span><br><span class="line">D.分组交换将一个大报文分割成分组，并以分组为单位进行存储转发在接收端再将各分组重新装成一个完整的报文</span><br><span class="line">7.下列关于网络体系结构的描述中正确的是（   ）。          [杭州电子科技大学2017年]</span><br><span class="line">A.网络协议中的语法涉及的是用于协调与差错处理有关的控制信息</span><br><span class="line">B.在网络分层体系结构中，n层是&lt;word-pic&gt;media/image4.wmf&lt;/word-pic&gt;层的用户，又是&lt;word-pic&gt;media/image5.wmf&lt;/word-pic&gt;层的服务提供者</span><br><span class="line">C.OSI参考模型包括了体系结构、服务定义和协议规范三级抽象</span><br><span class="line">D.OSI和TCP/IP模型的网络层同时支持面向连接的通信和无连接通信</span><br><span class="line">8.下列关于虚电路方式中路由选择的正确说法是（   ）。      [杭州电子科技大学2017年]</span><br><span class="line">A.建立连接和发送数据都不进行路由选择</span><br><span class="line">B.只在建立虚电路时进行路由选择</span><br><span class="line">C.传送数据时进行路由选择</span><br><span class="line">D.建立连接和发送数据都进行路由选择</span><br><span class="line">9.网络协议的主要要素为（   ）。                          [桂林电子科技大学2016年]</span><br><span class="line">A.数据格式、编码、信号电平</span><br><span class="line">B.数据格式、控制信息、时序</span><br><span class="line">C.语法、语义、时序</span><br><span class="line">D.编码、控制信息、数据格式</span><br><span class="line">10.下述对广域网的作用范围叙述最准确的是（   ）。         [桂林电子科技大学2016年]</span><br><span class="line">A.几千米到十几千米</span><br><span class="line">B.几十千米到几百千米</span><br><span class="line">C.几十千米到几千千米</span><br><span class="line">D.几千千米以上</span><br><span class="line">11.如果比特率为&lt;word-pic&gt;media/image6.wmf&lt;/word-pic&gt;，发送3000位需要多长时间？（   ）  [桂林电子科技大学2016年]</span><br><span class="line">A.&lt;word-pic&gt;media/image7.wmf&lt;/word-pic&gt;                              B.&lt;word-pic&gt;media/image8.wmf&lt;/word-pic&gt;</span><br><span class="line">C.&lt;word-pic&gt;media/image9.wmf&lt;/word-pic&gt;                            D.&lt;word-pic&gt;media/image10.wmf&lt;/word-pic&gt;</span><br><span class="line">[Done] exited with code=0 in 1.571 seconds</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>其次在完成了映射后还有一点需要做的就是（html是无法解析wmf文件的）把wmf转为pic。</p>
+<p>思路是把media文件夹下的所有文件转为png结尾，文档解析的<word-pic>内的wmf后缀转为png。pip install Pillow后<br>使用 Pillow库转换代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wmf2Png</span>(<span class="params">fileName</span>):</span></span><br><span class="line">   Image.<span class="built_in">open</span>(fileName).save(re.sub(<span class="string">&#x27;wmf&#x27;</span>,<span class="string">&#x27;png&#x27;</span>,fileName))</span><br><span class="line"></span><br><span class="line">wmf2Png(<span class="string">&quot;image5.wmf&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/12/log1/" rel="prev" title="Python+oss+json+request">
+      <i class="fa fa-chevron-left"></i> Python+oss+json+request
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/24/%E6%B5%8B%E8%AF%95%E6%97%A5%E5%BF%97-%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" rel="next" title="测试日志--压力测试">
+      测试日志--压力测试 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E8%A7%A3%E6%9E%90%E5%9B%BE%E7%89%87"><span class="nav-number">1.</span> <span class="nav-text">python解析图片</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">思路：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tr"
+      src="/images/tr.jpg">
+  <p class="site-author-name" itemprop="name">tr</p>
+  <div class="site-description" itemprop="description">talk is cheap , show me the code.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MOIPA" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MOIPA" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tassassintr@gmail.com" title="E-Mail → mailto:tassassintr@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

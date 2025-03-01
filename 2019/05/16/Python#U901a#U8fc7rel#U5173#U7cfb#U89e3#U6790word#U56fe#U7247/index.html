@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python解析图片选用工具：python-docx，elementtree 最终目标：读取word文档，把文档里的图片和wmf转为src123456789101112131415161718192021222324252627282930313233343536373839404142434445###### 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将med">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python通过rel关系解析word图片">
+<meta property="og:url" content="http://yoursite.com/2019/05/16/Python通过rel关系解析word图片/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="python解析图片选用工具：python-docx，elementtree 最终目标：读取word文档，把文档里的图片和wmf转为src123456789101112131415161718192021222324252627282930313233343536373839404142434445###### 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将med">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-16T08:57:48.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python通过rel关系解析word图片">
+<meta name="twitter:description" content="python解析图片选用工具：python-docx，elementtree 最终目标：读取word文档，把文档里的图片和wmf转为src123456789101112131415161718192021222324252627282930313233343536373839404142434445###### 思路：首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将med">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/16/Python通过rel关系解析word图片/">
+
+
+
+
+
+  <title>Python通过rel关系解析word图片 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/Python通过rel关系解析word图片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python通过rel关系解析word图片</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-16T15:29:00+08:00">
+                2019-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="python解析图片"><a href="#python解析图片" class="headerlink" title="python解析图片"></a>python解析图片</h3><p>选用工具：python-docx，elementtree</p>
+<p>最终目标：读取word文档，把文档里的图片和wmf转为<figure class="highlight plain"><figcaption><span>src</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###### 思路：</span><br><span class="line"></span><br><span class="line">首先把所有的图片一次性提取出来，具体做法为将word名换为zip，解压缩将media包导出，但是这样存在一个问题：如何知道每个图片对应在word中的哪个位置。</span><br><span class="line"></span><br><span class="line">第一种解决办法：由于图片是根据word中出现顺序排序的，所以扫描word文件，从0计数，将每出现的一个图片替换为计数。这样也存在问题：重复图片导致计数多与实际图片。wmf文件，就是word中每行中出现的矢量图，比如n不是n，而是wmf图片n。</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line"></span><br><span class="line">第二种思路：将每段的word解析为xml文档，使用docx，其实这个底层原理也是通过映射每段与document.xml实现的。</span><br><span class="line"></span><br><span class="line">解压缩word为zip时，可以看到document.xml文件，这才是word真正的样子，docx可以把每段的xml展示出来，再通过elementtree解析xml树，把每段变为：文本+图片文件名字</span><br><span class="line"></span><br><span class="line">解析xml树代码如下：</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"></span><br><span class="line">import docx</span><br><span class="line">import xml.etree.cElementTree as ET</span><br><span class="line">import sys</span><br><span class="line">import io</span><br><span class="line">import re</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=&apos;utf8&apos;)</span><br><span class="line"></span><br><span class="line">fs = docx.Document(&apos;computer_science.docx&apos;)</span><br><span class="line"></span><br><span class="line">lineCounts = 100</span><br><span class="line"></span><br><span class="line">for line in fs.paragraphs:</span><br><span class="line">   if lineCounts &lt;= 0:</span><br><span class="line">      exit()</span><br><span class="line">   root = ET.fromstring(line.paragraph_format.element.xml)</span><br><span class="line">   outStr = &apos;&apos;</span><br><span class="line">   for ele in root.iter():</span><br><span class="line">      # print(ele.tag)</span><br><span class="line">      # continue</span><br><span class="line">      if(ele.tag==&quot;&#123;http://schemas.openxmlformats.org/wordprocessingml/2006/main&#125;t&quot;):</span><br><span class="line">         outStr += ele.text</span><br><span class="line">      if(ele.tag == &quot;&#123;urn:schemas-microsoft-com:vml&#125;shape&quot;):</span><br><span class="line">         outStr += &quot;&lt;word-pic&gt;&quot;+ele.get(&apos;id&apos;)+&quot;&lt;/word-pic&gt;&quot;</span><br><span class="line">   print(outStr)</span><br><span class="line">   outStr = &apos;&apos;</span><br><span class="line"></span><br><span class="line">   print(&quot;*****&quot;)</span><br><span class="line">   lineCounts -= 1</span><br></pre></td></tr></table></figure></p>
+<p>解析的xml文档里放的是shapeid，就是直接对应media文件夹的图片，但是！！，shapeid有的时候不是“图片 2” 而是”_x0000…“，这就可能导致错误。</p>
+<p>所以新的思路：在xml树里，每个图片都有一个r:id属性，值like：rid39。这个rid是word的映射对象，在解压缩后的document.xml.rel中可以找到对应的映射图片，比如rid39对应的target是图片12。</p>
+<p>所以先变为rid,然后通过document.xml.rel文件将rid变为图片地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> docx</span><br><span class="line"><span class="keyword">import</span> xml.etree.cElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding=<span class="string">'utf8'</span>)</span><br><span class="line"></span><br><span class="line">fs = docx.Document(<span class="string">'computer_science.docx'</span>)</span><br><span class="line"></span><br><span class="line">lineCounts = <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseRidByRel</span><span class="params">(rid)</span>:</span></span><br><span class="line">   root = ET.ElementTree(file=<span class="string">'document.xml.rels'</span>)</span><br><span class="line">   <span class="keyword">for</span> ele <span class="keyword">in</span> root.iter():</span><br><span class="line">      <span class="keyword">if</span> ele.tag == <span class="string">"&#123;http://schemas.openxmlformats.org/package/2006/relationships&#125;Relationship"</span>:</span><br><span class="line">         <span class="keyword">if</span> ele.get(<span class="string">'Id'</span>) == rid:</span><br><span class="line">            <span class="keyword">return</span> ele.get(<span class="string">'Target'</span>)</span><br><span class="line">   <span class="keyword">return</span> <span class="string">"Null"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parseLinePic</span><span class="params">(line)</span>:</span></span><br><span class="line">   root = ET.fromstring(line.paragraph_format.element.xml)</span><br><span class="line">   outStr = <span class="string">''</span></span><br><span class="line">   <span class="keyword">for</span> ele <span class="keyword">in</span> root.iter():</span><br><span class="line">      <span class="comment"># print(ele.tag)</span></span><br><span class="line">      <span class="comment"># continue</span></span><br><span class="line">      <span class="keyword">if</span>(ele.tag==<span class="string">"&#123;http://schemas.openxmlformats.org/wordprocessingml/2006/main&#125;t"</span>):</span><br><span class="line">         outStr += ele.text</span><br><span class="line">      <span class="keyword">if</span>(ele.tag == <span class="string">"&#123;urn:schemas-microsoft-com:vml&#125;imagedata"</span>):</span><br><span class="line">         rid = ele.get(<span class="string">'&#123;http://schemas.openxmlformats.org/officeDocument/2006/relationships&#125;id'</span>)</span><br><span class="line">         outStr += <span class="string">"&lt;word-pic&gt;"</span>+parseRidByRel(rid)+<span class="string">"&lt;/word-pic&gt;"</span></span><br><span class="line">   <span class="keyword">return</span> outStr</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> fs.paragraphs:</span><br><span class="line">   <span class="keyword">if</span> lineCounts &lt;= <span class="number">0</span>:</span><br><span class="line">      exit()</span><br><span class="line">   outStr = parseLinePic(line)</span><br><span class="line">   print(outStr)</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">   lineCounts -= <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">输出</span><br><span class="line">[Running] python -u &quot;c:\Users\tassa\Downloads\test.py&quot;</span><br><span class="line">第一章 计算机网络体系结构</span><br><span class="line">知识导图</span><br><span class="line">&lt;word-pic&gt;media/image1.png&lt;/word-pic&gt;&lt;word-pic&gt;media/image2.png&lt;/word-pic&gt;</span><br><span class="line">历年真题</span><br><span class="line">单项选择题</span><br><span class="line">1.在OSI参考模型中，直接为会话层提供服务的是，插入测试图片如下图（   ）。             [全国联考2014年]</span><br><span class="line">&lt;word-pic&gt;media/image2.png&lt;/word-pic&gt;</span><br><span class="line">A.应用层                             B.表示层</span><br><span class="line">C.运输层                             D.网络层</span><br><span class="line">2.在OSI参考模型中，&lt;word-pic&gt;media/image3.wmf&lt;/word-pic&gt;下列功能需由应用层的相邻层实现的是（   ）。   [全国联考2013年]</span><br><span class="line">A.对话管理                           B.数据格式转换</span><br><span class="line">C.路由选择                           D.可靠数据传输</span><br><span class="line">3.TCP/IP参考模型的网络层提供的是（   ）。                        [全国联考2011年]</span><br><span class="line">A.无连接不可靠的数据报服务           B.无连接可靠的数据报服务</span><br><span class="line">C.有连接不可靠的虚电路服务           D.有连接可靠的虚电路服务</span><br><span class="line">4.下列选项中，不属于网络体系结构所描述的内容是（   ）。          [全国联考2010年]</span><br><span class="line">A.网络的层次                         B.每一层使用的协议</span><br><span class="line">C.协议的内部实现细节                 D.每一层必须完成的功能</span><br><span class="line">5.在OSI参考模型中，自下而上第一个提供端到端服务的层次是（   ）。 [全国联考2009年]</span><br><span class="line">A.数据链路层                         B.运输层</span><br><span class="line">C.会话层                             D.应用层</span><br><span class="line">6.有关交换技术的论述，以下哪个是正确的？（   ）          [杭州电子科技大学2017年]</span><br><span class="line">A.电路交换要求在通信的双方之间建立起一条实际的物理通路，但通信过程中，这条通路可以与别的通信方共享</span><br><span class="line">B.现有的公用数据网都采用报文交换技术</span><br><span class="line">C.报文交换可以满足实时或交互式的通信要求</span><br><span class="line">D.分组交换将一个大报文分割成分组，并以分组为单位进行存储转发在接收端再将各分组重新装成一个完整的报文</span><br><span class="line">7.下列关于网络体系结构的描述中正确的是（   ）。          [杭州电子科技大学2017年]</span><br><span class="line">A.网络协议中的语法涉及的是用于协调与差错处理有关的控制信息</span><br><span class="line">B.在网络分层体系结构中，n层是&lt;word-pic&gt;media/image4.wmf&lt;/word-pic&gt;层的用户，又是&lt;word-pic&gt;media/image5.wmf&lt;/word-pic&gt;层的服务提供者</span><br><span class="line">C.OSI参考模型包括了体系结构、服务定义和协议规范三级抽象</span><br><span class="line">D.OSI和TCP/IP模型的网络层同时支持面向连接的通信和无连接通信</span><br><span class="line">8.下列关于虚电路方式中路由选择的正确说法是（   ）。      [杭州电子科技大学2017年]</span><br><span class="line">A.建立连接和发送数据都不进行路由选择</span><br><span class="line">B.只在建立虚电路时进行路由选择</span><br><span class="line">C.传送数据时进行路由选择</span><br><span class="line">D.建立连接和发送数据都进行路由选择</span><br><span class="line">9.网络协议的主要要素为（   ）。                          [桂林电子科技大学2016年]</span><br><span class="line">A.数据格式、编码、信号电平</span><br><span class="line">B.数据格式、控制信息、时序</span><br><span class="line">C.语法、语义、时序</span><br><span class="line">D.编码、控制信息、数据格式</span><br><span class="line">10.下述对广域网的作用范围叙述最准确的是（   ）。         [桂林电子科技大学2016年]</span><br><span class="line">A.几千米到十几千米</span><br><span class="line">B.几十千米到几百千米</span><br><span class="line">C.几十千米到几千千米</span><br><span class="line">D.几千千米以上</span><br><span class="line">11.如果比特率为&lt;word-pic&gt;media/image6.wmf&lt;/word-pic&gt;，发送3000位需要多长时间？（   ）  [桂林电子科技大学2016年]</span><br><span class="line">A.&lt;word-pic&gt;media/image7.wmf&lt;/word-pic&gt;                              B.&lt;word-pic&gt;media/image8.wmf&lt;/word-pic&gt;</span><br><span class="line">C.&lt;word-pic&gt;media/image9.wmf&lt;/word-pic&gt;                            D.&lt;word-pic&gt;media/image10.wmf&lt;/word-pic&gt;</span><br><span class="line">[Done] exited with code=0 in 1.571 seconds</span><br></pre></td></tr></table></figure>
+<p>其次在完成了映射后还有一点需要做的就是（html是无法解析wmf文件的）把wmf转为pic。</p>
+<p>思路是把media文件夹下的所有文件转为png结尾，文档解析的<word-pic>内的wmf后缀转为png。pip install Pillow后<br>使用 Pillow库转换代码：</word-pic></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wmf2Png</span><span class="params">(fileName)</span>:</span></span><br><span class="line">   Image.open(fileName).save(re.sub(<span class="string">'wmf'</span>,<span class="string">'png'</span>,fileName))</span><br><span class="line"></span><br><span class="line">wmf2Png(<span class="string">"image5.wmf"</span>)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/log1/" rel="next" title="Python+oss+json+request">
+                <i class="fa fa-chevron-left"></i> Python+oss+json+request
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/24/测试日志-压力测试/" rel="prev" title="测试日志--压力测试">
+                测试日志--压力测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python解析图片"><span class="nav-number">1.</span> <span class="nav-text">python解析图片</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Spark,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="1.0 Spark 学习">
+<meta name="keywords" content="Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark 学习 01 入门">
+<meta property="og:url" content="http://yoursite.com/2020/11/16/Spark-学习/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="1.0 Spark 学习">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-11-17T01:48:02.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark 学习 01 入门">
+<meta name="twitter:description" content="1.0 Spark 学习">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/16/Spark-学习/">
+
+
+
+
+
+  <title>Spark 学习 01 入门 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/16/Spark-学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark 学习 01 入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-16T09:56:00+08:00">
+                2020-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-0-Spark-学习"><a href="#1-0-Spark-学习" class="headerlink" title="1.0 Spark 学习"></a>1.0 Spark 学习</h3><a id="more"></a>
+<h4 id="1-1-spark-是什么"><a href="#1-1-spark-是什么" class="headerlink" title="1.1 spark 是什么"></a>1.1 spark 是什么</h4><p>快速，多用途，集群计算系统</p>
+<h5 id="hdfs"><a href="#hdfs" class="headerlink" title="hdfs"></a>hdfs</h5><p>分布式存储工具，hadoop存在MR（map-reduce)即，每个计算节点计算完毕后hdfs存储在本地，效率地下</p>
+<p>spark，中间结果存储在内存</p>
+<h4 id="1-2-spark-优势"><a href="#1-2-spark-优势" class="headerlink" title="1.2 spark 优势"></a>1.2 spark 优势</h4><ol>
+<li><p>速度快，是MR100倍</p>
+</li>
+<li><p>易用，更加灵活的api</p>
+</li>
+<li><p>通用，提供大部分计算工具（结构化，非结构化，图形计算）</p>
+</li>
+<li><p>兼容性好，可以访问大部分中间队列和数据库</p>
+</li>
+</ol>
+<h4 id="1-3-Spark组件"><a href="#1-3-Spark组件" class="headerlink" title="1.3 Spark组件"></a>1.3 Spark组件</h4><ol>
+<li><p>spark-core:是整个spark的基础（RDDs）</p>
+</li>
+<li><p>spark-sql: 处理结构化数据，Data set,DateFrame 上执行sql</p>
+</li>
+<li><p>spark-streaming: 流分析，和批量分析</p>
+</li>
+<li><p>MLib: 机器学习</p>
+</li>
+<li><p>GraphX:图计算工具</p>
+</li>
+</ol>
+<h4 id="1-4-hadoop和spark"><a href="#1-4-hadoop和spark" class="headerlink" title="1.4 hadoop和spark"></a>1.4 hadoop和spark</h4><ol>
+<li>hadoop：基础平台（存储，调度），spark只是替换mr的计算工具</li>
+<li>hadoop擅长处理大数据的批处理，spark也支持大数据，快，适合迭代，交互，流计算</li>
+<li>hadoop延迟大，spark 小</li>
+</ol>
+<h3 id="2-0-Spark-集群"><a href="#2-0-Spark-集群" class="headerlink" title="2.0 Spark 集群"></a>2.0 Spark 集群</h3><h4 id="2-1-spark集群结构"><a href="#2-1-spark集群结构" class="headerlink" title="2.1 spark集群结构"></a>2.1 spark集群结构</h4><ol>
+<li><p>spark支持集群管理工具（standalone,yarn,mersos,kubernetes）</p>
+</li>
+<li><p>spark客户端（Driver：该进程调用spark的main，并且启动SparkContext）调用集群管理工具（Cluster manager),cm负责将任务分发，每个子主机（Worker）有个守护进程，负责和cm沟通，每个Worker执行分发下来的任务，在其内的JVM虚拟机中执行（Executor）</p>
+</li>
+<li><p>流程：启动Driver，创建sparkContext（切割任务），Client提交程序给Driver，Driver向CM申请集群资源，CM在对应的Worker启动Executor执行任务</p>
+</li>
+</ol>
+<p>NOTE: </p>
+<ol>
+<li>spark不是每次都需要启动集群，可以在单机模式（standalone）中使用测试代码</li>
+<li>spark可以运行在不同集群中，支持yarn,mersos,kubernetes和自己的standalone，在每个集群中启动方式不同</li>
+<li>spark在每个集群的启动模型自行了解</li>
+</ol>
+<h4 id="2-2-spark集群搭建"><a href="#2-2-spark集群搭建" class="headerlink" title="2.2 spark集群搭建"></a>2.2 spark集群搭建</h4><h5 id="2-2-0-配置hadoop"><a href="#2-2-0-配置hadoop" class="headerlink" title="2.2.0 配置hadoop"></a>2.2.0 配置hadoop</h5><ol start="0">
+<li>配置hadoop的java环境 <code>/opt/hadoop/etc/hadoop/hadoop-env.sh</code>：</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p><code>vim /opt/hadoop/etc/hadoop/core-site.html</code> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://node01:8020&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/opt/hadoop/tmp&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;io.file.buffer.size&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;4096&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.trash.interval&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;10080&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">  &lt;!--property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://localhost:9000&lt;/value&gt;</span><br><span class="line">  &lt;/property--&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vim /opt/hadoop/etc/hadoop/hdfs-site.html</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.secondary.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;node01:50090&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.http-address&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;node01:50070&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:///opt/hadoop/tmp/dfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:///opt/hadoop/tmp/dfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.namenode.edits.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:///opt/hadoop/tmp/edits&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.permissions&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.blocksize&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;134217728&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>vim /opt/hadoop/etc/hadoop/mapred-site.xml</code></p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;mapreduce.job.ubertask.enable&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;node01:10020&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;node01:19888&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><code>vim /opt/hadoop/etc/hadoop/mapred-env.sh</code></li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_JOB_HISTORYSERVER_HEAPSIZE=1000</span><br><span class="line"></span><br><span class="line">export HADOOP_MAPRED_ROOT_LOGGER=INFO,RFA</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_JOB_HISTORYSERVER_OPTS=</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_LOG_DIR=<span class="string">""</span> <span class="comment"># Where log files are stored.  $HADOOP_MAPRED_HOME/logs by default.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_JHS_LOGGER=INFO,RFA <span class="comment"># Hadoop JobSummary logger.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_PID_DIR= <span class="comment"># The pid files are stored. /tmp by default.</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_IDENT_STRING= <span class="comment">#A string representing this instance of hadoop. $USER by default</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HADOOP_MAPRED_NICENESS= <span class="comment">#The scheduling priority for daemons. Defaults to 0.</span></span></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li><p><code>vim /opt/hadoop/etc/hadoop/slaves</code>: <code>node01</code></p>
+</li>
+<li><p><code>mkdir -p /opt/hadoop/tmp</code> <code>mkdir -p /opt/hadoop/edits</code> <code>mkdir -p /opt/hadoop/name</code> <code>mkdir -p /opt/hadoop/data</code></p>
+</li>
+<li><p>格式化和启动dfs</p>
+</li>
+</ol>
+<p><code>/opt/hadoop/bin/hdfs namenode -format</code> <code>/opt/hadoop/sbin/start-dfs.sh</code> <code>/opt/hadoop/sbin/start-yarn.sh</code></p>
+<ol start="8">
+<li>配置环境变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export  HADOOP_HOME=/opt/hadoop</span><br><span class="line">export PATH=$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH</span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>web查看hadoop存储空间</li>
+</ol>
+<p><code>w3m http://node01:50070</code></p>
+<p>NOTE: 如果jps查看缺了什么namenode或者datanode  <code>cd /opt/hadoop/tmp</code> <code>rm -r dfs</code><br>(不使用停止服务 会导致这样)</p>
+<ol start="10">
+<li>常用命令</li>
+</ol>
+<p><code>hdfs dfs -ls /</code></p>
+<p><code>hdfs dfs -mkdir /spark_log</code></p>
+<p><code>hdfs dfs -put xxx.txt /data</code></p>
+<h5 id="2-2-1-安装配置spark"><a href="#2-2-1-安装配置spark" class="headerlink" title="2.2.1 安装配置spark"></a>2.2.1 安装配置spark</h5><ol>
+<li><p>下载spark 2.2，hadoop 2.75和安装</p>
+</li>
+<li><p>配置本地host：<code>127.0.0.1 localhost node01 localhost4 localhost4.localdomain4</code></p>
+</li>
+<li><p>配置conf/spark-env.sh</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 指定java</span></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定spark master 地址</span></span><br><span class="line">export SPARK_MASTER_HOST=node01</span><br><span class="line">export SPARK_MASTER_PORT=7077</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定查找<span class="built_in">history</span> server日志目录和web端口</span></span><br><span class="line">export SPARK_HISTORY_OPTS="-Dspark.history.ui.port=4001 -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory=hdfs://node01:8020/spark_log"</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME=/opt/hadoop</span><br><span class="line">export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>配置conf/slaves，master启动时可以启动所有从节点，告诉master worker在哪</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node01</span><br><span class="line">192.168.....</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置history server:conf/spark-defaults.conf，运行结束后无法查看中间过程，配置这个即可看到</p>
+</li>
+</ol>
+<p>启用输出日志，指定输入地址，是否压缩<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spark.eventLog.enabled           true</span><br><span class="line">spark.eventLog.dir               hdfs://node01:8020/spark_log</span><br><span class="line">spark.eventLog.compress          true</span><br></pre></td></tr></table></figure></p>
+<ol start="6">
+<li>创建history-server的日志地址 hdfs目录下</li>
+</ol>
+<p><code>hdfs dfs mkdir -p /spark_log</code></p>
+<h5 id="2-2-2-分发"><a href="#2-2-2-分发" class="headerlink" title="2.2.2 分发"></a>2.2.2 分发</h5><ol>
+<li><p>同步配置到其他机器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/</span><br><span class="line">scp -r spark root@node02：$PWD</span><br><span class="line">scp -r spark root@node03：$PWD</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/spark</span><br><span class="line">sbin/start-all.sh</span><br><span class="line">sbin/start-history-server.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="2-3-高可用"><a href="#2-3-高可用" class="headerlink" title="2.3 高可用"></a>2.3 高可用</h4><p>master有可能会挂，所有需要整一个备用master，有两种方式实现，一个是利用本地，一个是利用ZooKeeper，大部分是后者</p>
+<p>配置高可用</p>
+<ol>
+<li><p>进入spark-env.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">注释原来的Spark Master地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">export</span> SPARK_MASTER_HOST=node01</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定spark运行时参数</span></span><br><span class="line">export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=node01:2181,node02:2181,node03:2181(#这里填写的是zookeeper的三台主机) -Dspark.deploy.zookeeper.dir=/spark"</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分发配置 <code>scp -r spark root@node02:$PWD</code></p>
+</li>
+<li><p>启动</p>
+</li>
+</ol>
+<p>jps查看启动进程，webUI: localhost:8080</p>
+<h4 id="2-4-入门案例"><a href="#2-4-入门案例" class="headerlink" title="2.4 入门案例"></a>2.4 入门案例</h4><ol>
+<li>提交任务命令</li>
+</ol>
+<p>程序名，master节点，执行内存，执行内数量，包名</p>
+<p>`bin/spark-submit<br>–class org.apache.spark.examples.SparkPi<br>–master spark://node01:7077<br>–executor-memory 1G<br>–total-executor-cores 2<br>/opt/spark/examples/jars/spark-examples_2.11-2.2.0.jar                    </p>
+<blockquote>
+<blockquote>
+<p>out.log<br>`</p>
+</blockquote>
+</blockquote>
+<h5 id="2-4-1-执行方式"><a href="#2-4-1-执行方式" class="headerlink" title="2.4.1 执行方式"></a>2.4.1 执行方式</h5><ol>
+<li>观察数据集</li>
+<li>测试数据集</li>
+<li>固话代码</li>
+<li>提交集群</li>
+</ol>
+<h6 id="2-4-1-1-spark-shell-读取本地文件和读取hdfs-统计单词数量"><a href="#2-4-1-1-spark-shell-读取本地文件和读取hdfs-统计单词数量" class="headerlink" title="2.4.1.1 spark-shell 读取本地文件和读取hdfs 统计单词数量"></a>2.4.1.1 spark-shell 读取本地文件和读取hdfs 统计单词数量</h6><p>启动spark-shell：</p>
+<p>spark-shell –master local[N] 使用N条worker线程本地运行</p>
+<p>spark-shell –master spark://host:port standAlone中运行，指定master地址，默认端口7077</p>
+<p>spark-shell –master mesos://host:port Apache Mesos中运行</p>
+<p>spark-shell –master yarn  yarn中运行</p>
+<ol>
+<li><p>建立文件 vim /opt/data/WordCount.txt </p>
+</li>
+<li><p>进入shell spark-shell –master local[6]</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 读取文件 /opt/data/WordCount.txt</span><br><span class="line">val rdd1 = sc.textFile("file:///opt/data/WordCount.txt")</span><br><span class="line">// flatMap 平铺分割 按照空格分割</span><br><span class="line">val rdd2 = rdd1.flatMap(_.split(" "))</span><br><span class="line">// 每个元素组为元祖</span><br><span class="line">val rdd3 = rdd2.map((_,1))</span><br><span class="line">// 按照key聚合</span><br><span class="line">val rdd4 = rdd3.reduceByKey(_+_)</span><br><span class="line">// 收集</span><br><span class="line">rdd4.collect</span><br></pre></td></tr></table></figure>
+<p>如果文件过大，本机存不下，需要将文件上传到hdfs，可以直接不加”hdfs://node01:8020”，需要在conf/spark-env.sh中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/opt/hadoop</span><br><span class="line">export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop</span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>cd /opt/data</p>
+</li>
+<li><p><code>hdfs dfs -mkdir /data</code> , <code>hdfs dfs -put WordCount.txt /data</code></p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 读取文件 /opt/data/WordCount.txt</span><br><span class="line">val rdd1 = sc.textFile("hdfs://node01:8020/data/wordcount.txt")</span><br><span class="line"></span><br><span class="line">// flatMap 平铺分割 按照空格分割</span><br><span class="line">val rdd2 = rdd1.flatMap(_.split(" "))</span><br><span class="line">// 每个元素组为元祖</span><br><span class="line">val rdd3 = rdd2.map((_,1))</span><br><span class="line">// 按照key聚合</span><br><span class="line">val rdd4 = rdd3.reduceByKey(_+_)</span><br><span class="line">// 收集</span><br><span class="line">rdd4.collect</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>只有在调用collect的时候才会计算</li>
+</ol>
+<h6 id="2-4-1-1-独立应用"><a href="#2-4-1-1-独立应用" class="headerlink" title="2.4.1.1 独立应用"></a>2.4.1.1 独立应用</h6><ol>
+<li>本地运行</li>
+</ol>
+<p>创建idea,maven 工程<br>pom.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>SparkLearn<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>com.tr.spark<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scala.version</span>&gt;</span>2.11.8<span class="tag">&lt;/<span class="name">scala.version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">spark.version</span>&gt;</span>2.2.0<span class="tag">&lt;/<span class="name">spark.version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">slf4j.version</span>&gt;</span>1.7.16<span class="tag">&lt;/<span class="name">slf4j.version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">log4j.version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">log4j.version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--    &lt;repositories&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--        &lt;repository&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--            &lt;id&gt;scala-tools.org&lt;/id&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--            &lt;name&gt;Scala-Tools Maven2 Repository&lt;/name&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--            &lt;url&gt;http://scala-tools.org/repo-releases&lt;/url&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--        &lt;/repository&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--    &lt;/repositories&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--    &lt;pluginRepositories&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--        &lt;pluginRepository&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--            &lt;id&gt;scala-tools.org&lt;/id&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--            &lt;name&gt;Scala-Tools Maven2 Repository&lt;/name&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--            &lt;url&gt;http://scala-tools.org/repo-releases&lt;/url&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--        &lt;/pluginRepository&gt;--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--    &lt;/pluginRepositories&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.scala-lang<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>scala-library<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;scala.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;groupId&gt;junit&lt;/groupId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;artifactId&gt;junit&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;version&gt;4.4&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;scope&gt;test&lt;/scope&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;/dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;groupId&gt;org.specs&lt;/groupId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;artifactId&gt;specs&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;version&gt;1.2.5&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;scope&gt;test&lt;/scope&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;/dependency&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!-- spark --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.spark<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spark-core_2.11<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;spark.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jcl-over-slf4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;slf4j.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;slf4j.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;slf4j.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;log4j.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">&lt;!--        &lt;dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;artifactId&gt;spark-streaming_$&#123;spark.artifactID.suffix&#125;&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;version&gt;$&#123;spark.version&#125;&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;/dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;artifactId&gt;spark-sql_$&#123;spark.artifactID.suffix&#125;&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;version&gt;$&#123;spark.version&#125;&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;/dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;artifactId&gt;spark-hive_$&#123;spark.artifactID.suffix&#125;&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;version&gt;$&#123;spark.version&#125;&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;/dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;dependency&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;groupId&gt;org.apache.spark&lt;/groupId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;artifactId&gt;spark-mllib_$&#123;spark.artifactID.suffix&#125;&lt;/artifactId&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--            &lt;version&gt;$&#123;spark.version&#125;&lt;/version&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--        &lt;/dependency&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sourceDirectory</span>&gt;</span>src/main/scala<span class="tag">&lt;/<span class="name">sourceDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">testSourceDirectory</span>&gt;</span>src/test/scala<span class="tag">&lt;/<span class="name">testSourceDirectory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>net.alchim31.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>scala-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>testCompile<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">args</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">arg</span>&gt;</span>-dependencyfile<span class="tag">&lt;/<span class="name">arg</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">arg</span>&gt;</span>$&#123;project.build.directory&#125;/.scala_dependencies<span class="tag">&lt;/<span class="name">arg</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">args</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-shade-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span><span class="tag">&lt;<span class="name">goal</span>&gt;</span>shade<span class="tag">&lt;/<span class="name">goal</span>&gt;</span><span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">filters</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">artifact</span>&gt;</span>*:*<span class="tag">&lt;/<span class="name">artifact</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>META-INF/*.SF<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>META-INF/*.DSA<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">exclude</span>&gt;</span>META-INF/*.RSA<span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">filters</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">transformers</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">transformer</span> <span class="attr">implementation</span>=<span class="string">"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span><span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">transformer</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">transformers</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>WordCount.scala</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tr.spark</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author tr</span></span><br><span class="line"><span class="comment"> * @Date 11/16/20</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">WordCount</span> <span class="keyword">extends</span> <span class="title">App</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 1. 创建sparkcontext</span></span><br><span class="line">  <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local[6]"</span>).setAppName(<span class="string">"word_count"</span>)</span><br><span class="line">  <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 加载读取文件</span></span><br><span class="line">  <span class="keyword">val</span> rdd1 = sc.textFile(<span class="string">"data/wordcount.txt"</span>)</span><br><span class="line">  <span class="keyword">val</span> rdd2 = rdd1.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">  <span class="keyword">val</span> rdd3 = rdd2.map((_,<span class="number">1</span>))</span><br><span class="line">  <span class="keyword">val</span> rdd4 = rdd3.reduceByKey(_+_)</span><br><span class="line">  rdd4.collect.foreach(println)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>提交运行</p>
+<ul>
+<li>修改本地文件读取路径为hdfs</li>
+<li>打成jar包 mvn package</li>
+<li>两个包：一个包大的包含了所有的依赖，一个小开头为orignal只包含了代码，由于云上有spark环境，只需要小包即可</li>
+<li><code>root@tr:/opt/spark# bin/spark-submit --class com.tr.spark.WordCount --master spark://node01:7077 /opt/MyExercise/original-tr.jar</code></li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/10/26/Getting-Start-With-Spark/" rel="next" title="Getting Start With Spark">
+                <i class="fa fa-chevron-left"></i> Getting Start With Spark
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/17/Spark-学习-02-RDD/" rel="prev" title="Spark 学习 02 RDD">
+                Spark 学习 02 RDD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-0-Spark-学习"><span class="nav-number">1.</span> <span class="nav-text">1.0 Spark 学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-spark-是什么"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 spark 是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#hdfs"><span class="nav-number">1.1.1.</span> <span class="nav-text">hdfs</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-spark-优势"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 spark 优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Spark组件"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Spark组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-hadoop和spark"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 hadoop和spark</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-0-Spark-集群"><span class="nav-number">2.</span> <span class="nav-text">2.0 Spark 集群</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-spark集群结构"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 spark集群结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-spark集群搭建"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 spark集群搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-0-配置hadoop"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.0 配置hadoop</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-安装配置spark"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.1 安装配置spark</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-分发"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.2 分发</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-高可用"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-入门案例"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 入门案例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-1-执行方式"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1 执行方式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-4-1-1-spark-shell-读取本地文件和读取hdfs-统计单词数量"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">2.4.1.1 spark-shell 读取本地文件和读取hdfs 统计单词数量</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-4-1-1-独立应用"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">2.4.1.1 独立应用</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

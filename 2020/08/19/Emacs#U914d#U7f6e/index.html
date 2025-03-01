@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hi, world">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="emacs for windows配置下载的emacs版本在24以上，内置了插件管理软件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Emacs配置">
+<meta property="og:url" content="http://yoursite.com/2020/08/19/Emacs配置/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="emacs for windows配置下载的emacs版本在24以上，内置了插件管理软件">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-08-19T02:24:46.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Emacs配置">
+<meta name="twitter:description" content="emacs for windows配置下载的emacs版本在24以上，内置了插件管理软件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/19/Emacs配置/">
+
+
+
+
+
+  <title>Emacs配置 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/Emacs配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Emacs配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-19T09:46:42+08:00">
+                2020-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="emacs-for-windows配置"><a href="#emacs-for-windows配置" class="headerlink" title="emacs for windows配置"></a>emacs for windows配置</h3><p>下载的emacs版本在24以上，内置了插件管理软件</p>
+<a id="more"></a>
+<h4 id="基础配置"><a href="#基础配置" class="headerlink" title="基础配置"></a>基础配置</h4><ol>
+<li><p>官网下载emacs</p>
+</li>
+<li><p>由于在windows下使用，需要配置home目录，启动emacs后可以打开手册看到windows推荐配置</p>
+<p> 第一种：windows+R 输入regedit打开注册表 建立如下目录<code>\HKEY_CURRENT_USER\Software\GNU</code>，新建字符串<code>HOME</code>,值为自己的目录</p>
+<p>第二种：直接添加<code>HOME</code>环境变量，不推荐，用这个方法会导致很多其他依赖home的软件配置地址失效，如git，本来地址在c:/users/.ssd下，修改后到了emacs的home目录</p>
+</li>
+<li><p>基础学习：ctrl+h t 打开menu手册，简单学习emacs操作方式先</p>
+</li>
+<li><p>M+x : alt + x   </p>
+</li>
+<li><p>C+x: ctrl + x</p>
+</li>
+<li><p>RET: enter</p>
+</li>
+</ol>
+<h4 id="配置国内源"><a href="#配置国内源" class="headerlink" title="配置国内源"></a>配置国内源</h4><ol>
+<li><p>默认的网速比较慢，直接打开home目录下的.emacs文件，在文件头添加如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; set china source</span><br><span class="line">(setq package-archives &apos;((&quot;tgnu&quot;   . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/&quot;)</span><br><span class="line">                         (&quot;melpa&quot; . &quot;http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/&quot;)))</span><br><span class="line">(package-initialize)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>  <code>package-initialize</code> 只需添加一次</p>
+<h4 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h4><p>所有插件推荐去github或者官网查readme文档</p>
+<h5 id="evil"><a href="#evil" class="headerlink" title="evil"></a>evil</h5><p>这个插件为<code>vim</code>快捷键插件，和emacs冲突的键位不多，不用太多配置即可直接上手</p>
+<ol>
+<li><p><code>M+x package-refresh-contents</code> 刷新来自melpa的内容，evil默认不在elpa内</p>
+</li>
+<li><p><code>M+x package-install &lt;RET&gt; evil &lt;RET&gt;</code> 直接安装，或者 <code>M+x list-packages</code> =&gt; <code>C+s evil</code>寻找，找到后键入 <code>I</code> 标识即将安装 键入<code>x</code> 执行安装</p>
+</li>
+<li><p>安装后编辑<code>.emacs</code>,输入如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(require &apos;evil)</span><br><span class="line">(evil-mode 1)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启即可生效，简要说明下，下方状态栏内<code>&lt;N&gt;</code>标识vim模式，<code>ctrl+z</code>即可切换到emacs模式 此时标识为<code>&lt;E&gt;</code> ,其他标识如<code>&lt;V&gt;</code>是vim的其他模式，视图模式啊啥的。evil可以添加其他扩展支持，具体wiki</p>
+</li>
+</ol>
+<h4 id="org"><a href="#org" class="headerlink" title="org"></a>org</h4><p>必装的东西，我用emacs就是为了这个和eww</p>
+<ol>
+<li><p><code>M+x package-install &lt;RET&gt; org &lt;RET&gt;</code> 直接安装，或者 <code>M+x list-packages</code> =&gt; <code>C+s org</code>寻找，找到后键入 <code>I</code> 标识即将安装 键入<code>x</code> 执行安装</p>
+</li>
+<li><p>无需配置，直接使用，新建文本:<code>C+x f</code>在文本内:<code>M+x org-mode</code>进入org-mode</p>
+<p> <code>ctrl+shift+&lt;RET&gt;</code> 快速创建一个todo</p>
+<p> <code>ctrl+c ctrl+t</code>快速切换todo状态</p>
+<p> <code>C-c C-s</code> 选择时间</p>
+</li>
+<li><p>其余看官方文档</p>
+</li>
+</ol>
+<h4 id="smex"><a href="#smex" class="headerlink" title="smex"></a>smex</h4><p>快速命令插件，命令代替各种奇葩快捷键</p>
+<ol>
+<li><p><code>M+x package-install &lt;RET&gt; smex &lt;RET&gt;</code> 直接安装，或者 <code>M+x list-packages</code> =&gt; <code>C+s smex</code>寻找，找到后键入 <code>I</code> 标识即将安装 键入<code>x</code> 执行安装</p>
+</li>
+<li><p>smex可以改变<code>M+x</code>快捷键，需要添加配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(require &apos;smex)   ; Not needed if you use package.el</span><br><span class="line">(smex-initialize) ; Can be omitted. This might cause a (minimal) delay</span><br><span class="line">                  ; when Smex is auto-initialized on its first run.</span><br><span class="line">; bind keys</span><br><span class="line">(global-set-key (kbd &quot;M-x&quot;) &apos;smex)</span><br><span class="line">(global-set-key (kbd &quot;M-X&quot;) &apos;smex-major-mode-commands)</span><br><span class="line">;; This is your old M-x.</span><br><span class="line">(global-set-key (kbd &quot;C-c C-c M-x&quot;) &apos;execute-extended-command)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用时<code>M+x</code>呼出的是smex，此模式下输入命令后会在ido交互内出现<code>{...|..}</code>命令提示，默认是7个推荐，按照使用频率排序，在输入提示模式下<code>C+s</code>/<code>C+r</code>切换命令，<code>SPACE</code>展示所有相关命令并切换</p>
+<p> 如果想使用原来的<code>M+x</code> 键入<code>C-c C-c M-x</code>即可</p>
+</li>
+</ol>
+<h4 id="helm"><a href="#helm" class="headerlink" title="helm"></a>helm</h4><p>只用helm-buffers-list代替<code>C-x b</code>，其他和smex有点覆盖，smex够用了暂时不折腾</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/20/Layui字符数组超出表格问题/" rel="next" title="Layui字符数组超出表格问题">
+                <i class="fa fa-chevron-left"></i> Layui字符数组超出表格问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/02/VSC代替intellij/" rel="prev" title="VSC代替intellij">
+                VSC代替intellij <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#emacs-for-windows配置"><span class="nav-number">1.</span> <span class="nav-text">emacs for windows配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础配置"><span class="nav-number">1.1.</span> <span class="nav-text">基础配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置国内源"><span class="nav-number">1.2.</span> <span class="nav-text">配置国内源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置插件"><span class="nav-number">1.3.</span> <span class="nav-text">配置插件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#evil"><span class="nav-number">1.3.1.</span> <span class="nav-text">evil</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#org"><span class="nav-number">1.4.</span> <span class="nav-text">org</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#smex"><span class="nav-number">1.5.</span> <span class="nav-text">smex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#helm"><span class="nav-number">1.6.</span> <span class="nav-text">helm</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

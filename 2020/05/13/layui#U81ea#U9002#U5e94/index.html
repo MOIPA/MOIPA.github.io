@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="LayUi,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="layui自适应layui页面的自适应问题">
+<meta name="keywords" content="LayUi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="layui自适应">
+<meta property="og:url" content="http://yoursite.com/2020/05/13/layui自适应/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="layui自适应layui页面的自适应问题">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-26T08:26:12.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="layui自适应">
+<meta name="twitter:description" content="layui自适应layui页面的自适应问题">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/13/layui自适应/">
+
+
+
+
+
+  <title>layui自适应 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/13/layui自适应/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">layui自适应</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-13T16:07:00+08:00">
+                2020-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LayUi/" itemprop="url" rel="index">
+                    <span itemprop="name">LayUi</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="layui自适应"><a href="#layui自适应" class="headerlink" title="layui自适应"></a>layui自适应</h3><p>layui页面的自适应问题</p>
+<a id="more"></a>
+<h4 id="自适应页面布局"><a href="#自适应页面布局" class="headerlink" title="自适应页面布局"></a>自适应页面布局</h4><p>官方提供了<code>layui-body</code>但是使用后会自动向右便宜，这是官方为了适配本身的侧边栏页面，需要手动将left改为0px。</p>
+<p><code>layui-card</code>会让页面底部变为白色，区别于body的灰色。</p>
+<h5 id="宽度自适应-设定全局布局layui-fluid-内部使用layui-row，layui-row内部使用-lt-div-class-quot-layui-col-md8-quot-gt-8表示12个中占8位长度。"><a href="#宽度自适应-设定全局布局layui-fluid-内部使用layui-row，layui-row内部使用-lt-div-class-quot-layui-col-md8-quot-gt-8表示12个中占8位长度。" class="headerlink" title="宽度自适应:设定全局布局layui-fluid,内部使用layui-row，layui-row内部使用&lt;div class=&quot;layui-col-md8&quot;&gt; 8表示12个中占8位长度。"></a>宽度自适应:设定全局布局<code>layui-fluid</code>,内部使用<code>layui-row</code>，<code>layui-row</code>内部使用<code>&lt;div class=&quot;layui-col-md8&quot;&gt;</code> 8表示12个中占8位长度。</h5><p>页面布局如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>图模导入<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, maximum-scale=1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"../../assets/libs/layui/css/layui.css"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"../../assets/module/admin.css"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"../../assets/css/theme.css"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"layui-body"</span> <span class="attr">style</span>=<span class="string">"left: 0px;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-card"</span> <span class="attr">style</span>=<span class="string">"margin:10px;margin-top:0px;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-card-body"</span> <span class="attr">style</span>=<span class="string">"padding-left:10px;padding-top:5px;padding-bottom: 0px;padding-right: 10px;"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-fluid"</span> <span class="attr">style</span>=<span class="string">"padding:0px;margin: 0px;"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-col-md8"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">"layui-form"</span> <span class="attr">style</span>=<span class="string">"margin-top: 2px;"</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-form-item"</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-inline"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-inline"</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"search-text"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"search"</span> <span class="attr">placeholder</span>=<span class="string">"图像名称"</span></span></span><br><span class="line"><span class="tag">                                               <span class="attr">autocomplete</span>=<span class="string">"off"</span> <span class="attr">class</span>=<span class="string">"layui-input"</span> <span class="attr">style</span>=<span class="string">"margin-top: 5px;"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"layui-btn"</span> <span class="attr">lay-submit</span> <span class="attr">lay-filter</span>=<span class="string">"search-graph"</span>&gt;</span>查询</span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"reset"</span> <span class="attr">class</span>=<span class="string">"layui-btn layui-btn-primary"</span>&gt;</span>重置</span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row"</span> <span class="attr">style</span>=<span class="string">"margin-top: -14px;"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">table</span> <span class="attr">id</span>=<span class="string">"pic-mod-table"</span> <span class="attr">lay-filter</span>=<span class="string">"pic-mod-table"</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-row"</span><span class="attr">style</span>=<span class="string">"margin-top: 11px;"</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">table</span> <span class="attr">id</span>=<span class="string">"his-pic-mod-table"</span> <span class="attr">lay-filter</span>=<span class="string">"his-pic-mod-table"</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-col-md4"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-form-item"</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--                &lt;label class="layui-form-label"&gt;添加附件：&lt;/label&gt;--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">id</span>=<span class="string">"filePath"</span> <span class="attr">name</span>=<span class="string">"filePath"</span>/&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-input-inline shangc_txt"</span> <span class="attr">style</span>=<span class="string">"margin-top: 5px;padding-left: 10px;width: 100%"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-upload"</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"layui-btn"</span> <span class="attr">id</span>=<span class="string">"upload-svg-btn"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"layui-icon"</span>&gt;</span>&amp;#xe67c;<span class="tag">&lt;/<span class="name">i</span>&gt;</span>选择文件</span><br><span class="line">                                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-upload-list"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #D9D9D9;width: 98%"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"layui-table"</span> <span class="attr">style</span>=<span class="string">"padding:0px;margin: 0px;overflow-y: auto;margin-top: 2px;"</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件大小<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件状态<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件操作<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">tbody</span> <span class="attr">id</span>=<span class="string">"upload-list"</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"layui-btn layui-btn-disabled"</span> <span class="attr">id</span>=<span class="string">"upload"</span>&gt;</span>上传<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- js部分 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../../assets/libs/layui/layui.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../../assets/libs/jquery/jquery-3.2.1.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../../assets/js/common.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../../assets/js/applicationUtil.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/graph.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="高度自适应"><a href="#高度自适应" class="headerlink" title="高度自适应"></a>高度自适应</h5><h6 id="数据表格"><a href="#数据表格" class="headerlink" title="数据表格"></a>数据表格</h6><p>如下代码，可以直接在方法渲染中，官方做法：数据表格参数：<code>height:&#39;full-20&#39;</code>，20表示上下预留的像素，这个方法只能适用于页面单行数据表格的情况，如果两行同样数据表格，下面的表格会被顶出。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">table.render(&#123;</span><br><span class="line">      elem: <span class="string">'#pic-mod-table'</span></span><br><span class="line">      , <span class="attr">id</span>: <span class="string">'pic-mod-table'</span></span><br><span class="line">      , <span class="attr">url</span>: applicationUtil.gatewayURL + <span class="string">'/pssc-graph/graph/graph-name'</span> <span class="comment">//数据接口</span></span><br><span class="line">      , <span class="attr">response</span>: &#123;</span><br><span class="line">          statusCode: <span class="number">200</span> <span class="comment">//规定成功的状态码，默认：0</span></span><br><span class="line">          , <span class="attr">countName</span>: <span class="string">'totalCount'</span> <span class="comment">//规定数据总数的字段名称，默认：count</span></span><br><span class="line">          , <span class="attr">dataName</span>: <span class="string">'list'</span> <span class="comment">//规定数据列表的字段名称，默认：data</span></span><br><span class="line">      &#125;</span><br><span class="line">      , <span class="attr">limit</span>: <span class="number">20</span></span><br><span class="line">      , <span class="attr">parseData</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123; <span class="comment">//res 即为原始返回的数据</span></span><br><span class="line">          <span class="comment">// console.log(res.data.list);</span></span><br><span class="line">          <span class="keyword">return</span> &#123;</span><br><span class="line">              <span class="string">"code"</span>: res.code, <span class="comment">//解析接口状态</span></span><br><span class="line">              <span class="string">"msg"</span>: res.msg, <span class="comment">//解析提示文本</span></span><br><span class="line">              <span class="string">"totalCount"</span>: res.data.totalCount, <span class="comment">//解析数据长度</span></span><br><span class="line">              <span class="comment">// "count": 19, //解析数据长度</span></span><br><span class="line">              <span class="string">"list"</span>: res.data.list <span class="comment">//解析数据列表</span></span><br><span class="line">          &#125;;</span><br><span class="line">      &#125;</span><br><span class="line">      , <span class="attr">height</span>: <span class="string">'full-20'</span></span><br><span class="line">      , <span class="attr">totalRow</span>: <span class="literal">false</span></span><br><span class="line">      , <span class="attr">page</span>: <span class="literal">true</span> <span class="comment">//开启分页</span></span><br><span class="line">      , <span class="attr">cols</span>: [[ <span class="comment">//表头</span></span><br><span class="line">          &#123;<span class="attr">field</span>: <span class="string">'objId'</span>, <span class="attr">title</span>: <span class="string">''</span>, <span class="attr">fixed</span>: <span class="string">'left'</span>, <span class="attr">type</span>: <span class="string">'numbers'</span>, <span class="attr">align</span>: <span class="string">'center'</span>&#125;</span><br><span class="line">          , &#123;<span class="attr">field</span>: <span class="string">'graphId'</span>, <span class="attr">title</span>: <span class="string">'图模标识'</span>, <span class="attr">width</span>: <span class="string">'28%'</span>, <span class="attr">align</span>: <span class="string">'center'</span>&#125;</span><br><span class="line">          , &#123;<span class="attr">field</span>: <span class="string">'graphName'</span>, <span class="attr">title</span>: <span class="string">'图模名称'</span>, <span class="attr">width</span>: <span class="string">'28%'</span>, <span class="attr">align</span>: <span class="string">'center'</span>&#125;</span><br><span class="line">          , &#123;<span class="attr">field</span>: <span class="string">'graphType'</span>, <span class="attr">title</span>: <span class="string">'图模类型'</span>, <span class="attr">width</span>: <span class="string">'11%'</span>, <span class="attr">align</span>: <span class="string">'center'</span>&#125;</span><br><span class="line">          , &#123;<span class="attr">field</span>: <span class="string">'createTime'</span>, <span class="attr">title</span>: <span class="string">'创建时间'</span>, <span class="attr">width</span>: <span class="string">'17%'</span>, <span class="attr">sort</span>: <span class="literal">true</span>, <span class="attr">align</span>: <span class="string">'center'</span>&#125;</span><br><span class="line">          , &#123;<span class="attr">field</span>: <span class="string">'graphVersion'</span>, <span class="attr">title</span>: <span class="string">'图模版本'</span>, <span class="attr">width</span>: <span class="string">'14%'</span>, <span class="attr">sort</span>: <span class="literal">true</span>, <span class="attr">align</span>: <span class="string">'center'</span>&#125;</span><br><span class="line">      ]]</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h6 id="js监听resize事件"><a href="#js监听resize事件" class="headerlink" title="js监听resize事件"></a>js监听resize事件</h6><p>手动获取页面高度，并根据比例判断页面占比和高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> form = layui.form;</span><br><span class="line"><span class="keyword">var</span> allHeight = $(<span class="string">'.layui-body'</span>).height() - <span class="number">15</span>;</span><br><span class="line"><span class="keyword">var</span> offsetPercent = (allHeight - <span class="number">70</span>) / allHeight</span><br><span class="line">allHeight *= offsetPercent;</span><br><span class="line"><span class="keyword">var</span> halfHeight = allHeight / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> lay_off_size = halfHeight</span><br><span class="line">$(<span class="string">'.layui-upload-list'</span>).css(<span class="string">'height'</span>, allHeight * <span class="number">0.994</span> - $(<span class="string">"#upload"</span>).height());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自适应问题</span></span><br><span class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    allHeight = $(<span class="string">'.layui-body'</span>).height() - <span class="number">15</span>;</span><br><span class="line">    offsetPercent = (allHeight - <span class="number">70</span>) / allHeight</span><br><span class="line">    allHeight *= offsetPercent;</span><br><span class="line">    halfHeight = allHeight / <span class="number">2</span>;</span><br><span class="line">    $(<span class="string">'.layui-upload-list'</span>).css(<span class="string">'height'</span>, allHeight * <span class="number">0.994</span> - $(<span class="string">"#upload"</span>).height());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// resize all table</span></span><br><span class="line">    table.reload(<span class="string">'pic-mod-table'</span>, &#123;</span><br><span class="line">        height: halfHeight</span><br><span class="line">    &#125;);</span><br><span class="line">    table.reload(<span class="string">'task-pic-mod-table'</span>, &#123;</span><br><span class="line">        height: halfHeight</span><br><span class="line">    &#125;);</span><br><span class="line">    table.reload(<span class="string">'his-pic-mod-table'</span>, &#123;</span><br><span class="line">        height: halfHeight</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LayUi/" rel="tag"># LayUi</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/12/Intellij-idea实用配置和快捷键/" rel="next" title="Intellij idea实用配置和快捷键">
+                <i class="fa fa-chevron-left"></i> Intellij idea实用配置和快捷键
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/16/文件上传/" rel="prev" title="文件上传">
+                文件上传 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#layui自适应"><span class="nav-number">1.</span> <span class="nav-text">layui自适应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自适应页面布局"><span class="nav-number">1.1.</span> <span class="nav-text">自适应页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#宽度自适应-设定全局布局layui-fluid-内部使用layui-row，layui-row内部使用-lt-div-class-quot-layui-col-md8-quot-gt-8表示12个中占8位长度。"><span class="nav-number">1.1.1.</span> <span class="nav-text">宽度自适应:设定全局布局layui-fluid,内部使用layui-row，layui-row内部使用&lt;div class=&quot;layui-col-md8&quot;&gt; 8表示12个中占8位长度。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#高度自适应"><span class="nav-number">1.1.2.</span> <span class="nav-text">高度自适应</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#数据表格"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">数据表格</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#js监听resize事件"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">js监听resize事件</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

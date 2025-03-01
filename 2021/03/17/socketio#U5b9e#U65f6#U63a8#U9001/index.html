@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="hi, world">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="socketio 实时推送不仅是简单的建立连接响应，还要每隔一段时间推送数据到客户端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="socketio实时推送">
+<meta property="og:url" content="http://yoursite.com/2021/03/17/socketio实时推送/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="socketio 实时推送不仅是简单的建立连接响应，还要每隔一段时间推送数据到客户端">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2021-03-18T01:14:10.859Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="socketio实时推送">
+<meta name="twitter:description" content="socketio 实时推送不仅是简单的建立连接响应，还要每隔一段时间推送数据到客户端">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/17/socketio实时推送/">
+
+
+
+
+
+  <title>socketio实时推送 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/17/socketio实时推送/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">socketio实时推送</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-17T10:55:58+08:00">
+                2021-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="socketio-实时推送"><a href="#socketio-实时推送" class="headerlink" title="socketio 实时推送"></a>socketio 实时推送</h1><p>不仅是简单的建立连接响应，还要每隔一段时间推送数据到客户端<br><a id="more"></a></p>
+<h2 id="pom文件"><a href="#pom文件" class="headerlink" title="pom文件"></a>pom文件</h2><p>添加依赖<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.corundumstudio.socketio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>netty-socketio<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>fastjson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.56<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="yml-配置"><a href="#yml-配置" class="headerlink" title="yml 配置"></a>yml 配置</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">socketio:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">9922</span>		<span class="comment">#监听端口</span></span><br><span class="line">  <span class="comment"># host: 127.0.0.1	#监听的ip</span></span><br><span class="line">  <span class="comment"># 设置最大每帧处理数据的长度，防止他人利用大数据来攻击服务器</span></span><br><span class="line">  <span class="comment"># maxFramePayloadLength: 1048576</span></span><br><span class="line">  <span class="comment"># 设置http交互最大内容长度</span></span><br><span class="line">  <span class="comment"># maxHttpContentLength: 1048576</span></span><br><span class="line">  <span class="comment"># socket连接数大小（如只监听一个端口boss线程组为1即可）</span></span><br><span class="line">  <span class="comment"># bossCount: 1</span></span><br><span class="line">  <span class="comment"># workCount: 100</span></span><br><span class="line">  <span class="comment"># allowCustomRequests: true</span></span><br><span class="line">  <span class="comment"># 协议升级超时时间（毫秒），默认10秒。HTTP握手升级为ws协议超时时间</span></span><br><span class="line">  <span class="comment"># upgradeTimeout: 1000000</span></span><br><span class="line">  <span class="comment"># Ping消息超时时间（毫秒），默认60秒，这个时间间隔内没有接收到心跳消息就会发送超时事件</span></span><br><span class="line">  <span class="comment"># pingTimeout: 6000000</span></span><br><span class="line">  <span class="comment"># Ping消息间隔（毫秒），默认25秒。客户端向服务器发送一条心跳消息间隔</span></span><br><span class="line">  <span class="comment"># pingInterval: 25000</span></span><br></pre></td></tr></table></figure>
+<h2 id="socketio-配置"><a href="#socketio-配置" class="headerlink" title="socketio 配置"></a>socketio 配置</h2><p>@Configuration 和 @Bean 将spring管理的socketIOServer配置为我们自定义的server</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> cc.crrc.manage.mq.RabbitmqChannelListener;</span><br><span class="line"><span class="keyword">import</span> com.corundumstudio.socketio.SocketIOClient;</span><br><span class="line"><span class="keyword">import</span> com.corundumstudio.socketio.SocketIOServer;</span><br><span class="line"><span class="keyword">import</span> com.corundumstudio.socketio.listener.ExceptionListener;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.ChannelHandlerContext;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.Inet4Address;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketIOConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;socketio.port:''&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> socketIOPort;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(SocketIOConfiguration.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(<span class="string">"socketIOServer"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SocketIOServer <span class="title">socketIOServer</span><span class="params">()</span> <span class="keyword">throws</span> UnknownHostException </span>&#123;</span><br><span class="line">        com.corundumstudio.socketio.Configuration configuration = <span class="keyword">new</span> com.corundumstudio.socketio.Configuration();</span><br><span class="line">        configuration.setPort(socketIOPort);</span><br><span class="line">        configuration.setExceptionListener(<span class="keyword">new</span> ExceptionListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onEventException</span><span class="params">(Exception e, List&lt;Object&gt; list, SocketIOClient socketIOClient)</span> </span>&#123;</span><br><span class="line">                logger.error(<span class="string">"客户端:"</span> + socketIOClient.getRemoteAddress() + <span class="string">" EventException："</span> +e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDisconnectException</span><span class="params">(Exception e, SocketIOClient socketIOClient)</span> </span>&#123;</span><br><span class="line">                logger.error(<span class="string">"客户端:"</span> + socketIOClient.getRemoteAddress() + <span class="string">" DisconnectException："</span> +e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConnectException</span><span class="params">(Exception e, SocketIOClient socketIOClient)</span> </span>&#123;</span><br><span class="line">                logger.error(<span class="string">"客户端:"</span> + socketIOClient.getRemoteAddress() + <span class="string">" ConnectException："</span> +e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onPingException</span><span class="params">(Exception e, SocketIOClient socketIOClient)</span> </span>&#123;</span><br><span class="line">                logger.error(<span class="string">"客户端:"</span> + socketIOClient.getRemoteAddress() + <span class="string">" PingException："</span> +e.getMessage());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">exceptionCaught</span><span class="params">(ChannelHandlerContext channelHandlerContext, Throwable throwable)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"><span class="comment">//        configuration.setOrigin("*");</span></span><br><span class="line"><span class="comment">//        configuration.setSocketConfig();</span></span><br><span class="line"><span class="comment">//        configuration.setWorkerThreads(1);</span></span><br><span class="line"><span class="comment">//         configuration.setAllowCustomRequests(true);</span></span><br><span class="line"><span class="comment">//        configuration.setUpgradeTimeout(10000);</span></span><br><span class="line"><span class="comment">//        configuration.setPingTimeout(60000);</span></span><br><span class="line"><span class="comment">//        configuration.setPingInterval(25000);</span></span><br><span class="line"><span class="comment">//        configuration.setMaxHttpContentLength(2071738);</span></span><br><span class="line"><span class="comment">//        configuration.setMaxFramePayloadLength(2071738);</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SocketIOServer(configuration);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>configuration.setExceptionListener(new ExceptionListener() {...</code>可以不用写 这里只是重写了异常监听，用于记录日志到系统。</p>
+<h2 id="定义线程处理接口"><a href="#定义线程处理接口" class="headerlink" title="定义线程处理接口"></a>定义线程处理接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MonitorProcessor</span> </span>&#123;</span><br><span class="line">    <span class="function">Object <span class="title">process</span><span class="params">(String value)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实现线程处理接口"><a href="#实现线程处理接口" class="headerlink" title="实现线程处理接口"></a>实现线程处理接口</h2><p>处理传递过来的message 产生返回消息<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GPSProcessor</span> <span class="keyword">implements</span> <span class="title">MonitorProcessor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(GPSProcessor.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MtrVehicleService vehicleService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">process</span><span class="params">(String message)</span> </span>&#123;</span><br><span class="line">        List&lt;Map&lt;String, String&gt;&gt; result = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">"name"</span>,<span class="string">"tr"</span>);</span><br><span class="line">        <span class="keyword">return</span> JSONObject.toJSONString(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="映射主题和处理类"><a href="#映射主题和处理类" class="headerlink" title="映射主题和处理类"></a>映射主题和处理类</h2><p>将所有类根据名字存入map中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> SocketRoute &#123;</span><br><span class="line"></span><br><span class="line">    LINE_MONITOR(<span class="string">"lineMonitor"</span>, <span class="string">"/line"</span>, LineMonitorProcessor.class, <span class="number">2000</span>),</span><br><span class="line">    VEHICLE_MONITOR(<span class="string">"trainMonitor"</span>, <span class="string">"/vehicle"</span>, VehicleMonitorProcessor.class, <span class="number">1000</span>),</span><br><span class="line">    VEHICLE_GPS(<span class="string">"GPSMonitor"</span>, <span class="string">"/gps"</span>, GPSProcessor.class, <span class="number">2000</span>),</span><br><span class="line">    VEHICLE_FAULT(<span class="string">"faultInform"</span>, <span class="string">"/fault"</span>, GlobalFaultInformProcessor.class, <span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, SocketRoute&gt; routes = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (SocketRoute route : SocketRoute.values()) &#123;</span><br><span class="line">            routes.put(route.getCmd(),route);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Class&lt;? extends MonitorProcessor&gt; monitorClass;</span><br><span class="line">    <span class="keyword">private</span> String nameSpace;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> intervalTime;</span><br><span class="line">    <span class="keyword">private</span> String cmd;</span><br><span class="line"></span><br><span class="line">    SocketRoute(String cmd, String nameSpace, Class&lt;? extends MonitorProcessor&gt; monitorClass, <span class="keyword">int</span> intervalTime) &#123;</span><br><span class="line">        <span class="keyword">this</span>.cmd = cmd;</span><br><span class="line">        <span class="keyword">this</span>.nameSpace = nameSpace;</span><br><span class="line">        <span class="keyword">this</span>.monitorClass = monitorClass;</span><br><span class="line">        <span class="keyword">this</span>.intervalTime = intervalTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Class&lt;? extends MonitorProcessor&gt; getMonitorClass() &#123;</span><br><span class="line">        <span class="keyword">return</span> monitorClass;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNameSpace</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> nameSpace;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getIntervalTime</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intervalTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCmd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> cmd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">static</span> SocketRoute <span class="title">getSocketRoute</span><span class="params">(String cmd)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> routes.get(cmd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建server"><a href="#创建server" class="headerlink" title="创建server"></a>创建server</h2><p>配置socketIOServer启动类，并且在spring容器初始化后启动，有两种方式实现自动启动 </p>
+<ol>
+<li><p>实现CommandLineRunner接口 实现里面的run方法</p>
+</li>
+<li><p>@PostConstruct标签描述方法，被描述的方法会自动在构建后执行</p>
+</li>
+<li><p>以下这种实现是多线程共享一个socket通道，如果数据量大还是和前端建立多个通道好。</p>
+</li>
+</ol>
+<p>前端后端约定监听<code>talk</code>事件，且发送的json内容的两个key分别为<code>cmd</code>和<code>message</code>，定义一个SocketRoute的enum 保存不同cmd的处理事件和间隔时间。假设发送的json为<code>{&quot;cmd&quot;:&quot;GPSMonitor&quot;,&quot;message&quot;:{&quot;vehicle&quot;:&quot;t&quot;}}</code>，通过枚举类找到 GPSMonitor为key的值的类，将该类的对象作为线程的内部对象，启动新的线程，首先根据key取消之前的线程，再重写启动新的线程，内部调用传递类的process方法。</p>
+<p>处理线程内部根据是否循环loop和循环间隔interval 不停调用处理对象的process方法和<code>socketIOClient.sendEvent(&quot;message&quot;, returnVal);</code>返回客户端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketIOStartup</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(SocketIOStartup.class);</span><br><span class="line">    <span class="comment">// 保存当前运行的socket线程 一个key一个线程</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ConcurrentHashMap&lt;String, SocketThread&gt; socketThreadMap = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> SocketIOServer socketIOServer;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startUpServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        bindListener();</span><br><span class="line">        socketIOServer.startAsync();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">bindListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        connect();</span><br><span class="line">        disconnect();</span><br><span class="line">        bindEventListener();</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 可以不写，这里重写connect的监听方法用于日志记录</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">connect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        socketIOServer.addConnectListener(<span class="keyword">new</span> ConnectListener() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConnect</span><span class="params">(SocketIOClient socketIOClient)</span> </span>&#123;</span><br><span class="line">                logger.info(<span class="string">"&#123;&#125;已连接"</span>, socketIOClient.getRemoteAddress().toString() + socketIOClient.getSessionId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 可以不写，这里重写disconnect的监听方法用于日志记录</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">disconnect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        socketIOServer.addDisconnectListener(<span class="keyword">new</span> DisconnectListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDisconnect</span><span class="params">(SocketIOClient socketIOClient)</span> </span>&#123;</span><br><span class="line">                SocketThread st = socketThreadMap.get(socketIOClient.getSessionId().toString());</span><br><span class="line">                <span class="keyword">if</span> (st != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    st.setLoop(<span class="keyword">false</span>);</span><br><span class="line">                    socketThreadMap.remove(socketIOClient.getSessionId().toString());</span><br><span class="line">                &#125;</span><br><span class="line">                logger.info(<span class="string">"&#123;&#125;已关闭"</span>, socketIOClient.getSessionId());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 绑定监听事件：cmd 实现监听方法 前端也要发送该事件才能调用这个方法：socket.emit("cmd"..</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">bindEventListener</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        socketIOServer.addEventListener(<span class="string">"talk"</span>, Object.class, <span class="keyword">new</span> DataListener&lt;Object&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onData</span><span class="params">(SocketIOClient socketIOClient, Object value, AckRequest ackRequest)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                sendMessage(socketIOClient, value);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 消息处理方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(SocketIOClient socketIOClient, Object object)</span> <span class="keyword">throws</span> JsonParseException </span>&#123;</span><br><span class="line">        String cmd;</span><br><span class="line">        String value;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String jsonString = JSONObject.toJSONString(object);</span><br><span class="line">            JSONObject cmdJson = JSONObject.parseObject(jsonString);</span><br><span class="line">            cmd = cmdJson.getString(<span class="string">"cmd"</span>);</span><br><span class="line">            value = cmdJson.getString(<span class="string">"message"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RestApiException(ExceptionInfoEnum.DATA_PARSE_EXCEPTION);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        &#125; else &#123;</span></span><br><span class="line"><span class="comment">//            throw new RestApiException(ExceptionInfoEnum.URL_PARAMETER_MISMATCH_EXCEPTION);</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">		<span class="comment">//得到处理类</span></span><br><span class="line">        SocketRoute route = SocketRoute.getSocketRoute(cmd);</span><br><span class="line">        <span class="keyword">if</span> (route == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"找不到该cmd:"</span> + cmd + <span class="string">" 对应的处理方法"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        MonitorProcessor processor = SpringBeanUtils.getBean(route.getMonitorClass());</span><br><span class="line">        <span class="comment">// 将该处理类作为包装成线程启动</span></span><br><span class="line">        startThread(socketIOClient, processor, value, route.getIntervalTime());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startThread</span><span class="params">(SocketIOClient socketIOClient, MonitorProcessor processor, String value, <span class="keyword">long</span> interval)</span> </span>&#123;</span><br><span class="line">        SocketThread st = socketThreadMap.get(socketIOClient.getSessionId().toString());</span><br><span class="line">        <span class="keyword">if</span> (st != <span class="keyword">null</span>) &#123;</span><br><span class="line">            st.setLoop(<span class="keyword">false</span>);</span><br><span class="line">            socketThreadMap.remove(socketIOClient.getSessionId().toString());</span><br><span class="line">        &#125;</span><br><span class="line">        SocketThread st_new = <span class="keyword">new</span> SocketThread(socketIOClient, processor, value, interval);</span><br><span class="line">        socketThreadMap.put(socketIOClient.getSessionId().toString(), st_new);</span><br><span class="line">        Thread t = <span class="keyword">new</span> Thread(st_new);</span><br><span class="line">        t.start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SocketThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> SocketIOClient socketIOClient;</span><br><span class="line">        <span class="keyword">private</span> MonitorProcessor processor;</span><br><span class="line">        <span class="keyword">private</span> String value;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">long</span> interval;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> loop = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">SocketThread</span><span class="params">(SocketIOClient socketIOClient, MonitorProcessor processor, String value, <span class="keyword">long</span> interval)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.socketIOClient = socketIOClient;</span><br><span class="line">            <span class="keyword">this</span>.processor = processor;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            <span class="keyword">this</span>.interval = interval;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLoop</span><span class="params">(<span class="keyword">boolean</span> loop)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.loop = loop;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (loop &amp;&amp; socketIOClient.isChannelOpen()) &#123;</span><br><span class="line">                Object returnVal = processor.process(value);</span><br><span class="line">                <span class="keyword">if</span> (loop &amp;&amp; socketIOClient.isChannelOpen()) &#123;</span><br><span class="line">                    socketIOClient.sendEvent(<span class="string">"message"</span>, returnVal);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(interval);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    logger.error(<span class="string">"Socket clientId:&#123;&#125; &#123;&#125;"</span>, socketIOClient.getSessionId(), e.getMessage());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">        startUpServer();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="前端测试"><a href="#前端测试" class="headerlink" title="前端测试"></a>前端测试</h2><p>npm install socketio</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://libs.baidu.com/jquery/2.0.0/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;script src="/js/socketio/socket.io.js"&gt;&lt;/script&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/socket.io/2.3.0/socket.io.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> first = <span class="literal">true</span>;</span></span><br><span class="line"><span class="javascript">        $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">         <span class="keyword">var</span> socket ;</span></span><br><span class="line"><span class="javascript">           $(<span class="string">"#connectBtn"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">if</span>(first)&#123;</span></span><br><span class="line"><span class="javascript">                socket = io.connect(<span class="string">'http://localhost:9922'</span>);</span></span><br><span class="line"><span class="javascript">                 <span class="built_in">console</span>.log(socket)</span></span><br><span class="line"><span class="javascript">                socket.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    $(<span class="string">"#content"</span>).text(<span class="string">"连接成功"</span>)</span></span><br><span class="line"><span class="undefined">                &#125;);</span></span><br><span class="line"><span class="javascript">                 socket.on(<span class="string">'disconnect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                   $(<span class="string">"#content"</span>).text(<span class="string">"连接断开"</span>)</span></span><br><span class="line"><span class="undefined">                &#125;);</span></span><br><span class="line"><span class="javascript">                socket.on(<span class="string">"message"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                    $(<span class="string">"#content"</span>).text(data);</span></span><br><span class="line"><span class="undefined">                &#125;)</span></span><br><span class="line"><span class="javascript">                first = <span class="literal">false</span>;</span></span><br><span class="line"><span class="javascript">                &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="undefined">                    socket.connect();</span></span><br><span class="line"><span class="undefined">                &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">           &#125;)</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">           $(<span class="string">"#cancelBtn"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="undefined">                socket.disconnect();</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(socket);</span></span><br><span class="line"><span class="undefined">           &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">           $(<span class="string">"#sendBtn"</span>).on(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                socket.emit(<span class="string">"cmd"</span>,<span class="built_in">JSON</span>.parse($(<span class="string">"#message"</span>).val()));</span></span><br><span class="line"><span class="undefined">           &#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">        &#125;);</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"connectBtn"</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"连接"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"cancelBtn"</span> <span class="attr">class</span>=<span class="string">"btn"</span>&gt;</span>断开<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">id</span>=<span class="string">"sendBtn"</span> <span class="attr">class</span>=<span class="string">"btn"</span>&gt;</span>发送<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"message"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/10/Java-工程师之路-四/" rel="next" title="Java 工程师之路 四">
+                <i class="fa fa-chevron-left"></i> Java 工程师之路 四
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/23/日语/" rel="prev" title="日语">
+                日语 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#socketio-实时推送"><span class="nav-number">1.</span> <span class="nav-text">socketio 实时推送</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pom文件"><span class="nav-number">1.1.</span> <span class="nav-text">pom文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yml-配置"><span class="nav-number">1.2.</span> <span class="nav-text">yml 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#socketio-配置"><span class="nav-number">1.3.</span> <span class="nav-text">socketio 配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义线程处理接口"><span class="nav-number">1.4.</span> <span class="nav-text">定义线程处理接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现线程处理接口"><span class="nav-number">1.5.</span> <span class="nav-text">实现线程处理接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#映射主题和处理类"><span class="nav-number">1.6.</span> <span class="nav-text">映射主题和处理类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建server"><span class="nav-number">1.7.</span> <span class="nav-text">创建server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前端测试"><span class="nav-number">1.8.</span> <span class="nav-text">前端测试</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

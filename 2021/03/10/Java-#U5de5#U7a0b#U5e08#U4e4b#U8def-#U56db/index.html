@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="基础Java序列化">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 工程师之路 四">
+<meta property="og:url" content="http://yoursite.com/2021/03/10/Java-工程师之路-四/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="基础Java序列化">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-38.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-39.png">
+<meta property="og:updated_time" content="2021-04-01T11:43:32.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java 工程师之路 四">
+<meta name="twitter:description" content="基础Java序列化">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-38.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/10/Java-工程师之路-四/">
+
+
+
+
+
+  <title>Java 工程师之路 四 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/10/Java-工程师之路-四/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java 工程师之路 四</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-10T14:27:00+08:00">
+                2021-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h1><h2 id="Java序列化"><a href="#Java序列化" class="headerlink" title="Java序列化"></a>Java序列化</h2><a id="more"></a>
+<p>序列化是将对象转换为可传输格式的过程，是一种数据持久化手段，一般广泛应用于网络传输，RMI和RPC场景。</p>
+<p>反序列化就是逆操作，Java序列化特指JDK的序列化实现，这个实现不同于JSON序列化，是不跨语言的。</p>
+<h3 id="Java对象的序列化"><a href="#Java对象的序列化" class="headerlink" title="Java对象的序列化"></a>Java对象的序列化</h3><p>Java内创建的对象都是存在于JVM的堆内存中，只有JVM处于运行态这些对象才会存在，一旦JVM停止运行，这些对象状态也随之消失。但是在真是场景中我们需要将这些对象持久化下来，并且在需要的时候将对象重新读取出来。对象序列化可以很容易的在JVM中的活动对象和字节数组之间进行调换。</p>
+<h3 id="Serializable接口"><a href="#Serializable接口" class="headerlink" title="Serializable接口"></a>Serializable接口</h3><p>类通过实现java.io.Serializable接口以启用其序列化功能，当对一个对象进行序列化的时候，如果遇到不支持Serializable接口的对象，会抛出 NotSerializableException。</p>
+<p>配置实体类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"> <span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User1</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"User&#123;"</span> +</span><br><span class="line">                <span class="string">"name='"</span> + name + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", age="</span> + age +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>序列化实体类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SerializableDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Initializes The Object</span></span><br><span class="line">        User1 user = <span class="keyword">new</span> User1();</span><br><span class="line">        user.setName(<span class="string">"test"</span>);</span><br><span class="line">        user.setAge(<span class="number">1</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Write Obj to File</span></span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"tempFile"</span>));</span><br><span class="line">            oos.writeObject(user);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            IOUtils.closeQuietly(oos);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//Read Obj from File</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"tempFile"</span>);</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ois = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">            User1 newUser = (User1) ois.readObject();</span><br><span class="line">            System.out.println(newUser);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            IOUtils.closeQuietly(ois);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                FileUtils.forceDelete(file);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Externalizable接口"><a href="#Externalizable接口" class="headerlink" title="Externalizable接口"></a>Externalizable接口</h3><p>Externalizable继承了Serializable接口，且定义了两个新的方法：writeExternal()和readExternal()，使用Externalizable接口进行序列化的时候要重写writeExternal()和readExternal()方法。</p>
+<h3 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h3><p>序列化时将对象状态信息转为可存储或可传输的形式，虚拟机是否支持反序列化不仅取决于类的路径和代码一致，还要求两个类的序列化ID是否一致，即serialVersionUID</p>
+<p>反序列化时：JVM将传递过来的serialVersionUID与本地对应的实体类的UID进行比较，相同即可反序列化。</p>
+<p>这样是为了安全，因为文件存储的内容可能被篡改。</p>
+<h3 id="Java序列化缺陷"><a href="#Java序列化缺陷" class="headerlink" title="Java序列化缺陷"></a>Java序列化缺陷</h3><ol>
+<li><p>不能跨语言，如果两个不同语言编写的程序进行通讯，用Java序列化是无法完成序列化和反序列化的。</p>
+</li>
+<li><p>不安全，Java的反序列化实质是通过ObjectInputStream类调用readObject()方法实现的，这个方法本质是个构造器，可以将实现了Serializable接口的类都实例化，所以在反序列化过程中该方法会执行任意代码。<br>以下是攻击代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Set root = <span class="keyword">new</span> HashSet();  </span><br><span class="line">Set s1 = root;  </span><br><span class="line">Set s2 = <span class="keyword">new</span> HashSet();  </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;  </span><br><span class="line">   Set t1 = <span class="keyword">new</span> HashSet();  </span><br><span class="line">   Set t2 = <span class="keyword">new</span> HashSet();  </span><br><span class="line">   t1.add(<span class="string">"test"</span>); <span class="comment">//使t2不等于t1  </span></span><br><span class="line">   s1.add(t1);  </span><br><span class="line">   s1.add(t2);  </span><br><span class="line">   s2.add(t1);  </span><br><span class="line">   s2.add(t2);  </span><br><span class="line">   s1 = t1;  </span><br><span class="line">   s2 = t2;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>创建循环对象链，然后将序列化后的对象传输到程序中反序列化，这种情况会导致 hashCode 方法被调用次数呈次方爆发式增长, 从而引发栈溢出异常。</p>
+<ol start="3">
+<li><p>序列化后的流很大</p>
+</li>
+<li><p>序列化性能差 太慢</p>
+</li>
+</ol>
+<h3 id="序列化对单例的破坏"><a href="#序列化对单例的破坏" class="headerlink" title="序列化对单例的破坏"></a>序列化对单例的破坏</h3><p>实现一个双重校验锁的单例，对其序列化再反序列化，查看是否同一个对象。</p>
+<p>双重校验锁单例看上一篇<br>验证：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">        <span class="comment">//Write Obj to file</span></span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"tempFile"</span>));</span><br><span class="line">        oos.writeObject(Singleton.getSingleton());</span><br><span class="line">        <span class="comment">//Read Obj from file</span></span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"tempFile"</span>);</span><br><span class="line">        ObjectInputStream ois =  <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(file));</span><br><span class="line">        Singleton newInstance = (Singleton) ois.readObject();</span><br><span class="line">        <span class="comment">//判断是否是同一个对象</span></span><br><span class="line">        System.out.println(newInstance == Singleton.getSingleton());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>如何解决反序列化对单例的破坏呢：在单例类中定义readResolve即可添加方法到单例中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> Object <span class="title">readResolve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> singleton;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>原理：调用栈挺多的，实质就是在底层方法里有个判断目标对象是否有readResolve方法，如果有，就通过反射的方式调用readResolve方法返回一个对象用于反序列化最终返回对象。所以单例的readResolve方法直接返回自身。</p>
+<h3 id="Apache-Commons-Collections的反序列化漏洞"><a href="#Apache-Commons-Collections的反序列化漏洞" class="headerlink" title="Apache-Commons-Collections的反序列化漏洞"></a>Apache-Commons-Collections的反序列化漏洞</h3><p>这个漏洞只出现在3.2.1版本以下</p>
+<h4 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h4><p>Commons Collections中提供了一个Transformer接口，主要是用来进行类型转换，这个接口有一个实现类：InvokerTransformer，里面有个transform方法，核心代码就三行，通过反射将传入的对象进行实例化。然后执行其iMethodName方法。</p>
+<p><img src="/images/pasted-38.png" alt="upload successful"></p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><h3 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h3><p>定义其他注解的注解</p>
+<p>元注解有六个:@Target（表示该注解可以用于什么地方）、@Retention（表示再什么级别保存该注解信息）、@Documented（将此注解包含再javadoc中）、@Inherited（允许子类继承父类中的注解）、@Repeatable（1.8新增，允许一个注解在一个元素上使用多次）、@Native（1.8新增，修饰成员变量，表示这个变量可以被本地代码引用，常常被代码生成工具使用）。</p>
+<h3 id="Java常用注解"><a href="#Java常用注解" class="headerlink" title="Java常用注解"></a>Java常用注解</h3><p>@Override 表示覆写父类方法</p>
+<p>@Deprecated 表示当前方法已过时</p>
+<p>@SuppressWarnings 表示关闭一些警告信息</p>
+<p>@SafeVarargs 表示专门为抑制堆污染警告提供的</p>
+<p>@FunctionalInterface 表示用来指定某个接口必须是函数式接口</p>
+<h3 id="Spring常用注解"><a href="#Spring常用注解" class="headerlink" title="Spring常用注解"></a>Spring常用注解</h3><p>@Configuration：会将一个类作为IoC容器，它的某个方法头上如果注册了@Bean就会作为这个Spring容器中的Bean。</p>
+<p>@Scope 作用域</p>
+<p>@Lazy(true) 延迟初始化</p>
+<p>@Service 标注业务层组件</p>
+<p>@Controller 标注控制层组件</p>
+<p>@Repository 标注数据访问组件，即DAO组件</p>
+<p>@Component 泛指组件，当组件不好归类的时候可以用这个注解</p>
+<p>@PostConstruct用于指定初始化方法（用在方法上）</p>
+<p>@PreDestory用于指定销毁方法（用在方法上）</p>
+<p>@DependsOn：定义Bean初始化及销毁时的顺序</p>
+<p>@Primary：自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常</p>
+<p>@Autowired 默认按类型装配，如果我们想使用按名称装配，可以结合@Qualifier注解一起使用。如下： @Autowired @Qualifier(“personDaoBean”) 存在多个实例配合使用</p>
+<p>@Resource默认按名称装配，当找不到与名称匹配的bean才会按类型装配。</p>
+<p>@PostConstruct 初始化注解</p>
+<p>@PreDestroy 摧毁注解 默认 单例 启动就加载</p>
+<h3 id="如何定义注解"><a href="#如何定义注解" class="headerlink" title="如何定义注解"></a>如何定义注解</h3><p>注解和接口的定义差不多，注解多了个@符号</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAuth&#123;</span><br><span class="line">	<span class="function">String <span class="title">name</span><span class="params">()</span> <span class="keyword">default</span> "tr"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以定义成员变量，还可以添加默认值，实例如上。</p>
+<p>Target: 指定注解修饰什么东西（类，方法，字段）</p>
+<p>Rentention: 指定修饰的注解保留多长时间，分别SOURCE（注解仅存在于源码中，在class字节码文件中不包含）,CLASS（默认的保留策略，注解会在class字节码文件中存在，但运行时无法获取）,RUNTIME（注解会在class字节码文件中存在，在运行时可以通过反射获取到）三种类型，<em> 如果想要在程序运行过程中通过反射来获取注解的信息需要将Retention设置为RUNTIME ！</em></p>
+<p>Documented：指定被修饰的注解类将被javadoc工具提取成文档。</p>
+<p>Inherited：指定注解是否有继承性</p>
+<h3 id="通过反射使用自定义注解"><a href="#通过反射使用自定义注解" class="headerlink" title="通过反射使用自定义注解"></a>通过反射使用自定义注解</h3><p>如何获取类的方法，字段上的注解，以及获取注解的值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; clz = bean.getClass();</span><br><span class="line">Method[] methods = clz.getMethods();</span><br><span class="line"><span class="keyword">for</span> (Method method : methods) &#123;</span><br><span class="line">    <span class="keyword">if</span> (method.isAnnotationPresent(EnableAuth.class)) &#123;</span><br><span class="line">        String name = method.getAnnotation(EnableAuth.class).name();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ToString</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@EnableAuth</span></span><br><span class="line">    <span class="keyword">private</span> String stra;</span><br><span class="line">    <span class="keyword">private</span> String strb;</span><br><span class="line">    <span class="keyword">private</span> String strc;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(String str1,String str2,String str3)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.stra = str1;</span><br><span class="line">        <span class="keyword">this</span>.strb = str2;</span><br><span class="line">        <span class="keyword">this</span>.strc = str3;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获取注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//初始化全都赋值无注解</span></span><br><span class="line">        Person person = <span class="keyword">new</span> Person(<span class="string">"无注解"</span>,<span class="string">"无注解"</span>,<span class="string">"无注解"</span>);</span><br><span class="line">        <span class="comment">//解析注解</span></span><br><span class="line">        doAnnoTest(person);</span><br><span class="line">        System.out.println(person.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">doAnnoTest</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        Class clazz = obj.getClass();</span><br><span class="line">        Field[] declareFields = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field field:declareFields) &#123;</span><br><span class="line">            <span class="comment">//检查该字段是否使用了某个注解</span></span><br><span class="line">            <span class="keyword">if</span>(field.isAnnotationPresent(EnableAuth.class))&#123;</span><br><span class="line">                EnableAuth anno = field.getAnnotation(EnableAuth.class);</span><br><span class="line">                <span class="keyword">if</span>(anno!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                    String fieldName = field.getName();</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Method setMethod = clazz.getDeclaredMethod(<span class="string">"set"</span> + fieldName.substring(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + fieldName.substring(<span class="number">1</span>),String.class);</span><br><span class="line">                        <span class="comment">//获取注解的属性</span></span><br><span class="line">                        String annoValue = anno.value();</span><br><span class="line">                        <span class="comment">//将注解的属性值赋给对应的属性</span></span><br><span class="line">                        setMethod.invoke(obj,annoValue);</span><br><span class="line">                    &#125;<span class="keyword">catch</span> (NoSuchMethodException e)&#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>泛型是JDK5引入的新特性，允许在定义类和接口的时候使用类型参数。</p>
+<p>泛型最大的好处是复用，比如一个List接口，可以将String，Integer等类型放入，如果不用泛型，存String要写一个对应的接口，使用泛型就可以解决这个问题。</p>
+<h3 id="Java的类型擦除"><a href="#Java的类型擦除" class="headerlink" title="Java的类型擦除"></a>Java的类型擦除</h3><p>Java语言中的泛型只在程序源码中存在，在编译后的字节码文件中，就已经被替换为原来的原生类型（Raw Type，也称为裸类型）了，并且在相应的地方插入了强制转型代码，因此对于运行期的Java语言来说，ArrayList<integer>与ArrayList<string>就是同一个类。所以说泛型技术实际上是Java语言的一颗语法糖，Java语言中的泛型实现方法称为类型擦除，基于这种方法实现的泛型被称为伪泛型。</string></integer></p>
+<p>  类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。 类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码。 类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。 2.移除所有的类型参数。</p>
+<h3 id="eg"><a href="#eg" class="headerlink" title="eg"></a>eg</h3><p>code:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> HashMap&lt;String, String&gt;();  </span><br><span class="line">    map.put(<span class="string">"name"</span>, <span class="string">"test"</span>);  </span><br><span class="line">    map.put(<span class="string">"age"</span>, <span class="string">"1"</span>);  </span><br><span class="line">    System.out.println(map.get(<span class="string">"name"</span>));  </span><br><span class="line">    System.out.println(map.get(<span class="string">"age"</span>));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>反编译：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">    Map map = <span class="keyword">new</span> HashMap();  </span><br><span class="line">    map.put(<span class="string">"name"</span>, <span class="string">"test"</span>);  </span><br><span class="line">    map.put(<span class="string">"age"</span>, <span class="string">"1"</span>); </span><br><span class="line">    System.out.println((String) map.get(<span class="string">"name"</span>));  </span><br><span class="line">    System.out.println((String) map.get(<span class="string">"age"</span>));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到泛型类型都转为了基本类型</p>
+<h3 id="泛型带来的问题"><a href="#泛型带来的问题" class="headerlink" title="泛型带来的问题"></a>泛型带来的问题</h3><h4 id="泛型不可重载"><a href="#泛型不可重载" class="headerlink" title="泛型不可重载"></a>泛型不可重载</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTypes</span> </span>&#123;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(List&lt;String&gt; list)</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"invoke method(List&lt;String&gt; list)"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">(List&lt;Integer&gt; list)</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"invoke method(List&lt;Integer&gt; list)"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码中可以看到，两个重载函数唯一区别是<code>List&lt;String&gt;</code> 和 <code>List&lt;Integer&gt;</code> 但是在编译后泛型类型都会被擦除变为原始类型，导致两个方法变为一样的方法，所以编译不通过。</p>
+<h4 id="泛型的catch"><a href="#泛型的catch" class="headerlink" title="泛型的catch"></a>泛型的catch</h4><p>还是由于类型擦除问题，catch多个自定义泛型类的时候可能会重复。</p>
+<h4 id="泛型的静态变量"><a href="#泛型的静态变量" class="headerlink" title="泛型的静态变量"></a>泛型的静态变量</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        GT&lt;Integer&gt; gti = <span class="keyword">new</span> GT&lt;Integer&gt;();</span><br><span class="line">        gti.<span class="keyword">var</span>=<span class="number">1</span>;</span><br><span class="line">        GT&lt;String&gt; gts = <span class="keyword">new</span> GT&lt;String&gt;();</span><br><span class="line">        gts.<span class="keyword">var</span>=<span class="number">2</span>;</span><br><span class="line">        System.out.println(gti.<span class="keyword">var</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GT</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="keyword">var</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nothing</span><span class="params">(T x)</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>答案是——2！由于经过类型擦除，所有的泛型类实例都关联到同一份字节码上，泛型类的所有静态变量是共享的。</p>
+<h3 id="使用泛型注意点总结"><a href="#使用泛型注意点总结" class="headerlink" title="使用泛型注意点总结"></a>使用泛型注意点总结</h3><p>泛型本质就是一个java提供的语法糖，在虚拟机中只有普通类和普通方法，所有泛型类的类型参数在编译的时候都会被擦除</p>
+<p>创建泛型对象的时候要指明类型让编译器尽早做参数检查。</p>
+<p>所有静态变量是被泛型类的所有实例共享的</p>
+<p>泛型的类型参数不能用在catch里</p>
+<p>尽量不要使用原始态类型（Map 不指定泛型类型）可能导致ClassCastException</p>
+<h3 id="使用泛型"><a href="#使用泛型" class="headerlink" title="使用泛型"></a>使用泛型</h3><p>限定通配符和非限定通配符</p>
+<ul>
+<li>&lt;? extends T&gt; ：可以赋值给任意T及T的子类集合，上界为T，取出来的类型带有泛型限制，向上强制转型为T。null 可以表示任何类型，所以null除外，任何元素都不得添加进&lt;? extends T&gt;集合内。</li>
+<li>&lt;? super T&gt; : 可以复制T及任何T的父类集合，下界为T。再生活中，投票选举类似于&lt;? super T&gt;的操作。选举投票时，你只能往里投票，取数据时，根本不知道时是谁的票，相当于泛型丢失。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Food</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> <span class="keyword">extends</span> <span class="title">Food</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">extends</span> <span class="title">Fruit</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Banana</span> <span class="keyword">extends</span> <span class="title">Fruit</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExtends</span><span class="params">(List&lt;? extends Fruit&gt; list)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//报错,extends为上界通配符,只能取值,不能放.</span></span><br><span class="line">        <span class="comment">//因为Fruit的子类不只有Apple还有Banana,这里不能确定具体的泛型到底是Apple还是Banana，所以放入任何一种类型都会报错</span></span><br><span class="line">        <span class="comment">//list.add(new Apple());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//可以正常获取</span></span><br><span class="line">        Fruit fruit = list.get(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSuper</span><span class="params">(List&lt;? <span class="keyword">super</span> Fruit&gt; list)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//super为下界通配符，可以存放元素，但是也只能存放当前类或者子类的实例，以当前的例子来讲，</span></span><br><span class="line">        <span class="comment">//无法确定Fruit的父类是否只有Food一个(Object是超级父类)</span></span><br><span class="line">        <span class="comment">//因此放入Food的实例编译不通过</span></span><br><span class="line">        list.add(<span class="keyword">new</span> Apple());</span><br><span class="line"><span class="comment">//        list.add(new Food());</span></span><br><span class="line"></span><br><span class="line">        Object object = list.get(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;Apple&gt; apples = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        List&lt;Food&gt; foods = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        putFruits(foods);</span><br><span class="line">        eatFruits(apples);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putFruits</span><span class="params">(List&lt;? <span class="keyword">super</span> Fruit&gt; list)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">eatFruits</span><span class="params">(List&lt;? extends Fruit&gt; list)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;? extends Fruit&gt;</code>虽然不能添加元素，但可以在初始化的时候，接受一个已经定义好的list，而该list存放的类型一定相同，因此，List&lt;? extends T&gt;可直接接受一个定义好的list。</p>
+<p><code>&lt;? super T&gt;</code>:专门用来存，存的数据只能是本身或者子类，指向的时候只能指向父类</p>
+<p><code>&lt;? extends T&gt;</code>: 专门用来消费，得到的类型都是本身，指向的时候只能指向子类</p>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>自定义异常最好继承Exception</p>
+<h3 id="try-with-resources"><a href="#try-with-resources" class="headerlink" title="try-with-resources"></a>try-with-resources</h3><p>一般操作文件io，数据库链接比较耗费资源，用完后应该及时关闭，一般我们是在try catch finally的finally里面调用close方法释放资源。</p>
+<p>但是从jdk7开始提供了更好的方法：try-with-resources，新的syntax sugar，在try后面接上对io流的定义即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> (BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(<span class="string">"c:\\ test.xml"</span>))) &#123;</span><br><span class="line">        String line;</span><br><span class="line">        <span class="keyword">while</span> ((line = br.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        <span class="comment">// handle exception</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="finally和return的执行顺序"><a href="#finally和return的执行顺序" class="headerlink" title="finally和return的执行顺序"></a>finally和return的执行顺序</h3><p>假如try里面有个return 那么后面的finally会不会执行，什么时候执行？</p>
+<p>如果try里有return 那么finally的代码还是会执行，return表示整个方法的返回，所以finally会在return之前执行。</p>
+<p>但是return前执行的finally块内，对数据的修改效果对于引用类型和值类型会不同</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试 修改值类型</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">f</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ret;  <span class="comment">// 返回 0，finally内的修改效果不起作用</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        ret++;</span><br><span class="line">        System.out.println(<span class="string">"finally执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试 修改引用类型</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[] f2()&#123;</span><br><span class="line">    <span class="keyword">int</span>[] ret = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ret;  <span class="comment">// 返回 [1]，finally内的修改效果起了作用</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        ret[<span class="number">0</span>]++;</span><br><span class="line">        System.out.println(<span class="string">"finally执行"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><h3 id="SimpleDateFormat的线程安全问题"><a href="#SimpleDateFormat的线程安全问题" class="headerlink" title="SimpleDateFormat的线程安全问题"></a>SimpleDateFormat的线程安全问题</h3><p>强制：SimpleDateFormat 是线程不安全的，一般不要定义为static变量，如果定义static变量必须加锁或者使用DateUtils工具类。</p>
+<p>Date类型转为String并且指定输出格式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Date转String</span></span><br><span class="line">Date data = <span class="keyword">new</span> Date();</span><br><span class="line">SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">String dataStr = sdf.format(data);</span><br><span class="line">System.out.println(dataStr);</span><br></pre></td></tr></table></figure>
+<p>String 转Date：<code>sdf.parse(dataStr);</code></p>
+<p>时区问题：由于存在时区，不同地区时间不同，可以在代码中手动设置时区，获得当地时间，如中国的时间是GTM+8</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">sdf.setTimeZone(TimeZone.getTimeZone(<span class="string">"America/Los_Angeles"</span>));</span><br><span class="line">System.out.println(sdf.format(Calendar.getInstance().getTime()));</span><br></pre></td></tr></table></figure>
+<p>为什么会导致线程不安全？：</p>
+<p>因为观察源码可以发现，<br><img src="/images/pasted-39.png" alt="upload successful"></p>
+<p>calendar.setTime(date)是没有线程安全保证的，所以当设置SimpleDateForat为静态变量时，所有子线程都可以访问，可能A线程刚刚设置完calendar.setTime(date)就被B线程再调用修改时间了。</p>
+<p>如何解决？</p>
+<ol>
+<li><p>使用局部变量。</p>
+</li>
+<li><p>或者一定要将SimpleDateFormat作为共享变量的话，加同步锁。<br><code>synchronized(simpleDateFormat){...</code></p>
+</li>
+<li><p>或者使用使用ThreadLocal</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用ThreadLocal定义一个全局的SimpleDateFormat</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;SimpleDateFormat&gt; simpleDateFormatThreadLocal = <span class="keyword">new</span> ThreadLocal&lt;SimpleDateFormat&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> SimpleDateFormat <span class="title">initialValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//用法</span></span><br><span class="line">String dateString = simpleDateFormatThreadLocal.get().format(calendar.getTime());</span><br></pre></td></tr></table></figure>
+<p>如果是Java8. 换成DateTimeFormatter即可，线程安全。</p>
+<h3 id="为什么选择ThreadLocal"><a href="#为什么选择ThreadLocal" class="headerlink" title="为什么选择ThreadLocal"></a>为什么选择ThreadLocal</h3><p>ThreadLocal使同一变量在每一个线程中有各自的副本，不就意味着这个变量是不共享数据的，那不共享数据的话，为什么我不把这个变量变成自定义线程类的成员域，如果可以，ThreadLocal类的作用是啥?</p>
+<p>Spring采用Threadlocal的方式，来保证单个线程中的数据库操作使用的是同一个数据库连接，同时，采用这种方式可以使业务层使用事务时不需要感知并管理connection对象，通过传播级别，巧妙地管理多个事务配置之间的切换，挂起和恢复。</p>
+<p>其实本质是将变量的值都存在thread中，为什么不将变量定义为线程的成员变量呢，还是因为资源节省，每个线程都用成员变量而不用单例的话会造成大量浪费。而且假如有链路的话，需要共享一些变量比如用户信息，这时候如果定义成线程成员变量，那么不同线程请求得将信息传递过去，但是如果使用静态变量那么直接import后不需要传参直接threadlocal获取。</p>
+<h3 id="Java8时间处理"><a href="#Java8时间处理" class="headerlink" title="Java8时间处理"></a>Java8时间处理</h3><p>在Java8中， 新的时间及⽇期API位于java.time包中， 该包中有哪些重要的类。 分别代表了什么？</p>
+<p>Instant： 时间戳</p>
+<p>Duration： 持续时间， 时间差</p>
+<p>LocalDate： 只包含⽇期， ⽐如： 2016-10-20</p>
+<p>LocalTime： 只包含时间， ⽐如： 231210</p>
+<p>LocalDateTime： 包含⽇期和时间， ⽐如： 2016-10-20 231421</p>
+<p>Period： 时间段</p>
+<p>ZoneOffset： 时区偏移量， ⽐如： +8:00</p>
+<p>ZonedDateTime： 带时区的时间</p>
+<p>Clock： 时钟， ⽐如获取⽬前美国纽约的时间</p>
+<p>新的java.time包涵盖了所有处理日期，时间，日期/时间，时区，时刻（instants），过程（during）与时钟（clock）的操作。</p>
+<h4 id="获取当前时间"><a href="#获取当前时间" class="headerlink" title="获取当前时间"></a>获取当前时间</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LocalDate today = LocalDate.now();</span><br><span class="line"><span class="keyword">int</span> year = today.getYear();</span><br><span class="line"><span class="keyword">int</span> month = today.getMonthValue();</span><br><span class="line"><span class="keyword">int</span> day = today.getDayOfMonth();</span><br><span class="line">System.out.printf(<span class="string">"Year : %d Month : %d day : %d t %n"</span>, year,month, day);</span><br></pre></td></tr></table></figure>
+<h4 id="创建指定日期"><a href="#创建指定日期" class="headerlink" title="创建指定日期"></a>创建指定日期</h4><p><code>LocalDate date = LocalDate.of(2018, 01, 01);</code></p>
+<h4 id="格式化时间-时间戳转换"><a href="#格式化时间-时间戳转换" class="headerlink" title="格式化时间+时间戳转换"></a>格式化时间+时间戳转换</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LocalDateTime localDateTime = Instant.ofEpochMilli(<span class="number">1617257935413L</span>).atZone(ZoneOffset.ofHours(<span class="number">8</span>)).toLocalDateTime();</span><br><span class="line">DateTimeFormatter formatter = DateTimeFormatter.ofPattern(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</span><br><span class="line">String time = localDateTime.format(formatter);</span><br><span class="line">System.out.println(time);</span><br><span class="line">System.out.println(LocalDateTime.of(<span class="number">2021</span>,<span class="number">3</span>,<span class="number">11</span>,<span class="number">0</span>,<span class="number">0</span>).toInstant(ZoneOffset.ofHours(<span class="number">8</span>)).toEpochMilli());</span><br></pre></td></tr></table></figure>
+<h4 id="闰年判断"><a href="#闰年判断" class="headerlink" title="闰年判断"></a>闰年判断</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LocalDate nowDate = LocalDate.now();</span><br><span class="line"><span class="comment">//判断闰年</span></span><br><span class="line"><span class="keyword">boolean</span> leapYear = nowDate.isLeapYear();</span><br></pre></td></tr></table></figure>
+<h4 id="计算日期间天数和月数"><a href="#计算日期间天数和月数" class="headerlink" title="计算日期间天数和月数"></a>计算日期间天数和月数</h4><p><code>Period period = Period.between(LocalDate.of(2018, 1, 5),LocalDate.of(2018, 2, 5));</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/02/Java-工程师之路-三/" rel="next" title="Java 工程师之路 三">
+                <i class="fa fa-chevron-left"></i> Java 工程师之路 三
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/17/socketio实时推送/" rel="prev" title="socketio实时推送">
+                socketio实时推送 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java序列化"><span class="nav-number">1.1.</span> <span class="nav-text">Java序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java对象的序列化"><span class="nav-number">1.1.1.</span> <span class="nav-text">Java对象的序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Serializable接口"><span class="nav-number">1.1.2.</span> <span class="nav-text">Serializable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Externalizable接口"><span class="nav-number">1.1.3.</span> <span class="nav-text">Externalizable接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#serialVersionUID"><span class="nav-number">1.1.4.</span> <span class="nav-text">serialVersionUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java序列化缺陷"><span class="nav-number">1.1.5.</span> <span class="nav-text">Java序列化缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化对单例的破坏"><span class="nav-number">1.1.6.</span> <span class="nav-text">序列化对单例的破坏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Apache-Commons-Collections的反序列化漏洞"><span class="nav-number">1.1.7.</span> <span class="nav-text">Apache-Commons-Collections的反序列化漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#复现"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">复现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解"><span class="nav-number">1.2.</span> <span class="nav-text">注解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#元注解"><span class="nav-number">1.2.1.</span> <span class="nav-text">元注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java常用注解"><span class="nav-number">1.2.2.</span> <span class="nav-text">Java常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring常用注解"><span class="nav-number">1.2.3.</span> <span class="nav-text">Spring常用注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何定义注解"><span class="nav-number">1.2.4.</span> <span class="nav-text">如何定义注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过反射使用自定义注解"><span class="nav-number">1.2.5.</span> <span class="nav-text">通过反射使用自定义注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">1.3.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java的类型擦除"><span class="nav-number">1.3.1.</span> <span class="nav-text">Java的类型擦除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eg"><span class="nav-number">1.3.2.</span> <span class="nav-text">eg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型带来的问题"><span class="nav-number">1.3.3.</span> <span class="nav-text">泛型带来的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型不可重载"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">泛型不可重载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型的catch"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">泛型的catch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型的静态变量"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">泛型的静态变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用泛型注意点总结"><span class="nav-number">1.3.4.</span> <span class="nav-text">使用泛型注意点总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用泛型"><span class="nav-number">1.3.5.</span> <span class="nav-text">使用泛型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">1.4.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#try-with-resources"><span class="nav-number">1.4.1.</span> <span class="nav-text">try-with-resources</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finally和return的执行顺序"><span class="nav-number">1.4.2.</span> <span class="nav-text">finally和return的执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间"><span class="nav-number">1.5.</span> <span class="nav-text">时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SimpleDateFormat的线程安全问题"><span class="nav-number">1.5.1.</span> <span class="nav-text">SimpleDateFormat的线程安全问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么选择ThreadLocal"><span class="nav-number">1.5.2.</span> <span class="nav-text">为什么选择ThreadLocal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java8时间处理"><span class="nav-number">1.5.3.</span> <span class="nav-text">Java8时间处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取当前时间"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">获取当前时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建指定日期"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">创建指定日期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化时间-时间戳转换"><span class="nav-number">1.5.3.3.</span> <span class="nav-text">格式化时间+时间戳转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闰年判断"><span class="nav-number">1.5.3.4.</span> <span class="nav-text">闰年判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算日期间天数和月数"><span class="nav-number">1.5.3.5.</span> <span class="nav-text">计算日期间天数和月数</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

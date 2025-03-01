@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Spark,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="RDD">
+<meta name="keywords" content="Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark 学习 02 RDD">
+<meta property="og:url" content="http://yoursite.com/2020/11/17/Spark-学习-02-RDD/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="RDD">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-12-17T02:24:08.626Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark 学习 02 RDD">
+<meta name="twitter:description" content="RDD">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/17/Spark-学习-02-RDD/">
+
+
+
+
+
+  <title>Spark 学习 02 RDD | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/Spark-学习-02-RDD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark 学习 02 RDD</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-17T09:49:00+08:00">
+                2020-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h3><a id="more"></a>
+<h4 id="1-0-RDD概念"><a href="#1-0-RDD概念" class="headerlink" title="1.0 RDD概念"></a>1.0 RDD概念</h4><ol>
+<li><p>RDD 是弹性分布式数据集，有flatMap等api，也是编程模型。RDD 之间有依赖，且可以分区</p>
+</li>
+<li><p>分区：RDD和MR可以将自身分区到每一个block，处理每一个block的数据，如同hdfs，文件都被划分为block分布式存储在集群中。RDD和MR都是并行的。</p>
+</li>
+</ol>
+<h4 id="2-0-CODE"><a href="#2-0-CODE" class="headerlink" title="2.0 CODE"></a>2.0 CODE</h4><ol>
+<li>RDD实例化，SparkCore的入口SparkContext</li>
+</ol>
+<p>Driver和ClusterManager以及Worker的分布就如同C/S架构，SparkContext是Driver（前端客户端）最核心的组件。</p>
+<p>Spark作为大入口，可以设置参数，设置jar包等</p>
+<h5 id="2-1-RDD创建"><a href="#2-1-RDD创建" class="headerlink" title="2.1 RDD创建"></a>2.1 RDD创建</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 创建RDD三种方式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 本地集合方式创建</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rddCreationLocal</span></span>():<span class="type">Unit</span> = &#123;</span><br><span class="line">  <span class="comment">// 由于本地集合没有分区概念，提供集合还需要提供分区数量</span></span><br><span class="line">  <span class="keyword">val</span> rdd1:<span class="type">RDD</span>[<span class="type">String</span>] = sc.parallelize(<span class="type">Seq</span>(<span class="string">"tzq"</span>,<span class="string">"tr"</span>,<span class="string">"tr"</span>,<span class="string">"spark"</span>),<span class="number">2</span>)</span><br><span class="line">  <span class="keyword">val</span> rdd2:<span class="type">RDD</span>[<span class="type">Int</span>] = sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">2</span>)</span><br><span class="line">  <span class="comment">// 另一个方法 本质和上面一样  不常见</span></span><br><span class="line">  <span class="keyword">val</span> rdd3 = sc.makeRDD(<span class="type">Seq</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),<span class="number">2</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 从文件创建</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rddCreationFiles</span></span>():<span class="type">Unit</span> = &#123;</span><br><span class="line">  <span class="comment">// 1. 路径（支持本地和hdfs。不加前缀（file or hdfs）的路径取决于启动状态是否是集群，集群默认读取hdfs）</span></span><br><span class="line">  <span class="comment">// 2. 分区若读取hdfs，那么分区数由文件决定</span></span><br><span class="line">  <span class="comment">// 3. 支持aws或者阿里云读取</span></span><br><span class="line">  sc.textFile(<span class="string">"hdfs://node01:8020/data...."</span>,<span class="number">2</span>) <span class="comment">// 最小分区数量参数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 从Rdd创建</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rddCreationFromRdd</span></span>():<span class="type">Unit</span> = &#123;</span><br><span class="line">  <span class="keyword">val</span> rdd1:<span class="type">RDD</span>[<span class="type">String</span>] = sc.parallelize(<span class="type">Seq</span>(<span class="string">"tzq"</span>,<span class="string">"tr"</span>,<span class="string">"tr"</span>,<span class="string">"spark"</span>),<span class="number">2</span>)</span><br><span class="line">  <span class="comment">// 通过rdd的算子操作 会生成新的rdd</span></span><br><span class="line">  <span class="keyword">val</span> rdd2 = rdd1.map((_,<span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-算子"><a href="#2-2-算子" class="headerlink" title="2.2 算子"></a>2.2 算子</h5><p>map,flatMap 同java stream<br>ReduceByKey 接受二元元祖（k:v)</p>
+<h5 id="2-2-1算子分类："><a href="#2-2-1算子分类：" class="headerlink" title="2.2.1算子分类："></a>2.2.1算子分类：</h5><ol>
+<li><p>基础数据类型的计算</p>
+</li>
+<li><p>k:v 计算（这里特指二元元组）(reduceByKey,groupByKey…..)</p>
+</li>
+<li><p>针对数字类型的操作（max,min….)</p>
+</li>
+</ol>
+<h5 id="2-2-2-转换算子学习"><a href="#2-2-2-转换算子学习" class="headerlink" title="2.2.2 转换算子学习"></a>2.2.2 转换算子学习</h5><ol>
+<li><p>map</p>
+</li>
+<li><p>flatMap</p>
+</li>
+<li><p>reduceByKey: 传入二元元组，按照key分组，传递分组的value计算</p>
+</li>
+<li><p>mapPartitions（并行）: 和map的区别，map针对单个数据（如果在其内数据库访问，效率很低），mapPartitions（不让每一条数据执行访问数据库，按照分区访问数据库，效率高）将RDD内的所有分区数据一次传输过去，map的话得每次单条传输过去给执行器</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. mapPartitions</span></span><br><span class="line">  <span class="keyword">val</span> rdd1 = sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>), <span class="number">2</span>)</span><br><span class="line">  <span class="comment">// 一个分区肯定不止一条数据</span></span><br><span class="line">  rdd1.mapPartitions(iter =&gt; &#123;</span><br><span class="line">    <span class="comment">// iter 是scala的数据类型</span></span><br><span class="line">    iter.map(_*<span class="number">10</span>)</span><br><span class="line">  &#125;).collect().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mapPartitionsWithIndex(并行):</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rdd2 = sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>), <span class="number">2</span>)</span><br><span class="line">	<span class="comment">// index 是分区号</span></span><br><span class="line">    rdd2.mapPartitionsWithIndex((index,iter)=&gt;&#123;</span><br><span class="line">      iter.foreach(x=&gt;println(x+<span class="string">" belong index:"</span>+index))</span><br><span class="line">      iter</span><br><span class="line">    &#125;).collect()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>filter</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// true 就留下</span></span><br><span class="line"><span class="keyword">val</span> rdd3 = sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>), <span class="number">2</span>)</span><br><span class="line">    rdd3.filter(_&gt;<span class="number">6</span>).collect().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sample：如果数据太大，变为小数据集，随机抽取数据，保证速度</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>), <span class="number">2</span>)</span><br><span class="line">      <span class="comment">// 参数1:是否有放回（是否能抽到同一个东西），false就是无放回，同一数不能抽取出两次   参数2：采样比例  参数3：种子，一般不指定</span></span><br><span class="line">      .sample(<span class="literal">false</span>,<span class="number">0.3</span>).collect().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mapValues: 针对二元元组，可以用map代替，但是这个更方便</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"b"</span>, <span class="number">2</span>), (<span class="string">"c"</span>, <span class="number">3</span>), (<span class="string">"d"</span>, <span class="number">4</span>)),<span class="number">2</span>)</span><br><span class="line">  .mapValues(_*<span class="number">10</span>).collect().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>交集 并集 差集：interaction union subtract</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rddx = sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>), <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">val</span> rddy = sc.parallelize(<span class="type">Seq</span>(<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>), <span class="number">2</span>)</span><br><span class="line">  rddx.intersection(rddy).collect().foreach(println)</span><br><span class="line">  rddx.union(rddy).collect().foreach(println)</span><br><span class="line">  rddx.subtract(rddy).collect().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>groupByKey:每个分区重复的k:v可以出来，但是reduceByKey每个分区只能有一个key出来（可以减少io）</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 7. 分组 groupByKey 本质是shuffle  生成key =&gt; 数组</span></span><br><span class="line">sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"a"</span>, <span class="number">2</span>), (<span class="string">"c"</span>, <span class="number">3</span>), (<span class="string">"c"</span>, <span class="number">4</span>)), <span class="number">2</span>)</span><br><span class="line">  .groupByKey().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>combineByKey: groupByKey和reduceByKey的底层</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 8. combineByKey  算平均分</span></span><br><span class="line">    sc.parallelize(<span class="type">Seq</span>((<span class="string">"tzq"</span>, <span class="number">97.0</span>), (<span class="string">"tzq"</span>, <span class="number">98.0</span>), (<span class="string">"tr"</span>, <span class="number">88.0</span>), (<span class="string">"tr"</span>, <span class="number">92.0</span>)), <span class="number">2</span>)</span><br><span class="line">      <span class="comment">// 参数说明：1.将value初步转换（分区内） 2.在每个分区把上一步结果聚合 3. 在所有分区上把每个分区结果聚合 4.可选，分区函数 5.可选，是否在map端的Combine 6.序列化器</span></span><br><span class="line">      <span class="comment">// 思路：将每个数据变成(分数，1) 然后聚合 （总分，几）  一个分区结果就出来了</span></span><br><span class="line">      <span class="comment">// 然后将不同分区的均分聚合， 然后除 （均分，1）</span></span><br><span class="line">      <span class="comment">// 写法说明：第一个函数作用于第一条数据后，接着将结果和第二条数据作为参数传入第二个函数。 前两个函数作用于每个分区，将每个分区的结果作为参数传递给第三个函数</span></span><br><span class="line">      .combineByKey((_,<span class="number">1</span>),(c:(<span class="type">Double</span>,<span class="type">Int</span>),nextValue:<span class="type">Double</span>)=&gt;(c._1+nextValue,c._2+<span class="number">1</span>),(c:(<span class="type">Double</span>,<span class="type">Int</span>),v:(<span class="type">Double</span>,<span class="type">Int</span>))=&gt;(c._1+v._1,c._2+v._2))</span><br><span class="line">      .map(item=&gt;(item._1,(item._2._1/item._2._2,<span class="number">1</span>))).foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>foldByKey:比起reduceByKey有一个初始值（会加到每个元组）</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 9. foldByKey</span></span><br><span class="line">   sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"b"</span>, <span class="number">2</span>), (<span class="string">"c"</span>, <span class="number">3</span>), (<span class="string">"d"</span>, <span class="number">4</span>)), <span class="number">2</span>)</span><br><span class="line">     .foldByKey(<span class="number">10</span>)(_+_).collect().foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>aggregateByKey: 先处理 后聚合</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 10. aggregateByKey 打八折后的总价</span></span><br><span class="line">    <span class="comment">// 参数说明：1. 初始值 2.seqop 作用于每个分区每条数据 传递初始值和每条数据的value 3. combOp 整体聚合生成最终结果</span></span><br><span class="line">    sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">10.0</span>), (<span class="string">"a"</span>, <span class="number">20.0</span>), (<span class="string">"c"</span>, <span class="number">30.0</span>), (<span class="string">"d"</span>, <span class="number">40.0</span>)), <span class="number">2</span>)</span><br><span class="line">      .aggregateByKey(<span class="number">0.8</span>)((zeroValue,item)=&gt;item*zeroValue,(curr,agg)=&gt;curr+agg).foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>join</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rdd1 = sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"a"</span>, <span class="number">2</span>), (<span class="string">"b"</span>, <span class="number">1</span>)), <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">val</span> rdd2 = sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">10</span>), (<span class="string">"a"</span>, <span class="number">2</span>), (<span class="string">"b"</span>, <span class="number">12</span>)), <span class="number">2</span>)</span><br><span class="line">  rdd1.join(rdd2).foreach(println)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sortBy:作用于任何数据类型，sortByKey只用于kv 且只能按照key排序，写法简单</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 12. sortBy</span></span><br><span class="line">   <span class="keyword">val</span> rdd1 = sc.parallelize(<span class="type">Seq</span>(<span class="number">2</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>), <span class="number">2</span>)</span><br><span class="line">   <span class="keyword">val</span> rdd2 = sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">2</span>), (<span class="string">"b"</span>, <span class="number">1</span>), (<span class="string">"c"</span>, <span class="number">3</span>), (<span class="string">"d"</span>, <span class="number">4</span>)), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 参数：1.用哪个进行排序</span></span><br><span class="line">   rdd1.sortBy(item=&gt;item).collect().foreach(println)</span><br><span class="line">   rdd2.sortBy(item=&gt;item._2).collect().foreach(println)</span><br><span class="line">   rdd2.sortByKey().collect().foreach(println</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>repartition</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 13. repartition</span></span><br><span class="line">   <span class="keyword">val</span> rdd = sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>), <span class="number">2</span>)</span><br><span class="line">   <span class="comment">// 重新分区  分区越多线程越多 为了节省资源 可以适当减少分区数量</span></span><br><span class="line">   println(rdd.repartition(<span class="number">4</span>).partitions.size)</span><br><span class="line">   <span class="comment">// 减少合并分区</span></span><br><span class="line">   println(rdd.coalesce(<span class="number">5</span>,shuffle = <span class="literal">true</span>).partitions.size)</span><br><span class="line">   <span class="comment">// repatition 重分区时 默认shuffle</span></span><br><span class="line">   <span class="comment">// coalesce 重分区时 默认不shuffle 所以默认不增大分区</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><b>action 操作：一个actions生成一个job</b></p>
+<ol start="17">
+<li><p>collect </p>
+</li>
+<li><p>reduce  不是转换操作的reduceByKey，如果有10个不同key的多条数据，结果只有10条，但是reduce后只有1条，reduce针对所有数据类型</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 14. reduce</span></span><br><span class="line">   println(sc.parallelize(<span class="type">Seq</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>), <span class="number">2</span>)</span><br><span class="line">     .reduce(_ + _))</span><br><span class="line">   <span class="keyword">val</span> res = sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"a"</span>, <span class="number">2</span>), (<span class="string">"b"</span>, <span class="number">1</span>)), <span class="number">2</span>)</span><br><span class="line">     .reduce((curr, agg) =&gt; (<span class="string">"全部"</span>, curr._2 + agg._2))</span><br><span class="line">   println(res._2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>foreach 不同于scala本身的foreach，spark的算子会推送到集群执行，collect会将数据拉倒driver端，所以排序后不collect直接调用foreach会并行遍历各自分区的数据</p>
+</li>
+<li><p>count</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rdd = sc.parallelize(<span class="type">Seq</span>((<span class="string">"a"</span>, <span class="number">1</span>), (<span class="string">"a"</span>, <span class="number">2</span>), (<span class="string">"b"</span>, <span class="number">1</span>)), <span class="number">2</span>)</span><br><span class="line">    println(rdd.count())</span><br><span class="line">    println(rdd.countByKey())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>first() 返回第一个 take(N) 返回前N个,takeSample(withReplacement,fract)乐死sample，区别在于这是个action，直接返回结果到driver</p>
+</li>
+</ol>
+<h5 id="2-3-Spark的一些注意点"><a href="#2-3-Spark的一些注意点" class="headerlink" title="2.3 Spark的一些注意点"></a>2.3 Spark的一些注意点</h5><ol>
+<li><p>每个计算任务必须可以拆分并行</p>
+</li>
+<li><p>计算会对应到每个文件块</p>
+</li>
+<li><p>提高容错两种手段：保存数据集和状态到介质里 or 根据rdd依赖推算</p>
+</li>
+</ol>
+<h5 id="2-4-弹性分布式数据集"><a href="#2-4-弹性分布式数据集" class="headerlink" title="2.4 弹性分布式数据集"></a>2.4 弹性分布式数据集</h5><p>RDD特性：</p>
+<ol>
+<li><p>惰性求值，只有collect，reduce才会开始计算</p>
+</li>
+<li><p>分区</p>
+</li>
+<li><p>RDD是只读的</p>
+</li>
+<li><p>RDD容错高，保存RDD之间的依赖，当RDD2计算错误，从RDD1计算回来，缓存</p>
+</li>
+</ol>
+<p>弹性分布式数据集：</p>
+<ol>
+<li><p>RDD可以运行在集群中，</p>
+</li>
+<li><p>高容错，RDD数据可以缓存</p>
+</li>
+<li><p>RDD可以不保存具体数据，只保留必备信息（依赖和计算函数）</p>
+<h6 id="2-5-shffle"><a href="#2-5-shffle" class="headerlink" title="2.5 shffle"></a>2.5 shffle</h6><p>Maper1————-&gt;reducer1<br>  |—————</p>
+<pre><code>|
+</code></pre><p>Maper2————-&gt;reducer2</p>
+<p>Maper3</p>
+<p>Mapper1 –&gt; reducer1 ,Mapper1 –&gt;reducer2,Mapper2 –&gt; reducer1 ………</p>
+<p>shuffle 分为mapper端和reduce端，mapper将数据放入partition的函数计算，求得分到哪个reducer</p>
+<p>[例子](<a href="https://www.jianshu.com/p/7f8d4484bfbd）" target="_blank" rel="noopener">https://www.jianshu.com/p/7f8d4484bfbd）</a></p>
+</li>
+</ol>
+<h5 id="2-6-RDD支持的数据类型"><a href="#2-6-RDD支持的数据类型" class="headerlink" title="2.6 RDD支持的数据类型"></a>2.6 RDD支持的数据类型</h5><p>String,数字，KV，对象</p>
+<p>kv：类型 省略</p>
+<p>数字类型支持（都是action）：</p>
+<ol>
+<li>count</li>
+<li>mean 均值</li>
+<li>max min sum</li>
+<li>variance 方差</li>
+<li>sampleVariance 采样中计算方差</li>
+<li>stdev 标准差</li>
+<li>sampleStdev 采样中计算标准差</li>
+<li>…………很多</li>
+</ol>
+<h4 id="2-0-spark-core"><a href="#2-0-spark-core" class="headerlink" title="2.0 spark core"></a>2.0 spark core</h4><p>主要内容就是RDD</p>
+<h4 id="3-0-案例（统计北京天气）"><a href="#3-0-案例（统计北京天气）" class="headerlink" title="3.0 案例（统计北京天气）"></a>3.0 案例（统计北京天气）</h4><ol>
+<li>读取文件</li>
+<li>抽取需要的列</li>
+<li>按照日，时为基础，运行reduce 统计东西地区pm</li>
+<li>排序，获取结果</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.tr.spark</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.<span class="type">StringUtils</span></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author tr</span></span><br><span class="line"><span class="comment"> * @Date 11/19/20</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">StagePractice</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">pmProcess</span></span>(): <span class="type">Unit</span> = &#123;</span><br><span class="line">    <span class="comment">// 1. 创建SC  读取文件</span></span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">"local[6]"</span>).setAppName(<span class="string">"stage_practice"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line">    <span class="keyword">val</span> weatherSource = sc.textFile(<span class="string">"data/beijing_all_20200101.csv"</span>)</span><br><span class="line">    <span class="comment">// 2. 算子处理</span></span><br><span class="line">    <span class="comment">// 2.1 抽取数据 取date,hour作为key 东西作为value ( (key,value), value )</span></span><br><span class="line">    <span class="comment">// 2.2 数据清洗</span></span><br><span class="line">    <span class="comment">// 2.3 聚合</span></span><br><span class="line">    <span class="comment">//    weatherSource.map(_.split(",")).foreach(item=&gt;&#123;</span></span><br><span class="line">    <span class="comment">//      item.foreach(x=&gt;print(x+" || "))</span></span><br><span class="line">    <span class="comment">//      println("\n*********")</span></span><br><span class="line">    <span class="comment">//    &#125;)</span></span><br><span class="line">    <span class="keyword">val</span> resultRdd = weatherSource</span><br><span class="line">      .map(_.split(<span class="string">","</span>)).filter(x=&gt;  x.size&gt;<span class="number">2</span> &amp;&amp; x(<span class="number">2</span>).equalsIgnoreCase(<span class="string">"PM2.5"</span>) )</span><br><span class="line">      .map(item =&gt; ((item(<span class="number">0</span>), item(<span class="number">1</span>)), item(<span class="number">3</span>)))</span><br><span class="line">      .filter(item =&gt; <span class="type">StringUtils</span>.isNotEmpty(item._2) &amp;&amp; !item._2.equalsIgnoreCase(<span class="string">"NA"</span>))</span><br><span class="line">      .map(item =&gt; (item._1, item._2.toInt))</span><br><span class="line">      .reduceByKey(_ + _)</span><br><span class="line">      <span class="comment">// 按照第二项排序</span></span><br><span class="line">      .sortBy(_._2,<span class="literal">false</span>)</span><br><span class="line">    <span class="comment">// 3. 获取结果</span></span><br><span class="line">    resultRdd.take(<span class="number">10</span>).foreach(println)</span><br><span class="line"></span><br><span class="line">    sc.stop()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  pmProcess()</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-0-RDD-特性"><a href="#4-0-RDD-特性" class="headerlink" title="4.0 RDD 特性"></a>4.0 RDD 特性</h4><h5 id="4-1-RDD分区和shuffle"><a href="#4-1-RDD分区和shuffle" class="headerlink" title="4.1 RDD分区和shuffle"></a>4.1 RDD分区和shuffle</h5><p>分区作用：</p>
+<ol>
+<li><p>RDD经常需要读取外部系统文件创建（那么外部存储系统往往是支持分片的，Rdd需要分区来和外部系统的文件分片一一对应）</p>
+</li>
+<li><p>Rdd的分区是一个并行计算的实现手段</p>
+</li>
+</ol>
+<p>shuffle特点：</p>
+<p>只有 kV类型有shuffle</p>
+<p>查看RDD分区</p>
+<ol>
+<li>进入控制台 <code>spark-shell --master local[6]</code></li>
+<li>执行一个rdd <code>sc.parallelize(Seq(1,2,3,4,5,6,7,8,9))</code></li>
+<li>进入webUI查看 <code>http://localhost:4040</code></li>
+</ol>
+<p>怎么创建分区：</p>
+<ol>
+<li>读取外部文件时指定分区数量    <code>sc.parallize(Seq(1,2,3),2)</code></li>
+<li>通过本地集合创建时指定分区数量 <code>sc.textFile(&quot;/data/x.txt&quot;,2)</code></li>
+</ol>
+<p>怎么重分区：</p>
+<ol>
+<li><p>coalesce（N，false）：可以将分区缩小，如果需要扩大分区，指定shuffle：true</p>
+</li>
+<li><p>repartitions(N): 相当于coalesce的默认shuffle为true</p>
+</li>
+</ol>
+<p>通过其他算子指定分区：一般通过shuffle的算子都可以手动指定分区数，如果没有指定，默认从父节点继承</p>
+<p>shuffle过程简介：</p>
+<p><code>rdd2 = rdd1.reduceByKey()</code>  实质是rdd2的调用函数，rdd2调用这个函数从rdd1拉取数据<br>，那么如何确定数据流入哪个分区，通过Partitioner函数：HashPartitioner，rdd2的分区和rdd1的分区是交错联系的，rdd2的每个分区去rdd1的每个分区内拉取数据</p>
+<h5 id="4-2-RDD缓存"><a href="#4-2-RDD缓存" class="headerlink" title="4.2 RDD缓存"></a>4.2 RDD缓存</h5><h5 id="4-3-RDD的checkpoint"><a href="#4-3-RDD的checkpoint" class="headerlink" title="4.3 RDD的checkpoint"></a>4.3 RDD的checkpoint</h5><p>什么是checkpoint？ 斩断RDD的依赖链</p>
+<p>方式： 本地存储，可靠的:缓存在hdfs上</p>
+<p>Rdd之间有很多依赖关系，依赖链过长的话当某个rdd错误，需要追溯很久，斩断依赖链，就是不用计算之前的依赖链。</p>
+<p>但是如果rdd错误，且之前的rdd已经斩断，正常情况下，可以重放，从上一个被斩断的节点开始(这个节点的结果已经被存放在外部可靠介质中,直接取出结果)</p>
+<p>checkpoint本质还是缓存，但是和cache的区别是：</p>
+<ol>
+<li>checkpoint 数据可以保存在hdfs这类可靠介质内，cache和persist只能放在内存和磁盘</li>
+<li>checkpoint可以斩断依赖链，但是cache和persist不可以</li>
+</ol>
+<p>使用checkpoint</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.读取文件</span></span><br><span class="line">   <span class="keyword">val</span> sourceRdd = sc.textFile(<span class="string">"data/access_log.txt"</span>)</span><br><span class="line">   <span class="comment">// 2.取出ip</span></span><br><span class="line">   <span class="keyword">val</span> ipRdd = sourceRdd.map(x =&gt; (x.split(<span class="string">" "</span>)(<span class="number">0</span>), <span class="number">1</span>))</span><br><span class="line">   <span class="comment">// 3.简单清洗 去掉空数据 去掉非法数据 根据业务再规整数据</span></span><br><span class="line">   <span class="keyword">val</span> cleanRdd = ipRdd.filter(x =&gt; <span class="type">StringUtils</span>.isNotEmpty(x._1))</span><br><span class="line">   <span class="comment">// 4.根据ip次数聚合</span></span><br><span class="line">   <span class="keyword">var</span> aggRdd = cleanRdd.reduceByKey(_ + _)</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 设置checkpoint,调用的时候前面计算会执行一遍，将结果放入目录，因为checkpoint是先等待job执行完后启动一个线程去计算要checkpoint的内容</span></span><br><span class="line">   <span class="comment">// 所以应该在checkpoint之前进行一次cache，第一次就将结果缓存到内存，调用checkpoint的时候拿缓存的数据写入外部介质</span></span><br><span class="line">   aggRdd = aggRdd.cache()</span><br><span class="line">   aggRdd.checkpoint()</span><br><span class="line"></span><br><span class="line">   <span class="keyword">val</span> lessIp = aggRdd.sortBy(_._2,<span class="literal">true</span>).first()</span><br><span class="line">   <span class="keyword">val</span> moreIp = aggRdd.sortBy(_._2,<span class="literal">false</span>).first()</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/16/Spark-学习/" rel="next" title="Spark 学习 01 入门">
+                <i class="fa fa-chevron-left"></i> Spark 学习 01 入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/17/Spark-学习-03-原理/" rel="prev" title="Spark 学习 03 原理">
+                Spark 学习 03 原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD"><span class="nav-number">1.</span> <span class="nav-text">RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0-RDD概念"><span class="nav-number">1.1.</span> <span class="nav-text">1.0 RDD概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-0-CODE"><span class="nav-number">1.2.</span> <span class="nav-text">2.0 CODE</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-RDD创建"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 RDD创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-算子"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 算子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1算子分类："><span class="nav-number">1.2.3.</span> <span class="nav-text">2.2.1算子分类：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-转换算子学习"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.2.2 转换算子学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-Spark的一些注意点"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.3 Spark的一些注意点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-弹性分布式数据集"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.4 弹性分布式数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-5-shffle"><span class="nav-number">1.2.6.1.</span> <span class="nav-text">2.5 shffle</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-6-RDD支持的数据类型"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.6 RDD支持的数据类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-0-spark-core"><span class="nav-number">1.3.</span> <span class="nav-text">2.0 spark core</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-0-案例（统计北京天气）"><span class="nav-number">1.4.</span> <span class="nav-text">3.0 案例（统计北京天气）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-0-RDD-特性"><span class="nav-number">1.5.</span> <span class="nav-text">4.0 RDD 特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-RDD分区和shuffle"><span class="nav-number">1.5.1.</span> <span class="nav-text">4.1 RDD分区和shuffle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-RDD缓存"><span class="nav-number">1.5.2.</span> <span class="nav-text">4.2 RDD缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-RDD的checkpoint"><span class="nav-number">1.5.3.</span> <span class="nav-text">4.3 RDD的checkpoint</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

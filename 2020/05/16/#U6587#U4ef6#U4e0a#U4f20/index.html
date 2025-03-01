@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="LayUi,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="文件上传多文件批量上传问题，layui下的实现。 layui底层只支持单个文件上传，实现多文件统一上传并在全部上传后生成事件">
+<meta name="keywords" content="LayUi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件上传">
+<meta property="og:url" content="http://yoursite.com/2020/05/16/文件上传/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="文件上传多文件批量上传问题，layui下的实现。 layui底层只支持单个文件上传，实现多文件统一上传并在全部上传后生成事件">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/pasted-28.png">
+<meta property="og:updated_time" content="2020-05-26T08:41:50.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件上传">
+<meta name="twitter:description" content="文件上传多文件批量上传问题，layui下的实现。 layui底层只支持单个文件上传，实现多文件统一上传并在全部上传后生成事件">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-28.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/16/文件上传/">
+
+
+
+
+
+  <title>文件上传 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/16/文件上传/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件上传</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-16T16:28:00+08:00">
+                2020-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LayUi/" itemprop="url" rel="index">
+                    <span itemprop="name">LayUi</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>多文件批量上传问题，layui下的实现。</p>
+<p>layui底层只支持单个文件上传，实现多文件统一上传并在全部上传后生成事件</p>
+<a id="more"></a>
+<h4 id="前端html"><a href="#前端html" class="headerlink" title="前端html"></a>前端html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-form-item"</span>&gt;</span></span><br><span class="line">                        <span class="comment">&lt;!--                &lt;label class="layui-form-label"&gt;添加附件：&lt;/label&gt;--&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span> <span class="attr">id</span>=<span class="string">"filePath"</span> <span class="attr">name</span>=<span class="string">"filePath"</span>/&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-input-inline shangc_txt"</span> <span class="attr">style</span>=<span class="string">"margin-top: 5px;padding-left: 10px;width: 100%"</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-upload"</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"layui-btn"</span> <span class="attr">id</span>=<span class="string">"upload-svg-btn"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"layui-icon"</span>&gt;</span>&amp;#xe67c;<span class="tag">&lt;/<span class="name">i</span>&gt;</span>选择文件</span><br><span class="line">                                <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"layui-upload-list"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #D9D9D9;width: 98%"</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"layui-table"</span> <span class="attr">style</span>=<span class="string">"padding:0px;margin: 0px;overflow-y: auto;margin-top: 2px;"</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件名<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件大小<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件状态<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                            <span class="tag">&lt;<span class="name">th</span>&gt;</span>文件操作<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">                                        <span class="tag">&lt;<span class="name">tbody</span> <span class="attr">id</span>=<span class="string">"upload-list"</span>&gt;</span><span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line">                                    <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                                <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"layui-btn layui-btn-disabled"</span> <span class="attr">id</span>=<span class="string">"upload"</span>&gt;</span>上传<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/pasted-28.png" alt="upload successful"></p>
+<h4 id="前端js"><a href="#前端js" class="headerlink" title="前端js"></a>前端js</h4><p>使用了layui的文件上传，在上传过程中手动拼接上传文件的显示和操作ui，done为每个文件上传后的调用，alldone为所有文件上传后的调用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 生成上传task</span></span><br><span class="line">    <span class="keyword">var</span> uploadTaskForm = <span class="function"><span class="keyword">function</span> (<span class="params">uploadForm</span>) </span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: applicationUtil.gatewayURL + <span class="string">'/pssc-graph/graph/generate-task'</span>,</span><br><span class="line">            data: uploadForm,</span><br><span class="line">            type: <span class="string">"post"</span>,</span><br><span class="line">            contentType: <span class="string">"application/json"</span>,</span><br><span class="line">            dataType: <span class="string">"JSON"</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(data.code);</span><br><span class="line">                <span class="comment">// layer.msg(data.msg);</span></span><br><span class="line">            &#125;,</span><br><span class="line">            error: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(data.msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"><span class="comment">//上传svg和cim文件渲染</span></span><br><span class="line">    <span class="keyword">var</span> array = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">    <span class="keyword">var</span> list_view = $(<span class="string">'#upload-list'</span>);</span><br><span class="line">    <span class="keyword">var</span> taskForm = &#123;&#125;;</span><br><span class="line">    <span class="keyword">var</span> uploadListIns = upload.render(&#123;</span><br><span class="line">        elem: <span class="string">'#upload-svg-btn'</span> <span class="comment">//绑定元素</span></span><br><span class="line">        , <span class="attr">url</span>: applicationUtil.gatewayURL + <span class="string">'/pssc-graph/graph/upload/'</span> <span class="comment">//上传接口</span></span><br><span class="line">        , <span class="attr">accept</span>: <span class="string">'file'</span></span><br><span class="line">        , <span class="attr">exts</span>: <span class="string">'svg|xml'</span></span><br><span class="line">        , <span class="attr">auto</span>: <span class="literal">false</span></span><br><span class="line">        , <span class="attr">multiple</span>: <span class="literal">true</span></span><br><span class="line">        , <span class="attr">number</span>: <span class="number">2</span></span><br><span class="line">        , <span class="attr">bindAction</span>: <span class="string">'#upload'</span></span><br><span class="line">        , <span class="attr">choose</span>: <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//将每次选择的文件追加到文件队列</span></span><br><span class="line">            <span class="keyword">var</span> files = <span class="keyword">this</span>.files = obj.pushFile();</span><br><span class="line">            <span class="comment">//预读本地文件，如果是多文件，则会遍历。(不支持ie8/9)</span></span><br><span class="line">            obj.preview(<span class="function"><span class="keyword">function</span> (<span class="params">index, file, result</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> ($(<span class="string">"#upload"</span>).hasClass(<span class="string">"layui-btn-disabled"</span>)) &#123;</span><br><span class="line">                    $(<span class="string">"#upload"</span>).removeClass(<span class="string">"layui-btn-disabled"</span>)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">var</span> tr = $([<span class="string">'&lt;tr id="upload-'</span> + index + <span class="string">'"&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;td&gt;'</span> + file.name + <span class="string">'&lt;/td&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;td&gt;'</span> + (file.size / <span class="number">1024</span>).toFixed(<span class="number">1</span>) + <span class="string">'kb&lt;/td&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;td&gt;等待上传&lt;/td&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;td&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;button class="layui-btn layui-btn-min demo-reload layui-hide"&gt;重传&lt;/button&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;button class="layui-btn layui-btn-min demo-delete layui-btn-danger"&gt;删除&lt;/button&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;/td&gt;'</span></span><br><span class="line">                    , <span class="string">'&lt;/tr&gt;'</span>].join(<span class="string">''</span>));</span><br><span class="line">                <span class="comment">// 单个重传</span></span><br><span class="line">                tr.find(<span class="string">'.demo-reload'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    obj.upload(index, file);</span><br><span class="line">                &#125;);</span><br><span class="line">                <span class="comment">// 删除</span></span><br><span class="line">                tr.find(<span class="string">'.demo-delete'</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">delete</span> files[index];</span><br><span class="line">                    tr.remove();</span><br><span class="line">                    uploadListIns.config.elem.next()[<span class="number">0</span>].value = <span class="string">''</span>;</span><br><span class="line">                &#125;);</span><br><span class="line">                list_view.append(tr);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        , <span class="attr">allDone</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">            $(<span class="string">"#filePath"</span>).val(array.toString());</span><br><span class="line">            $(<span class="string">"#upload"</span>).addClass(<span class="string">"layui-btn-disabled"</span>);</span><br><span class="line">            <span class="comment">// console.log("task form is " + JSON.stringify(taskForm));</span></span><br><span class="line">            <span class="comment">// 文件全部上传完毕 执行生成task任务</span></span><br><span class="line">            uploadTaskForm(<span class="built_in">JSON</span>.stringify(taskForm));</span><br><span class="line">        &#125;</span><br><span class="line">        , <span class="attr">done</span>: <span class="function"><span class="keyword">function</span> (<span class="params">res, index, upload</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//上传完毕回调</span></span><br><span class="line">            <span class="comment">// 每次回调存储回调文件信息</span></span><br><span class="line">            <span class="keyword">if</span> (res.data.svgFileName != <span class="string">'-1'</span>) &#123;</span><br><span class="line">                taskForm.svgFileName = res.data.svgFileName;</span><br><span class="line">                taskForm.svgFileId = res.data.svgFileId;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (res.data.cimFileName != <span class="string">'-1'</span>) &#123;</span><br><span class="line">                taskForm.cimFileName = res.data.cimFileName;</span><br><span class="line">                taskForm.cimFileId = res.data.cimFileId;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (res.code == <span class="number">0</span>) &#123;</span><br><span class="line">                array.push(res.filePath);</span><br><span class="line">                <span class="keyword">var</span> tr = list_view.find(<span class="string">'tr#upload-'</span> + index)</span><br><span class="line">                    , tds = tr.children();</span><br><span class="line">                tds.eq(<span class="number">2</span>).html(<span class="string">'&lt;span style="color:#5FB878;"&gt;上传成功&lt;/span&gt;'</span>);</span><br><span class="line">                <span class="comment">// tds.eq(3).html(''); //清空</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">delete</span> <span class="keyword">this</span>.files[index];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.error(index, upload);</span><br><span class="line">        &#125;</span><br><span class="line">        , <span class="attr">error</span>: <span class="function"><span class="keyword">function</span> (<span class="params">index, upload</span>) </span>&#123;</span><br><span class="line">            <span class="comment">//请求异常回调</span></span><br><span class="line">            <span class="keyword">var</span> tr = list_view.find(<span class="string">'tr#upload-'</span> + index)</span><br><span class="line">                , tds = tr.children();</span><br><span class="line">            tds.eq(<span class="number">2</span>).html(<span class="string">'&lt;span style="color:#FF5722;"&gt;上传失败&lt;/span&gt;'</span>);</span><br><span class="line">            tds.eq(<span class="number">3</span>).find(<span class="string">'.demo-reload'</span>).removeClass(<span class="string">'layui-hide'</span>); <span class="comment">//显示重传</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="后端实现"><a href="#后端实现" class="headerlink" title="后端实现"></a>后端实现</h4><p>后端获取post方式负载的文件后将文件流压缩位字符流存入数据库即可，后台的mapper和service为正常操作不做展示，注意的事这是单文件接口，layui多次调用此接口实现多文件上传。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 由于前端使用的框架底层只支持单次文件上传，业务需求同时上传两个文件</span></span><br><span class="line"><span class="comment">     * 解决方案二：抽离task生成，前端配置alldone,完成后调用后台task接口</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/upload"</span>)</span><br><span class="line">    <span class="meta">@ApiOperation</span>(value = <span class="string">"单次上传图模文件，svg和cim"</span>, notes = <span class="string">"单次上传图模文件，svg和cim"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> CommonResult&lt;GenerateTaskForm&gt; <span class="title">uploadGraphFile</span><span class="params">(@RequestParam(<span class="string">"file"</span>)</span> MultipartFile file) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (file.isEmpty()) &#123;</span><br><span class="line">            log.error(<span class="string">"所传文件为空"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 文件uuid</span></span><br><span class="line">        String fileId = UUID.randomUUID().toString().replace(<span class="string">"-"</span>, <span class="string">""</span>);</span><br><span class="line">        <span class="comment">// 返回前端的文件名</span></span><br><span class="line">        String fileName = file.getOriginalFilename();</span><br><span class="line">        GenerateTaskForm form = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//将获取的文件名和文件内容存入数据库T-PW-files里</span></span><br><span class="line">            <span class="keyword">int</span> result = IGraphService.insertFileName(fileId, fileName, <span class="string">"123"</span>, ZipUtil.compress(file.getBytes()));</span><br><span class="line">            log.info(<span class="string">"插入文件成功 result code:[&#123;&#125;], 文件名:[&#123;&#125;], uuid:[&#123;&#125;]"</span>, result, fileName, fileId);</span><br><span class="line">            <span class="keyword">if</span> (result &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (fileName.toLowerCase().lastIndexOf(<span class="string">".svg"</span>) != -<span class="number">1</span>)</span><br><span class="line">                    form = <span class="keyword">new</span> GenerateTaskForm(fileName, fileId, <span class="string">"-1"</span>, <span class="string">"-1"</span>);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (fileName.toLowerCase().lastIndexOf(<span class="string">".xml"</span>) != -<span class="number">1</span>)</span><br><span class="line">                    form = <span class="keyword">new</span> GenerateTaskForm(<span class="string">"-1"</span>, <span class="string">"-1"</span>, fileName, fileId);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            log.error(<span class="string">"获取文件字节流失败 错误信息[&#123;&#125;]"</span>, e.getMessage());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CommonResult&lt;&gt;(<span class="number">0</span>, <span class="string">""</span>, form);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LayUi/" rel="tag"># LayUi</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/13/layui自适应/" rel="next" title="layui自适应">
+                <i class="fa fa-chevron-left"></i> layui自适应
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/26/OracleSql/" rel="prev" title="OracleSql+mybatis">
+                OracleSql+mybatis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传"><span class="nav-number">1.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前端html"><span class="nav-number">1.1.</span> <span class="nav-text">前端html</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端js"><span class="nav-number">1.2.</span> <span class="nav-text">前端js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后端实现"><span class="nav-number">1.3.</span> <span class="nav-text">后端实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

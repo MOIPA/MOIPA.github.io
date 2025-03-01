@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Spark,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Spark 学习 03 spark原理1.0 总体介绍 为什么说一组电脑是spark集群？ 因为这一组电脑都运行了Spark，node01 运行了masterdaemon 所以node01是master，其他电脑运行了workderDaemon，所以其他是worker，workDaemon去master上认领任务，取得任务后还要创建和关闭executor  executor 怎么运行？ 首先运行一">
+<meta name="keywords" content="Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark 学习 03 原理">
+<meta property="og:url" content="http://yoursite.com/2020/11/17/Spark-学习-03-原理/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="Spark 学习 03 spark原理1.0 总体介绍 为什么说一组电脑是spark集群？ 因为这一组电脑都运行了Spark，node01 运行了masterdaemon 所以node01是master，其他电脑运行了workderDaemon，所以其他是worker，workDaemon去master上认领任务，取得任务后还要创建和关闭executor  executor 怎么运行？ 首先运行一">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-12-17T02:27:06.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark 学习 03 原理">
+<meta name="twitter:description" content="Spark 学习 03 spark原理1.0 总体介绍 为什么说一组电脑是spark集群？ 因为这一组电脑都运行了Spark，node01 运行了masterdaemon 所以node01是master，其他电脑运行了workderDaemon，所以其他是worker，workDaemon去master上认领任务，取得任务后还要创建和关闭executor  executor 怎么运行？ 首先运行一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/11/17/Spark-学习-03-原理/">
+
+
+
+
+
+  <title>Spark 学习 03 原理 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/17/Spark-学习-03-原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spark 学习 03 原理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-11-17T10:25:00+08:00">
+                2020-11-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Spark-学习-03-spark原理"><a href="#Spark-学习-03-spark原理" class="headerlink" title="Spark 学习 03 spark原理"></a>Spark 学习 03 spark原理</h3><h4 id="1-0-总体介绍"><a href="#1-0-总体介绍" class="headerlink" title="1.0 总体介绍"></a>1.0 总体介绍</h4><ol>
+<li><p>为什么说一组电脑是spark集群？ 因为这一组电脑都运行了Spark，node01 运行了masterdaemon 所以node01是master，其他电脑运行了workderDaemon，所以其他是worker，workDaemon去master上认领任务，取得任务后还要创建和关闭executor</p>
+</li>
+<li><p>executor 怎么运行？ 首先运行一个executor Backend来管理executor，一对一关系</p>
+</li>
+<li><p>driver干嘛的？  整个spark application的驱动节点，action操作实质是将结果发给driver</p>
+</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> textRdd: <span class="type">RDD</span>[<span class="type">String</span>] = sc.textFile(<span class="string">"data/wordcount.txt"</span>)</span><br><span class="line">   <span class="keyword">val</span> splitRdd = textRdd.flatMap(_.split(<span class="string">" "</span>))</span><br><span class="line">   <span class="keyword">val</span> tupleRdd = splitRdd.map((_, <span class="number">1</span>))</span><br><span class="line">   <span class="keyword">val</span> reduceRdd = tupleRdd.reduceByKey(_ + _)</span><br><span class="line">   <span class="keyword">val</span> strRdd = reduceRdd.map(item =&gt; <span class="string">s"<span class="subst">$&#123;item._1&#125;</span>,<span class="subst">$&#123;item._2&#125;</span>"</span>)</span><br><span class="line">   strRdd.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+<h4 id="2-0-逻辑执行图"><a href="#2-0-逻辑执行图" class="headerlink" title="2.0 逻辑执行图"></a>2.0 逻辑执行图</h4><ol>
+<li><p>代表了数据如何计算和流转，以wordCount为例，在结果调用print(strRdd.toCollectString()),可以看到依赖关系</p>
+</li>
+<li><p>并非执行单位，最后还是要划分到实际执行单位(机器怎么执行)</p>
+</li>
+</ol>
+<h5 id="2-1-边界"><a href="#2-1-边界" class="headerlink" title="2.1 边界"></a>2.1 边界</h5><ol>
+<li><p>rdd从第一个rdd的创建开始，到逻辑图action执行之前结束.就是一组rdd和其依赖关系</p>
+</li>
+<li><p>RDD 5大属性：分区，依赖，计算函数，最佳位置，分区函数</p>
+</li>
+</ol>
+<h5 id="2-2-rdd如何生成"><a href="#2-2-rdd如何生成" class="headerlink" title="2.2 rdd如何生成"></a>2.2 rdd如何生成</h5><ol>
+<li><p>sc.textFile在源码中回去生成一个对象：HadoopRdd，这个HadoopRdd继承了父类RDD并且重写了compute方法，这个compute方法实际调用了inputFormat方法，实际就是去读取hdfs文件块，HadoopRdd的一个分区实际就对应了hadoop的一个文件块。</p>
+</li>
+<li><p>map算子: 在源码中就是new了一个MapPartitionsRdd，且传递了一个scala的map方法给他的构造函数，并且由iter调用。spark map算子中接受的函数，实际交给了里面的scala的map。 这个iter实际是一个分区的迭代器。</p>
+</li>
+<li><p>flatMap算子：和map差不多</p>
+</li>
+</ol>
+<h5 id="2-3-rdd之间有哪些依赖"><a href="#2-3-rdd之间有哪些依赖" class="headerlink" title="2.3 rdd之间有哪些依赖"></a>2.3 rdd之间有哪些依赖</h5><ol>
+<li><p>rdd分区之间的关系，flatMap这些算子的分区关系是一一对应的</p>
+</li>
+<li><p>多对一的关系：reduceByKey</p>
+</li>
+</ol>
+<p>为什么要对rdd划分依赖关系：想确定rdd是否能在同一流水线上执行(取决于两个是否是shuffle关系)</p>
+<ol>
+<li><p>窄依赖：没有shuffle，shuffle是必须要对被分发区的每条数据进行切分的</p>
+</li>
+<li><p>宽依赖：有shuffle，reduceByKey:假设rddA有三个区块的数据，第一个区块的数据为：（hadoop，1），（spark，1）,假设生成到rddB，通过分区函数将每个分区的数据发送到rddB的每个分区。然后开始塞数据，假设 key为hadoop的数据给到rddB的0分区，key为spark的hadoop的数据给rddB的1分区。那么rddA的第一个区块的数据会被拆分，所以这是一个宽依赖（shuffle）</p>
+</li>
+</ol>
+<p>如果两个分区一对一关系，必定是窄依赖<br>如果多对一要看是否有数据分发，有就是宽依赖</p>
+<p>窄依赖的类别：</p>
+<ol>
+<li>依赖类的关系</li>
+</ol>
+<p>RDD之间的关系是由 dependency对象决定的，这个对象可以获得另一端信息</p>
+<p>第一级别继承类：NarrowDependency,ShuffleDependency</p>
+<p>第二级别：OneToOneDependency，RangeDependency，继承自NarrowDependency  </p>
+<ul>
+<li>一对一窄依赖：map算子</li>
+<li>range窄依赖：只在union中使用，两个集合合起来。</li>
+<li>多对一窄依赖：和shuffle相似但是不是，coalesce求笛卡尔积为例，被发的rdd是不会对数据再切分</li>
+</ul>
+<p>宽依赖只能等待前一个rdd的所有数据算好后切割分发，但是窄依赖的不同分区可以和生成的rdd的分区对应放在一个task计算。</p>
+<h4 id="3-0-物理执行图"><a href="#3-0-物理执行图" class="headerlink" title="3.0 物理执行图"></a>3.0 物理执行图</h4><ol>
+<li>数据如何在集群中计算</li>
+</ol>
+<p>如代码所示，flatMap和map会被合并为一个计算任务在一个executor中执行完毕后，再执行，一个task表示一个flatMap和map计算，多个task组合成一个stage。<br>执行shuffle（reduceByKey）操作后就是另一个stage，最后将结果发给Driver。</p>
+<ol start="2">
+<li>RDD是被谁执行计算的？</li>
+</ol>
+<p>每台电脑的executor是一个进程，使用多线程计算，和driver认领任务，运行任务线程：task。</p>
+<p>task如何设计，如果有rddA—map—&gt;rddB—map—rddC每个rdd都是3个分区。</p>
+<p>如果设计每个分区和map就是一个task，那么map的结果得生成文件，给下一个分区的map这就和hadoop的mapreduce一样了</p>
+<p>如果将rddA的分区和rddB的分区的两个map生成一个task，一共三个task，共享内存，效率高多了，但是遇到shuffle操作就有问题了。</p>
+<p>spark采用数据流动模型设计，划分阶段：因为在遇到shuffle会出问题,所以在有shuffle的地方分段，shuffle左边的某分区的所有操作成为一个task，右边分为一个task，这样就有了两个stage。</p>
+<p>划分stage规则：从后往前划分，知道遇到shuffle（宽依赖）断开stage，创建新的stage，继续往前走。</p>
+<ol start="3">
+<li>数据流向</li>
+</ol>
+<p>数据的计算发生在调用Action的RDD上，RDD一直往上请求数据，类似递归，然后不停返回数据。第一个获取数据的rdd是最左边的rdd。</p>
+<h4 id="4-0-如何运行"><a href="#4-0-如何运行" class="headerlink" title="4.0 如何运行"></a>4.0 如何运行</h4><ol>
+<li><p>Collect方法会去调用DAGScheduler方法==》taskScheduler方法 运行到集群中。DAGScheduler给每个job生成有向无环图，确定最佳task位置</p>
+</li>
+<li><p>一次action生成一个job，数据从读取到生成结果就是一个job，job会被分发到集群是spark调度的颗粒，一个job有多个stage，一个stage有多个task，stage之间串行执行。</p>
+</li>
+<li><p>TaskSet：一个stage对应了一个TaskSet（多个task，数量由分区决定）</p>
+</li>
+</ol>
+<h4 id="5-0-spark-高级特性"><a href="#5-0-spark-高级特性" class="headerlink" title="5.0 spark 高级特性"></a>5.0 spark 高级特性</h4><h5 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h5><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">closeure</span></span>():<span class="type">Unit</span>  = &#123;</span><br><span class="line">    <span class="keyword">val</span> factor = <span class="number">3.14</span></span><br><span class="line">    (r:<span class="type">Int</span>) = </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-0-spark-shuffle原理"><a href="#6-0-spark-shuffle原理" class="headerlink" title="6.0 spark shuffle原理"></a>6.0 spark shuffle原理</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/17/Spark-学习-02-RDD/" rel="next" title="Spark 学习 02 RDD">
+                <i class="fa fa-chevron-left"></i> Spark 学习 02 RDD
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/11/17/Scala-Spark踩坑/" rel="prev" title="Scala-Spark踩坑">
+                Scala-Spark踩坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spark-学习-03-spark原理"><span class="nav-number">1.</span> <span class="nav-text">Spark 学习 03 spark原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0-总体介绍"><span class="nav-number">1.1.</span> <span class="nav-text">1.0 总体介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-0-逻辑执行图"><span class="nav-number">1.2.</span> <span class="nav-text">2.0 逻辑执行图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-边界"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 边界</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-rdd如何生成"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 rdd如何生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-rdd之间有哪些依赖"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 rdd之间有哪些依赖</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-0-物理执行图"><span class="nav-number">1.3.</span> <span class="nav-text">3.0 物理执行图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-0-如何运行"><span class="nav-number">1.4.</span> <span class="nav-text">4.0 如何运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-0-spark-高级特性"><span class="nav-number">1.5.</span> <span class="nav-text">5.0 spark 高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#闭包"><span class="nav-number">1.5.1.</span> <span class="nav-text">闭包</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-0-spark-shuffle原理"><span class="nav-number">1.6.</span> <span class="nav-text">6.0 spark shuffle原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

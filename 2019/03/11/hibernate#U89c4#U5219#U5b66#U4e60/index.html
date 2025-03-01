@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hibernate,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="hibernate 规则">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hibernate规则学习">
+<meta property="og:url" content="http://yoursite.com/2019/03/11/hibernate规则学习/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="hibernate 规则">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-21T14:58:03.137Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hibernate规则学习">
+<meta name="twitter:description" content="hibernate 规则">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/11/hibernate规则学习/">
+
+
+
+
+
+  <title>hibernate规则学习 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/hibernate规则学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hibernate规则学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-11T09:14:34+08:00">
+                2019-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hibernate/" itemprop="url" rel="index">
+                    <span itemprop="name">Hibernate</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="hibernate-规则"><a href="#hibernate-规则" class="headerlink" title="hibernate 规则"></a>hibernate 规则</h3><a id="more"></a>
+<h4 id="1-实体类创建注意事项"><a href="#1-实体类创建注意事项" class="headerlink" title="1. 实体类创建注意事项"></a>1. 实体类创建注意事项</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a. 成员变量私有，设置setter，getter公共方法</span><br><span class="line">b. 属性都是指的get，set方法 </span><br><span class="line">c. 需要无参数构造方法</span><br><span class="line">d. 尽量使用包装类型 Integer ...</span><br><span class="line">e. 持久化类需要提供oid 与数据库的主键对应   如果表没有主键 不能用hibernate</span><br><span class="line">f. 不要用final修饰class 因为hibernate使用cglib代理生成代理对象，代理对象是继承关系</span><br></pre></td></tr></table></figure>
+<h3 id="2-主键类型"><a href="#2-主键类型" class="headerlink" title="2. 主键类型"></a>2. 主键类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a. 自然主键（少见）  表的业务列中符合必须有，且不重复特征，该列可以为主键</span><br><span class="line">b. 代理主键（常见）  表没有任何意义的列，用于区别</span><br></pre></td></tr></table></figure>
+<h3 id="3-主键生成策略generator"><a href="#3-主键生成策略generator" class="headerlink" title="3. 主键生成策略generator"></a>3. 主键生成策略generator</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a. 每条记录录入时主键生成的规则 </span><br><span class="line">		identity:自增，由数据库自己维护主键值</span><br><span class="line">           increment：自增，（不建议使用）由hibernate维护，每次插入前找表中id最大的，+1</span><br><span class="line">           sequence：oracle中的主键生成策略</span><br><span class="line">           hilo:高低位算法（不建议使用），自增，hibernate，确保不会重复</span><br><span class="line">           native：（建议）hilo+sequence+identity 自动三选一</span><br><span class="line">           uuid：（主键类型必须为String）用来产生永远不重复的随机字符串最为主键</span><br><span class="line">           assigned：自然属性生成策略，就是没有策略，用户自己指定主键</span><br></pre></td></tr></table></figure>
+<h3 id="4-hibernate-中对象的状态"><a href="#4-hibernate-中对象的状态" class="headerlink" title="4. hibernate 中对象的状态"></a>4. hibernate 中对象的状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">save方法其实是为了生成oid值 所以需要执行insert语句</span><br><span class="line">持久化状态会自动将任何变化同步到数据库，</span><br><span class="line">	1. 对象分为三种状态： 	瞬时状态</span><br><span class="line">								没有id ,没有与session关联就是 不在session缓存</span><br><span class="line">							持久化状态</span><br><span class="line">								有id，有session关联</span><br><span class="line">							游离状态</span><br><span class="line">								有id，没有与session关联</span><br><span class="line">								</span><br><span class="line">	2. 结论：将我们希望同步到数据库的数据，对应的对象转换为持久化状态</span><br><span class="line">			在get后可以直接修改状态，不用调用update</span><br><span class="line">			后期有个重要方法：saveOrUpdate 可以将对象变为持久化状态</span><br></pre></td></tr></table></figure>
+<h3 id="5-hibernate-一级缓存"><a href="#5-hibernate-一级缓存" class="headerlink" title="5. hibernate 一级缓存"></a>5. hibernate 一级缓存</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">例子：比如取5次某个对象，这5个对象引用地址一样，因为hibernate先查看缓存</span><br><span class="line">hibernate取出的时候会产生两个对象，一个放入缓存，一个放入快照，commit的时候对比快照</span><br><span class="line">改变就产生sql</span><br></pre></td></tr></table></figure>
+<h3 id="6-hibernate事务"><a href="#6-hibernate事务" class="headerlink" title="6. hibernate事务"></a>6. hibernate事务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">1. 原子性 a	要么全成功 。。。</span><br><span class="line">2. 一致性 c	数据总量提交前和提交后不变</span><br><span class="line">3. 隔离性 i 事务并发</span><br><span class="line">4. 持久性 d 数据必须立即写入硬盘</span><br><span class="line"></span><br><span class="line">事务并发问题： 1脏读 读的是正在操作的数据</span><br><span class="line">				2不可重复读：两次读不一致</span><br><span class="line">				3幻读：自己删了有人添加，一查还在 感觉没删</span><br><span class="line">事务隔离级别：读为提交 可能：123</span><br><span class="line">				读已提交：23</span><br><span class="line">				可重复读（mysql默认级别)：3</span><br><span class="line">				串行化：没问题  效率低</span><br><span class="line"></span><br><span class="line">指定hibernate隔离级别：			</span><br><span class="line">	&lt;!--指定hibernate隔离级别</span><br><span class="line">		1|2|4|8</span><br><span class="line">		0001 1 读为提交</span><br><span class="line">		0010 2  读已提交</span><br><span class="line">		0100 4 可重复读</span><br><span class="line">		1000 8 串行化</span><br><span class="line">	--&gt;</span><br><span class="line">	&lt;property name=&quot;hibernate.connection.isolation&quot;&gt;4&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">项目中如何管理事务：</span><br><span class="line">	1. 业务开始之前打开事务，业务执行之后提交事务，执行中出现异常回滚</span><br><span class="line">	2. dao和service层用的同一个session，service负责开启和提交事务，将session绑定到本线程，</span><br><span class="line">		调用session.getCurrentSession方法即可获得当前线程绑定的session对象</span><br><span class="line">		注意:必须在著配置文件中配置才能用这个方法</span><br><span class="line">		```xml				</span><br><span class="line">			&lt;!--指定session与线程绑定--&gt;</span><br><span class="line">			&lt;property name=&quot;hibernate.current_session_context_class&quot;&gt;thread&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>**example**
+service 开启事务，关闭和回滚
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">		</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(Customer customer)</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获得session   这时候customer没有id，不和session关联  瞬时状态</span></span><br><span class="line">	Session session = HibernateUtils.getCUrrentSession();</span><br><span class="line">	<span class="comment">//执行事务</span></span><br><span class="line">	Transaction transaction = session.beginTransaction();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		dao.save(customer);</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">		transaction.rollback();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//提交事务</span></span><br><span class="line">	transaction.commit();</span><br><span class="line">	session.close(); <span class="comment">//有id 无session 游离状态</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+dao 执行事务
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * save方法其实是为了生成oid值 所以需要执行insert语句</span></span><br><span class="line"><span class="comment"> * 持久化状态会自动将任何变化同步到数据库，</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomerDaoImpl</span> <span class="keyword">implements</span> <span class="title">CustomerDao</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(Customer customer)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//获得session   这时候customer没有id，不和session关联  瞬时状态</span></span><br><span class="line">		Session session = HibernateUtils.getCUrrentSession();</span><br><span class="line">		<span class="comment">//保存</span></span><br><span class="line">		session.save(customer); <span class="comment">//持久化状态</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">	</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 7. hibernate中批量查询</span><br></pre></td></tr></table></figure>
+<pre><code>1. hql   可以多表查询 但是大部分都是单表查询
+     * 书写HQL
+     * String hql = &quot;from com.tr.domain.Customer where cust_id = 1&quot;;  //如果类名不重复 可以不用写包名
+     * Query query = session.createQuery(hql);
+     * List&lt;Custromer&gt; list =  query.list(); //查询所有结果
+     * query.uniqueResult() ; //查询唯一结果(有where的情况下)
+     *
+      * 带参数？的
+     *
+     * String hql = &quot;from Custromer where cust_id=?&quot;
+     * //创建查询对象
+     * Query query = session.createQuery(hql);
+     *  //设置参数  第一个是参数的位置
+     *  query.setLong(0,12&quot;) //可以换成setParameter就不用写类型
+     *  Customer c  =query.uniqueResult();
+     *
+      * 命名占位符
+     *  String hql = &quot;from Custromer where cust_id = :cust_id&quot;
+     *  Query query = session.createQuery(hql);
+     *  query.setParameter(&quot;cust_id&quot;,12);
+     *
+     * 分页
+     *  String hql = &quot;from Custromer&quot;
+     *  Query query = session.createQuery(hql);
+     *   //设置分页信息
+     *   query.setFirstResult(0);  //从哪开始抓
+     *   query.setMaxResults(10);   //抓多少
+     *  query.list();
+     *
+
+2. Criteria:hibernate自创的查询，都不用写hql或则sql  用于单表查询
+        现在已经被抛弃了
+3. sql  复杂业务还是sql
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>video 1 和video 2看完了  但是3，4没看完，且2的最后两个没怎么看。留以后有余力看
+            hibernate现在用的少，我选择先看 spring data jpa
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hibernate/" rel="tag"># Hibernate</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/08/常用包的maven依赖/" rel="next" title="常用包的maven依赖">
+                <i class="fa fa-chevron-left"></i> 常用包的maven依赖
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/11/struts2学习/" rel="prev" title="struts2学习">
+                struts2学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hibernate-规则"><span class="nav-number">1.</span> <span class="nav-text">hibernate 规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-实体类创建注意事项"><span class="nav-number">1.1.</span> <span class="nav-text">1. 实体类创建注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主键类型"><span class="nav-number">2.</span> <span class="nav-text">2. 主键类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-主键生成策略generator"><span class="nav-number">3.</span> <span class="nav-text">3. 主键生成策略generator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-hibernate-中对象的状态"><span class="nav-number">4.</span> <span class="nav-text">4. hibernate 中对象的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-hibernate-一级缓存"><span class="nav-number">5.</span> <span class="nav-text">5. hibernate 一级缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-hibernate事务"><span class="nav-number">6.</span> <span class="nav-text">6. hibernate事务</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

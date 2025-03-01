@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Java基础集合类Collection 和 Collections">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 工程师之路 二">
+<meta property="og:url" content="http://example.com/2020/09/05/Java-%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E4%BA%8C/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="Java基础集合类Collection 和 Collections">
+<meta property="og:locale">
+<meta property="og:image" content="http://example.com/images/pasted-36.png">
+<meta property="og:image" content="http://example.com/images/pasted-37.png">
+<meta property="article:published_time" content="2020-09-05T13:17:00.000Z">
+<meta property="article:modified_time" content="2022-01-19T04:06:18.000Z">
+<meta property="article:author" content="tr">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pasted-36.png">
+
+<link rel="canonical" href="http://example.com/2020/09/05/Java-%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E4%BA%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'default'
+  };
+</script>
+
+  <title>Java 工程师之路 二 | TrBlog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="TrBlog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TrBlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/MOIPA" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="default">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/05/Java-%E5%B7%A5%E7%A8%8B%E5%B8%88%E4%B9%8B%E8%B7%AF-%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/tr.jpg">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content="talk is cheap , show me the code.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 工程师之路 二
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-05 13:17:00" itemprop="dateCreated datePublished" datetime="2020-09-05T13:17:00+00:00">2020-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-19 04:06:18" itemprop="dateModified" datetime="2022-01-19T04:06:18+00:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h1><h2 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h2><h3 id="Collection-和-Collections"><a href="#Collection-和-Collections" class="headerlink" title="Collection 和 Collections"></a>Collection 和 Collections</h3><span id="more"></span>
+
+<p>Collection是一个集合接口，提供了对集合对象进行基本操作的通用接口，是list，set等的父接口。</p>
+<p>Collections是一个包装类，包含各种有关集合操作的静态多态方法，此类不能实例化，就像一个工具类，服务于Collection框架。</p>
+<h3 id="常用集合类"><a href="#常用集合类" class="headerlink" title="常用集合类"></a>常用集合类</h3><p><img src="/images/pasted-36.png" alt="upload successful"></p>
+<p><img src="/images/pasted-37.png" alt="upload successful"></p>
+<h4 id="Set和List"><a href="#Set和List" class="headerlink" title="Set和List"></a>Set和List</h4><p>Set和List都继承自Collection接口，都用来存储一组相同类型的元素。</p>
+<p>list特点：元素有放入顺序，元素可重复。</p>
+<p>set特点：元素无序，元素不可重复。</p>
+<p>有些场景下set可以用来去重，set在元素插入时要方法来判断是否重复，这个方法决定了set中可以保存哪些元素</p>
+<h4 id="ArrayList-amp-LinkedList-amp-Vector"><a href="#ArrayList-amp-LinkedList-amp-Vector" class="headerlink" title="ArrayList &amp; LinkedList &amp; Vector"></a>ArrayList &amp; LinkedList &amp; Vector</h4><p>这三个都是List接口的实现。主要区别在于实现方式不同，对不同操作有不同的效率。</p>
+<p>ArrayList本质是个可变数组，LinkedList是一个双链表，添加删除元素性能更好，查询拉跨。</p>
+<p>Vector和ArrayList类似，但是属于强同步类，适用于多线程情况，如果代码本身线程安全，ArrayList更高效。</p>
+<p>Vector和ArrayList 在添加更多元素时会请求更大空间，Vector每次请求双倍空间，ArrayList每次对size增长50%。</p>
+<p>LinkedList还实现了Queue接口，该接口比List接口提供了更多方法，offer(),peek(),poll()等。</p>
+<p>开发的时候注意，ArrayList的初始容量很小，如果预估数据较大，最好分配一个较大的初始值。</p>
+<p>注意:使用Arrays.asList获得的list不可CRUD，因为这不是真正的List，用ArrayList的构造器可以转为真正的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  List&lt;Integer&gt; fakeList = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="comment">//        fakeList.add(1);</span></span><br><span class="line">        ArrayList&lt;Integer&gt; trueList = <span class="keyword">new</span> ArrayList&lt;&gt;(fakeList);</span><br><span class="line">        trueList.add(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="ArrayList-Vector-transient"><a href="#ArrayList-Vector-transient" class="headerlink" title="ArrayList Vector transient"></a>ArrayList Vector transient</h4><p>ArrayList使用了transient进行优化而Vector没有，这是为啥。</p>
+<p>查看ArrayList源码会发现elementData被transient修饰了，这是因为elementData可能长度比较长，但是只存放了几个数据，后面的都为null，这种情况下，序列化的时候不需要后面的空数据，于是将elementData使用transient修饰，并且定义了两个方法实现自己可控制的序列化：writeObject和readObject方法。</p>
+<p>虽然Vector也实现了WriteObject方法，但是里面可以看到 data = elementData.clone();会拷贝null值。但是Vector时多线程下靠谱的数据结构。</p>
+<p>什么是fail-fast：</p>
+<p>fail-fast 机制是java集合(Collection)中的一种错误机制。它只能被用来检测错误，因为JDK并不保证fail-fast机制一定会发生。当多个线程对同一个集合的内容进行操作时，就可能会产生fail-fast事件。例如：当某一个线程A通过iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程A访问集合时，就会抛出ConcurrentModificationException异常，产生fail-fast事件。</p>
+<p>ArrayList的fast-fail：内部保存了一个modCount计数用来统计修改次数，还有一个expectedModCount用来保存当前线程修改次数，在遍历list的时候，在next方法里会调用checkForComodification方法查看是否合法，如果modCount！=expectedModCount 说明有其他线程动过数组了 那么就抛出异常。</p>
+<h4 id="synchronizedList和Vector"><a href="#synchronizedList和Vector" class="headerlink" title="synchronizedList和Vector"></a>synchronizedList和Vector</h4><p>Vector来自java.util ，synchronizedList来自java.util.collections的一个静态内部类。</p>
+<p>多线程的时候可以用Vector也可以用Collections.synchronizedList(List list)来返回一个线程安全的List</p>
+<p>SynchronizedList的底层操作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">synchronized</span> (mutex) &#123;</span><br><span class="line">       list.add(index, element);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到对于add方法，实际上只是在外面包了一个同步块。</p>
+<ol>
+<li>SynchronizedList有很好的拓展和兼容功能，它可以将所有的List子类转化为线程安全的类（ArrayList和LinkedList等）</li>
+<li>使用SynchronizedList的时候，遍历时要手动进行同步处理</li>
+<li>SynchronizedList可以指定锁定的对象</li>
+</ol>
+<h4 id="Set如何实现元素不重复"><a href="#Set如何实现元素不重复" class="headerlink" title="Set如何实现元素不重复"></a>Set如何实现元素不重复</h4><p>Set有两个，HashSet和TreeSet</p>
+<ol>
+<li><p>TreeSet使用二叉树实现，底层是TreeMap的keySet(),TreeMap里面是红黑树，所以数据都是自动排好序的不可以放入null。元素在插入TreeSet的时候调用compareTo() 方法，所以TreeSet中要实现Comparable接口。</p>
+</li>
+<li><p>HashSet根据哈希表实现，基本操作都是由HashMap实现的，向HashSet添加元素的时候先计算元素的hashCode，然后计算出这个元素的存储位置，为空就添加进去，不为空则调用equals方法，看是否相等，相等就不添加，否则调用冲突算法继续。</p>
+</li>
+</ol>
+<h4 id="HashMap-HashTalbe-ConcurrentHashMap"><a href="#HashMap-HashTalbe-ConcurrentHashMap" class="headerlink" title="HashMap HashTalbe ConcurrentHashMap"></a>HashMap HashTalbe ConcurrentHashMap</h4><p>HashMap和HashTable区别：HashTable的方法是同步的所以HashTable线程安全。HashTable中KV都不可以null，而在HashMap中null可以作为键（只能存在一个）但是值可以有多个为null</p>
+<p>HashTable中的hash数组大写初始是 11 增加方式：old*2+1</p>
+<p>HashMap默认大小 16 每次扩容为2的指数 16</p>
+<p>HashTable直接使用对象的HashCode，HashMap重新计算hash值</p>
+<p>HashMap和ConcurrentHashMap：后者线程安全</p>
+<h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p>HashMap实际上是将数组和链表组合在一起，每一个数组后面挂着一个链表，哈希碰撞的元素挂在同一个链表。</p>
+<p>HashMap的容量：默认情况下大小是16，如果用户手动指定大小则会选择大于这个数的一个2次幂。7-》8。</p>
+<p>什么时候扩容：</p>
+<blockquote>
+<blockquote>
+<p>HashMap里面定义了size 表示一个数组的链表存放元素个数，capacity 总容量，loadFactor 装载因子，其实就是百分比（默认0.75)。threshold就是临界值，如果超过 threshold = loadFactor*capacity 那么就扩容。所以对于默认大小16的HashMap &gt;12的时候就扩容了。</p>
+</blockquote>
+</blockquote>
+<p>怎么扩容：</p>
+<blockquote>
+<blockquote>
+<p>每次扩容都要将内部所有元素重新Hash重新分配元素到相应的桶，如果只是简单增加容量的话，get的时候对新的容量取模的数不是原来存的数就会找不到存入的数。</p>
+</blockquote>
+</blockquote>
+<p>先介绍个技巧：如何提高取模效率，用位运算&amp;替换取模%。这要求被取模数为2的幂<br>10 % 8 = 2; 10 &amp; 8 = 2;</p>
+<p>那么为什么HashMap的容量一定要是2的幂呢?</p>
+<blockquote>
+<blockquote>
+<p>这是因为一个元素存入HashMap，放入里面哪个桶之前肯定要知道数组下标，这个下表就是hash值对数组容量取模，所以为了取模运算快点，需要被取模数为2的幂。</p>
+</blockquote>
+</blockquote>
+<p>为啥loadFactor不是1而是0.75呢？</p>
+<blockquote>
+<blockquote>
+<p>假设负载因子为 1，默认最大容纳数量16，16满了才要扩容，如果这16个数分别存放在各个数组是最好的，但是显然，数据越多的时候，碰撞的概率越大。如果是0.75的话，13个就要扩容了，那么这12个数据碰撞的概率很显然小于16个数的碰撞概率。所以12的时候扩容是比较好的。0.75这个数字被认为是合理的，因为0.7左右数据的碰撞概率最低。</p>
+</blockquote>
+</blockquote>
+<p>HashMap设置多少初始值合适？</p>
+<blockquote>
+<blockquote>
+<p>如果不设置初始值，且目标数据过大的话，每次扩容都会全部重排内部元素，造成浪费。<br>传递的数据如果不是2的幂则会选择一个大于输入值的2的幂，在设置的时候要考虑到负载因子，举个反例：如果输入7 那么自动计算出大小为8，但是负载因子是0.75 也就是6个以后就会扩容，这显然是不科学的，现在比较推荐的算法是：预计大小/0.75 +1 = 设置大小。如放入7，7/0.75 +1 = 10.3 会被计算为 16</p>
+</blockquote>
+</blockquote>
+<h4 id="如何遍历集合类-Collection"><a href="#如何遍历集合类-Collection" class="headerlink" title="如何遍历集合类 Collection"></a>如何遍历集合类 Collection</h4><ol>
+<li>普通for循环</li>
+<li>增强for循环</li>
+<li>iterator迭代</li>
+<li>stream迭代</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Iterator it = list.iterator();</span><br><span class="line"><span class="keyword">while</span>(it.hasNext()) System.out.println(it.next());</span><br><span class="line"><span class="comment">// iterator 还可以对数据进行删除操作</span></span><br><span class="line">Iterator&lt;Integer&gt; iterator = trueList.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (iterator.next()==<span class="number">2</span>) iterator.remove();</span><br><span class="line">        &#125;</span><br><span class="line">        trueList.stream().forEach(System.out::println);</span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Enumeration：这个比较古老，只能遍历Vector,HashTalbe这些古老集合。不建议使用。</li>
+</ul>
+<h4 id="为什么不能一边遍历集合一边增删"><a href="#为什么不能一边遍历集合一边增删" class="headerlink" title="为什么不能一边遍历集合一边增删"></a>为什么不能一边遍历集合一边增删</h4><p>首先集合类都有个fast-fail机制，这个前面讲过了，那么在for循环中，如果使用add方法添加元素，会修改modCount 这是实际修改值，一般一个list生成的时候是0，还有个expectedModCount 这是Iterator的成员变量，只有通过迭代器操作这个值才会变化，一般这两个值是相等的。在遍历的时候如果调用了list.remove(xx)而不是iterator.remove()的话，只会修改modCount，下次遍历的时候会调用这个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">checkForComodification</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发现不一样抛出异常（ConcurrentModificationException）。</p>
+<p>fail-safe:Java提供了一些安全的集合类，这样的集合在遍历时不是在集合内容上访问的，而是copy一个在复制体上遍历，java.util.concurrent包下的都是fail-safe的。可以在多线程下使用，也可以foreach中add/remove。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">CopyOnWriteArrayList&lt;String&gt; cowList = <span class="keyword">new</span> CopyOnWriteArrayList&lt;&gt;() &#123;</span><br><span class="line">    &#123;</span><br><span class="line">        add(<span class="string">&quot;tr&quot;</span>);</span><br><span class="line">        add(<span class="string">&quot;tzq&quot;</span>);</span><br><span class="line">        add(<span class="string">&quot;oth&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">cowList.forEach(x -&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (x.equals(<span class="string">&quot;oth&quot;</span>)) cowList.remove(x);</span><br><span class="line">&#125;);</span><br><span class="line">System.out.println(cowList);</span><br></pre></td></tr></table></figure>
+
+<h4 id="COW-Copy-On-Write"><a href="#COW-Copy-On-Write" class="headerlink" title="COW Copy-On-Write"></a>COW Copy-On-Write</h4><p>了解COW后会好奇，为啥都已经上锁了还要拷贝，直接操作原链表不好吗。这个Vector没啥区别啊感觉。</p>
+<p>但其实不是，COW只有在写的时候会上锁，而且所有操作不是对原链表操作，而是对复制的容器进行操作，到需要写入的时候，上锁，将原链表的指针指向复制的链表。读的时候是不上锁的。</p>
+<p>当然也有缺点：</p>
+<ul>
+<li><p>读的方法不加锁，或者读取的是修改前的数据，毕竟一个在读，可能有一个在写。</p>
+</li>
+<li><p>要拷贝，如果数据量大那就崩了，所以还是慎用</p>
+</li>
+</ul>
+<p>一般COW用于读多写少的场景，比如读取白名单，商品类目访问和更新</p>
+<h2 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h2><p>switch 支持枚举类型（之前讲过switch只支持int整型，其实这里也是，只是将enum转为<code>switch(xx.ordinal())</code>）,枚举可以实现接口，枚举类不能被继承。</p>
+<h3 id="枚举定义"><a href="#枚举定义" class="headerlink" title="枚举定义"></a>枚举定义</h3><ol>
+<li><p>常量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Season</span> </span>&#123;</span><br><span class="line">	SPRING,SUMMER,AUTUMN,WINTER</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>绑定值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Season</span> </span>&#123;</span><br><span class="line">    SPRING(<span class="number">1</span>), SUMMER(<span class="number">2</span>), AUTUMN(<span class="number">3</span>), WINTER(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> code;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Season</span><span class="params">(<span class="keyword">int</span> code)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.code = code;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCode</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>绑定值和名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Color</span> </span>&#123;  </span><br><span class="line">    RED(<span class="string">&quot;红色&quot;</span>, <span class="number">1</span>), GREEN(<span class="string">&quot;绿色&quot;</span>, <span class="number">2</span>), BLANK(<span class="string">&quot;白色&quot;</span>, <span class="number">3</span>), YELLO(<span class="string">&quot;黄色&quot;</span>, <span class="number">4</span>);  </span><br><span class="line">    <span class="comment">// 成员变量  </span></span><br><span class="line">    <span class="keyword">private</span> String name;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;  </span><br><span class="line">    <span class="comment">// 构造方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Color</span><span class="params">(String name, <span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// 普通方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getName</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">for</span> (Color c : Color.values()) &#123;  </span><br><span class="line">            <span class="keyword">if</span> (c.getIndex() == index) &#123;  </span><br><span class="line">                <span class="keyword">return</span> c.name;  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="comment">// get set 方法  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getIndex</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> index;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.index = index;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="枚举实现单例"><a href="#枚举实现单例" class="headerlink" title="枚举实现单例"></a>枚举实现单例</h3><p>双重校验锁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton singleton;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(singleton == <span class="keyword">null</span>)&#123;</span><br><span class="line">        	<span class="keyword">synchronized</span>(Singleton.class)&#123;</span><br><span class="line">            	<span class="keyword">if</span>(singleton == <span class="keyword">null</span>) singleton = <span class="keyword">new</span> Singleton();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">Singleton</span></span>&#123;</span><br><span class="line">	INSTANCE;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whateverMethod</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="枚举和线程安全"><a href="#枚举和线程安全" class="headerlink" title="枚举和线程安全"></a>枚举和线程安全</h3><ol>
+<li><p>非枚举方式都要求自己实现线程安全，如同双重校验锁，枚举Java本身在底层实现了线程问题。</p>
+</li>
+<li><p>在一个类真正被使用的时候，静态资源的初始化，类的加载和初始化过程都是线程安全的，所以，创建一个enum类是线程安全的</p>
+</li>
+<li><p>双重校验锁可能会被序列化锁破坏，普通的Java类的反序列化中，会通过反射的方式调用类的默认构造函数来初始化对象，所以即使单例的构造函数私有，也会被破坏，由于反序列化后的对象是重新new出来的，这就破坏了单例。而enum的序列化只是将枚举对象的name属性输出到结果。</p>
+</li>
+</ol>
+<h3 id="枚举的比较"><a href="#枚举的比较" class="headerlink" title="枚举的比较"></a>枚举的比较</h3><p>equals 和 == 没区别，compareTo只是比较enum的ordinal顺序大小</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/04/Linux-ssh/" rel="prev" title="Linux ssh scp">
+      <i class="fa fa-chevron-left"></i> Linux ssh scp
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/26/Getting-Start-With-Spark/" rel="next" title="Getting Start With Spark">
+      Getting Start With Spark <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Java基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">集合类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Collection-%E5%92%8C-Collections"><span class="nav-number">1.1.1.</span> <span class="nav-text">Collection 和 Collections</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E9%9B%86%E5%90%88%E7%B1%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">常用集合类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Set%E5%92%8CList"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Set和List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-amp-LinkedList-amp-Vector"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">ArrayList &amp; LinkedList &amp; Vector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArrayList-Vector-transient"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">ArrayList Vector transient</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronizedList%E5%92%8CVector"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">synchronizedList和Vector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%85%83%E7%B4%A0%E4%B8%8D%E9%87%8D%E5%A4%8D"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">Set如何实现元素不重复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap-HashTalbe-ConcurrentHashMap"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">HashMap HashTalbe ConcurrentHashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HashMap"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">HashMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%8D%E5%8E%86%E9%9B%86%E5%90%88%E7%B1%BB-Collection"><span class="nav-number">1.1.2.8.</span> <span class="nav-text">如何遍历集合类 Collection</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E4%B8%80%E8%BE%B9%E9%81%8D%E5%8E%86%E9%9B%86%E5%90%88%E4%B8%80%E8%BE%B9%E5%A2%9E%E5%88%A0"><span class="nav-number">1.1.2.9.</span> <span class="nav-text">为什么不能一边遍历集合一边增删</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COW-Copy-On-Write"><span class="nav-number">1.1.2.10.</span> <span class="nav-text">COW Copy-On-Write</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE"><span class="nav-number">1.2.</span> <span class="nav-text">枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">枚举定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%AE%9E%E7%8E%B0%E5%8D%95%E4%BE%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">枚举实现单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E5%92%8C%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">1.2.3.</span> <span class="nav-text">枚举和线程安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">1.2.4.</span> <span class="nav-text">枚举的比较</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="tr"
+      src="/images/tr.jpg">
+  <p class="site-author-name" itemprop="name">tr</p>
+  <div class="site-description" itemprop="description">talk is cheap , show me the code.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MOIPA" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MOIPA" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tassassintr@gmail.com" title="E-Mail → mailto:tassassintr@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python字符编码问题最近在复习python，又遇到了编码问题，下定决心弄懂，把自己的理解写出来。 什么是编码 编码是由于计算机无法识别除了0/1以外的东西而产生的。早起只有英文字母的时代，一个字节即可以表达所有字母，这个编码叫ascall，每个字母通过这个表可以将字母转为对应的二进制数，存在磁盘中。  例如字母B的ascall是66，转为二进制：0100002存在磁盘上。如果这时候一个不兼容a">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python的str和bytes问题">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/python的str和bytes问题/index.html">
+<meta property="og:site_name" content="TrBlog">
+<meta property="og:description" content="python字符编码问题最近在复习python，又遇到了编码问题，下定决心弄懂，把自己的理解写出来。 什么是编码 编码是由于计算机无法识别除了0/1以外的东西而产生的。早起只有英文字母的时代，一个字节即可以表达所有字母，这个编码叫ascall，每个字母通过这个表可以将字母转为对应的二进制数，存在磁盘中。  例如字母B的ascall是66，转为二进制：0100002存在磁盘上。如果这时候一个不兼容a">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-18T10:06:16.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python的str和bytes问题">
+<meta name="twitter:description" content="python字符编码问题最近在复习python，又遇到了编码问题，下定决心弄懂，把自己的理解写出来。 什么是编码 编码是由于计算机无法识别除了0/1以外的东西而产生的。早起只有英文字母的时代，一个字节即可以表达所有字母，这个编码叫ascall，每个字母通过这个表可以将字母转为对应的二进制数，存在磁盘中。  例如字母B的ascall是66，转为二进制：0100002存在磁盘上。如果这时候一个不兼容a">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/python的str和bytes问题/">
+
+
+
+
+
+  <title>python的str和bytes问题 | TrBlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">TrBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/python的str和bytes问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TrBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python的str和bytes问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-18T15:42:00+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="python字符编码问题"><a href="#python字符编码问题" class="headerlink" title="python字符编码问题"></a>python字符编码问题</h3><p>最近在复习python，又遇到了编码问题，下定决心弄懂，把自己的理解写出来。</p>
+<h4 id="什么是编码"><a href="#什么是编码" class="headerlink" title="什么是编码"></a>什么是编码</h4><ol>
+<li><p>编码是由于计算机无法识别除了0/1以外的东西而产生的。早起只有英文字母的时代，一个字节即可以表达所有字母，这个编码叫ascall，每个字母通过这个表可以将字母转为对应的二进制数，存在磁盘中。</p>
+<p> 例如字母B的ascall是66，转为二进制：<code>0100002</code>存在磁盘上。如果这时候一个不兼容ascall码表的单字节码表读取的时候认不得这个二进制，就会产生乱码。</p>
+</li>
+<li><p>后来由于发展，ascall码不够用，出现了很多码表，其中以一种规范为unicode（万国码），这个表里英文是2字节表示，中文3字节，不兼容ascall码，注意的是unicode不是物理存储实现，所以需要一种存储方式和ascall的存储方式兼容。</p>
+<p> 所以又有人推出了 utf-8规范，这个规范是对unicode的实现，具体做法是对unicode的对应字符序号（码点：code-point）使用边长字节进行存放。内存中unicode是2字节存放码点。</p>
+<p> 在python中显示验证：</p>
+<p> a变量存放了str类型的unicode的中文，在python3里头unicode的字自动会转为中文的，类型都是str。这里将str编码为utf-8，a就是这3字节（24位）的数。再使用gbk编码解码读取，gbk不兼容utf-8显然无法识别这串二进制数。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'\u8bf7'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="string">'请'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.encode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="string">b'\xe8\xaf\xb7'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a= a.encode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.decode(<span class="string">'gbk'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">UnicodeDecodeError: <span class="string">'gbk'</span> codec can<span class="string">'t decode byte 0xb7 in position 2: incomplete multibyte sequence</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="python的unicode和str区别"><a href="#python的unicode和str区别" class="headerlink" title="python的unicode和str区别"></a>python的unicode和str区别</h4><ol>
+<li><p>str在python2.7里指向的是二进制，在python3里是unicode字符（统一了str和unicode,取消了unicode对象），2.7 print时会转为unicode显示，因为内存默认读取unicode编码。</p>
+<p> python3 str为unicode字符集，传输需要编码：</p>
+<p> str ==&gt; encode：bytes</p>
+<p> bytes ==&gt; decode：str</p>
+</li>
+<li><p>python2 里unicode是文本字符串，str是字节字符串！！！能直接看到str的二进制表示，看不到unicode对象的二进制内存表示！unicode对象和str对象之间转换需要encode和decode，内存里默认的用unicode编码但是存放的是unicode的序号（code-point）的二进制，所以str的二进制解码就是unicode字符</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'唐'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">   <span class="string">'\xe5\x94\x90'</span></span><br><span class="line">   &gt;&gt;&gt; a.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">   <span class="string">u'\u5510'</span></span><br><span class="line">   &gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p> python2将字节字符串和文本字符串视为一致了，这是一个设计错误，所以在3里取消了！</p>
+<p> python会自动处理他们的关系。例如将unicode对象和str对象拼接时，python自动对str进行转换，转为unicode，但是转换的decode方式为默认的ascall，但这年头谁还纯用ascall，所以非常容易出错，很烦。</p>
+<p> 例如：a为str对象，b为unicode对象，两者拼接，str对象是二进制，需要将str转为unicode，默认执行str.decode(‘ascall’)，但是实际文本是utf-8的二进制，所以出错。</p>
+</li>
+<li><p>（2.7）<code>str</code>是python内存的一种二进制编码（但是编码方式取决于环境：如果是在解释器中写，二进制为终端的编码类型，文件的话则是文件保存编码类型），python读取这个str对象（二进制序列）就知道是什么字符，显示到显示器。</p>
+<p> <code>unicode</code>对象是一种字符集并非二进制（本质在内存中是2个字节标识的序号二进制），如果要存储<code>unicode</code>对象到磁盘，需要自己指定编码方式如<code>utf-8</code>（以三个字节表示中文），如果指定的编码方式如<code>gbk</code>会无法写入，因为<code>gbk</code>不支持<code>unicode</code>编码。</p>
+<p> 但是在python中是无法直接看到<code>unicode</code>对象的二进制数。（注意的是在<code>python3</code>中<code>unicode</code>和<code>str</code>都为<code>str</code>类型）</p>
+<p> （2.7）举例子： ‘唐’ 如果是str类型 且在终端的解释器环境下为gbk，那么<code>a = &#39;唐&#39;</code> <code>a</code>在内存里就是<code>gbk</code>的二进制数组。再次打印 <code>a</code> 时计算机读取内存的二进制，根据终端的码表显示，如果写的时候终端为<code>utf-8</code>,打印的时候改成<code>gbk</code>那么应该会乱码。</p>
+<p> 在python中验证乱码：</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">'唐'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a 	<span class="comment">#python2.7里头直接打印a打印的是a指向的内存的二进制数，需要print函数</span></span><br><span class="line"><span class="string">'\xe5\x94\x90'</span> <span class="comment"># 内存里头的二进制数，因为终端是utf-8所以是三个字节24位</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(a)</span><br><span class="line">&lt;type <span class="string">'str'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">唐</span><br><span class="line"><span class="comment"># 这时候我将终端的编码改为了gbk</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(a)</span><br><span class="line">鍞�</span><br><span class="line"><span class="comment"># 乱码，因为gbk读取这个24位读不懂</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="使用py2需要注意的点（参考了StackOverflow"><a href="#使用py2需要注意的点（参考了StackOverflow" class="headerlink" title="使用py2需要注意的点（参考了StackOverflow)"></a>使用py2需要注意的点（参考了StackOverflow)</h4><ol>
+<li><p>所有文本字符串都应该是unicode类型，而不是str类型。如果处理的是文本，而变量类型是str，这就是bug了！(因为在内存中默认的是unicode，磁盘中才是对于编码后的二进制)</p>
+</li>
+<li><p>若要将字节串解码成字符串，需要使用正确的解码，即 var.decode(encoding)（如， var.decode(‘utf-8’) ）。将文本字符串编码成字节，使用var.encode(encoding)。</p>
+</li>
+<li><p>永远不要对unicode字符串使用 str() （str转为了二进制，编码方式取决于环境），也不要在不指定编码的情况下就对字节串使用 unicode() 。</p>
+</li>
+<li><p>当应用从外部（磁盘，网络）读取数据时，应将其视为字节串，即str类型的，接着调用.decode() 将其解释成文本。同样，在将文本发送到外部时，总是对文本调用.encode() 。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/12/vpn/" rel="next" title="vpn">
+                <i class="fa fa-chevron-left"></i> vpn
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/25/java-基础知识点（查漏补缺）/" rel="prev" title="java 基础知识点（查漏补缺）">
+                java 基础知识点（查漏补缺） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/tr.jpg" alt="tr">
+          <p class="site-author-name" itemprop="name">tr</p>
+           
+              <p class="site-description motion-element" itemprop="description">talk is cheap , show me the code.</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">120</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.github.com/MOIPA/" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://wenxuan.wtf" title="WWX" target="_blank">WWX</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python字符编码问题"><span class="nav-number">1.</span> <span class="nav-text">python字符编码问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是编码"><span class="nav-number">1.1.</span> <span class="nav-text">什么是编码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#python的unicode和str区别"><span class="nav-number">1.2.</span> <span class="nav-text">python的unicode和str区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用py2需要注意的点（参考了StackOverflow"><span class="nav-number">1.3.</span> <span class="nav-text">使用py2需要注意的点（参考了StackOverflow)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tr</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
